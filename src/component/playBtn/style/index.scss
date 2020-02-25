@@ -1,0 +1,26 @@
+
+@import '@g/asset/style/global.scss';
+
+.container {
+  @extend %flex-center;
+}
+
+.icon {
+  @extend %flex-center;
+  margin: 0 10px;
+  svg {
+   width:20px;
+  }
+}
+
+.progressBar {
+	width: 100%;
+	@extend %flex-center;
+	& > div:first-child {
+		flex: 1;
+	}
+	& > div:last-child {
+		padding: 0 10px;
+		text-align: center;
+	}
+}
