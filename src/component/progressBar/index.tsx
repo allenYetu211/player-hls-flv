@@ -26,9 +26,11 @@ const ProgressBar = () => {
     });
   };
 
+  //  计算滚动条
   const onMouseMove = (e: React.MouseEvent) => {
     // @ts-ignore
     console.log('e offsetWidth', e.target.offsetWidth)
+    
     console.log('e clientX', e.clientX)
     // const left = progressBarEl.current.getBoundingClientRect().left;
     // const result = msToTime(Number((e.clientX - left) / pbElWidth * duration * 1000));
