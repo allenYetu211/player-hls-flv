@@ -18,6 +18,8 @@ export default class VideoContainer {
 
   constructor(config: ConfigType) {
     this.videoEl  = config.element;
+    //  监听视频全图
+    this.addEventListenerFullscreen()
   }
 
   public stop() {
@@ -47,6 +49,30 @@ export default class VideoContainer {
     }, 1000)
   }
 
+  // 设置声音
+  public setVideoVolume (value: number) {
+    this.videoEl.volume = value;
+  }
+
+  // 监听全屏事件
+  private  addEventListenerFullscreen () {
+     //  监听微信 Android 全屏
+     this.videoEl.addEventListener('x5videoenterfullscreen', () => {
+      this._emitter.emit('fullscreen', true)
+    })
+    this.videoEl.addEventListener('x5videoexitfullscreen', () => {
+      this._emitter.emit('fullscreen', false)
+    })
+
+    this.videoEl.addEventListener("webkitbeginfullscreen", () => {
+      this._emitter.emit('fullscreen', true)
+    })
+    
+    this.videoEl.addEventListener("webkitendfullscreen", () => {
+      this._emitter.emit('fullscreen', false)
+    })
+  }
+
   public setCurrentTime (value: number) {
     this.stop();
     this._emitter.emit('playProgress', value);
@@ -56,5 +82,6 @@ export default class VideoContainer {
   public on(event: string, listener: EventEmitter.ListenerFn) {
     this._emitter.addListener(event, listener);
   }
+
 
 }

@@ -16,6 +16,8 @@ const VideoPlayer = (props: initConfig) => {
 
   const videoEl = useRef<HTMLVideoElement>(null);
 
+  const containerEl = useRef<HTMLDivElement>(null);
+
   const [initState, setInitState] = useState<boolean>(false);
 
   const [vPlayer, setVPlayer] = useState<any>();
@@ -34,15 +36,13 @@ const VideoPlayer = (props: initConfig) => {
 
   //  初始播放器
   useEffect(() => {
-    if(videoEl.current) {
       const config = Object.assign({}, props, {
-        element: videoEl.current,
+        element: videoEl.current!,
       })
       const vp = initPlayer(config);
       setVPlayer(vp);
       setInitState(true);
       addEventListener(vp)
-    }
   }, [])
 
   // 监听状态
@@ -54,9 +54,9 @@ const VideoPlayer = (props: initConfig) => {
 
 
   return (
-  <div className={style.container}>
+  <div ref={containerEl}  className={style.container}>
     <video ref={videoEl} />
-    {initState && <UiControl config={props} />}
+    {initState && <UiControl config={props} element={containerEl.current!} />}
   </div>);
 }
 

@@ -1,0 +1,9 @@
+@import '@g/asset/style/global.scss';
+
+.icon {
+  @extend %flex-center;
+  margin: 0 10px;
+  svg {
+   width:20px;
+  }
+}

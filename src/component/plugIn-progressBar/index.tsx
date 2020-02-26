@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {getVideoPlayer} from '@player/index';
 import Slider from 'react-rangeslider';
 import style from './style/index.scss';
 import {msToTime} from '@utils/translateTime';
+
+import cn from 'classnames';
+
 let progressState: boolean = false;
 
-const ProgressBar = () => {
+const PlugInProgressBar = () => {
   const player: any = getVideoPlayer();
   useEffect(() => {
     addEventListener();
@@ -13,6 +16,10 @@ const ProgressBar = () => {
 
   const [videoDuration, setVideoDuration] = useState <number>(0);
   const [playProgress, setPlayProgress] = useState <number> (0);
+  const [popContent, setPopContent] = useState<string>('');
+  const [cursorElDisplayState, setCursorElDisplayState] = useState<boolean>(false);
+  const progressEl = useRef<HTMLDivElement>(null);
+  const cursorEl = useRef<HTMLDivElement>(null);
 
   const addEventListener = () => {
     player.on('duration', (duration: string) => {
@@ -28,25 +35,35 @@ const ProgressBar = () => {
 
   //  计算滚动条
   const onMouseMove = (e: React.MouseEvent) => {
-    // @ts-ignore
-    console.log('e offsetWidth', e.target.offsetWidth)
-    
-    console.log('e clientX', e.clientX)
-    // const left = progressBarEl.current.getBoundingClientRect().left;
-    // const result = msToTime(Number((e.clientX - left) / pbElWidth * duration * 1000));
-    // onChangePbValue(result);
-    // barEl.current.style.left = `${e.clientX - left}px`;
+    const width = progressEl.current!.offsetWidth;
+    const left = progressEl.current!.getBoundingClientRect().left;
+    const result = (e.clientX - left) / width * videoDuration;
+    cursorEl.current!.style.left = `${e.clientX - left}px`;
+    setPopContent(msToTime(String(result)))
   };
-
-  const onMouseEnter = () => {}
-  const onMouseLeave = () => {}
 
   return (
     <div 
+      ref={progressEl}
       className={style.progress}
       onMouseMove={(e) => {onMouseMove(e)}}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}>
+      onMouseEnter={() => {setCursorElDisplayState(true);}}
+      onMouseLeave={() => {setCursorElDisplayState(false);}}>
+
+      <div
+        ref={cursorEl}
+        className={cn(style.indicateBar, style.focusContainer, {
+          [style.hover]: cursorElDisplayState,
+        })}>
+        <div className={style.focuseContainer}>
+          <div
+            className={cn(style.focuseChild, style.value)}
+          >
+            {popContent}
+          </div>
+        </div>
+      </div>
+
       <Slider
         min={0}
         max={videoDuration}
@@ -64,4 +81,4 @@ const ProgressBar = () => {
   );
 };
 
-export default ProgressBar;
+export default PlugInProgressBar;

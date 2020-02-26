@@ -5,14 +5,14 @@
   @extend %flex-center;
 }
 
+
 .icon {
-  @extend %flex-center;
-  margin: 0 10px;
-  svg {
-   width:20px;
+  width: 30px;
+  padding: 0 10px;
+  & > svg {
+    vertical-align: middle;
   }
 }
-
 .progressBar {
 	width: 100%;
 	@extend %flex-center;

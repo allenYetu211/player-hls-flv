@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {getVideoPlayer} from '@player/index';
+import cn from 'classnames';
 import style from './style/index.scss';
 
 import {msToTime} from '@utils/translateTime';
@@ -8,14 +9,14 @@ import {iconVideoPlay, iconVideoStop} from '@images/icon';
 
 
 
-const PlayBtn = () => {
+const PlugInPlayBtn = () => {
   // 播放状态
   const [isPlayering, setIsPlayering] = useState<boolean>(false);
   const [playProgress, setPlayProgress] = useState<string>('00:00');
   const [videoDuration, setVideoDuration] = useState<string>('00:00');
   
   // 播放器
-  let player: any = getVideoPlayer();
+  const player: any = getVideoPlayer();
   useEffect(() => {
     addEventListener();
   }, []);
@@ -48,7 +49,7 @@ const PlayBtn = () => {
 
   return (
     <div className={style.container}>
-      <div className={style.icon} onClick={switcherPlayState}>
+      <div className={cn(style.icon)} onClick={switcherPlayState}>
         {isPlayering ?  iconVideoStop : iconVideoPlay}
       </div>
 
@@ -60,4 +61,4 @@ const PlayBtn = () => {
   );
 };
 
-export default PlayBtn;
+export default PlugInPlayBtn;
