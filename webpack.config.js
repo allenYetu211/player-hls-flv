@@ -107,6 +107,24 @@ module.exports = (env, argv) => {
           commonjs2: 'rc-slider',
           commonjs: 'rc-slider',
           amd: 'rc-slider'
+        },
+        'flv.js': {
+          root: 'flvjs',
+          commonjs2: 'flv.js',
+          commonjs: 'flv.js',
+          amd: 'flv.js'
+        },
+        'hls.js': {
+          root: 'Hls',
+          commonjs2: 'hls.js',
+          commonjs: 'hls.js',
+          amd: 'hls.js'
+        },
+        'classnames': {
+          root: 'cn',
+          commonjs2: 'classnames',
+          commonjs: 'classnames',
+          amd: 'classnames'
         }
       },
     })
@@ -116,7 +134,7 @@ module.exports = (env, argv) => {
     result =  Object.assign({} , config, {
       entry: [
         'react-hot-loader/patch',
-        './src/devImport/index.tsx'
+        './devImport/index.tsx'
       ],
       optimization: {
         runtimeChunk: 'single',

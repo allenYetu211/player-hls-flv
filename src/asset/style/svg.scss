@@ -3,7 +3,9 @@
 .icon {
   @extend %flex-center;
   margin: 0 10px;
+  width: 25px;
+  height: 100%;
   svg {
-   width:20px;
+   width:100%;
   }
 }

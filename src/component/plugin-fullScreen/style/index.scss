@@ -1,5 +1,7 @@
 @import '@g/asset/style/svg.scss';
 
 .fullScreenContainer {
-  // background-color:#fff;
+  svg {
+    width: 20px;
+  }
 }

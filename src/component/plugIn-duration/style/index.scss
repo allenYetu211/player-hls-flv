@@ -1,0 +1,13 @@
+@import '@g/asset/style/global.scss';
+
+.progressBar {
+	width: 100%;
+	@extend %flex-center;
+	& > div:first-child {
+		flex: 1;
+	}
+	& > div:last-child {
+		padding: 0 10px;
+		text-align: center;
+	}
+}

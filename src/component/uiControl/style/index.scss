@@ -27,45 +27,29 @@
 	height: 50px;
 	padding: 0 10px;
   transition: all 0.5s ease;
-	// transform: translate3d(0, 20%, 0);
-	// opacity: 0;
+	transform: translate3d(0, 20%, 0);
+	opacity: 0;
   background:rgba(0,0,0,0.45);
   z-index: 999;
   
-	// & > div {
-	// 	cursor: pointer;
-	// 	border: none;
-  //   line-height: 40px;
-  //   height: 40px;
-	// }
+	& > div {
+		cursor: pointer;
+		border: none;
+    line-height: 40px;
+    height: 40px;
+	}
+}
+
+.middlePlayBtn {
+  position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
 
 
-  // .progressContainer {
-  //   position: absolute;
-  //   left: 0;
-  //   top: 0;
-  //   right: 0;
-  //   height:4px;
-  //   background:rgba(255,255,255,0.5);
-  //   transform: translate3d(0, -100%, 0);
-  //   transition: all 0.3s ease;
-  // }
-
-  // .indicateBar {
-  //   position:absolute;
-  //   left:0;
-  //   top: 0;
-  //   bottom: 0;
-  //   width: 1px;
-  //   z-index: 11;
-  //   background-color: #fff;
-  //   pointer-events: none;
-
-  //   .pbValueEl {
-  //     padding: 0 10px;
-  //     text-align: center;
-  //   }
-  // }
+.leftontainer {
+  @extend %flex-center;
 }
 
 .rightContaienr {

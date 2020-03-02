@@ -1,11 +1,9 @@
 @import '@g/asset/style/global.scss';
 @import '@g/asset/style/focuseContainer.scss';
+@import '@g/asset/style/svg.scss';
 
 .voiceContainer {
   @extend %flex-center;
-}
-.icon {
-  width: 30px;
 }
 
 .volumeBar {

@@ -1,8 +1,8 @@
 
-import {videoConfig, Element} from '@interfaces/player';
-import VideoContainer from './videoContainer';
+import {videoConfig, Element} from '@interfaces/index';
+import VideoControl from './video-control';
 
-export default class NativePlayer extends VideoContainer {
+export default class NativePlayer extends VideoControl {
 
   // 播流地址
   private src: string = '';
@@ -30,6 +30,10 @@ export default class NativePlayer extends VideoContainer {
       // 获取时长，注入
       this._emitter.emit('duration', this.videoEl.duration * 1000)
     })
+  }
+
+  public  destroy(){
+    console.log('Native destroy')
   }
  
 }

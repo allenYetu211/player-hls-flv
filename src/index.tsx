@@ -3,9 +3,9 @@ import React, {useRef, useEffect, useState} from 'react';
 
 import style from './styles.scss';
 
-import {initConfig} from '@interfaces/vp';
+import {initConfig} from '@interfaces/index';
 
-import Player, {initPlayer} from '@player/index';
+import {initPlayer} from '@player/index';
 
 
 import UiControl from '@g/component/uiControl';
@@ -19,9 +19,6 @@ const VideoPlayer = (props: initConfig) => {
   const containerEl = useRef<HTMLDivElement>(null);
 
   const [initState, setInitState] = useState<boolean>(false);
-
-  const [vPlayer, setVPlayer] = useState<any>();
-
 
   // 针对不同浏览器添加不同属性
   useEffect(() => {
@@ -39,10 +36,13 @@ const VideoPlayer = (props: initConfig) => {
       const config = Object.assign({}, props, {
         element: videoEl.current!,
       })
-      const vp = initPlayer(config);
-      setVPlayer(vp);
+      const vp:any = initPlayer(config);
       setInitState(true);
-      addEventListener(vp)
+      addEventListener(vp);
+      return () => {
+        vp.destroy();
+        console.log('====== destroy ====')
+      }
   }, [])
 
   // 监听状态
