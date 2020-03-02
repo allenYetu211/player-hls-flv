@@ -63,7 +63,6 @@ const PlugInProgressBar = () => {
           </div>
         </div>
       </div>
-
       <Slider
         min={0}
         max={videoDuration}
@@ -73,6 +72,7 @@ const PlugInProgressBar = () => {
         onChange={(value: number) => {
           player.setCurrentTime(value);
         }}
+        
         onChangeComplete={() => {
           player.play();
         }}

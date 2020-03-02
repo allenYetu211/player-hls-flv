@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import cn from 'classnames';
 import style from './style/index.scss';
 import {getVideoPlayer} from '@player/index';
-
+import Slider from 'react-rangeslider';
 
 import {iconVoice, iconVoiceOff} from '@images/icon';
 const PluginVoice = () => {
@@ -12,27 +12,40 @@ const PluginVoice = () => {
 
   const onClickMuteVolume = () => {
     if (!volume) {
-      player.setVideoVolume(0.6);
-      setVolume(0.6)
+      setVideoVolume(0.6)
     } else {
-      player.setVideoVolume(0);
-      setVolume(0)
+      setVideoVolume(0)
     }
   };
+
+  const setVideoVolume = (value: number) => {
+    player.setVideoVolume(value);
+    setVolume(value)
+  }
+
   return (
     <div
-      className={cn(style.voiceContainer)}
+      className={cn(style.voiceContainer,style.focusContainer)}
     >
-      <div className={style.icon} onClick={onClickMuteVolume}>
+      <div className={cn(style.icon)} onClick={onClickMuteVolume}>
         {volume > 0 ? iconVoice : iconVoiceOff}
       </div>
-
-      {/* <div className={style.focuseContainer}>
+      <div className={style.focuseContainer}>
         <div className={cn(style.volumeBar, style.focuseChild)}>
-          <span>{`${volumeConf.value.toFixed(2) * 100}%`}</span>
-          <Slider {...volumeConf} />
+        <span>{`${(volume  as  any).toFixed(2) * 100}%`}</span>
+          <Slider 
+              min={0}
+              max={1}
+              step={0.1}
+              tooltip={false}
+              value={volume}
+              orientation='vertical'
+              onChange={(value: number) => {
+                setVideoVolume(value)
+              }}
+           />
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

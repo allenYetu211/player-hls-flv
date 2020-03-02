@@ -6,6 +6,7 @@
 }
 .icon {
   width: 30px;
+  line-height: 40px;
 }
 
 .volumeBar {
@@ -17,5 +18,25 @@
   flex-direction: column;
   span {
     font-size: 12px;
+  }
+}
+
+
+.listContainer {
+  width: 100px;
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    list-style: none;
+    text-align: center;
+		line-height: 40px;
+    transition: all 1s ease;
+    cursor:pointer;
+		&:hover,
+		&.action {
+			color: #52C9A0;
+		}
   }
 }
