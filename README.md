@@ -4,7 +4,7 @@
 ## 支持格式
 - [x] mp4
 - [x] flv
-- [ ] hls
+- [x] hls
 
 ## 浏览器支持
 - Windows 10 - IE11
