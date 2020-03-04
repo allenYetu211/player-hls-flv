@@ -1,6 +1,6 @@
 {
   "name": "v-player",
-  "version": "1.0.1",
+  "version": "1.0.01",
   "description": "",
   "main": "./dist/index.js",
   "keywords": [],
