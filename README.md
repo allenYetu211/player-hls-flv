@@ -19,17 +19,6 @@
 - [x] flv 
 - [x] hls 
 ---
-
-## Error Code
-| 错误码 | 描述 |
-| --- | --- |
-| 0001 | 浏览器禁止自动播放，需手动处理播放状态 |
-|NETWORK_ERROR| 网络相关错误 |
-|STATISTICS_INFO| 提供播放统计信息，如下降帧，当前速度等|
-|ERROR| 播放过程中发生的任何错误 |
-|MEDIA_ERROR| 与媒体相关的错误(格式错误、解码问题等) |
-|OTHER_ERROR| 任何其他未指定的错误 |
-
 ---
 ### 使用
 
@@ -67,6 +56,27 @@ return (
   <PlayerHlsFlv {...params} />
 )
 ```
+---
+
+## 效果图
+![image](https://raw.githubusercontent.com/allenYetu211/player-hls-flv/master/picture/picture-1.png)
+![image](https://raw.githubusercontent.com/allenYetu211/player-hls-flv/master/picture/picture-2.png)
+![image](https://raw.githubusercontent.com/allenYetu211/player-hls-flv/master/picture/picture-3.png)
+![image](https://raw.githubusercontent.com/allenYetu211/player-hls-flv/master/picture/picture-4.png)
+
+---
+
+## Error Code
+| 错误码 | 描述 |
+| --- | --- |
+| 0001 | 浏览器禁止自动播放，需手动处理播放状态 |
+|NETWORK_ERROR| 网络相关错误 |
+|STATISTICS_INFO| 提供播放统计信息，如下降帧，当前速度等|
+|ERROR| 播放过程中发生的任何错误 |
+|MEDIA_ERROR| 与媒体相关的错误(格式错误、解码问题等) |
+|OTHER_ERROR| 任何其他未指定的错误 |
+
+
 
 
 
