@@ -11,7 +11,7 @@ const mp4Config: initConfig = {
   type: 'mp4',
   autoplay: false,
   src:
-    'http://1.180.60.49:9990/vodfiles/sharefiles/live/2c924e496fb46e43016fb62acb0813f9/20201/316cead6-033b-4a2b-95f1-65da69d4b312.mp4',
+    "http://prd-vodcdn.xylink.com/vodfiles/sharefiles/live/2c94bb04707cfec4017089d77d353acc/20203/1a690410-bc08-4258-af58-14f77a462f9b.mp4",
 }
 
 const flvConfig: initConfig = {
@@ -56,7 +56,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option] = useState<initConfig>(hlsConfig)
+  const [option] = useState<initConfig>(mp4Config)
   return <VideoPlayer {...option} />
 }
 

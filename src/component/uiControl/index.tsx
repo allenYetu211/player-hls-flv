@@ -51,7 +51,7 @@ const UiControl = (props: IPlayer) => {
     <div className={style.container}>
 
       <div className={style.middlePlayBtn}>
-      { isShowPlayering && isPlayBtn &&  <PlugInPlayBtn />}
+      { isShowPlayering && isPlayBtn &&  <PlugInPlayBtn notlistener={true} />}
       </div>
       
       <div

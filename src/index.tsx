@@ -6,7 +6,7 @@ import UiControl from '@g/component/uiControl';
 
 
 export interface initConfig {
-  type: 'flv' | 'hls' | 'mp4' | 'm3u8',
+  type?: 'flv' | 'hls' | 'mp4' | 'm3u8',
   src?: string;
   autoplay?: boolean;
   option?: IMultiStreamsContainer;

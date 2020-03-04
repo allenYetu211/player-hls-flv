@@ -13,7 +13,7 @@ export interface IMultiStreamsContainer {
 
 
 export interface initConfig {
-  type: 'flv' | 'hls' | 'mp4' | 'm3u8',
+  type?: 'flv' | 'hls' | 'mp4' | 'm3u8',
   src?: string;
   autoplay?: boolean;
   option?: IMultiStreamsContainer;
@@ -23,7 +23,7 @@ export interface initConfig {
 export type Element = HTMLVideoElement
 
 export interface videoConfig extends initConfig {
-  type: 'flv' | 'hls' | 'mp4' | 'm3u8',
+  type?: 'flv' | 'hls' | 'mp4' | 'm3u8',
   src?: string,
   element: Element,
   autoplay?: boolean;

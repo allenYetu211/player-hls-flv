@@ -1,8 +1,8 @@
 {
-  "name": "vp",
+  "name": "v-player",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/view/index.js",
+  "main": "./dist/index.js",
   "keywords": [],
   "author": "",
   "license": "ISC",

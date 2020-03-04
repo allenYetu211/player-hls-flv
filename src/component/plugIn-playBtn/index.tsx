@@ -6,26 +6,28 @@ import style from './style/index.scss';
 
 import {iconVideoPlay, iconVideoStop} from '@images/icon';
 
+interface IProps {
+  notlistener?: boolean;
+}
 
-
-const PlugInPlayBtn = () => {
+const PlugInPlayBtn = (props: IProps) => {
   // 播放状态
   const [isPlayering, setIsPlayering] = useState<boolean>(false);
   // 播放器
   const player: any = getVideoPlayer();
   useEffect(() => {
-    addEventListener();
+      if (!props.notlistener)  {
+        addListenerState();
+    }
   }, []);
 
-  const addEventListener = () => {
+  const addListenerState = () => {
     player.on('play', () => {
       setIsPlayering(true);
-      console.log('Naitve play');
     });
 
     player.on('stop', () => {
       setIsPlayering(false);
-      console.log('Naitve stop');
     });
   };
 
