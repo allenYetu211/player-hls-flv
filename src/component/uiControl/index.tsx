@@ -27,6 +27,7 @@ const UiControl = (props: IPlayer) => {
   const [isMultiples,setMultiples] = useState<boolean>(false);
   const [isVoice,setVoice] = useState<boolean>(true);
   const [isFullScreen,setFullScreen] = useState<boolean>(true);
+  const [isPluginMultiCode,setPluginMultiCode] = useState<boolean>(false);
   const [isShowPlayering,setShowPlayering] = useState<boolean>(true);
   const [loading,setloading] = useState<boolean>(false);
 
@@ -42,6 +43,11 @@ const UiControl = (props: IPlayer) => {
       setDuration(true);
       setProgressBar(true);
     }
+
+    if (props.config.type === 'flv' || props.config.type === 'hls') {
+      setPluginMultiCode(true);
+    }
+
   }
 
   const addEventListener = () => {
@@ -100,7 +106,7 @@ const UiControl = (props: IPlayer) => {
         </div>
 
         <div className={style.rightContaienr}>
-          <PluginMultiCode  option={config.option!}/>
+          {isPluginMultiCode && <PluginMultiCode  option={config.option!}/>}
           {isMultiples && <PluginMultiples />}
           {isVoice && <PlugInVoice />}
           {isFullScreen && <PlugInFullScreen element={props.element} />}

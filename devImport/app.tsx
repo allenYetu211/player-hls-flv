@@ -20,12 +20,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83.flv?auth_key=0e20e8b34a4c9e34936fd14756707116-1583559000-6fde323fbdcc4d179c54c4a9cbd1c99a-',
+        src:'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83.flv?auth_key=497dc1edca0a091e7749f7a4b7c7759b-1583559000-f46e3eb1d57a4a83a774f186b14736b2-',
         text: '标清',
       },
       {
         src:
-          'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83.flv?auth_key=0e20e8b34a4c9e34936fd14756707116-1583559000-6fde323fbdcc4d179c54c4a9cbd1c99a-',
+          'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83.flv?auth_key=497dc1edca0a091e7749f7a4b7c7759b-1583559000-f46e3eb1d57a4a83a774f186b14736b2-',
         text: '高清',
       },
     ],
@@ -56,7 +56,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option] = useState<initConfig>(hlsConfig)
+  const [option] = useState<initConfig>(flvConfig)
   return <VideoPlayer {...option} />
 }
 
