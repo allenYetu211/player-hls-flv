@@ -18,28 +18,28 @@
     }
   }
   }
-}
-
-
-
-
-
-.indicateBar {
-  display: none;
-  position:absolute;
-  left:0;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  z-index: 11;
-  background-color: #fff;
-  pointer-events: none;
-
-  .value {
-    padding: 0 10px;
-    text-align: center;
+  & > .indicateBar {
+    display: none;
+    position:absolute;
+    left:0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    z-index: 11;
+    background-color: #fff;
+    pointer-events: none;
+  
+    .value {
+      padding: 0 10px;
+      text-align: center;
+    }
   }
 }
+
+
+
+
+
 
 
 

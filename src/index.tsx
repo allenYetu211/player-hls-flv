@@ -4,7 +4,6 @@ import style from './styles.scss';
 import {initPlayer} from '@player/index';
 import UiControl from '@g/component/uiControl';
 
-
 export interface initConfig {
   type?: 'flv' | 'hls' | 'mp4' | 'm3u8',
   src?: string;

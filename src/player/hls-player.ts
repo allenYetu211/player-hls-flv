@@ -51,6 +51,14 @@ export default class HLSPlayer extends VideoControl {
     this.addPlayerListener();
   }
 
+  public chooseMultiCode(key: number) {
+    this.destroy();
+    this.playerIndex = key;
+    this.src = this.multiStreams[key].src;
+    this.autoplay = true;
+    this.initVideoEl()
+  }
+
   private addPlayerListener() {
     this.hls.on(Hls.ErrorTypes.NETWORK_ERROR, (e: any) => {
       this._emitter.emit('NETWORK_ERROR: HLS ===>', e)

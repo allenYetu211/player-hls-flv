@@ -7,7 +7,10 @@ import PlugInPlayBtn from '@g/component/plugIn-playBtn';
 import PlugInDuration from '@g/component/plugIn-duration';
 import PlugInProgressBar from '@g/component/plugIn-progressBar'
 import PlugInFullScreen from '@g/component/plugIn-fullScreen'
-import PluginMultiple from '@g/component/plugIn-multiple';
+import PluginMultiples from '@g/component/plugIn-multiples';
+import PluginMultiCode from '@g/component/plugIn-multiCode';
+import {iconLoading} from '@g/images/icon';
+import cn from 'classnames';
 
 interface IPlayer {
   config: initConfig,
@@ -21,10 +24,12 @@ const UiControl = (props: IPlayer) => {
   const [isProgressBar,setProgressBar] = useState<boolean>(false);
   const [isDuration,setDuration] = useState<boolean>(false);
   const [isPlayBtn,setPlayBtn] = useState<boolean>(true);
-  const [isMultiple,setMultiple] = useState<boolean>(false);
+  const [isMultiples,setMultiples] = useState<boolean>(false);
   const [isVoice,setVoice] = useState<boolean>(true);
   const [isFullScreen,setFullScreen] = useState<boolean>(true);
   const [isShowPlayering,setShowPlayering] = useState<boolean>(true);
+  const [loading,setloading] = useState<boolean>(false);
+
 
   useEffect(() => {
     addEventListener();
@@ -32,8 +37,10 @@ const UiControl = (props: IPlayer) => {
   }, []);
 
   const controlUi = () => {
-    if (props.config.type === 'flv') {
-     
+    if (props.config.type === 'mp4') {
+      setMultiples(true);
+      setDuration(true);
+      setProgressBar(true);
     }
   }
 
@@ -45,13 +52,35 @@ const UiControl = (props: IPlayer) => {
     player.on('stop', () => {
       setShowPlayering(true);
     });
+    
+    // 监听首次点击 只执行一次
+    player.once('clickPlay', () => {
+        setloading(true);
+        setShowPlayering(false);
+    });
+
+    player.on('mediaState', (state: boolean) =>{
+      if(state) {
+        setloading(false);
+      } else {
+        setloading(true);
+      }
+    })
   };
+
+  const onChangeComplete = () => {
+    setShowPlayering(false);
+  }
 
   return (
     <div className={style.container}>
 
-      <div className={style.middlePlayBtn}>
+      <div className={style.middleContainer}>
       { isShowPlayering && isPlayBtn &&  <PlugInPlayBtn notlistener={true} />}
+
+      { !isShowPlayering && loading &&  <div className={cn(style.icon, style.animation)}>
+        {iconLoading}
+      </div> }
       </div>
       
       <div
@@ -62,7 +91,7 @@ const UiControl = (props: IPlayer) => {
       >
 
 
-       {isProgressBar && <PlugInProgressBar />} 
+       {isProgressBar && <PlugInProgressBar onChangeComplete={onChangeComplete} />} 
 
 
         <div className={style.leftContainer}>
@@ -71,7 +100,8 @@ const UiControl = (props: IPlayer) => {
         </div>
 
         <div className={style.rightContaienr}>
-          {isMultiple && <PluginMultiple />}
+          <PluginMultiCode  option={config.option!}/>
+          {isMultiples && <PluginMultiples />}
           {isVoice && <PlugInVoice />}
           {isFullScreen && <PlugInFullScreen element={props.element} />}
         </div>

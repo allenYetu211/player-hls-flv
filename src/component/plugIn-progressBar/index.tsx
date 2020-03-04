@@ -6,9 +6,12 @@ import {msToTime} from '@utils/translateTime';
 
 import cn from 'classnames';
 
-let progressState: boolean = false;
 
-const PlugInProgressBar = () => {
+interface IProps {
+  onChangeComplete: Function;
+}
+
+const PlugInProgressBar = (props:IProps) => {
   const player: any = getVideoPlayer();
   useEffect(() => {
     addEventListener();
@@ -27,9 +30,7 @@ const PlugInProgressBar = () => {
     });
 
     player.on('playProgress', (duration: string) => {
-      if (!progressState) {
         setPlayProgress(Number(duration));
-      }
     });
   };
 
@@ -75,6 +76,7 @@ const PlugInProgressBar = () => {
         
         onChangeComplete={() => {
           player.play();
+          props.onChangeComplete()
         }}
       />
     </div>

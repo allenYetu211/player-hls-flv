@@ -45,6 +45,13 @@ export default class FlvPlayer extends VideoControl {
     this.addPlayerListener();
   }
 
+  public chooseMultiCode(key: number) {
+    this.destroy();
+    this.playerIndex = key
+    this.src = this.multiStreams[key].src;
+    this.initVideoEl()
+  }
+
   private addPlayerListener() {
     this.flv.on(flvjs.ErrorTypes.NETWORK_ERROR, (e: any) => {
       this._emitter.emit('NETWORK_ERROR: FLV ===>', e)

@@ -18,9 +18,8 @@ export default class VideoContainer {
 
   constructor(config: ConfigType) {
     this.videoEl  = config.element;
-    //  监听视频全图
-    this.addEventListenerFullscreen();
-    this.addEventListenerWaiting()
+    // 添加video 监听
+    this.addEventListener();
   }
 
   public stop() {
@@ -30,6 +29,7 @@ export default class VideoContainer {
   } 
 
   public play() {
+    this._emitter.emit('clickPlay');
     this.videoEl.play().then(() => {
       this._emitter.emit('play');
       this.onPlayProgress()
@@ -40,7 +40,6 @@ export default class VideoContainer {
 
   public onPlayProgress() {
     this._emitter.emit('playProgress', this.videoEl.currentTime  * 1000);
-    
     this.timer = setInterval(() => {
       this._emitter.emit('playProgress', this.videoEl.currentTime  * 1000)
       if (this.videoEl.currentTime >= this.videoEl.duration) {
@@ -55,15 +54,16 @@ export default class VideoContainer {
     this.videoEl.volume = value;
   }
 
-  private addEventListenerWaiting() {
-    this.videoEl.addEventListener('waiting', (e: any) => {
-      console.log('waiting', e);
-      // this._emitter.emit('fullscreen', true)
+  // 监听video事件
+  private  addEventListener () {
+  this.videoEl.addEventListener('timeupdate', (e: any) => {
+      if (this.videoEl.readyState > 2 ) {
+        this._emitter.emit('mediaState', true)
+      } else {
+        this._emitter.emit('mediaState', false)
+      }
     })
-  }
 
-  // 监听全屏事件
-  private  addEventListenerFullscreen () {
      //  监听微信 Android 全屏
      this.videoEl.addEventListener('x5videoenterfullscreen', () => {
       this._emitter.emit('fullscreen', true)
@@ -87,8 +87,22 @@ export default class VideoContainer {
     this.videoEl.currentTime = value/1000;
   }
 
+  public setPlaybackRate(value: number) {
+    if (value === this.videoEl.playbackRate) {
+      return 
+    }
+    this.videoEl.playbackRate = value;
+  }
+
+
+
+  // 发布订阅
   public on(event: string, listener: EventEmitter.ListenerFn) {
     this._emitter.addListener(event, listener);
+  } 
+  
+  public once(event: string, listener: EventEmitter.ListenerFn) {
+    this._emitter.once(event, listener);
   } 
   
   public off(event: string, listener: EventEmitter.ListenerFn) {

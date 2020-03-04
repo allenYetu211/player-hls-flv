@@ -14,12 +14,10 @@ const PluginDiration = () => {
   const addEventListener = () => {
     player.on('duration', (duration: string) => {
       setVideoDuration(msToTime(duration));
-      console.log('video duration');
     }); 
     
     player.on('playProgress', (duration: string) => {
       setPlayProgress(msToTime(duration));
-      console.log('video playProgress');
     });
   };
 

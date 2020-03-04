@@ -20,12 +20,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'http://prdsecurelive.ainemo.com/prdnemo/2c94bb04707cfec4017089d77d353acc.flv?auth_key=ac2584d8bafac786c1ee7d1d959a3b33-1583299800-f50144a0eecd4efa89bec92c75d0aacc-',
+        src:'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83.flv?auth_key=0e20e8b34a4c9e34936fd14756707116-1583559000-6fde323fbdcc4d179c54c4a9cbd1c99a-',
         text: '标清',
       },
       {
         src:
-          'http://prdsecurelive.ainemo.com/prdnemo/2c94bb04707cfec4017089d77d353acc.flv?auth_key=ac2584d8bafac786c1ee7d1d959a3b33-1583299800-f50144a0eecd4efa89bec92c75d0aacc-',
+          'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83.flv?auth_key=0e20e8b34a4c9e34936fd14756707116-1583559000-6fde323fbdcc4d179c54c4a9cbd1c99a-',
         text: '高清',
       },
     ],
@@ -40,12 +40,12 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'tp://prdsecurelive.ainemo.com/prdnemo/2c94bb04707cfec4017089d77d353acc_2.m3u8?auth_key=9525bed7443122e451f0cdee079c1aaa-1583299800-f112f0e537f14ff38f36fe268e0e974a-',
+        src:'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83_2.m3u8?auth_key=87d9480b42428ced637a8954d9aad39d-1583559000-902995052d9f4ed69212d42e9acd17ad-',
         text: '标清',
       },
       {
         src:
-          'http://prdsecurelive.ainemo.com/prdnemo/2c94bb04707cfec4017089d77d353acc.m3u8?auth_key=4dd4c84c77d4efc784cc60731645ee3c-1583299800-941b991626074f9f841c8253d0c73f30-',
+          'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83_2.m3u8?auth_key=87d9480b42428ced637a8954d9aad39d-1583559000-902995052d9f4ed69212d42e9acd17ad-',
         text: '高清',
       },
     ],
@@ -56,7 +56,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option] = useState<initConfig>(mp4Config)
+  const [option] = useState<initConfig>(hlsConfig)
   return <VideoPlayer {...option} />
 }
 

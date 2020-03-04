@@ -2,6 +2,8 @@ import React,{useState} from 'react';
 import style from './style/index.scss';
 import cn from 'classnames';
 
+import {getVideoPlayer} from '@player/index';
+
 const multiple = [
   {
     text: '1x',
@@ -18,7 +20,7 @@ const multiple = [
 ];
 
 const PluginMultiple = () => {
-
+  const player: any = getVideoPlayer();
   const [multipleIndex, setMultipleIndex] = useState<number>(0); 
   return (
     <div
@@ -28,7 +30,7 @@ const PluginMultiple = () => {
       style.focusContainer
     )}
   >
-    <span>{multiple[multipleIndex].text}</span>
+    <div className={style.multiple}>{multiple[multipleIndex].text}</div>
     <div className={style.focuseContainer}>
       <div className={cn(style.listContainer, style.focuseChild)}>
         <ul>
@@ -40,7 +42,8 @@ const PluginMultiple = () => {
                 })}
                 key={`${item.text}-${key}`}
                 onClick={() => {
-                  setMultipleIndex(item.value);
+                  player.setPlaybackRate(key + 1)
+                  setMultipleIndex(key);
                 }}
               >
                 {item.text}
