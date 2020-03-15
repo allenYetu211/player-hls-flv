@@ -47,7 +47,7 @@ export default class FlvPlayer extends VideoControl {
 
   public chooseMultiCode(key: number) {
     this.destroy();
-    this.playerIndex = key
+    this.playerIndex = key;
     this.src = this.multiStreams[key].src;
     this.autoplay = true;
     this.initVideoEl()

@@ -20,12 +20,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83.flv?auth_key=497dc1edca0a091e7749f7a4b7c7759b-1583559000-f46e3eb1d57a4a83a774f186b14736b2-',
+        src:'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83_2.flv?auth_key=8d4bc759cd3bb6c96b671347a65c46af-1583559000-e3d43bb3e6244c12b34ae393a1653be9-',
         text: '标清',
       },
       {
         src:
-          'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83.flv?auth_key=497dc1edca0a091e7749f7a4b7c7759b-1583559000-f46e3eb1d57a4a83a774f186b14736b2-',
+          'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83.flv?auth_key=66e0400aaaeee5c914d6b3d853f88117-1583559000-747da1c53d2d438f875d1f5002ac570e-',
         text: '高清',
       },
     ],
