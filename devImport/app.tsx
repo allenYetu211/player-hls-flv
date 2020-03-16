@@ -20,12 +20,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83_2.flv?auth_key=8d4bc759cd3bb6c96b671347a65c46af-1583559000-e3d43bb3e6244c12b34ae393a1653be9-',
+        src:'https://d1--cn-gotcha04.bilivideo.com/live-bvc/734551/live_30109585_1857875.flv?cdn=cn-gotcha04&expires=1584376686&len=0&oi=1929209288&pt=web&qn=10000&trid=8c653f1072064030828e5788a624fea6&sigparams=cdn,expires,len,oi,pt,qn,trid&sign=490a34bf62b28ffea4deef76dc53c655&ptype=0&platform=web&pSession=T0BkkYFY-MyHh-4Y5Q-h263-pK2nBECw425Z',
         text: '标清',
       },
       {
         src:
-          'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83.flv?auth_key=66e0400aaaeee5c914d6b3d853f88117-1583559000-747da1c53d2d438f875d1f5002ac570e-',
+          'https://d1--cn-gotcha04.bilivideo.com/live-bvc/734551/live_30109585_1857875.flv?cdn=cn-gotcha04&expires=1584376686&len=0&oi=1929209288&pt=web&qn=10000&trid=8c653f1072064030828e5788a624fea6&sigparams=cdn,expires,len,oi,pt,qn,trid&sign=490a34bf62b28ffea4deef76dc53c655&ptype=0&platform=web&pSession=T0BkkYFY-MyHh-4Y5Q-h263-pK2nBECw425Z',
         text: '高清',
       },
     ],
@@ -40,12 +40,12 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83_2.m3u8?auth_key=87d9480b42428ced637a8954d9aad39d-1583559000-902995052d9f4ed69212d42e9acd17ad-',
+        src:'https://d1--cn-gotcha104.bilivideo.com/live-bvc/437609/live_30109585_1857875.m3u8?cdn=cn-gotcha04&expires=1584377940&len=0&oi=1929209288&pt=h5&qn=10000&trid=2256fd0504694630bf30ee6a8530187a&sigparams=cdn,expires,len,oi,pt,qn,trid&sign=970f3104383348e8e6c15d68d04ba229&ptype=0',
         text: '标清',
       },
       {
         src:
-          'http://prdsecurelive.ainemo.com/prdnemo/2c949a2a707cfb12017089d7a2633b83_2.m3u8?auth_key=87d9480b42428ced637a8954d9aad39d-1583559000-902995052d9f4ed69212d42e9acd17ad-',
+          'https://d1--cn-gotcha104.bilivideo.com/live-bvc/437609/live_30109585_1857875.m3u8?cdn=cn-gotcha04&expires=1584377940&len=0&oi=1929209288&pt=h5&qn=10000&trid=2256fd0504694630bf30ee6a8530187a&sigparams=cdn,expires,len,oi,pt,qn,trid&sign=970f3104383348e8e6c15d68d04ba229&ptype=0',
         text: '高清',
       },
     ],
@@ -56,7 +56,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option] = useState<initConfig>(flvConfig)
+  const [option] = useState<initConfig>(hlsConfig)
   return <VideoPlayer {...option} />
 }
 
