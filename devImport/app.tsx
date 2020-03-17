@@ -20,12 +20,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'https://d1--cn-gotcha04.bilivideo.com/live-bvc/734551/live_30109585_1857875.flv?cdn=cn-gotcha04&expires=1584376686&len=0&oi=1929209288&pt=web&qn=10000&trid=8c653f1072064030828e5788a624fea6&sigparams=cdn,expires,len,oi,pt,qn,trid&sign=490a34bf62b28ffea4deef76dc53c655&ptype=0&platform=web&pSession=T0BkkYFY-MyHh-4Y5Q-h263-pK2nBECw425Z',
+        src:' http://presecurelive.ainemo.com/testdevnemo/ff80808170e15e9b0170e667b6fe00e5_2.flv?auth_key=6e59d49550c6ac7e3c128f5875da1447-1584507658-d939b40c59cb4fb08c890a6f3e437112-',
         text: '标清',
       },
       {
         src:
-          'https://d1--cn-gotcha04.bilivideo.com/live-bvc/734551/live_30109585_1857875.flv?cdn=cn-gotcha04&expires=1584376686&len=0&oi=1929209288&pt=web&qn=10000&trid=8c653f1072064030828e5788a624fea6&sigparams=cdn,expires,len,oi,pt,qn,trid&sign=490a34bf62b28ffea4deef76dc53c655&ptype=0&platform=web&pSession=T0BkkYFY-MyHh-4Y5Q-h263-pK2nBECw425Z',
+          ' http://presecurelive.ainemo.com/testdevnemo/ff80808170e15e9b0170e667b6fe00e5_2.flv?auth_key=6e59d49550c6ac7e3c128f5875da1447-1584507658-d939b40c59cb4fb08c890a6f3e437112-',
         text: '高清',
       },
     ],
@@ -56,7 +56,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option] = useState<initConfig>(hlsConfig)
+  const [option] = useState<initConfig>(flvConfig)
   return <VideoPlayer {...option} />
 }
 
