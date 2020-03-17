@@ -5,7 +5,11 @@ import {getVideoPlayer} from '@player/index';
 import Slider from 'react-rangeslider';
 
 import {iconVoice, iconVoiceOff} from '@images/icon';
-const PluginVoice = () => {
+
+interface IProps {
+  isMobile?: boolean;
+}
+const PluginVoice = (props: IProps) => {
 
   const player: any = getVideoPlayer();
   const [volume, setVolume] = useState(0.6);
@@ -25,7 +29,9 @@ const PluginVoice = () => {
 
   return (
     <div
-      className={cn(style.voiceContainer,style.focusContainer)}
+      className={cn(style.voiceContainer,style.focusContainer, {
+        [style.mobile]: props.isMobile
+      })}
     >
       <div className={cn(style.icon)} onClick={onClickMuteVolume}>
         {volume > 0 ? iconVoice : iconVoiceOff}

@@ -9,11 +9,13 @@ import cn from 'classnames';
 
 interface IProps {
   onChangeComplete: Function;
+  isMobile?: boolean;
 }
 
 const PlugInProgressBar = (props:IProps) => {
   const player: any = getVideoPlayer();
   useEffect(() => {
+    console.log('isMobile', props.isMobile)
     addEventListener();
   }, []);
 
@@ -55,6 +57,7 @@ const PlugInProgressBar = (props:IProps) => {
         ref={cursorEl}
         className={cn(style.indicateBar, style.focusContainer, {
           [style.hover]: cursorElDisplayState,
+          [style.mobile]: props.isMobile,
         })}>
         <div className={style.focuseContainer}>
           <div

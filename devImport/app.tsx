@@ -10,6 +10,7 @@ import {initConfig} from '../src/interfaces';
 const mp4Config: initConfig = {
   type: 'mp4',
   autoplay: false,
+  isMobile: true,
   src:
     "http://prd-vodcdn.xylink.com/vodfiles/sharefiles/live/2c94bb04707cfec4017089d77d353acc/20203/1a690410-bc08-4258-af58-14f77a462f9b.mp4",
 }
@@ -17,6 +18,7 @@ const mp4Config: initConfig = {
 const flvConfig: initConfig = {
   type: 'flv',
   autoplay: false,
+  isMobile: true,
   option: {
     multiStreams: [
       {
@@ -56,7 +58,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option] = useState<initConfig>(flvConfig)
+  const [option] = useState<initConfig>(mp4Config)
   return <VideoPlayer {...option} />
 }
 

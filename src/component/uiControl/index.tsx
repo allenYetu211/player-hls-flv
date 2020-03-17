@@ -97,7 +97,7 @@ const UiControl = (props: IPlayer) => {
       >
 
 
-       {isProgressBar && <PlugInProgressBar onChangeComplete={onChangeComplete} />} 
+       {isProgressBar && <PlugInProgressBar isMobile={config.isMobile!} onChangeComplete={onChangeComplete} />} 
 
 
         <div className={style.leftContainer}>
@@ -108,7 +108,7 @@ const UiControl = (props: IPlayer) => {
         <div className={style.rightContaienr}>
           {isPluginMultiCode && <PluginMultiCode  option={config.option!}/>}
           {isMultiples && <PluginMultiples />}
-          {isVoice && <PlugInVoice />}
+          {isVoice && <PlugInVoice isMobile={config.isMobile!}/>}
           {isFullScreen && <PlugInFullScreen element={props.element} />}
         </div>
 

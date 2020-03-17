@@ -17,6 +17,7 @@ export interface initConfig {
   src?: string;
   autoplay?: boolean;
   option?: IMultiStreamsContainer;
+  isMobile?: boolean;
 }
 
 

@@ -47,4 +47,17 @@
       display: block;
     }
   }
+
+  &.mobile {
+    &:hover,
+    &.hover {
+      .focuseContainer {
+        opacity: 0;
+        transform: translate3d(-50%, -120%, 0);
+      }
+      &.indicateBar {
+        display: block;
+      }
+    }
+  }
 }
