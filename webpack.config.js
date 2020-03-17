@@ -8,10 +8,10 @@ let envPrd = false;
 const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
+    filename: 'index.js',
     library: 'Videoplayer',
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    filename: 'index.js',
   },
   module: {
     rules: [
@@ -114,11 +114,11 @@ module.exports = (env, argv) => {
           commonjs: 'react',
           amd: 'react',
         },
-        'rc-slider': {
-          root: 'rc-slider',
-          commonjs2: 'rc-slider',
-          commonjs: 'rc-slider',
-          amd: 'rc-slider',
+        'react-rangeslider': {
+          root: 'react-rangeslider',
+          commonjs2: 'react-rangeslider',
+          commonjs: 'react-rangeslider',
+          amd: 'react-rangeslider',
         },
         'flv.js': {
           root: 'flvjs',
