@@ -1,6 +1,6 @@
 {
   "name": "player-hls-flv",
-  "version": "1.0.406",
+  "version": "1.0.5",
   "description": "",
   "main": "./dist/index.js",
   "keywords": [],
@@ -10,7 +10,7 @@
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
     "build": "webpack -p --mode production --env.NODE_ENV=production",
-    "start": "webpack-dev-server --hot --mode development --env.NODE_ENV=development"
+    "start": "webpack-dev-server --hot --mode development --env.NODE_ENV=development --host 0.0.0.0"
   },
   "dependencies": {
     "@types/hls.js": "^0.12.5",
