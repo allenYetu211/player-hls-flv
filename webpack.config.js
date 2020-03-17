@@ -8,7 +8,9 @@ let envPrd = false;
 const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
+    library: 'Videoplayer',
     libraryTarget: 'umd',
+    umdNamedDefine: true,
     filename: 'index.js',
   },
   module: {
