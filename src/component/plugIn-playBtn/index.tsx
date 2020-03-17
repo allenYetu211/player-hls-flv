@@ -17,16 +17,22 @@ const PlugInPlayBtn = (props: IProps) => {
   const player: any = getVideoPlayer();
   useEffect(() => {
       if (!props.notlistener)  {
-        addListenerState();
-    }
+        onListenerState('on');
+      }
+      return () => {
+        if (!props.notlistener)  {
+          onListenerState('off');
+        }
+      }
   }, []);
 
-  const addListenerState = () => {
-    player.on('play', () => {
+  const onListenerState = (state: 'on' | 'off') => {
+    console.log('onListenerState', state)
+    player[state]('play', () => {
       setIsPlayering(true);
     });
 
-    player.on('stop', () => {
+    player[state]('stop', () => {
       setIsPlayering(false);
     });
   };

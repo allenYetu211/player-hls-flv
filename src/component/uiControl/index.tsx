@@ -13,8 +13,9 @@ import {iconLoading} from '@g/images/icon';
 import cn from 'classnames';
 
 interface IPlayer {
-  config: initConfig,
-  element: HTMLDivElement
+  config: initConfig;
+  element: HTMLDivElement;
+  videoEl: HTMLVideoElement;
 }
 
 const UiControl = (props: IPlayer) => {
@@ -33,8 +34,11 @@ const UiControl = (props: IPlayer) => {
 
 
   useEffect(() => {
-    addEventListener();
+    onListenerState('on');
     controlUi()
+return () => {
+  onListenerState('off')
+}
   }, []);
 
   const controlUi = () => {
@@ -50,22 +54,24 @@ const UiControl = (props: IPlayer) => {
 
   }
 
-  const addEventListener = () => {
-    player.on('play', () => {
+  const onListenerState = (state: 'on' | 'off') => {
+    if (state === 'on') {
+      // 监听首次点击 只执行一次
+      player.once('clickPlay', () => {
+        setloading(true);
+        setShowPlayering(false);
+      });
+    }
+
+    player[state]('play', () => {
       setShowPlayering(false);
     });
 
-    player.on('stop', () => {
+    player[state]('stop', () => {
       setShowPlayering(true);
     });
     
-    // 监听首次点击 只执行一次
-    player.once('clickPlay', () => {
-        setloading(true);
-        setShowPlayering(false);
-    });
-
-    player.on('mediaState', (state: boolean) =>{
+    player[state]('mediaState', (state: boolean) =>{
       if(state) {
         setloading(false);
       } else {
@@ -109,7 +115,7 @@ const UiControl = (props: IPlayer) => {
           {isPluginMultiCode && <PluginMultiCode  option={config.option!}/>}
           {isMultiples && <PluginMultiples />}
           {isVoice && <PlugInVoice isMobile={config.isMobile!}/>}
-          {isFullScreen && <PlugInFullScreen element={props.element} />}
+          {isFullScreen && <PlugInFullScreen element={props.element}  videoEl={props.videoEl}/>}
         </div>
 
       </div>

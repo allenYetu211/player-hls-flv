@@ -26,12 +26,13 @@ playIndex: number;
 
 const VideoPlayer = (props: initConfig) => {
 
-
   const videoEl = useRef<HTMLVideoElement>(null);
 
   const containerEl = useRef<HTMLDivElement>(null);
 
   const [initState, setInitState] = useState<boolean>(false);
+
+  const [videoPlayer, setVideoPlayer] = useState<any>();
 
   // 针对不同浏览器添加不同属性
   useEffect(() => {
@@ -44,6 +45,14 @@ const VideoPlayer = (props: initConfig) => {
     }
   })
 
+  // src 发生变化时候更新
+  useEffect(() => {
+    if(videoPlayer && videoPlayer.updateMp4Path) {
+      videoPlayer.stop();
+      videoPlayer.updateMp4Path(props.src)
+    }
+  }, [props.src])
+
   //  初始播放器
   useEffect(() => {
       const config = Object.assign({}, props, {
@@ -51,16 +60,19 @@ const VideoPlayer = (props: initConfig) => {
       })
       const vp:any = initPlayer(config);
       setInitState(true);
-      addEventListener(vp);
+      onListenerState(vp, 'on');
+      setVideoPlayer(vp);
       return () => {
         vp.destroy();
+        onListenerState(vp, 'off');
+        setInitState(false);
         console.log('====== destroy ====')
       }
   }, [])
 
   // 监听状态
-  const addEventListener = (vp: any) => {
-    vp.on('0001', (info: string) => {
+  const onListenerState = (vp: any, state: 'on'| 'off') => {
+    vp[state]('0001', (info: string) => {
       console.log('0001', info)
     })
   }
@@ -69,7 +81,7 @@ const VideoPlayer = (props: initConfig) => {
   return (
   <div ref={containerEl}  className={style.container}>
     <video ref={videoEl} />
-    {initState && <UiControl config={props} element={containerEl.current!} />}
+    {initState && <UiControl config={props} element={containerEl.current!} videoEl={videoEl.current!}/>}
   </div>);
 }
 

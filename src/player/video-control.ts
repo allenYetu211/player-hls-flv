@@ -57,7 +57,6 @@ export default class VideoContainer {
   // 监听video事件
   private  addEventListener () {
   this.videoEl.addEventListener('timeupdate', (e: any) => {
-      console.log('this.videoEl.readyState', this.videoEl.readyState)
       if (this.videoEl.readyState > 2 ) {
         this._emitter.emit('mediaState', true)
       } else {

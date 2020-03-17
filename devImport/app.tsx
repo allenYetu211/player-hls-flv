@@ -12,7 +12,7 @@ const mp4Config: initConfig = {
   autoplay: false,
   isMobile: true,
   src:
-    "http://prd-vodcdn.xylink.com/vodfiles/sharefiles/live/2c94bb04707cfec4017089d77d353acc/20203/1a690410-bc08-4258-af58-14f77a462f9b.mp4",
+    "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/ff80808170e6aa1b0170e751d2a2000a/20203/1796783e-624a-4cc3-babe-1cf6a1eb3272.mp4",
 }
 
 const flvConfig: initConfig = {
@@ -57,9 +57,32 @@ const hlsConfig: initConfig = {
 
 
 
+
 const App = () => {
-  const [option] = useState<initConfig>(mp4Config)
-  return <VideoPlayer {...option} />
+  const [option, setOption] = useState<initConfig>(mp4Config)
+
+  const choseMp4Url = () => {
+    setOption({
+      type: 'mp4',
+      autoplay: false,
+      isMobile: true,
+      src:
+        "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/ff80808170e6aa1b0170e751d2a2000a/20203/9d3a1691-90eb-43dc-b824-a0d9c4b8b04c.mp4",
+    })
+  }
+
+  return (
+    <div>
+      <button style={{
+        position: 'absolute',
+        top: '0px',
+        left: '0px',
+        zIndex: 999
+      }} onClick={choseMp4Url}>切换</button>
+      <VideoPlayer {...option} />
+    </div>
+  )
+ 
 }
 
 export default hot(App);

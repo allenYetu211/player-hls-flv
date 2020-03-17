@@ -8,15 +8,18 @@ import {msToTime} from '@utils/translateTime';
 const PluginDiration = () => {
   const player: any = getVideoPlayer();
   useEffect(() => {
-    addEventListener();
+    onListenerState('on');
+    return () => {
+      onListenerState('off');
+    }
   }, []);
 
-  const addEventListener = () => {
-    player.on('duration', (duration: string) => {
+  const onListenerState = (state: 'on' | 'off') => {
+    player[state]('duration', (duration: string) => {
       setVideoDuration(msToTime(duration));
     }); 
     
-    player.on('playProgress', (duration: string) => {
+    player[state]('playProgress', (duration: string) => {
       setPlayProgress(msToTime(duration));
     });
   };

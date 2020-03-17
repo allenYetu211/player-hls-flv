@@ -15,8 +15,10 @@ interface IProps {
 const PlugInProgressBar = (props:IProps) => {
   const player: any = getVideoPlayer();
   useEffect(() => {
-    console.log('isMobile', props.isMobile)
-    addEventListener();
+    onListenerState('on');
+    return () => {
+      onListenerState('off');
+    }
   }, []);
 
   const [videoDuration, setVideoDuration] = useState <number>(0);
@@ -26,12 +28,12 @@ const PlugInProgressBar = (props:IProps) => {
   const progressEl = useRef<HTMLDivElement>(null);
   const cursorEl = useRef<HTMLDivElement>(null);
 
-  const addEventListener = () => {
-    player.on('duration', (duration: string) => {
+  const onListenerState = (state: 'on' | 'off') => {
+    player[state]('duration', (duration: string) => {
       setVideoDuration(Number(duration));
     });
 
-    player.on('playProgress', (duration: string) => {
+    player[state]('playProgress', (duration: string) => {
         setPlayProgress(Number(duration));
     });
   };

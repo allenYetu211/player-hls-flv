@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {iconFull, iconExitFull} from '@images/icon';
 import {fullScreen, exitFullscreen} from '@utils/fullScreen';
-
+import {isIOS} from '@utils/phoneType';
 import style from './style/index.scss';
 
 interface IProps {
-  element: HTMLDivElement
+  element: HTMLDivElement;
+  videoEl: HTMLVideoElement;
 }
 
 const PlugInFullScreen = (props: IProps) => {
@@ -13,6 +14,7 @@ const PlugInFullScreen = (props: IProps) => {
 
     // 注册全屏事件
     useEffect(() => {
+      console.log('element:::', props.element)
       props.element!.onfullscreenchange = (event) => {
         if (document.fullscreenElement !== event.target) {
           onExitfullScreen();
@@ -27,7 +29,12 @@ const PlugInFullScreen = (props: IProps) => {
 
     const onfullScreen = () => {
       setFullState(true);
-      fullScreen(props.element)
+      fullScreen(props.videoEl)
+      // if (isIOS()) {
+      //   fullScreen(props.videoEl)
+      // } else {
+      //   fullScreen(props.element)
+      // }
     };
 
   return (

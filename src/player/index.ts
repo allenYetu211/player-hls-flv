@@ -3,7 +3,7 @@ import NaitvePlayer from './native-player';
 import FlvPlayer from './flv-player';
 // import HlsPlayer from './hls-player';
 
-let videoPlayer:Player;
+let videoPlayer:any;
 
 export default class Player {
   constructor(config: videoConfig) {
@@ -34,6 +34,7 @@ export const getVideoPlayer = () => {
 }
 
 export const initPlayer = (config: videoConfig) => {
-  videoPlayer = new Player(config);
-  return videoPlayer;
+    videoPlayer = new Player(config);
+    return videoPlayer;
 }
+

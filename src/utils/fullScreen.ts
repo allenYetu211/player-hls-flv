@@ -1,5 +1,5 @@
 //  全屏
-export const fullScreen = (element: HTMLDivElement) => {
+export const fullScreen = (element: HTMLVideoElement| HTMLDivElement) => {
   const _element = element as any;
 	if (_element.requestFullscreen) {
 		_element.requestFullscreen();

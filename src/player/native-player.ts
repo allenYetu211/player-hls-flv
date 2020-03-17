@@ -25,6 +25,7 @@ export default class NativePlayer extends VideoControl {
 
     this.type = config.type!;
 
+
     if (this.type === 'hls' || this.type === 'm3u8') {
       this.multiStreams = config.option!.multiStreams;
       this.playerIndex = config.option!.playIndex;
@@ -36,20 +37,25 @@ export default class NativePlayer extends VideoControl {
     if (this.type ==='mp4' || config.src) {
       this.src = config.src!
     }
+
+    this.videoEl.src = this.src;
     this.initVideoEl()
   }
 
-  
-
   // 初始播放器
   private initVideoEl() {
-    this.videoEl.src = this.src ;
     this.videoEl.load();
     this.videoEl.addEventListener('loadedmetadata', () => {
       this.autoplay && this.play();
       // 获取时长，注入
       this._emitter.emit('duration', this.videoEl.duration * 1000)
     })
+  }
+
+  public  updateMp4Path (src: string) {
+    this._emitter.emit('playProgress', 0);
+    this.videoEl.src = src;
+    this.initVideoEl()
   }
 
   public chooseMultiCode(key: number) {
@@ -61,6 +67,7 @@ export default class NativePlayer extends VideoControl {
   }
 
   public  destroy(){
+    this.stop()
     console.log('Native destroy')
   }
  
