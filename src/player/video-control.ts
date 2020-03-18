@@ -106,7 +106,6 @@ export default class VideoContainer {
   } 
   
   public off(event: string, listener: EventEmitter.ListenerFn) {
-    console.log("event", event)
     this._emitter.removeListener(event, listener);
   }
 

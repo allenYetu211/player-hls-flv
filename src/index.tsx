@@ -1,7 +1,7 @@
 
 import React, {useRef, useEffect, useState} from 'react';
 import style from './styles.scss';
-import {initPlayer} from '@player/index';
+import {initPlayer, getVideoPlayer} from '@player/index';
 import UiControl from '@g/component/uiControl';
 
 export interface initConfig {
@@ -66,7 +66,7 @@ const VideoPlayer = (props: initConfig) => {
         vp.destroy();
         onListenerState(vp, 'off');
         setInitState(false);
-        console.log('====== destroy ====')
+        console.log('====== destroy ======')
       }
   }, [])
 
@@ -86,3 +86,4 @@ const VideoPlayer = (props: initConfig) => {
 }
 
 export default VideoPlayer;
+export {getVideoPlayer}

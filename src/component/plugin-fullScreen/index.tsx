@@ -14,12 +14,20 @@ const PlugInFullScreen = (props: IProps) => {
 
     // 注册全屏事件
     useEffect(() => {
-      console.log('element:::', props.element)
       props.element!.onfullscreenchange = (event) => {
         if (document.fullscreenElement !== event.target) {
           onExitfullScreen();
         }
       };
+
+       // android 全屏事件
+      document.addEventListener('webkitfullscreenchange', (evt) => {
+        const _d = document as  any;
+        if (!_d.webkitIsFullScreen && evt.srcElement === props.videoEl) {
+            onExitfullScreen();
+        }
+    }, false);
+    
     }, []);
 
     const onExitfullScreen = () => {

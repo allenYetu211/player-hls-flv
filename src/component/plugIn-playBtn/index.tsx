@@ -27,7 +27,6 @@ const PlugInPlayBtn = (props: IProps) => {
   }, []);
 
   const onListenerState = (state: 'on' | 'off') => {
-    console.log('onListenerState', state)
     player[state]('play', () => {
       setIsPlayering(true);
     });
