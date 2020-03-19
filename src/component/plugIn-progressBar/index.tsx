@@ -50,7 +50,9 @@ const PlugInProgressBar = (props:IProps) => {
   return (
     <div 
       ref={progressEl}
-      className={style.progress}
+      className={cn(style.progress, {
+        [style.mobileIndicateBar]: props.isMobile,
+      })}
       onMouseMove={(e) => {onMouseMove(e)}}
       onMouseEnter={() => {setCursorElDisplayState(true);}}
       onMouseLeave={() => {setCursorElDisplayState(false);}}>

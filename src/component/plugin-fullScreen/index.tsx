@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {iconFull, iconExitFull} from '@images/icon';
 import {fullScreen, exitFullscreen} from '@utils/fullScreen';
-import {isIOS} from '@utils/phoneType';
+import {deviceType} from '@utils/phoneType';
 import style from './style/index.scss';
 
 interface IProps {
@@ -37,12 +37,12 @@ const PlugInFullScreen = (props: IProps) => {
 
     const onfullScreen = () => {
       setFullState(true);
-      fullScreen(props.videoEl)
-      // if (isIOS()) {
-      //   fullScreen(props.videoEl)
-      // } else {
-      //   fullScreen(props.element)
-      // }
+
+      if (deviceType.pc) {
+        fullScreen(props.element);
+      } else {
+        fullScreen(props.videoEl)
+      }
     };
 
   return (

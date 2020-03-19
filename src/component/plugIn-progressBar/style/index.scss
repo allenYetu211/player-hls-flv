@@ -1,5 +1,30 @@
 @import '@g/asset/style/focuseContainer.scss';
 
+
+.mobileIndicateBar {
+  &.progress{
+    position: static;
+    transform: translate3d(0,0,0);
+    margin: 0 20px;
+    flex: 1;
+    &:hover {
+      height: 3px;
+      :global {
+        .rangeslider-horizontal .rangeslider__handle:after{
+        opacity: 1;
+        transform: scale(1) ranslate(-50%,-30%);
+        }
+        .rangeslider-horizontal .rangeslider__fill {
+          background-color: #e0e0e0;
+        }
+      }
+    }
+    & > .indicateBar {
+      opacity: 0;
+    }
+  }
+}
+
 .progress {
   position: absolute;
   left: 0;
@@ -10,7 +35,6 @@
   transition: all 0.3s ease;
   transform: translate3d(0,-100%,0);
   &:hover {
-    height: 10px;
     :global {
     .rangeslider-horizontal .rangeslider__handle:after{
       opacity: 1;

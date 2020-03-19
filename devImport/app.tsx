@@ -42,12 +42,12 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'https://d1--cn-gotcha104.bilivideo.com/live-bvc/437609/live_30109585_1857875.m3u8?cdn=cn-gotcha04&expires=1584377940&len=0&oi=1929209288&pt=h5&qn=10000&trid=2256fd0504694630bf30ee6a8530187a&sigparams=cdn,expires,len,oi,pt,qn,trid&sign=970f3104383348e8e6c15d68d04ba229&ptype=0',
+        src:'http://prdsecurelive.ainemo.com/prdnemo/2c94982b70ab389e0170e868b366534c_2.m3u8?auth_key=ed7f1579407b592078ce1e157c467a90-1585146600-8ec46633d26f4091987e62a4183c7a7f-',
         text: '标清',
       },
       {
         src:
-          'https://d1--cn-gotcha104.bilivideo.com/live-bvc/437609/live_30109585_1857875.m3u8?cdn=cn-gotcha04&expires=1584377940&len=0&oi=1929209288&pt=h5&qn=10000&trid=2256fd0504694630bf30ee6a8530187a&sigparams=cdn,expires,len,oi,pt,qn,trid&sign=970f3104383348e8e6c15d68d04ba229&ptype=0',
+          'http://prdsecurelive.ainemo.com/prdnemo/2c94982b70ab389e0170e868b366534c_2.m3u8?auth_key=ed7f1579407b592078ce1e157c467a90-1585146600-8ec46633d26f4091987e62a4183c7a7f-',
         text: '高清',
       },
     ],

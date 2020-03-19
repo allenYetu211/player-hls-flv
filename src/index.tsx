@@ -3,7 +3,7 @@ import React, {useRef, useEffect, useState} from 'react';
 import style from './styles.scss';
 import {initPlayer, getVideoPlayer} from '@player/index';
 import UiControl from '@g/component/uiControl';
-
+import {deviceType} from '@utils/phoneType';
 export interface initConfig {
   type?: 'flv' | 'hls' | 'mp4' | 'm3u8',
   src?: string;
@@ -39,9 +39,14 @@ const VideoPlayer = (props: initConfig) => {
     if(videoEl.current) {
       videoEl.current.setAttribute("playsinline", 'true');
       videoEl.current.setAttribute("webkit-playsinline", 'true');
-      videoEl.current.setAttribute("x5-playsinline", 'true');
-      videoEl.current.setAttribute("x5-video-player-type", 'h5');
-      videoEl.current.setAttribute("x5-video-player-fullscreen", 'false');
+
+      if (deviceType.androidTx) {
+        videoEl.current.setAttribute("x5-video-orientation", "landscape|portrait");
+        videoEl.current.setAttribute("x5-playsinline", 'true');
+        videoEl.current.setAttribute("x5-video-player-type", 'h5');
+      }
+
+      // videoEl.current.setAttribute("x5-video-player-fullscreen", 'false');
     }
   })
 
@@ -81,7 +86,7 @@ const VideoPlayer = (props: initConfig) => {
   return (
   <div ref={containerEl}  className={style.container}>
     <video ref={videoEl} />
-    {initState && <UiControl config={props} element={containerEl.current!} videoEl={videoEl.current!}/>}
+    { initState && <UiControl config={props} element={containerEl.current!} videoEl={videoEl.current!}/>}
   </div>);
 }
 

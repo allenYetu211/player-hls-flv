@@ -11,7 +11,7 @@ import PluginMultiples from '@g/component/plugIn-multiples';
 import PluginMultiCode from '@g/component/plugIn-multiCode';
 import {iconLoading} from '@g/images/icon';
 import cn from 'classnames';
-
+import {deviceType} from '@utils/phoneType';
 interface IPlayer {
   config: initConfig;
   element: HTMLDivElement;
@@ -94,31 +94,31 @@ return () => {
         {iconLoading}
       </div> }
       </div>
-      
-      <div
-        className={style.controlBar}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
+      {/* {deviceType.pc && ( */}
+        <div
+          className={style.controlBar}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+
+          <div className={style.leftContainer}>
+            {isPlayBtn &&  <PlugInPlayBtn />}
+            {isDuration &&  <PlugInDuration />}
+          </div>
+
+        {isProgressBar && <PlugInProgressBar isMobile={config.isMobile!} onChangeComplete={onChangeComplete} />} 
 
 
-       {isProgressBar && <PlugInProgressBar isMobile={config.isMobile!} onChangeComplete={onChangeComplete} />} 
+          <div className={style.rightContaienr}>
+            {isPluginMultiCode && <PluginMultiCode  option={config.option!}/>}
+            {!config.isMobile && isMultiples && <PluginMultiples />}
+            {!config.isMobile && isVoice && <PlugInVoice isMobile={config.isMobile!}/>}
+            {isFullScreen && <PlugInFullScreen element={props.element}  videoEl={props.videoEl}/>}
+          </div>
 
-
-        <div className={style.leftContainer}>
-          {isPlayBtn &&  <PlugInPlayBtn />}
-          {isDuration &&  <PlugInDuration />}
         </div>
-
-        <div className={style.rightContaienr}>
-          {isPluginMultiCode && <PluginMultiCode  option={config.option!}/>}
-          {isMultiples && <PluginMultiples />}
-          {isVoice && <PlugInVoice isMobile={config.isMobile!}/>}
-          {isFullScreen && <PlugInFullScreen element={props.element}  videoEl={props.videoEl}/>}
-        </div>
-
-      </div>
+      {/* )} */}
     </div>
   );
 };
