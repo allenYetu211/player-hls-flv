@@ -14,6 +14,7 @@ const PlugInFullScreen = (props: IProps) => {
 
     // 注册全屏事件
     useEffect(() => {
+      //  pc 端检测全屏状态， esc 监控当前退出全屏
       props.element!.onfullscreenchange = (event) => {
         if (document.fullscreenElement !== event.target) {
           onExitfullScreen();
@@ -23,21 +24,22 @@ const PlugInFullScreen = (props: IProps) => {
        // android 全屏事件
       document.addEventListener('webkitfullscreenchange', (evt) => {
         const _d = document as  any;
+        console.log('_d.webkitIsFullScreen', _d.webkitIsFullScreen)
         if (!_d.webkitIsFullScreen && evt.srcElement === props.videoEl) {
             onExitfullScreen();
         }
     }, false);
-    
     }, []);
 
     const onExitfullScreen = () => {
+      console.log('onExitfullScreen')
       setFullState(false)
       exitFullscreen()
     }
 
     const onfullScreen = () => {
+      console.log('onfullScreen')
       setFullState(true);
-
       if (deviceType.pc) {
         fullScreen(props.element);
       } else {

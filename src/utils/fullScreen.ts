@@ -1,8 +1,10 @@
 //  全屏
 export const fullScreen = (element: HTMLVideoElement| HTMLDivElement) => {
+  // @ts-ignore
+  window.ctarget = element;
   const _element = element as any;
 	if (_element.requestFullscreen) {
-		_element.requestFullscreen();
+		_element.requestFullscreen()
 	} else if (_element.mozRequestFullScreen) {
 		_element.mozRequestFullScreen();
 	} else if (_element.webkitRequestFullscreen) {
@@ -14,14 +16,15 @@ export const fullScreen = (element: HTMLVideoElement| HTMLDivElement) => {
 	}
 };
 
+
 //  退出全屏
 export const exitFullscreen = () => {
   const _document = document as  any
 	if (_document.fullscreenElement) {
-		_document.exitFullscreen();
+		_document.exitFullscreen()
 	} else if (_document.mozExitFullScreen) {
-		_document.mozExitFullScreen();
+		_document.mozExitFullScreen()
 	} else if (_document.webkitExitFullscreen) {
-		_document.webkitExitFullscreen();
+		_document.webkitExitFullscreen()
 	}
 };

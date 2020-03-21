@@ -34,6 +34,7 @@ export default class VideoContainer {
       this._emitter.emit('play');
       this.onPlayProgress()
     }).catch((error: any) => {
+      console.log('error:::===>>>', error)
       this._emitter.emit('0001', error)
     })
   }
