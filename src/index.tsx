@@ -39,11 +39,10 @@ const VideoPlayer = (props: initConfig) => {
     if(videoEl.current) {
       videoEl.current.setAttribute("playsinline", 'true');
       videoEl.current.setAttribute("webkit-playsinline", 'true');
+      videoEl.current.setAttribute("preload", "true");
 
 
       if (deviceType.androidTx) {
-      videoEl.current.setAttribute("preload", "true");
-
         // videoEl.current.setAttribute("x5-video-orientation", "landscape|portrait");
         videoEl.current.setAttribute("x5-playsinline", 'true');
         videoEl.current.setAttribute("x5-video-player-type", 'h5');
