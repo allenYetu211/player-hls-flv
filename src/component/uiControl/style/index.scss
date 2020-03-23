@@ -11,7 +11,14 @@
   overflow: hidden;
   color:#fff;
 
-  &:hover {
+  &.hover:hover {
+    & > .controlBar {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &.display {
     & > .controlBar {
       opacity: 1;
       transform: translate3d(0, 0, 0);

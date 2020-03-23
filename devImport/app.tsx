@@ -38,6 +38,7 @@ const flvConfig: initConfig = {
 
 const hlsConfig: initConfig = {
   type: 'hls',
+  isMobile: true,
   option: {
     multiStreams: [
       {

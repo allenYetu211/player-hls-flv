@@ -31,6 +31,7 @@ const UiControl = (props: IPlayer) => {
   const [isPluginMultiCode,setPluginMultiCode] = useState<boolean>(false);
   const [isShowPlayering,setShowPlayering] = useState<boolean>(true);
   const [loading,setloading] = useState<boolean>(false);
+  const [containerDisplay,setContainerDisplay] = useState<boolean>(false);
 
 
   useEffect(() => {
@@ -84,8 +85,17 @@ return () => {
     setShowPlayering(false);
   }
 
+  const switchContainerDisplay = () => {
+      setContainerDisplay(!containerDisplay)
+  }
+
   return (
-    <div className={style.container}>
+    <div className={cn(style.container, 'needsclick',{
+      [style.display]: config.isMobile! && containerDisplay,
+      [style.hover]: !config.isMobile!,
+    })}
+    onClick={switchContainerDisplay}
+    >
 
       <div className={style.middleContainer}>
       { isShowPlayering && isPlayBtn &&  <PlugInPlayBtn notlistener={true} />}
@@ -94,11 +104,14 @@ return () => {
         {iconLoading}
       </div> }
       </div>
+
       {/* {deviceType.pc && ( */}
         <div
-          className={style.controlBar}
+          className={cn(style.controlBar)}
           onClick={(e) => {
+            console.log('stopPropagation')
             e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
           }}
         >
 
@@ -108,15 +121,12 @@ return () => {
           </div>
 
         {isProgressBar && <PlugInProgressBar isMobile={config.isMobile!} onChangeComplete={onChangeComplete} />} 
-
-
           <div className={style.rightContaienr}>
             {isPluginMultiCode && <PluginMultiCode  option={config.option!}/>}
             {!config.isMobile && isMultiples && <PluginMultiples />}
             {!config.isMobile && isVoice && <PlugInVoice isMobile={config.isMobile!}/>}
             {isFullScreen && <PlugInFullScreen element={props.element}  videoEl={props.videoEl}/>}
           </div>
-
         </div>
       {/* )} */}
     </div>
