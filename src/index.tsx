@@ -39,7 +39,7 @@ const VideoPlayer = (props: initConfig) => {
     if(videoEl.current) {
       videoEl.current.setAttribute("playsinline", 'true');
       videoEl.current.setAttribute("webkit-playsinline", 'true');
-      videoEl.current.setAttribute("preload", "true");
+      videoEl.current.setAttribute("preload", "auto");
 
 
       if (deviceType.androidTx) {
@@ -87,7 +87,7 @@ const VideoPlayer = (props: initConfig) => {
 
   return (
   <div ref={containerEl}  className={style.container}>
-    <video ref={videoEl} />
+    <video   ref={videoEl} />
     { initState && <UiControl config={props} element={containerEl.current!} videoEl={videoEl.current!}/>}
   </div>);
 }

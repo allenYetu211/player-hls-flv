@@ -43,15 +43,21 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: "https://presecurelive.ainemo.com/testdevnemo/ff80808171055acb0171060748030013_2.m3u8?auth_key=026b8a32f6d49f56d7634b544fcaf1b3-1585038630-ab6e85f714954af99c476b6d44fd0d09-",
-        text: "标清",
+        src: "//aldirect.hls.huya.com/backsrc/1444545162-1444545162-6204274228385021952-3287928998-10057-A-0-1_2500.m3u8?wsSecret=699839cbbc816f45b30eaba93ea6ce26&wsTime=5e78bc81",
+        text: "虎牙",
+      },{
+        src: "http://js.wshls.acgvideo.com/live-js/532717/live_2347952_332_c521e483.m3u8?wsSecret=cfb01b5536085f7236237b741a69c9f4&wsTime=1584978722&trid=3011e00dc00e4612b69a6d111870efa6&pt=h5&oi=1875158211&order=1&sig=no",
+        text: "bilibili",
       },
       {
-        src: "https://presecurelive.ainemo.com/testdevnemo/ff80808171055acb0171060748030013_2.m3u8?auth_key=026b8a32f6d49f56d7634b544fcaf1b3-1585038630-ab6e85f714954af99c476b6d44fd0d09-",
-        text: "高清"
+        src: "http://presecurelive.ainemo.com/testdevnemo/ff80808171055acb017107b68a13006a_2.m3u8?auth_key=721708bbb8d6b3af9a7537d9589deacf-1585067429-87ed686e4a2f4ddb96b7943fbd7565e7-",
+        text: "小鱼"
+      },{
+        src: "http://hls1a.douyucdn.cn/live/701979rFO9vpm2c5/playlist.m3u8?wsSecret=e5ef3f9091ad9a612e4551638447190d&wsTime=1584971530&token=h5-douyu-0-701979-1b7143ca2f7bc76bb85ca52567fda26b&did=fce1d799721df9283db8630200091531&origin=all&vhost=play2",
+        text: "斗鱼"
       },
     ],
-    playIndex: 1,
+    playIndex: 2,
   },
 }
 
