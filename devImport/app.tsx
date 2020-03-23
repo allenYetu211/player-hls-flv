@@ -43,10 +43,10 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: "//aldirect.hls.huya.com/backsrc/1444545162-1444545162-6204274228385021952-3287928998-10057-A-0-1_2500.m3u8?wsSecret=699839cbbc816f45b30eaba93ea6ce26&wsTime=5e78bc81",
+        src: "http://presecurelive.ainemo.com/testdevnemo/ff80808171055acb017108421633008e.m3u8?auth_key=2fe1e23ed866167348664a3eec29df4f-1585076458-43c1d9450a524341aa9ab1b813eca212-",
         text: "虎牙",
       },{
-        src: "http://js.wshls.acgvideo.com/live-js/532717/live_2347952_332_c521e483.m3u8?wsSecret=cfb01b5536085f7236237b741a69c9f4&wsTime=1584978722&trid=3011e00dc00e4612b69a6d111870efa6&pt=h5&oi=1875158211&order=1&sig=no",
+        src: "http://presecurelive.ainemo.com/testdevnemo/ff80808171055acb017108421633008e_2.m3u8?auth_key=24e72f3bbaef57e905e2774e4f37ca4e-1585076458-294a2d38958b4833bfc7870dd7666ed5-",
         text: "bilibili",
       },
       {
@@ -57,7 +57,7 @@ const hlsConfig: initConfig = {
         text: "斗鱼"
       },
     ],
-    playIndex: 2,
+    playIndex: 0,
   },
 }
 

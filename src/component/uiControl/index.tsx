@@ -109,7 +109,6 @@ return () => {
         <div
           className={cn(style.controlBar)}
           onClick={(e) => {
-            console.log('stopPropagation')
             e.stopPropagation();
             e.nativeEvent.stopImmediatePropagation();
           }}

@@ -13,6 +13,7 @@
 
   &.hover:hover {
     & > .controlBar {
+      pointer-events: all;
       opacity: 1;
       transform: translate3d(0, 0, 0);
     }
@@ -20,6 +21,7 @@
 
   &.display {
     & > .controlBar {
+      pointer-events: all;
       opacity: 1;
       transform: translate3d(0, 0, 0);
     }
@@ -27,6 +29,7 @@
 }
 
 .controlBar {
+  pointer-events: none;
 	@extend %flex-between-center;
 	position: absolute;
 	left: 0px;

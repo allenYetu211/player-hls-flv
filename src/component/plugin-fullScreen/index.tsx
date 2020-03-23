@@ -3,6 +3,7 @@ import {iconFull, iconExitFull} from '@images/icon';
 import {fullScreen, exitFullscreen} from '@utils/fullScreen';
 import {deviceType} from '@utils/phoneType';
 import style from './style/index.scss';
+import {getVideoPlayer} from '@player/index';
 
 interface IProps {
   element: HTMLDivElement;
@@ -11,7 +12,8 @@ interface IProps {
 
 const PlugInFullScreen = (props: IProps) => {
   const [fullState, setFullState] = useState(false);
-
+  // 播放器
+  const player: any = getVideoPlayer();
     // 注册全屏事件
     useEffect(() => {
       //  pc 端检测全屏状态， esc 监控当前退出全屏
@@ -24,12 +26,28 @@ const PlugInFullScreen = (props: IProps) => {
        // android 全屏事件
       document.addEventListener('webkitfullscreenchange', (evt) => {
         const _d = document as  any;
-        console.log('_d.webkitIsFullScreen', _d.webkitIsFullScreen)
         if (!_d.webkitIsFullScreen && evt.srcElement === props.videoEl) {
             onExitfullScreen();
         }
     }, false);
     }, []);
+
+    // useEffect(() => {
+    //         onListenerState('on');
+    //       return () => {
+    //           onListenerState('off');
+    //       }
+    //   }, []);
+
+
+
+    // const onListenerState = (state: 'on' | 'off') => {
+    //   player[state]('fullscreen', (value:boolean) => {
+    //     console.log('state===>>>', state, value)
+    //     setFullState(value);
+    //   });
+    // };
+
 
     const onExitfullScreen = () => {
       console.log('onExitfullScreen')

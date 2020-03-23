@@ -38,14 +38,23 @@ export default class HLSPlayer extends VideoControl {
   }
 
   private initVideoEl() {
+    console.log('Hls.isSupported()', Hls.isSupported())
+    console.log('Hls.isSupported()', this.element.canPlayType('application/vnd.apple.mpegurl'))
+
     if (Hls.isSupported()) { 
+
       this.hls = new Hls();
       this.hls.loadSource(this.src);
       this.hls.attachMedia(this.element);
       this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
       this.autoplay && this.play();
     });
+
+    this.addPlayerListener();
+
     } else if (this.element.canPlayType('application/vnd.apple.mpegurl')) {
+      this.videoEl.src = this.src;
+      this.videoEl.load();
       this.element.addEventListener('loadedmetadata', () => {
         this.autoplay && this.play();
         this._emitter.emit('duration', this.videoEl.duration * 1000)
@@ -53,7 +62,6 @@ export default class HLSPlayer extends VideoControl {
     } else {
       throw new Error('Hls player error');
     }
-    this.addPlayerListener();
   }
 
   public chooseMultiCode(key: number) {

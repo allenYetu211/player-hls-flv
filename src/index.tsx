@@ -87,7 +87,7 @@ const VideoPlayer = (props: initConfig) => {
 
   return (
   <div ref={containerEl}  className={style.container}>
-    <video   ref={videoEl} />
+    <video autoPlay   ref={videoEl} />
     { initState && <UiControl config={props} element={containerEl.current!} videoEl={videoEl.current!}/>}
   </div>);
 }
