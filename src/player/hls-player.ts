@@ -38,16 +38,21 @@ export default class HLSPlayer extends VideoControl {
   }
 
   private initVideoEl() {
-    this.hls = new Hls({
-      maxBufferLength: 2,
-      maxLoadingDelay: 2,
-      liveDurationInfinity: true,
-    });
-    this.hls.loadSource(this.src);
-    this.hls.attachMedia(this.element);
-    this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
+    if (Hls.isSupported()) { 
+      this.hls = new Hls();
+      this.hls.loadSource(this.src);
+      this.hls.attachMedia(this.element);
+      this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
       this.autoplay && this.play();
-  });
+    });
+    } else if (this.element.canPlayType('application/vnd.apple.mpegurl')) {
+      this.element.addEventListener('loadedmetadata', () => {
+        this.autoplay && this.play();
+        this._emitter.emit('duration', this.videoEl.duration * 1000)
+      });
+    } else {
+      throw new Error('Hls player error');
+    }
     this.addPlayerListener();
   }
 

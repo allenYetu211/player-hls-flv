@@ -39,14 +39,15 @@ const flvConfig: initConfig = {
 const hlsConfig: initConfig = {
   type: 'hls',
   isMobile: true,
+  autoplay: false,
   option: {
     multiStreams: [
       {
-        src: "http://txdirect.hls.huya.com/huyalive/1351873504-1351873504-5806252488008925184-2885343058-10057-A-0-1_2500.m3u8?wsSecret=58cbcdd42ef0c3faf0a5de5af11f5b94&wsTime=5e75b7ec",
+        src: "https://presecurelive.ainemo.com/testdevnemo/ff80808171055acb0171060748030013_2.m3u8?auth_key=026b8a32f6d49f56d7634b544fcaf1b3-1585038630-ab6e85f714954af99c476b6d44fd0d09-",
         text: "标清",
       },
       {
-        src: "http://txdirect.hls.huya.com/huyalive/1351873504-1351873504-5806252488008925184-2885343058-10057-A-0-1_2500.m3u8?wsSecret=58cbcdd42ef0c3faf0a5de5af11f5b94&wsTime=5e75b7ec",
+        src: "https://presecurelive.ainemo.com/testdevnemo/ff80808171055acb0171060748030013_2.m3u8?auth_key=026b8a32f6d49f56d7634b544fcaf1b3-1585038630-ab6e85f714954af99c476b6d44fd0d09-",
         text: "高清"
       },
     ],
