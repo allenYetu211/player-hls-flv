@@ -18,6 +18,8 @@ export interface initConfig {
   autoplay?: boolean;
   option?: IMultiStreamsContainer;
   isMobile?: boolean;
+  hideControl?: boolean;
+  hideMultiCode?: boolean;
 }
 
 

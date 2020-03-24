@@ -11,7 +11,7 @@ import PluginMultiples from '@g/component/plugIn-multiples';
 import PluginMultiCode from '@g/component/plugIn-multiCode';
 import {iconLoading} from '@g/images/icon';
 import cn from 'classnames';
-import {deviceType} from '@utils/phoneType';
+// import {deviceType} from '@utils/phoneType';
 interface IPlayer {
   config: initConfig;
   element: HTMLDivElement;
@@ -105,7 +105,7 @@ return () => {
       </div> }
       </div>
 
-      {/* {deviceType.pc && ( */}
+      {!props.config.hideControl && (
         <div
           className={cn(style.controlBar)}
           onClick={(e) => {
@@ -121,13 +121,13 @@ return () => {
 
         {isProgressBar && <PlugInProgressBar isMobile={config.isMobile!} onChangeComplete={onChangeComplete} />} 
           <div className={style.rightContaienr}>
-            {isPluginMultiCode && <PluginMultiCode  option={config.option!}/>}
+            {!config.hideMultiCode  && isPluginMultiCode && <PluginMultiCode  option={config.option!}/>}
             {!config.isMobile && isMultiples && <PluginMultiples />}
             {!config.isMobile && isVoice && <PlugInVoice isMobile={config.isMobile!}/>}
             {isFullScreen && <PlugInFullScreen element={props.element}  videoEl={props.videoEl}/>}
           </div>
         </div>
-      {/* )} */}
+      )} 
     </div>
   );
 };

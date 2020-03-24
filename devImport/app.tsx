@@ -40,6 +40,7 @@ const hlsConfig: initConfig = {
   type: 'hls',
   isMobile: true,
   autoplay: false,
+  hideMultiCode: true,
   option: {
     multiStreams: [
       {

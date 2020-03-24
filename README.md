@@ -77,6 +77,23 @@ return (
 |OTHER_ERROR| 任何其他未指定的错误 |
 
 
+  src?: string;
+  autoplay?: boolean;
+  option?: IMultiStreamsContainer;
+  isMobile?: boolean;
+  hideControl?: boolean;
+  hideMultiCode?: boolean;
+## 参数
+| 参数 | 参数类型 |默认值 |描述|
+| --- | --- |---|---|
+|type| 'flv' ，'hls'，'mp4'，'m3u8' | ''|媒体类型|
+|src?| string |''|请求地址|
+|autoplay?| boolean|''|自动播放|
+|option?| IMultiStreamsContainer |''|分辨率选项|
+|isMobile?| boolean |false|手机端|
+|hideMultiCode?| boolean |false|是否影藏分辨率|
+
+
 
 
 
