@@ -12,7 +12,7 @@ const mp4Config: initConfig = {
   autoplay: false,
   isMobile: true,
   src:
-    "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/ff80808170e6aa1b0170e751d2a2000a/20203/1796783e-624a-4cc3-babe-1cf6a1eb3272.mp4",
+    "https://txcd-res.xylinkedu.com/vodfiles/sharefiles/vod/426770098917736448.mp4",
 }
 
 const flvConfig: initConfig = {
@@ -66,7 +66,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(hlsConfig)
+  const [option, setOption] = useState<initConfig>(mp4Config)
 
   const choseMp4Url = () => {
     setOption({
