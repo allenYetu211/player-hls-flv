@@ -32,31 +32,28 @@ const PlugInFullScreen = (props: IProps) => {
     }, false);
     }, []);
 
-    // useEffect(() => {
-    //         onListenerState('on');
-    //       return () => {
-    //           onListenerState('off');
-    //       }
-    //   }, []);
+    useEffect(() => {
+            onListenerState('on');
+          return () => {
+              onListenerState('off');
+          }
+      }, []);
 
 
 
-    // const onListenerState = (state: 'on' | 'off') => {
-    //   player[state]('fullscreen', (value:boolean) => {
-    //     console.log('state===>>>', state, value)
-    //     setFullState(value);
-    //   });
-    // };
+    const onListenerState = (state: 'on' | 'off') => {
+      player[state]('fullscreen', (value:boolean) => {
+        setFullState(value);
+      });
+    };
 
 
     const onExitfullScreen = () => {
-      console.log('onExitfullScreen')
       setFullState(false)
       exitFullscreen()
     }
 
     const onfullScreen = () => {
-      console.log('onfullScreen')
       setFullState(true);
       if (deviceType.pc) {
         fullScreen(props.element);
