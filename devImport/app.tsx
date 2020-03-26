@@ -22,12 +22,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:' http://presecurelive.ainemo.com/testdevnemo/ff80808170e6aa1b0170f16824580134_2.flv?auth_key=804dfa8e091c176bea90ad53a628f191-1584693017-ef09d54fe76445aba3699ca7735ee4ed-',
+        src:'https://presecurelive.ainemo.com/testdevnemo/ff80808171055d06017115118a3f00f9.flv?auth_key=4a6adf85dbfba7ee600697d23852f306-1585294200-8d5471e45ff04f0ba51bafaf4bd1795c-',
         text: '标清',
       },
       {
         src:
-          'http://presecurelive.ainemo.com/testdevnemo/ff80808170e6aa1b0170f16824580134.flv?auth_key=af94cd43cebede7d692cac1e367c4c5e-1584693017-8f25a3de6e874e0eb30784bd08da15b4-',
+          'https://presecurelive.ainemo.com/testdevnemo/ff80808171055d06017115118a3f00f9.flv?auth_key=807b24c62509fed62fb4b03ded627edb-1585294200-2ef68a65ffe242f488547fcf07e784cb-',
         text: '高清',
       },
     ],
@@ -51,14 +51,14 @@ const hlsConfig: initConfig = {
         text: "bilibili",
       },
       {
-        src: "http://presecurelive.ainemo.com/testdevnemo/ff80808171055acb017107b68a13006a_2.m3u8?auth_key=721708bbb8d6b3af9a7537d9589deacf-1585067429-87ed686e4a2f4ddb96b7943fbd7565e7-",
+        src: "https://presecurelive.ainemo.com/testdevnemo/ff80808171055d06017115118a3f00f9.m3u8?auth_key=a7b8269425f461cad73c9f42bc66e254-1585294200-17f9077c8cec480bb9ea00a171515d4c-",
         text: "小鱼"
       },{
         src: "http://hls1a.douyucdn.cn/live/701979rFO9vpm2c5/playlist.m3u8?wsSecret=e5ef3f9091ad9a612e4551638447190d&wsTime=1584971530&token=h5-douyu-0-701979-1b7143ca2f7bc76bb85ca52567fda26b&did=fce1d799721df9283db8630200091531&origin=all&vhost=play2",
         text: "斗鱼"
       },
     ],
-    playIndex: 0,
+    playIndex: 2,
   },
 }
 
@@ -66,7 +66,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config)
+  const [option, setOption] = useState<initConfig>(flvConfig)
 
   const choseMp4Url = () => {
     setOption({

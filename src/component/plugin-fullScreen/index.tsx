@@ -43,6 +43,11 @@ const PlugInFullScreen = (props: IProps) => {
 
     const onListenerState = (state: 'on' | 'off') => {
       player[state]('fullscreen', (value:boolean) => {
+        console.log("全屏：：：：：：：：")
+        console.log('=================')
+        console.log('onListenerState::::>>>', value)
+        console.log('=================')
+        console.log("全屏：：：：：：：：")
         setFullState(value);
       });
     };
