@@ -78,4 +78,12 @@ export default class FlvPlayer extends VideoControl {
   public  destroy(){
     this.flv.destroy();
   }
+
+  public refresh() {
+    console.log('Refresh FLV')
+    this.stop()
+    this.destroy();
+    this.initVideoEl();
+  }
+
 }

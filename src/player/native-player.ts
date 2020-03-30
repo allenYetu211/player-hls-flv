@@ -37,13 +37,13 @@ export default class NativePlayer extends VideoControl {
     if (this.type ==='mp4' || config.src) {
       this.src = config.src!
     }
-
-    this.videoEl.src = this.src;
+   
     this.initVideoEl()
   }
 
   // 初始播放器
   private initVideoEl() {
+    this.videoEl.src = this.src;
     this.videoEl.load();
     this.videoEl.addEventListener('loadedmetadata', () => {
       this.autoplay && this.play();
@@ -54,6 +54,7 @@ export default class NativePlayer extends VideoControl {
 
   public  updateMp4Path (src: string) {
     this._emitter.emit('playProgress', 0);
+    this.src = src;
     this.videoEl.src = src;
     this.initVideoEl()
   }
@@ -69,6 +70,13 @@ export default class NativePlayer extends VideoControl {
   public  destroy(){
     this.stop()
     console.log('Native destroy')
+  }
+
+  public refresh() {
+    console.log('Refresh mp4')
+    this.destroy()
+    this.videoEl.src = "";
+    this.initVideoEl();
   }
  
 }

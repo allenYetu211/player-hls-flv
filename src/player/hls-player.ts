@@ -38,11 +38,7 @@ export default class HLSPlayer extends VideoControl {
   }
 
   private initVideoEl() {
-    console.log('Hls.isSupported()', Hls.isSupported())
-    console.log('Hls.isSupported()', this.element.canPlayType('application/vnd.apple.mpegurl'))
-
     if (Hls.isSupported()) { 
-
       this.hls = new Hls();
       this.hls.loadSource(this.src);
       this.hls.attachMedia(this.element);
@@ -92,5 +88,12 @@ export default class HLSPlayer extends VideoControl {
 
   public  destroy(){
     this.hls.destroy();
+  }
+
+  public refresh() {
+    console.log('Refresh HLS')
+    this.stop()
+    this.destroy();
+    this.initVideoEl();
   }
 }

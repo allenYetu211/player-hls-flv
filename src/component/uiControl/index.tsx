@@ -9,6 +9,7 @@ import PlugInProgressBar from '@g/component/plugIn-progressBar'
 import PlugInFullScreen from '@g/component/plugIn-fullScreen'
 import PluginMultiples from '@g/component/plugIn-multiples';
 import PluginMultiCode from '@g/component/plugIn-multiCode';
+import PluginRefresh from '@g/component/plugIn-refresh';
 import {iconLoading} from '@g/images/icon';
 import cn from 'classnames';
 // import {deviceType} from '@utils/phoneType';
@@ -116,6 +117,7 @@ return () => {
 
           <div className={style.leftContainer}>
             {isPlayBtn &&  <PlugInPlayBtn />}
+            <PluginRefresh/>
             {isDuration &&  <PlugInDuration />}
           </div>
 

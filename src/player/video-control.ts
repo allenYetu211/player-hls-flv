@@ -20,6 +20,9 @@ export default class VideoContainer {
   //  计时器
   private timer: any; 
 
+  // 资源加载状态
+  public resourceLoadingState: boolean = false;
+
   constructor(config: ConfigType) {
     this.videoEl  = config.element;
     // 添加video 监听
@@ -75,8 +78,10 @@ export default class VideoContainer {
       }
 
       if (this.videoEl.readyState > 2 ) {
+        this.resourceLoadingState = false;
         this._emitter.emit('mediaState', true)
       } else {
+        this.resourceLoadingState = true;
         this._emitter.emit('mediaState', false)
       }
     })

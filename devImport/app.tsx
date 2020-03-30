@@ -12,7 +12,7 @@ const mp4Config: initConfig = {
   autoplay: false,
   isMobile: true,
   src:
-    "https://txcd-res.xylinkedu.com/vodfiles/sharefiles/vod/426770098917736448.mp4",
+    "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/ff8080817116b00001711ad5472300b6/20203/7de7712d-abb5-4aa6-9995-30a0dcaf5e76.mp4",
 }
 
 const flvConfig: initConfig = {
@@ -22,7 +22,7 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'https://presecurelive.ainemo.com/testdevnemo/ff80808171055d06017115118a3f00f9.flv?auth_key=4a6adf85dbfba7ee600697d23852f306-1585294200-8d5471e45ff04f0ba51bafaf4bd1795c-',
+        src:'http://prdsecurelive.ainemo.com/prdnemo/2c94971170ee30f40171291b0cb86de6.flv?auth_key=c0019c95f14aa5a0a522994d19b44cf0-1585627249-6fc97f05b1b34c5d984bdace727d949e-',
         text: '标清',
       },
       {
@@ -38,7 +38,7 @@ const flvConfig: initConfig = {
 
 const hlsConfig: initConfig = {
   type: 'hls',
-  isMobile: true,
+  isMobile: false,
   autoplay: false,
   hideMultiCode: true,
   option: {
@@ -51,7 +51,7 @@ const hlsConfig: initConfig = {
         text: "bilibili",
       },
       {
-        src: "https://presecurelive.ainemo.com/testdevnemo/ff80808171055d06017115118a3f00f9.m3u8?auth_key=a7b8269425f461cad73c9f42bc66e254-1585294200-17f9077c8cec480bb9ea00a171515d4c-",
+        src: "http://prdsecurelive.ainemo.com/prdnemo/2c94971170ee30f40171291b0cb86de6.m3u8?auth_key=e2dd8389ad434afd9902f58f731176b1-1585627249-d1de4d761efa474aa1cf25cba6c30351-",
         text: "小鱼"
       },{
         src: "http://hls1a.douyucdn.cn/live/701979rFO9vpm2c5/playlist.m3u8?wsSecret=e5ef3f9091ad9a612e4551638447190d&wsTime=1584971530&token=h5-douyu-0-701979-1b7143ca2f7bc76bb85ca52567fda26b&did=fce1d799721df9283db8630200091531&origin=all&vhost=play2",
@@ -66,7 +66,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(flvConfig)
+  const [option, setOption] = useState<initConfig>(mp4Config)
 
   const choseMp4Url = () => {
     setOption({

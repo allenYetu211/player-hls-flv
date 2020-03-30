@@ -43,12 +43,11 @@ const PlugInFullScreen = (props: IProps) => {
 
     const onListenerState = (state: 'on' | 'off') => {
       player[state]('fullscreen', (value:boolean) => {
-        console.log("全屏：：：：：：：：")
-        console.log('=================')
-        console.log('onListenerState::::>>>', value)
-        console.log('=================')
-        console.log("全屏：：：：：：：：")
         setFullState(value);
+        if (!value) {
+          console.log('listener stop')
+          player.stop()
+        }
       });
     };
 
@@ -59,6 +58,10 @@ const PlugInFullScreen = (props: IProps) => {
     }
 
     const onfullScreen = () => {
+      console.log(player.resourceLoadingState)
+      if (player.resourceLoadingState) {
+        player.emit('resourceLoadingState')
+      }
       setFullState(true);
       if (deviceType.pc) {
         fullScreen(props.element);
