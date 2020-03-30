@@ -7,7 +7,6 @@ import {getVideoPlayer} from '@player/index';
 
 interface IProps {
   element: HTMLDivElement;
-  videoEl: HTMLVideoElement;
 }
 
 const PlugInFullScreen = (props: IProps) => {
@@ -26,7 +25,7 @@ const PlugInFullScreen = (props: IProps) => {
        // android 全屏事件
       document.addEventListener('webkitfullscreenchange', (evt) => {
         const _d = document as  any;
-        if (!_d.webkitIsFullScreen && evt.srcElement === props.videoEl) {
+        if (!_d.webkitIsFullScreen && evt.srcElement === player.videoEl) {
             onExitfullScreen();
         }
     }, false);
@@ -58,15 +57,21 @@ const PlugInFullScreen = (props: IProps) => {
     }
 
     const onfullScreen = () => {
-      console.log(player.resourceLoadingState)
-      if (player.resourceLoadingState) {
-        player.emit('resourceLoadingState')
-      }
+
+      // console.log(player.resourceLoadingState)
+      console.log('=====================', player)
+      console.log('=====================')
+      console.log('=====================')
+      console.log('触发进入全屏：deviceType.pc', deviceType.pc)
+      console.log('=====================')
+      console.log('=====================')
+      console.log('=====================')
+
       setFullState(true);
       if (deviceType.pc) {
         fullScreen(props.element);
       } else {
-        fullScreen(props.videoEl)
+        fullScreen(player.videoEl)
       }
     };
 

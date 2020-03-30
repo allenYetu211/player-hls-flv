@@ -20,6 +20,7 @@ export default class NativePlayer extends VideoControl {
   constructor(config: videoConfig) {
     super({
       element:  config.element,
+      container:  config.containerEl,
     })
     this.autoplay = config.autoplay || false;
 
@@ -74,8 +75,8 @@ export default class NativePlayer extends VideoControl {
 
   public refresh() {
     console.log('Refresh mp4')
-    this.destroy()
-    this.videoEl.src = "";
+    this.onRefershVideo();
+    this.destroy();
     this.initVideoEl();
   }
  

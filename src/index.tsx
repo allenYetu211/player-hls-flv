@@ -37,22 +37,22 @@ const VideoPlayer = (props: initConfig) => {
   const [videoPlayer, setVideoPlayer] = useState<any>();
 
   // 针对不同浏览器添加不同属性
-  useEffect(() => {
-    if(videoEl.current) {
-      videoEl.current.setAttribute("playsinline", 'true');
-      videoEl.current.setAttribute("webkit-playsinline", 'true');
-      videoEl.current.setAttribute("preload", "auto");
+  // useEffect(() => {
+  //   if(videoEl.current) {
+  //     videoEl.current.setAttribute("playsinline", 'true');
+  //     videoEl.current.setAttribute("webkit-playsinline", 'true');
+  //     videoEl.current.setAttribute("preload", "auto");
 
 
-      if (deviceType.androidTx) {
-        // videoEl.current.setAttribute("x5-video-orientation", "landscape|portrait");
-        videoEl.current.setAttribute("x5-playsinline", 'true');
-        videoEl.current.setAttribute("x5-video-player-type", 'h5');
-      }
+  //     if (deviceType.androidTx) {
+  //       // videoEl.current.setAttribute("x5-video-orientation", "landscape|portrait");
+  //       videoEl.current.setAttribute("x5-playsinline", 'true');
+  //       videoEl.current.setAttribute("x5-video-player-type", 'h5');
+  //     }
 
-      // videoEl.current.setAttribute("x5-video-player-fullscreen", 'false');
-    }
-  })
+  //     // videoEl.current.setAttribute("x5-video-player-fullscreen", 'false');
+  //   }
+  // })
 
   // src 发生变化时候更新
   useEffect(() => {
@@ -66,6 +66,7 @@ const VideoPlayer = (props: initConfig) => {
   useEffect(() => {
       const config = Object.assign({}, props, {
         element: videoEl.current!,
+        containerEl: containerEl.current!,
       })
       const vp:any = initPlayer(config);
       setInitState(true);
@@ -89,8 +90,12 @@ const VideoPlayer = (props: initConfig) => {
 
   return (
   <div ref={containerEl}  className={style.container}>
+    { initState && 
+      <UiControl 
+        config={props} 
+        element={containerEl.current!} 
+      />}
     <video  ref={videoEl} />
-    { initState && <UiControl config={props} element={containerEl.current!} videoEl={videoEl.current!}/>}
   </div>);
 }
 

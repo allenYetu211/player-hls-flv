@@ -17,13 +17,13 @@ export default class FlvPlayer extends VideoControl {
   // 当前播放的列表
   private src: string  = '';
 
-  private element: HTMLVideoElement;
 
   private flv: any;
 
   constructor(config: videoConfig){
     super({
       element:  config.element,
+      container:  config.containerEl,
     })
 
     this.multiStreams = config.option!.multiStreams;
@@ -33,13 +33,12 @@ export default class FlvPlayer extends VideoControl {
     this.src = this.multiStreams[this.playerIndex].src;
     this.autoplay = config.autoplay || false;
     
-    this.element = config.element
     this.initVideoEl();
   }
 
   private initVideoEl() {
     this.flv = flvjs.createPlayer({type: 'flv',url: this.src,},{isLive: true});
-    this.flv.attachMediaElement(this.element);
+    this.flv.attachMediaElement(this.videoEl);
     this.flv.load();
     this.autoplay && this.play();
     this.addPlayerListener();
@@ -83,6 +82,7 @@ export default class FlvPlayer extends VideoControl {
     console.log('Refresh FLV')
     this.stop()
     this.destroy();
+    this.onRefershVideo()
     this.initVideoEl();
   }
 

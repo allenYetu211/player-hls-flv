@@ -17,13 +17,12 @@ export default class HLSPlayer extends VideoControl {
   // 当前播放的列表
   private src: string  = '';
 
-  private element: HTMLVideoElement;
-
   private hls: any;
 
   constructor(config: videoConfig){
     super({
       element:  config.element,
+      container:  config.containerEl,
     })
 
     this.multiStreams = config.option!.multiStreams;
@@ -33,25 +32,30 @@ export default class HLSPlayer extends VideoControl {
     this.src = this.multiStreams[this.playerIndex].src;
     this.autoplay = config.autoplay || false;
     
-    this.element = config.element
     this.initVideoEl();
   }
 
   private initVideoEl() {
     if (Hls.isSupported()) { 
+      console.log('4')
+
       this.hls = new Hls();
       this.hls.loadSource(this.src);
-      this.hls.attachMedia(this.element);
+      this.hls.attachMedia(this.videoEl);
+      console.log('this.src' , this.src)
+      console.log('this.element', this.videoEl)
       this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      console.log('5')
+
       this.autoplay && this.play();
     });
 
     this.addPlayerListener();
 
-    } else if (this.element.canPlayType('application/vnd.apple.mpegurl')) {
+    } else if (this.videoEl.canPlayType('application/vnd.apple.mpegurl')) {
       this.videoEl.src = this.src;
       this.videoEl.load();
-      this.element.addEventListener('loadedmetadata', () => {
+      this.videoEl.addEventListener('loadedmetadata', () => {
         this.autoplay && this.play();
         this._emitter.emit('duration', this.videoEl.duration * 1000)
       });
@@ -61,7 +65,12 @@ export default class HLSPlayer extends VideoControl {
   }
 
   public chooseMultiCode(key: number) {
-    this.destroy();
+    try {
+      this.destroy();
+    } catch(e) {
+      console.log('hls not function');
+    }
+
     this.playerIndex = key;
     this.src = this.multiStreams[key].src;
     this.autoplay = true;
@@ -94,6 +103,7 @@ export default class HLSPlayer extends VideoControl {
     console.log('Refresh HLS')
     this.stop()
     this.destroy();
+    this.onRefershVideo()
     this.initVideoEl();
   }
 }

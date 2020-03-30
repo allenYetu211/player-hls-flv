@@ -29,7 +29,7 @@ const PluginDiration = () => {
 
   return (
     <div className={style.progressBar}>
-      {playProgress} / {videoDuration}
+      {playProgress} {videoDuration === '00:00' ? '' : `/ ${videoDuration}`}
     </div>
   );
 };

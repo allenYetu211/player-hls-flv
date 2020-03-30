@@ -16,7 +16,6 @@ import cn from 'classnames';
 interface IPlayer {
   config: initConfig;
   element: HTMLDivElement;
-  videoEl: HTMLVideoElement;
 }
 
 const UiControl = (props: IPlayer) => {
@@ -126,7 +125,7 @@ return () => {
             {!config.hideMultiCode  && isPluginMultiCode && <PluginMultiCode  option={config.option!}/>}
             {!config.isMobile && isMultiples && <PluginMultiples />}
             {!config.isMobile && isVoice && <PlugInVoice isMobile={config.isMobile!}/>}
-            {isFullScreen && <PlugInFullScreen element={props.element}  videoEl={props.videoEl}/>}
+            {isFullScreen && <PlugInFullScreen element={props.element} />}
           </div>
         </div>
       )} 

@@ -29,5 +29,6 @@ export interface videoConfig extends initConfig {
   type?: 'flv' | 'hls' | 'mp4' | 'm3u8',
   src?: string,
   element: Element,
+  containerEl: HTMLDivElement,
   autoplay?: boolean;
 }

@@ -3,7 +3,11 @@ import {getVideoPlayer} from '@player/index';
 import {iconRefresh} from '@images/icon';
 import style from './style/index.scss';
 
-const PlugInRefresh = () => {
+interface IProps {
+  // onRefrashElement: () => void;
+}
+
+const PlugInRefresh = (props: IProps) => {
   const player: any = getVideoPlayer();
   const onRefreshPlayer = () => {
     player.refresh();

@@ -2,13 +2,17 @@ import EventEmitter from 'eventemitter3';
 import {deviceType} from '@utils/phoneType';
 
 interface ConfigType {
-  element: HTMLVideoElement
+  element: HTMLVideoElement,
+  container: HTMLDivElement,
 }
 
 export default class VideoContainer {
 
    // video
-   public videoEl: HTMLVideoElement;
+   public videoEl: HTMLVideoElement; 
+   
+   // containerEl
+   public containerEl: HTMLDivElement;
 
 
    // 事件中心
@@ -21,10 +25,12 @@ export default class VideoContainer {
   private timer: any; 
 
   // 资源加载状态
-  public resourceLoadingState: boolean = false;
+  // public resourceLoadingState: boolean = false;
 
   constructor(config: ConfigType) {
     this.videoEl  = config.element;
+    this.containerEl  = config.container;
+    this.addVideoAttribute()
     // 添加video 监听
     this.addEventListener();
   }
@@ -78,10 +84,10 @@ export default class VideoContainer {
       }
 
       if (this.videoEl.readyState > 2 ) {
-        this.resourceLoadingState = false;
+        // this.resourceLoadingState = false;
         this._emitter.emit('mediaState', true)
       } else {
-        this.resourceLoadingState = true;
+        // this.resourceLoadingState = true;
         this._emitter.emit('mediaState', false)
       }
     })
@@ -118,6 +124,30 @@ export default class VideoContainer {
       return 
     }
     this.videoEl.playbackRate = value;
+  }
+
+  public  addVideoAttribute = () => {
+      this.videoEl.setAttribute("playsinline", 'true');
+      this.videoEl.setAttribute("webkit-playsinline", 'true');
+      this.videoEl.setAttribute("preload", "auto");
+
+
+      if (deviceType.androidTx) {
+        // this.videoEl.setAttribute("x5-video-orientation", "landscape|portrait");
+        this.videoEl.setAttribute("x5-playsinline", 'true');
+        this.videoEl.setAttribute("x5-video-player-type", 'h5');
+      }
+  }
+
+  public onRefershVideo(){
+    console.log('onRefershVideo')
+    this.videoEl.remove();
+    const newVideoEl = document.createElement('video');
+    this.videoEl = newVideoEl;
+    this.addVideoAttribute()
+    this.addEventListener()
+    this.containerEl.appendChild(newVideoEl)
+    
   }
 
 
