@@ -28,10 +28,12 @@ const PlugInPlayBtn = (props: IProps) => {
 
   const onListenerState = (state: 'on' | 'off') => {
     player[state]('play', () => {
+      console.log('onListenerState => play')
       setIsPlayering(true);
     });
 
     player[state]('stop', () => {
+      console.log('onListenerState => stop')
       setIsPlayering(false);
     });
   };

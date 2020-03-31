@@ -70,8 +70,8 @@ export default class VideoContainer {
   // 监听video事件
   private  addEventListener () {
   this.videoEl.addEventListener('timeupdate', (e: any) => {
-
-      if(deviceType.ios) {
+      // 手机检测
+      if(!deviceType.pc) {
         if (this.displayingFullscreenState !== this.videoEl.webkitDisplayingFullscreen) {
           this.displayingFullscreenState = this.videoEl.webkitDisplayingFullscreen
           if(this.displayingFullscreenState) {
@@ -100,6 +100,13 @@ export default class VideoContainer {
     this.videoEl.addEventListener('x5videoexitfullscreen', () => {
       console.log('x5videoexitfullscreen')
       this._emitter.emit('fullscreen', false)
+
+      // console.log('增加 WeixinJSBridge')
+      // // @ts-ignore
+      // if(WeixinJSBridge) {
+      //   // @ts-ignore
+      //   WeixinJSBridge.call('closeWindow');
+      // }
     })
 
     this.videoEl.addEventListener("webkitbeginfullscreen", () => {
@@ -132,11 +139,11 @@ export default class VideoContainer {
       this.videoEl.setAttribute("preload", "auto");
 
 
-      if (deviceType.androidTx) {
-        // this.videoEl.setAttribute("x5-video-orientation", "landscape|portrait");
+      // if (deviceType.androidTx) {
+        this.videoEl.setAttribute("x5-video-orientation", "landscape|portrait");
         this.videoEl.setAttribute("x5-playsinline", 'true');
         this.videoEl.setAttribute("x5-video-player-type", 'h5');
-      }
+      // }
   }
 
   public onRefershVideo(){
