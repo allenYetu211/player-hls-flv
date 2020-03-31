@@ -68,14 +68,18 @@ const PlugInFullScreen = (props: IProps) => {
       // console.log(player.resourceLoadingState)
       console.log('=====================')
       console.log('=====================')
-      console.log('触发进入全屏：onfullScreen', deviceType.pc)
+      console.log('触发进入全屏：pc', deviceType.pc)
+      console.log('触发进入全屏：tbs',deviceType.tbs)
+      console.log('deviceType.pc || !deviceType.tbs',deviceType.pc || !deviceType.tbs)
       console.log('=====================')
       console.log('=====================')
 
       setFullState(true);
-      if (deviceType.pc) {
+      if (deviceType.pc || !deviceType.tbs) {
+        console.log('use props.element')
         fullScreen(props.element);
       } else {
+        console.log('use props.videoEl')
         fullScreen(player.videoEl)
       }
     };
