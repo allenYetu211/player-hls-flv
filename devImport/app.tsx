@@ -43,11 +43,11 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: "http://prdsecurelive.ainemo.com/prdnemo/2c924e4970ee3006017129be5bc917a7.m3u8?auth_key=6d8f868686f7b5f417bd8882f96752dc-1585638011-14ec76371e7f4af0a787d1980e22554b-",
+        src: "http://prdsecurelive.ainemo.com/prdnemo/2c94982b71364816017138fef97219cc.m3u8?auth_key=64337803c7e77086385e227a2a7c09e9-1585893604-81d776115f3f457ca085a6cb304179e7-",
         text: "小鱼1",
       },
       {
-        src: "http://prdsecurelive.ainemo.com/prdnemo/2c924e4970ee3006017129be5bc917a7.m3u8?auth_key=6d8f868686f7b5f417bd8882f96752dc-1585638011-14ec76371e7f4af0a787d1980e22554b-",
+        src: "http://prdsecurelive.ainemo.com/prdnemo/2c94982b71364816017138fef97219cc.m3u8?auth_key=64337803c7e77086385e227a2a7c09e9-1585893604-81d776115f3f457ca085a6cb304179e7-",
         text: "小鱼2"
       }
     ],

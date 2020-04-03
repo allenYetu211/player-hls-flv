@@ -75,7 +75,17 @@ const PlugInFullScreen = (props: IProps) => {
       console.log('=====================')
 
       setFullState(true);
+
+      // 如果是ios手机 则使用video进行全屏
+      if (deviceType.ios){
+        fullScreen(player.videoEl)
+        return
+      }
+
+      // 桌面端， 非TBS 浏览器，或者tbs版本036849以下， 使用自带播放器进行播放, 并且不是在Android微信内
+      
       if (deviceType.pc || !deviceType.tbs) {
+      // if (deviceType.pc || deviceType.android) {
         console.log('use props.element')
         fullScreen(props.element);
       } else {
