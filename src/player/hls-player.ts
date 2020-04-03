@@ -90,7 +90,9 @@ export default class HLSPlayer extends VideoControl {
   }
 
   public  destroy(){
-    this.hls.destroy();
+    if (this.hls) {
+      this.hls.destroy();
+    }
   }
 
   public refresh() {
