@@ -12,7 +12,7 @@ const mp4Config: initConfig = {
   autoplay: false,
   isMobile: true,
   src:
-    "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/ff8080817116b00001711ad5472300b6/20203/7de7712d-abb5-4aa6-9995-30a0dcaf5e76.mp4",
+    "http://precdn.xylink.com/vodfiles/sharefiles/pre/live/2c9223e5715980cb01715d808f930146/20204/ffe193d4-452d-4045-8d2b-b0cb98c11e27.mp4",
 }
 
 const flvConfig: initConfig = {
@@ -22,12 +22,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'http://prdsecurelive.ainemo.com/prdnemo/2c924e4970ee3006017129be5bc917a7.flv?auth_key=dd5be82b04c943062ad661a4a1948425-1585638011-c4ec0a8271a74c32b79fd522a341c219-',
+        src:'http://presecurelive.ainemo.com/prenemo/2c9223e5715980cb01715d808f930146.flv?auth_key=2a911c5d6768c02d9056b72d10bfe877-1586505657-720e942079f34273ba951522e3d4a4ac-',
         text: '标清',
       },
       {
         src:
-          'http://prdsecurelive.ainemo.com/prdnemo/2c924e4970ee3006017129be5bc917a7.flv?auth_key=dd5be82b04c943062ad661a4a1948425-1585638011-c4ec0a8271a74c32b79fd522a341c219-',
+          'http://presecurelive.ainemo.com/prenemo/2c9223e5715980cb01715d808f930146.flv?auth_key=2a911c5d6768c02d9056b72d10bfe877-1586505657-720e942079f34273ba951522e3d4a4ac-',
         text: '高清',
       },
     ],
@@ -43,7 +43,7 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: "http://prdsecurelive.ainemo.com/prdnemo/2c94982b71364816017138fef97219cc.m3u8?auth_key=64337803c7e77086385e227a2a7c09e9-1585893604-81d776115f3f457ca085a6cb304179e7-",
+        src: "http://presecurelive.ainemo.com/prenemo/2c9226fc715ee2cb017162bd38dd0049.m3u8?auth_key=315d229298d39b479bbbd0433d9a45f2-1586593817-f658be2b8cf7410b92fb542a0f1c59b9-",
         text: "小鱼1",
       },
       {
@@ -61,14 +61,15 @@ const hlsConfig: initConfig = {
 const App = () => {
   const [option, setOption] = useState<initConfig>(mp4Config)
 
-  const choseMp4Url = () => {
-    setOption({
-      type: 'mp4',
-      autoplay: false,
-      isMobile: true,
-      src:
-        "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/ff80808170e6aa1b0170e751d2a2000a/20203/9d3a1691-90eb-43dc-b824-a0d9c4b8b04c.mp4",
-    })
+  const choseFlv = () => {
+    setOption(flvConfig);
+  }
+  const choseHLS = () => {
+    setOption(hlsConfig);
+  }
+
+  const choseMp4Url2 = () => {
+    setOption(mp4Config)
   }
 
   return (
@@ -77,8 +78,23 @@ const App = () => {
         position: 'absolute',
         top: '0px',
         left: '0px',
-        zIndex: 999
-      }} onClick={choseMp4Url}>切换</button>
+        zIndex: 9999
+      }} onClick={choseFlv}>flv</button>
+
+<button style={{
+        position: 'absolute',
+        top: '0px',
+        left: '100px',
+        zIndex: 9999
+      }} onClick={choseMp4Url2}>MP4</button>
+
+
+<button style={{
+        position: 'absolute',
+        top: '0px',
+        left: '150px',
+        zIndex: 9999
+      }} onClick={choseHLS}>HLS</button>
       <VideoPlayer {...option} />
     </div>
   )

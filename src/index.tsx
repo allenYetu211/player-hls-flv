@@ -64,21 +64,33 @@ const VideoPlayer = (props: initConfig) => {
 
   //  初始播放器
   useEffect(() => {
-      const config = Object.assign({}, props, {
-        element: videoEl.current!,
-        containerEl: containerEl.current!,
-      })
-      const vp:any = initPlayer(config);
-      setInitState(true);
-      onListenerState(vp, 'on');
-      setVideoPlayer(vp);
+      let vp: any = null;
+      if (videoPlayer) {
+        setInitState(false);
+        onListenerState(videoPlayer, 'off');
+        videoPlayer.destroy();
+      }
+
+      setTimeout(() => {
+        const config = Object.assign({}, props, {
+          element: videoEl.current!,
+          containerEl: containerEl.current!,
+        })
+        vp = initPlayer(config);
+        setInitState(true);
+        onListenerState(vp, 'on');
+        setVideoPlayer(vp);
+      }, 100)
+
+      
       return () => {
         vp.destroy();
-        onListenerState(vp, 'off');
+        // 清楚所有监听
+        vp.removeAllListeners();
         setInitState(false);
         console.log('====== destroy ======')
       }
-  }, [])
+  }, [props.type])
 
   // 监听状态
   const onListenerState = (vp: any, state: 'on'| 'off') => {

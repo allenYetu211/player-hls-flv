@@ -70,6 +70,7 @@ export default class VideoContainer {
   // 监听video事件
   private  addEventListener () {
   this.videoEl.addEventListener('timeupdate', (e: any) => {
+   
       // 手机检测
       if(!deviceType.pc) {
         if (this.displayingFullscreenState !== this.videoEl.webkitDisplayingFullscreen) {
@@ -170,6 +171,10 @@ export default class VideoContainer {
   
   public off(event: string, listener: EventEmitter.ListenerFn) {
     this._emitter.removeListener(event, listener);
+  }
+  
+  public removeAllListeners() {
+    this._emitter.removeAllListeners();
   }
 
 

@@ -28,17 +28,18 @@ const PlugInPlayBtn = (props: IProps) => {
 
   const onListenerState = (state: 'on' | 'off') => {
     player[state]('play', () => {
-      console.log('onListenerState => play')
+      console.log('onListenerState => play', state)
       setIsPlayering(true);
     });
 
     player[state]('stop', () => {
-      console.log('onListenerState => stop')
+      console.log('onListenerState => stop', state)
       setIsPlayering(false);
     });
   };
 
   const switcherPlayState = () => {
+    console.log('===>>>> switcherPlayState', isPlayering)
     isPlayering ?  player.stop() : player.play() 
   }
 
