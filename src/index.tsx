@@ -12,6 +12,7 @@ export interface initConfig {
   isMobile?: boolean;
   hideControl?: boolean;
   hideMultiCode?: boolean;
+  onVideoPlayerState?: (vp: any) => void;
 }
 
 export interface IMultiStreams {
@@ -35,24 +36,6 @@ const VideoPlayer = (props: initConfig) => {
   const [initState, setInitState] = useState<boolean>(false);
 
   const [videoPlayer, setVideoPlayer] = useState<any>();
-
-  // 针对不同浏览器添加不同属性
-  // useEffect(() => {
-  //   if(videoEl.current) {
-  //     videoEl.current.setAttribute("playsinline", 'true');
-  //     videoEl.current.setAttribute("webkit-playsinline", 'true');
-  //     videoEl.current.setAttribute("preload", "auto");
-
-
-  //     if (deviceType.androidTx) {
-  //       // videoEl.current.setAttribute("x5-video-orientation", "landscape|portrait");
-  //       videoEl.current.setAttribute("x5-playsinline", 'true');
-  //       videoEl.current.setAttribute("x5-video-player-type", 'h5');
-  //     }
-
-  //     // videoEl.current.setAttribute("x5-video-player-fullscreen", 'false');
-  //   }
-  // })
 
   // src 发生变化时候更新
   useEffect(() => {
@@ -80,6 +63,9 @@ const VideoPlayer = (props: initConfig) => {
         setInitState(true);
         onListenerState(vp, 'on');
         setVideoPlayer(vp);
+        if (props.onVideoPlayerState) {
+          props.onVideoPlayerState(vp);
+        }
       }, 100)
 
       

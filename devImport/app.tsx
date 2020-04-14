@@ -22,12 +22,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'http://presecurelive.ainemo.com/prenemo/2c9223e5715980cb01715d808f930146.flv?auth_key=2a911c5d6768c02d9056b72d10bfe877-1586505657-720e942079f34273ba951522e3d4a4ac-',
+        src:'http://presecurelive.ainemo.com/prenemo/2c9223e57163d82d0171730eb83a0fdc.flv?auth_key=890a80fc8166c58d3f4a66111dd97f43-1586953800-db608cb20abd4763be6972f6cdd4dedb-',
         text: '标清',
       },
       {
         src:
-          'http://presecurelive.ainemo.com/prenemo/2c9223e5715980cb01715d808f930146.flv?auth_key=2a911c5d6768c02d9056b72d10bfe877-1586505657-720e942079f34273ba951522e3d4a4ac-',
+          'http://presecurelive.ainemo.com/prenemo/2c9223e57163d82d0171730eb83a0fdc.flv?auth_key=890a80fc8166c58d3f4a66111dd97f43-1586953800-db608cb20abd4763be6972f6cdd4dedb-',
         text: '高清',
       },
     ],
@@ -59,7 +59,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config)
+  const [option, setOption] = useState<initConfig>(flvConfig)
 
   const choseFlv = () => {
     setOption(flvConfig);
