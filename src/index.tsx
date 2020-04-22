@@ -54,6 +54,8 @@ const VideoPlayer = (props: initConfig) => {
         videoPlayer.destroy();
       }
 
+      // 此处添加setTimeout 是处理切换码流类型时，销毁原本的播放器，需要一定时间重新初始。  
+      // TODO 后续需要优化
       setTimeout(() => {
         const config = Object.assign({}, props, {
           element: videoEl.current!,

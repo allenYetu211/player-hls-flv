@@ -59,7 +59,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(flvConfig)
+  const [option, setOption] = useState<initConfig>(mp4Config)
 
   const choseFlv = () => {
     setOption(flvConfig);

@@ -1,7 +1,8 @@
 @import '@g/asset/style/global.scss';
 
 .progressBar {
-	width: 100%;
+  width: 100%;
+  line-height: 1;
 	@extend %flex-center;
 	& > div:first-child {
 		flex: 1;
