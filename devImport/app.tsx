@@ -72,6 +72,10 @@ const App = () => {
     setOption(mp4Config)
   }
 
+  const onVideoPlayerState = (vp: any) => {
+    console.log('vp', vp);
+  }
+
   return (
     <div>
       <button style={{
@@ -95,7 +99,7 @@ const App = () => {
         left: '150px',
         zIndex: 9999
       }} onClick={choseHLS}>HLS</button>
-      <VideoPlayer {...option} />
+      <VideoPlayer {...option} onVideoPlayerState={onVideoPlayerState}/>
     </div>
   )
  

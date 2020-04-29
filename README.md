@@ -76,13 +76,16 @@ return (
 |MEDIA_ERROR| 与媒体相关的错误(格式错误、解码问题等) |
 |OTHER_ERROR| 任何其他未指定的错误 |
 
-
+```typescript
+{
   src?: string;
   autoplay?: boolean;
   option?: IMultiStreamsContainer;
   isMobile?: boolean;
   hideControl?: boolean;
   hideMultiCode?: boolean;
+}
+```
 ## 参数
 | 参数 | 参数类型 |默认值 |描述|
 | --- | --- |---|---|
@@ -92,7 +95,23 @@ return (
 |option?| IMultiStreamsContainer |''|分辨率选项|
 |isMobile?| boolean |false|手机端|
 |hideMultiCode?| boolean |false|是否影藏分辨率|
+|onVideoPlayerState?|(vp) => void;|''|播放器注册成功后，通过回调返回播放器相关属性|
 
+```typescript
+<!-- vp返回关键属性 -->
+{
+  containerEl: '当前使用播放器的容器div元素',
+  videoEl: 'video 元素',
+  play: '控制播放器开始播放',
+  stop: '控制播放器停止播放',
+  on: '监听当前播放器返回状态, 可以监听的对象有 「0001」「duration」「fullscreen」「mediaState」「play」「stop」',
+}
+```
+
+### 推荐安装依赖后，启动后运行查看使用方式。
+- 安装依赖 **yarn install**
+- 启动 **yarn start**
+- console 内打印的Vp 为播放器相关属性。
 
 
 
