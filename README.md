@@ -31,20 +31,33 @@ npm i player-hls-flv
 
 ```typescript
 export interface initConfig {
-    type?: 'flv' | 'hls' | 'mp4' | 'm3u8';
-    src?: string;
-    autoplay?: boolean;
-    option?: IMultiStreamsContainer;
+  type?: 'flv' | 'hls' | 'mp4' | 'm3u8',
+  src?: string;
+  autoplay?: boolean;
+  option?: IMultiStreamsContainer;
+  isMobile?: boolean;
+  hideControl?: boolean;
+  hideMultiCode?: boolean;
+  onVideoPlayerState?: (vp: any) => void;
+  multiple?: IMultiple
 }
 
-export interface IMultiStreamsContainer {
-    multiStreams: IMultiStreams[];
-    playIndex: number;
+export interface IMultiple {
+  list: {
+    text: string,
+    value: number,
+  }[],
+  initIndex: number
 }
 
 export interface IMultiStreams {
-    src: string;
-    text: string;
+  src: string;
+  text: string
+}
+
+export interface IMultiStreamsContainer {
+multiStreams: IMultiStreams[];
+playIndex: number;
 }
 ```
 
@@ -58,11 +71,11 @@ return (
 ```
 ---
 
-## 效果图
+<!-- ## 效果图
 ![image](https://raw.githubusercontent.com/allenYetu211/player-hls-flv/master/picture/picture-1.png)
 ![image](https://raw.githubusercontent.com/allenYetu211/player-hls-flv/master/picture/picture-2.png)
 ![image](https://raw.githubusercontent.com/allenYetu211/player-hls-flv/master/picture/picture-3.png)
-![image](https://raw.githubusercontent.com/allenYetu211/player-hls-flv/master/picture/picture-4.png)
+![image](https://raw.githubusercontent.com/allenYetu211/player-hls-flv/master/picture/picture-4.png) -->
 
 ---
 
@@ -76,16 +89,6 @@ return (
 |MEDIA_ERROR| 与媒体相关的错误(格式错误、解码问题等) |
 |OTHER_ERROR| 任何其他未指定的错误 |
 
-```typescript
-{
-  src?: string;
-  autoplay?: boolean;
-  option?: IMultiStreamsContainer;
-  isMobile?: boolean;
-  hideControl?: boolean;
-  hideMultiCode?: boolean;
-}
-```
 ## 参数
 | 参数 | 参数类型 |默认值 |描述|
 | --- | --- |---|---|
@@ -96,6 +99,7 @@ return (
 |isMobile?| boolean |false|手机端|
 |hideMultiCode?| boolean |false|是否影藏分辨率|
 |onVideoPlayerState?|(vp) => void;|''|播放器注册成功后，通过回调返回播放器相关属性|
+|multiple|[{text: '1x',value: 1,},{text: '2x',value: 2,},{text: '3x',value: 3,},]|倍速|
 
 ```typescript
 <!-- vp返回关键属性 -->

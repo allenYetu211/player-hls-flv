@@ -9,8 +9,12 @@ import {initConfig} from '../src/interfaces';
 
 const mp4Config: initConfig = {
   type: 'mp4',
+  multiple: {
+    list: [{text:'1x', value:1}, {text: '2x', value: 2}],
+    initIndex: 1
+  },
   autoplay: false,
-  isMobile: true,
+  isMobile: false,
   src:
     "http://precdn.xylink.com/vodfiles/sharefiles/pre/live/2c9223e5715980cb01715d808f930146/20204/ffe193d4-452d-4045-8d2b-b0cb98c11e27.mp4",
 }

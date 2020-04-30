@@ -3,25 +3,33 @@ import style from './style/index.scss';
 import cn from 'classnames';
 
 import {getVideoPlayer} from '@player/index';
+import {IMultiple} from '@interfaces/index';
 
-const multiple = [
-  {
-    text: '1x',
-    value: 1,
-  },
-  {
-    text: '2x',
-    value: 2,
-  },
-  {
-    text: '3x',
-    value: 3,
-  },
-];
 
-const PluginMultiple = () => {
+interface IProps {
+  multiple?: IMultiple
+}
+type multipleType = {text: string, value: number}
+
+const PluginMultiple = (props: IProps) => {
   const player: any = getVideoPlayer();
-  const [multipleIndex, setMultipleIndex] = useState<number>(0); 
+  const [multipleIndex, setMultipleIndex] = useState<number>(props.multiple  ? props.multiple!.initIndex : 0); 
+  const [multipleList] = useState<multipleType[]>(props.multiple ? props.multiple!.list  : [
+    {
+      text: '1x',
+      value: 1,
+    },
+    {
+      text: '2x',
+      value: 2,
+    },
+    {
+      text: '3x',
+      value: 3,
+    },
+  ])
+
+  console.log('multipleList', props.multiple )
   return (
     <div
     className={cn(
@@ -30,11 +38,11 @@ const PluginMultiple = () => {
       style.focusContainer
     )}
   >
-    <div className={style.multiple}>{multiple[multipleIndex].text}</div>
+    <div className={style.multiple}>{multipleList[multipleIndex].text}</div>
     <div className={style.focuseContainer}>
       <div className={cn(style.listContainer, style.focuseChild)}>
         <ul>
-          {multiple.map((item, key) => {
+          {multipleList.map((item:multipleType, key: number) => {
             return (
               <li
                 className={cn({
@@ -42,7 +50,7 @@ const PluginMultiple = () => {
                 })}
                 key={`${item.text}-${key}`}
                 onClick={() => {
-                  player.setPlaybackRate(key + 1)
+                  player.setPlaybackRate(item.value)
                   setMultipleIndex(key);
                 }}
               >

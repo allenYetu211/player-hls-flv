@@ -13,6 +13,15 @@ export interface initConfig {
   hideControl?: boolean;
   hideMultiCode?: boolean;
   onVideoPlayerState?: (vp: any) => void;
+  multiple?: IMultiple
+}
+
+export interface IMultiple {
+  list: {
+    text: string,
+    value: number,
+  }[],
+  initIndex: number
 }
 
 export interface IMultiStreams {
@@ -100,4 +109,4 @@ const VideoPlayer = (props: initConfig) => {
 }
 
 export default VideoPlayer;
-export {getVideoPlayer}
+// export {getVideoPlayer}

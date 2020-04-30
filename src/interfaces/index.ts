@@ -20,6 +20,7 @@ export interface initConfig {
   isMobile?: boolean;
   hideControl?: boolean;
   hideMultiCode?: boolean;
+  multiple?: IMultiple
 }
 
 
@@ -31,4 +32,12 @@ export interface videoConfig extends initConfig {
   element: Element,
   containerEl: HTMLDivElement,
   autoplay?: boolean;
+}
+
+export interface IMultiple {
+  list: {
+    text: string,
+    value: number,
+  }[],
+  initIndex: number
 }

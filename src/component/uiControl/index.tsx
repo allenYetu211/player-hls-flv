@@ -123,7 +123,7 @@ return () => {
         {isProgressBar && <PlugInProgressBar isMobile={config.isMobile!} onChangeComplete={onChangeComplete} />} 
           <div className={style.rightContaienr}>
             {!config.hideMultiCode  && isPluginMultiCode && <PluginMultiCode  option={config.option!}/>}
-            {!config.isMobile && isMultiples && <PluginMultiples />}
+            {!config.isMobile && isMultiples && <PluginMultiples  multiple={config.multiple} />}
             {!config.isMobile && isVoice && <PlugInVoice isMobile={config.isMobile!}/>}
             {isFullScreen && <PlugInFullScreen element={props.element} />}
           </div>
