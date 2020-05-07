@@ -78,6 +78,7 @@ export default class NativePlayer extends VideoControl {
     this.onRefershVideo();
     this.destroy();
     this.initVideoEl();
+    this._emitter.emit('refresh')
   }
  
 }

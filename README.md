@@ -101,6 +101,7 @@ return (
 |onVideoPlayerState?|(vp) => void;|''|播放器注册成功后，通过回调返回播放器相关属性|
 |multiple|[{text: '1x',value: 1,},{text: '2x',value: 2,},{text: '3x',value: 3,},]|倍速|
 
+
 ```typescript
 <!-- vp返回关键属性 -->
 {
@@ -108,7 +109,7 @@ return (
   videoEl: 'video 元素',
   play: '控制播放器开始播放',
   stop: '控制播放器停止播放',
-  on: '监听当前播放器返回状态, 可以监听的对象有 「0001」「duration」「fullscreen」「mediaState」「play」「stop」',
+  on: '监听当前播放器返回状态, 可以监听的对象有 「0001」「duration」「fullscreen」「mediaState」「play」「stop」「refresh」',
 }
 ```
 
