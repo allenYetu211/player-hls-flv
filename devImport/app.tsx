@@ -10,7 +10,7 @@ import {initConfig} from '../src/interfaces';
 const mp4Config: initConfig = {
   type: 'mp4',
   multiple: {
-    list: [{text:'1x', value:1}, {text: '2x', value: 2}],
+    list: [{text:'1x', value:1}, {text: '高清', value: 2}],
     initIndex: 1
   },
   autoplay: false,
