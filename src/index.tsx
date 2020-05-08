@@ -13,7 +13,8 @@ export interface initConfig {
   hideControl?: boolean;
   hideMultiCode?: boolean;
   onVideoPlayerState?: (vp: any) => void;
-  multiple?: IMultiple
+  multiple?: IMultiple;
+  vod?: boolean;
 }
 
 export interface IMultiple {

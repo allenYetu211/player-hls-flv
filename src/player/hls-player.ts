@@ -4,6 +4,8 @@ import {videoConfig, IMultiStreams} from '@interfaces/index';
 import Hls from 'hls.js';
 
 export default class HLSPlayer extends VideoControl {
+  // 是否为VOD
+  private vod: boolean = false;
 
   // 自动播放
   private autoplay: boolean = false;
@@ -25,23 +27,38 @@ export default class HLSPlayer extends VideoControl {
       container:  config.containerEl,
     })
 
-    this.multiStreams = config.option!.multiStreams;
-    this.playerIndex = config.option!.playIndex;
+    // 如果是vod点播，则不处理多码率
+    console.log('!config!.vod', config)
+    if (!config!.vod) {
+      this.multiStreams = config.option!.multiStreams;
+      this.playerIndex = config.option!.playIndex;
+      // 当前播放的src 
+      this.src = this.multiStreams[this.playerIndex].src;
+    } else {
+      this.vod = true;
+      this.src = config.src || '';
+    }
 
-    // 当前播放的src 
-    this.src = this.multiStreams[this.playerIndex].src;
     this.autoplay = config.autoplay || false;
     
     this.initVideoEl();
   }
 
   private initVideoEl() {
+
+    console.log('this.src', this.src);
+
     if (Hls.isSupported()) { 
       this.hls = new Hls();
       this.hls.loadSource(this.src);
       this.hls.attachMedia(this.videoEl);
       this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
       this.autoplay && this.play();
+      if(this.vod) {
+        this.videoEl.addEventListener('loadedmetadata', () => {
+          this._emitter.emit('duration', this.videoEl.duration * 1000)
+        });
+      }
     });
 
     this.addPlayerListener();

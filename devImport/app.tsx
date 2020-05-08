@@ -19,6 +19,16 @@ const mp4Config: initConfig = {
     "http://precdn.xylink.com/vodfiles/sharefiles/pre/live/2c9223e5715980cb01715d808f930146/20204/ffe193d4-452d-4045-8d2b-b0cb98c11e27.mp4",
 }
 
+// vod 点播
+const vodHlsConfig: initConfig = {
+  type: 'hls',
+  vod: true,
+  autoplay: false,
+  isMobile: false,
+  src:
+    "https://vod.xylink.com/vodfile1/cloud/9006261021/1155662354619_0_1588073014333_1280_720.mp4/index.m3u8?proxysessionid=1804317912,bandwidth=1816980",
+}
+
 const flvConfig: initConfig = {
   type: 'flv',
   autoplay: false,
@@ -26,12 +36,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'http://presecurelive.ainemo.com/prenemo/2c9223e57163d82d0171730eb83a0fdc.flv?auth_key=890a80fc8166c58d3f4a66111dd97f43-1586953800-db608cb20abd4763be6972f6cdd4dedb-',
+        src:'http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.flv?auth_key=45cb07cb837b032b36e8b8174de25bab-1589004009-fe3bc305f8da457e91765d3612c7fcf0-',
         text: '标清',
       },
       {
         src:
-          'http://presecurelive.ainemo.com/prenemo/2c9223e57163d82d0171730eb83a0fdc.flv?auth_key=890a80fc8166c58d3f4a66111dd97f43-1586953800-db608cb20abd4763be6972f6cdd4dedb-',
+          'http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.flv?auth_key=45cb07cb837b032b36e8b8174de25bab-1589004009-fe3bc305f8da457e91765d3612c7fcf0-',
         text: '高清',
       },
     ],
@@ -47,11 +57,11 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: "http://presecurelive.ainemo.com/prenemo/2c9226fc715ee2cb017162bd38dd0049.m3u8?auth_key=315d229298d39b479bbbd0433d9a45f2-1586593817-f658be2b8cf7410b92fb542a0f1c59b9-",
+        src: "http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.m3u8?auth_key=c44f5608a056a65bac59fe6e31881f64-1589004009-d9c36ee5a34a44018cc0204f70dcf370-",
         text: "小鱼1",
       },
       {
-        src: "http://prdsecurelive.ainemo.com/prdnemo/2c94982b71364816017138fef97219cc.m3u8?auth_key=64337803c7e77086385e227a2a7c09e9-1585893604-81d776115f3f457ca085a6cb304179e7-",
+        src: "http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.m3u8?auth_key=c44f5608a056a65bac59fe6e31881f64-1589004009-d9c36ee5a34a44018cc0204f70dcf370-",
         text: "小鱼2"
       }
     ],
@@ -63,7 +73,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config)
+  const [option, setOption] = useState<initConfig>(hlsConfig)
 
   const choseFlv = () => {
     setOption(flvConfig);

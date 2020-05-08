@@ -43,13 +43,13 @@ return () => {
   }, []);
 
   const controlUi = () => {
-    if (props.config.type === 'mp4') {
+    if (props.config.type === 'mp4' || (props.config.type === 'hls' && props.config.vod)) {
       setMultiples(true);
       setDuration(true);
       setProgressBar(true);
     }
 
-    if (props.config.type === 'flv' || props.config.type === 'hls') {
+    if (props.config.type === 'flv' || (props.config.type === 'hls' && !props.config.vod)) {
       setPluginMultiCode(true);
     }
 
@@ -122,7 +122,7 @@ return () => {
 
         {isProgressBar && <PlugInProgressBar isMobile={config.isMobile!} onChangeComplete={onChangeComplete} />} 
           <div className={style.rightContaienr}>
-            {!config.hideMultiCode  && isPluginMultiCode && <PluginMultiCode  option={config.option!}/>}
+            {!config.hideMultiCode  && isPluginMultiCode && !config.vod && <PluginMultiCode  option={config.option!}/>}
             {!config.isMobile && isMultiples && <PluginMultiples  multiple={config.multiple} />}
             {!config.isMobile && isVoice && <PlugInVoice isMobile={config.isMobile!}/>}
             {isFullScreen && <PlugInFullScreen element={props.element} />}

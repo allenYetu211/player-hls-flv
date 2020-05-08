@@ -12,6 +12,7 @@ export default class Player {
     switch(config.type) {
       case 'hls':
       case 'm3u8': {
+        console.log('config::', config)
         return new HlsPlayer(config);
       }
       case 'flv' : {
