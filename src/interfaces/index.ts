@@ -20,6 +20,7 @@ export interface initConfig {
   isMobile?: boolean;
   hideControl?: boolean;
   hideMultiCode?: boolean;
+  hideRefresh?: boolean;
   multiple?: IMultiple,
   vod?: boolean,
 }

@@ -12,6 +12,7 @@ export interface initConfig {
   isMobile?: boolean;
   hideControl?: boolean;
   hideMultiCode?: boolean;
+  hideRefresh?: boolean;
   onVideoPlayerState?: (vp: any) => void;
   multiple?: IMultiple;
   vod?: boolean;

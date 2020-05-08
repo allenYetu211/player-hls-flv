@@ -9,6 +9,7 @@ import {initConfig} from '../src/interfaces';
 
 const mp4Config: initConfig = {
   type: 'mp4',
+  hideRefresh: false,
   multiple: {
     list: [{text:'1x', value:1}, {text: '高清', value: 2}],
     initIndex: 1
@@ -73,7 +74,7 @@ const hlsConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(hlsConfig)
+  const [option, setOption] = useState<initConfig>(mp4Config)
 
   const choseFlv = () => {
     setOption(flvConfig);

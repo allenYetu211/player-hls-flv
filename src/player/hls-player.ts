@@ -46,8 +46,6 @@ export default class HLSPlayer extends VideoControl {
 
   private initVideoEl() {
 
-    console.log('this.src', this.src);
-
     if (Hls.isSupported()) { 
       this.hls = new Hls();
       this.hls.loadSource(this.src);

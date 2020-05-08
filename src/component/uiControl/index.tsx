@@ -116,7 +116,7 @@ return () => {
 
           <div className={style.leftContainer}>
             {isPlayBtn &&  <PlugInPlayBtn />}
-            <PluginRefresh/>
+            {!config.hideRefresh && <PluginRefresh/>}
             {isDuration &&  <PlugInDuration />}
           </div>
 

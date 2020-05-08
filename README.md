@@ -99,6 +99,7 @@ return (
 |option?| IMultiStreamsContainer |''|分辨率选项|
 |isMobile?| boolean |false|手机端|
 |hideMultiCode?| boolean |false|是否影藏分辨率|
+|hideRefresh?| boolean |false|是否影藏刷新按钮|
 |onVideoPlayerState?|(vp) => void;|''|播放器注册成功后，通过回调返回播放器相关属性|
 |multiple|[{text: '1x',value: 1,},{text: '2x',value: 2,},{text: '3x',value: 3,},]|倍速|
 
