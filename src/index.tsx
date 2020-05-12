@@ -72,6 +72,8 @@ const VideoPlayer = (props: initConfig) => {
           element: videoEl.current!,
           containerEl: containerEl.current!,
         })
+
+
         vp = initPlayer(config);
         setInitState(true);
         onListenerState(vp, 'on');
@@ -111,4 +113,12 @@ const VideoPlayer = (props: initConfig) => {
 }
 
 export default VideoPlayer;
+
+const getv = () => {
+  return 'getv'
+}
+
+export {
+  getv
+}
 // export {getVideoPlayer}

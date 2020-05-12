@@ -43,12 +43,22 @@ export default class VideoContainer {
 
   public play() {
     this._emitter.emit('clickPlay');
-    this.videoEl.play().then(() => {
-      this._emitter.emit('play');
+
+    // 兼容IE，ie浏览器不存在then 方法
+    try {
+			this.videoEl.play()
+			this._emitter.emit('play');
       this.onPlayProgress()
-    }).catch((error: any) => {
-      this._emitter.emit('0001',  {error})
-    })
+		} catch (error) {
+			this._emitter.emit('0001',  {error})
+    }
+
+    // this.videoEl.play().then(() => {
+    //   this._emitter.emit('play');
+    //   this.onPlayProgress()
+    // }).catch((error: any) => {
+    //   this._emitter.emit('0001',  {error})
+    // })
   }
 
   public onPlayProgress() {

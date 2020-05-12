@@ -29,7 +29,6 @@ const PluginMultiple = (props: IProps) => {
     },
   ])
 
-  console.log('multipleList', props.multiple )
   return (
     <div
     className={cn(
