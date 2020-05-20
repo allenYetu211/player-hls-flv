@@ -27,13 +27,21 @@ export default class HLSPlayer extends VideoControl {
       container:  config.containerEl,
     })
 
-    // 如果是vod点播，则不处理多码率
-    console.log('!config!.vod', config)
+
+
+    // 如果是vod点播，
     if (!config!.vod) {
-      this.multiStreams = config.option!.multiStreams;
-      this.playerIndex = config.option!.playIndex;
-      // 当前播放的src 
-      this.src = this.multiStreams[this.playerIndex].src;
+
+      // 如果存在option，则处理多码率。
+      if (config.option) {
+        this.multiStreams = config.option!.multiStreams;
+        this.playerIndex = config.option!.playIndex;
+        // 当前播放的src 
+        this.src = this.multiStreams[this.playerIndex].src;
+      } else {
+        this.src = config.src || ''
+      }
+     
     } else {
       this.vod = true;
       this.src = config.src || '';

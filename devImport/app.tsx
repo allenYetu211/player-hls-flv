@@ -70,11 +70,29 @@ const hlsConfig: initConfig = {
   },
 }
 
+const hlsConfigSrc: initConfig = {
+  type: 'hls',
+  src:
+    'https://live.ainemo.com/testdevnemo/ff80808171a4ff980171a7b9d6a20023.m3u8?auth_key=1587750600-0-0-9c8741e8888a406db25474818e1d81b5',
+  autoplay: false,
+  isMobile: false,
+  hideMultiCode: true,
+  multiple: {
+    list: [
+      {text: '2x', value: 2},
+      {text: '1.5x', value: 1.5},
+      {text: '1x', value: 1},
+      {text: '0.5x', value: 0.5},
+    ],
+    initIndex: 2,
+  },
+}
+
 
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config)
+  const [option, setOption] = useState<initConfig>(hlsConfig)
 
   const choseFlv = () => {
     setOption(flvConfig);
