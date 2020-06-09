@@ -7,6 +7,7 @@ import VideoPlayer from '../src/index';
 import {initConfig} from '../src/interfaces';
 
 
+
 const mp4Config: initConfig = {
   type: 'mp4',
   hideRefresh: false,
@@ -14,6 +15,7 @@ const mp4Config: initConfig = {
     list: [{text:'1x', value:1}, {text: '高清', value: 2}],
     initIndex: 1
   },
+  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
   isMobile: false,
   src:
@@ -75,6 +77,7 @@ const hlsConfigSrc: initConfig = {
   src:
     'https://live.ainemo.com/testdevnemo/ff80808171a4ff980171a7b9d6a20023.m3u8?auth_key=1587750600-0-0-9c8741e8888a406db25474818e1d81b5',
   autoplay: false,
+  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   isMobile: false,
   hideMultiCode: true,
   multiple: {
@@ -92,7 +95,7 @@ const hlsConfigSrc: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(hlsConfig)
+  const [option, setOption] = useState<initConfig>(hlsConfigSrc)
 
   const choseFlv = () => {
     setOption(flvConfig);
