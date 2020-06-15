@@ -21,6 +21,7 @@ export default class NativePlayer extends VideoControl {
     super({
       element:  config.element,
       container:  config.containerEl,
+      poster: config.poster
     })
     this.autoplay = config.autoplay || false;
 
@@ -51,6 +52,12 @@ export default class NativePlayer extends VideoControl {
       // 获取时长，注入
       this._emitter.emit('duration', this.videoEl.duration * 1000)
     })
+
+    // 增加特殊处理，获取播放时长 TODO 需优化
+    this.videoEl.addEventListener('canplay', () => {
+      this._emitter.emit('duration', this.videoEl.duration * 1000)
+    })
+
   }
 
   public  updateMp4Path (src: string) {

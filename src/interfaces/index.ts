@@ -23,6 +23,7 @@ export interface initConfig {
   hideRefresh?: boolean;
   multiple?: IMultiple,
   vod?: boolean,
+  poster?: string;
 }
 
 
@@ -34,7 +35,8 @@ export interface videoConfig extends initConfig {
   element: Element,
   containerEl: HTMLDivElement,
   autoplay?: boolean;
-  vod?: boolean,
+  vod?: boolean;
+  poster?: string;
 }
 
 export interface IMultiple {

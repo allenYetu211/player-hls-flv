@@ -24,6 +24,7 @@ export default class FlvPlayer extends VideoControl {
     super({
       element:  config.element,
       container:  config.containerEl,
+      poster: config.poster
     })
 
     this.multiStreams = config.option!.multiStreams;

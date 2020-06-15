@@ -16,6 +16,7 @@ export interface initConfig {
   onVideoPlayerState?: (vp: any) => void;
   multiple?: IMultiple;
   vod?: boolean;
+  poster?: string;
 }
 
 export interface IMultiple {
@@ -86,7 +87,7 @@ const VideoPlayer = (props: initConfig) => {
       
       return () => {
         vp.destroy();
-        // 清楚所有监听
+        // 清除所有监听
         vp.removeAllListeners();
         setInitState(false);
         console.log('====== destroy ======')
@@ -113,12 +114,3 @@ const VideoPlayer = (props: initConfig) => {
 }
 
 export default VideoPlayer;
-
-const getv = () => {
-  return 'getv'
-}
-
-export {
-  getv
-}
-// export {getVideoPlayer}

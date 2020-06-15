@@ -4,6 +4,7 @@ import {deviceType} from '@utils/phoneType';
 interface ConfigType {
   element: HTMLVideoElement,
   container: HTMLDivElement,
+  poster?: string;
 }
 
 export default class VideoContainer {
@@ -21,6 +22,8 @@ export default class VideoContainer {
   //  全屏状态
    public displayingFullscreenState:boolean = false;
 
+   public config: ConfigType;
+
   //  计时器
   private timer: any; 
 
@@ -28,12 +31,16 @@ export default class VideoContainer {
   // public resourceLoadingState: boolean = false;
 
   constructor(config: ConfigType) {
+    this.config = config;
     this.videoEl  = config.element;
     this.containerEl  = config.container;
+    // 设置参数
     this.addVideoAttribute()
     // 添加video 监听
     this.addEventListener();
   }
+
+
 
   public stop() {
     this.videoEl.pause();
@@ -148,8 +155,8 @@ export default class VideoContainer {
       this.videoEl.setAttribute("playsinline", 'true');
       this.videoEl.setAttribute("webkit-playsinline", 'true');
       this.videoEl.setAttribute("preload", "auto");
-
-
+      this.videoEl.setAttribute("poster", this.config.poster || '');
+      
       // if (deviceType.androidTx) {
         this.videoEl.setAttribute("x5-video-orientation", "landscape|portrait");
         this.videoEl.setAttribute("x5-playsinline", 'true');
