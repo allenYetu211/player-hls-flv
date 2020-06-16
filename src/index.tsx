@@ -17,6 +17,7 @@ export interface initConfig {
   multiple?: IMultiple;
   vod?: boolean;
   poster?: string;
+  duration?: string;
 }
 
 export interface IMultiple {
@@ -53,9 +54,9 @@ const VideoPlayer = (props: initConfig) => {
   useEffect(() => {
     if(videoPlayer && videoPlayer.updateMp4Path) {
       videoPlayer.stop();
-      videoPlayer.updateMp4Path(props.src)
+      videoPlayer.updateMp4Path(props.src, props.duration)
     }
-  }, [props.src])
+  }, [props.src, props.duration])
 
   //  初始播放器
   useEffect(() => {

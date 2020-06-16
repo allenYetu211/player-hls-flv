@@ -16,12 +16,10 @@ const PluginDiration = () => {
 
   const onListenerState = (state: 'on' | 'off') => {
     player[state]('duration', (duration: string) => {
-      console.log('duration::::==>>>>', duration)
       setVideoDuration(msToTime(duration));
     }); 
     
     player[state]('playProgress', (duration: string) => {
-      console.log('playProgress::::==>>>>', duration)
       setPlayProgress(msToTime(duration));
     });
   };

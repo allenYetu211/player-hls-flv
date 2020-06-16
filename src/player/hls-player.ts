@@ -65,10 +65,6 @@ export default class HLSPlayer extends VideoControl {
         this.videoEl.addEventListener('loadedmetadata', () => {
           this._emitter.emit('duration', this.videoEl.duration * 1000)
         });
-            // 增加特殊处理，获取播放时长 TODO 需优化
-        this.videoEl.addEventListener('canplay', () => {
-          this._emitter.emit('duration', this.videoEl.duration * 1000)
-        })
       }
     });
 
@@ -80,12 +76,8 @@ export default class HLSPlayer extends VideoControl {
       this.videoEl.addEventListener('loadedmetadata', () => {
         this.autoplay && this.play();
         this._emitter.emit('duration', this.videoEl.duration * 1000)
+        // 获取时长
       });
-
-      // 增加特殊处理，获取播放时长  TODO 需优化
-      this.videoEl.addEventListener('canplay', () => {
-        this._emitter.emit('duration', this.videoEl.duration * 1000)
-      })
     } else {
       throw new Error('Hls player error');
     }

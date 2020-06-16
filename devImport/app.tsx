@@ -17,9 +17,24 @@ const mp4Config: initConfig = {
   },
   poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
-  isMobile: false,
+  isMobile: true,
+  duration: '549185',
   src:
     "http://precdn.xylink.com/vodfiles/sharefiles/pre/live/2c9223e5715980cb01715d808f930146/20204/ffe193d4-452d-4045-8d2b-b0cb98c11e27.mp4",
+}
+
+const mp4Config2: initConfig = {
+  type: 'mp4',
+  hideRefresh: false,
+  multiple: {
+    list: [{text:'1x', value:1}, {text: '高清', value: 2}],
+    initIndex: 1
+  },
+  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
+  autoplay: false,
+  isMobile: true,
+  src:
+    "https://pre-res.xylinkedu.com/video/425663056429711360.mp4",
 }
 
 // vod 点播
@@ -95,7 +110,7 @@ const hlsConfigSrc: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(hlsConfigSrc)
+  const [option, setOption] = useState<initConfig>(mp4Config)
 
   const choseFlv = () => {
     setOption(flvConfig);
@@ -105,7 +120,7 @@ const App = () => {
   }
 
   const choseMp4Url2 = () => {
-    setOption(mp4Config)
+    setOption(mp4Config2)
   }
 
   const onVideoPlayerState = (vp: any) => {

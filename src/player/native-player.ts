@@ -11,6 +11,9 @@ export default class NativePlayer extends VideoControl {
 
   public type: string = '';
 
+  // 时长
+  private c: string = ''
+
   // 播放列表
   private multiStreams: IMultiStreams[] = [{src: '', text: ''}];
 
@@ -27,6 +30,7 @@ export default class NativePlayer extends VideoControl {
 
     this.type = config.type!;
 
+    this.duration = config.duration!;
 
     if (this.type === 'hls' || this.type === 'm3u8') {
       this.multiStreams = config.option!.multiStreams;
@@ -39,7 +43,7 @@ export default class NativePlayer extends VideoControl {
     if (this.type ==='mp4' || config.src) {
       this.src = config.src!
     }
-   
+
     this.initVideoEl()
   }
 
@@ -49,21 +53,19 @@ export default class NativePlayer extends VideoControl {
     this.videoEl.load();
     this.videoEl.addEventListener('loadedmetadata', () => {
       this.autoplay && this.play();
-      // 获取时长，注入
-      this._emitter.emit('duration', this.videoEl.duration * 1000)
+      if (this.videoEl.duration) {
+        this._emitter.emit('duration', this.videoEl.duration * 1000)
+      } else if(this.duration) {
+        this._emitter.emit('duration', this.duration)
+      }
     })
-
-    // 增加特殊处理，获取播放时长 TODO 需优化
-    this.videoEl.addEventListener('canplay', () => {
-      this._emitter.emit('duration', this.videoEl.duration * 1000)
-    })
-
   }
 
-  public  updateMp4Path (src: string) {
+  public  updateMp4Path (src: string, duration: string) {
     this._emitter.emit('playProgress', 0);
     this.src = src;
     this.videoEl.src = src;
+    this.duration = duration;
     this.initVideoEl()
   }
 
