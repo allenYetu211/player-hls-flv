@@ -24,7 +24,7 @@ export interface initConfig {
   multiple?: IMultiple,
   vod?: boolean,
   poster?: string;
-  duration?: string;
+  duration?: number;
 }
 
 

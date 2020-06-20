@@ -12,7 +12,7 @@ export default class NativePlayer extends VideoControl {
   public type: string = '';
 
   // 时长
-  private c: string = ''
+  private duration: number = 0;
 
   // 播放列表
   private multiStreams: IMultiStreams[] = [{src: '', text: ''}];
@@ -61,7 +61,7 @@ export default class NativePlayer extends VideoControl {
     })
   }
 
-  public  updateMp4Path (src: string, duration: string) {
+  public  updateMp4Path (src: string, duration: number) {
     this._emitter.emit('playProgress', 0);
     this.src = src;
     this.videoEl.src = src;
