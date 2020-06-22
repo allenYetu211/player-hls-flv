@@ -10,7 +10,7 @@ import {initConfig} from '../src/interfaces';
 
 const mp4Config: initConfig = {
   type: 'mp4',
-  hideRefresh: false,
+  hideRefresh: true,
   multiple: {
     list: [{text:'1x', value:1}, {text: '高清', value: 2}],
     initIndex: 1

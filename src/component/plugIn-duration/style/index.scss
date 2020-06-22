@@ -3,6 +3,7 @@
 .progressBar {
   width: 100%;
   line-height: 1;
+  white-space: nowrap;
 	@extend %flex-center;
 	& > div:first-child {
 		flex: 1;
