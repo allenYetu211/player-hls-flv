@@ -20,7 +20,7 @@ const mp4Config: initConfig = {
   isMobile: true,
   duration: 549185,
   src:
-    "http://precdn.xylink.com/vodfiles/sharefiles/pre/live/2c9223e5715980cb01715d808f930146/20204/ffe193d4-452d-4045-8d2b-b0cb98c11e27.mp4",
+    "https://txcdtrain-res.xylinkedu.com/edu/video/20200706/464841678373523456.mp4?auth_key=1594027192-2-1-cdfc4c048fc82d994b4944d7d2a6d4f1",
 }
 
 const mp4Config2: initConfig = {

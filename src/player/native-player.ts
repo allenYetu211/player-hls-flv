@@ -1,6 +1,7 @@
 
 import {videoConfig, Element, IMultiStreams} from '@interfaces/index';
 import VideoControl from './video-control';
+import {httpFetch} from '../utils/fetch';
 export default class NativePlayer extends VideoControl {
 
   // 播流地址
@@ -51,6 +52,19 @@ export default class NativePlayer extends VideoControl {
   private initVideoEl() {
     this.videoEl.src = this.src;
     this.videoEl.load();
+
+
+    // this.videoEl.addEventListener('error',  (error) => {
+    //   httpFetch({url: this.videoEl.src, method: 'head'}).then((resolve) => {
+    //     this._emitter.emit('pathState', {
+    //       url: this.src,
+    //       status: resolve.status
+    //     })
+    //   })
+    // })
+
+
+
     this.videoEl.addEventListener('loadedmetadata', () => {
       this.autoplay && this.play();
       if (this.videoEl.duration) {
