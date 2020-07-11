@@ -70,11 +70,12 @@ export default class VideoContainer {
 
   public onPlayProgress() {
     this._emitter.emit('playProgress', this.videoEl.currentTime  * 1000);
+    clearInterval(this.timer);
     this.timer = setInterval(() => {
       this._emitter.emit('playProgress', this.videoEl.currentTime  * 1000)
       if (this.videoEl.currentTime >= this.videoEl.duration) {
-        this.stop();
         clearInterval(this.timer);
+        this.stop();
         return;
       }
     }, 1000)
