@@ -14,7 +14,7 @@
   &:active{
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
-
+ 
   &.hover:hover {
     & > .controlBar {
       pointer-events: all;
@@ -42,8 +42,10 @@
 	height: 50px;
 	padding: 0 10px;
   transition: all 0.5s ease;
-	transform: translate3d(0, 100%, 0);
-	opacity: 0;
+  // transform: translate3d(0, 100%, 0);
+	// opacity: 0;
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
   background:rgba(0,0,0,0.45);
   z-index: 999;
   

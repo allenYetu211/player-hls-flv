@@ -10,6 +10,7 @@ import cn from 'classnames';
 interface IProps {
   onChangeComplete: Function;
   isMobile?: boolean;
+  thumbnail?: string;
 }
 
 const PlugInProgressBar = (props:IProps) => {
@@ -27,6 +28,7 @@ const PlugInProgressBar = (props:IProps) => {
   const [cursorElDisplayState, setCursorElDisplayState] = useState<boolean>(false);
   const progressEl = useRef<HTMLDivElement>(null);
   const cursorEl = useRef<HTMLDivElement>(null);
+  const thumbnailEl = useRef<HTMLDivElement>(null);
 
   const onListenerState = (state: 'on' | 'off') => {
     player[state]('duration', (duration: string) => {
@@ -38,12 +40,40 @@ const PlugInProgressBar = (props:IProps) => {
     });
   };
 
-  //  计算滚动条
+  //  计算
   const onMouseMove = (e: React.MouseEvent) => {
     const width = progressEl.current!.offsetWidth;
     const left = progressEl.current!.getBoundingClientRect().left;
     const result = (e.clientX - left) / width * videoDuration;
     cursorEl.current!.style.left = `${e.clientX - left}px`;
+
+
+
+    const picturePosition = Math.ceil(e.clientX / width  * 21);
+    const pictureRow = Math.floor(picturePosition / 10);
+
+
+
+    const pictrueX =     picturePosition <= 10 ?  150 * picturePosition : 150 *  (picturePosition - (pictureRow *  10));
+    const pictrueY =     90  * pictureRow;
+  
+    console.log('picturePosition', picturePosition)
+    // console.log('pictrueX', pictrueX)
+    // console.log('pictrueX', pictrueY)
+
+    thumbnailEl.current!.style.backgroundPosition = `-${pictrueX}px -${pictrueY}px`;
+
+
+    console.log('pictureRow', pictureRow);
+
+    
+
+
+    // TODO  计算
+    
+    
+
+    
     setPopContent(msToTime(String(result)))
   };
 
@@ -55,7 +85,9 @@ const PlugInProgressBar = (props:IProps) => {
       })}
       onMouseMove={(e) => {onMouseMove(e)}}
       onMouseEnter={() => {setCursorElDisplayState(true);}}
-      onMouseLeave={() => {setCursorElDisplayState(false);}}>
+      // onMouseLeave={() => {setCursorElDisplayState(false);}}
+      onMouseLeave={() => {setCursorElDisplayState(true);}}
+      >
 
       <div
         ref={cursorEl}
@@ -65,7 +97,13 @@ const PlugInProgressBar = (props:IProps) => {
         })}>
         <div className={style.focuseContainer}>
           <div
-            className={cn(style.focuseChild, style.value)}
+            ref={thumbnailEl}
+            style={{
+              backgroundImage: `url(${ props.thumbnail})`;
+            }}
+            className={cn(style.focuseChild, style.value, {
+              [style.thumbnailContainer]: props.thumbnail
+            })}
           >
             {popContent}
           </div>

@@ -5,7 +5,8 @@ import { hot } from "react-hot-loader/root";
 import VideoPlayer from '../src/index';
 
 import {initConfig} from '../src/interfaces';
-
+// import detailsPicture from './212621588.jpg@.webp';
+// https://i0.hdslb.com/bfs/videoshot/212621588.jpg@.webp
 
 
 const mp4Config: initConfig = {
@@ -15,12 +16,13 @@ const mp4Config: initConfig = {
     list: [{text:'1x', value:1}, {text: '高清', value: 2}],
     initIndex: 1
   },
-  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
+  // poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
-  isMobile: true,
+  isMobile: false,
   duration: 549185,
   src:
     "https://pre-res.xylinkedu.com/video/425663056429711360.mp4",
+  thumbnail: 'https://i0.hdslb.com/bfs/videoshot/212621588.jpg@.webp'
 }
 
 const mp4Config2: initConfig = {

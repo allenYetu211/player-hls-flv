@@ -120,7 +120,7 @@ return () => {
             {isDuration &&  <PlugInDuration />}
           </div>
 
-        {isProgressBar && <PlugInProgressBar isMobile={config.isMobile!} onChangeComplete={onChangeComplete} />} 
+        {isProgressBar && <PlugInProgressBar thumbnail={config.thumbnail} isMobile={config.isMobile!} onChangeComplete={onChangeComplete} />} 
           <div className={style.rightContaienr}>
             {!config.hideMultiCode  && isPluginMultiCode && !config.vod && <PluginMultiCode  option={config.option!}/>}
             {!config.isMobile && isMultiples && <PluginMultiples  multiple={config.multiple} />}

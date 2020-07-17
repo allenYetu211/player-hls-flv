@@ -7,11 +7,11 @@
   .focuseContainer {
     pointer-events: none;
     opacity: 0;
+    transform: translate3d(-50%, -120%, 0);
     position: absolute;
     top: -0;
     left: 50%;
     transition: all 0.5s ease;
-    transform: translate3d(-50%, -120%, 0);
     padding-bottom: 20px;
     z-index: 10;
   }
