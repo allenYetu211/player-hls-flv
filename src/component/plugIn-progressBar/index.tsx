@@ -84,7 +84,7 @@ const PlugInProgressBar = (props:IProps) => {
           <div
             ref={thumbnailEl}
             style={{
-              backgroundImage: `url(${ props.thumbnail})`;
+              backgroundImage: `url(${ props.thumbnail})`
             }}
             className={cn(style.focuseChild, style.value, {
               [style.thumbnailContainer]: props.thumbnail
