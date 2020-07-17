@@ -49,27 +49,12 @@ const PlugInProgressBar = (props:IProps) => {
 
 
 
+    // 缩略图预览计算
     const picturePosition = Math.ceil(e.clientX / width  * 21);
     const pictureRow = Math.floor(picturePosition / 10);
-
-
-
     const pictrueX =     picturePosition <= 10 ?  150 * picturePosition : 150 *  (picturePosition - (pictureRow *  10));
     const pictrueY =     90  * pictureRow;
-  
-    console.log('picturePosition', picturePosition)
-    // console.log('pictrueX', pictrueX)
-    // console.log('pictrueX', pictrueY)
-
     thumbnailEl.current!.style.backgroundPosition = `-${pictrueX}px -${pictrueY}px`;
-
-
-    console.log('pictureRow', pictureRow);
-
-    
-
-
-    // TODO  计算
     
     
 
