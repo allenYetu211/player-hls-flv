@@ -107,6 +107,8 @@ return (
 |multiple|[{text: '1x',value: 1,},{text: '2x',value: 2,},{text: '3x',value: 3,},]|倍速|
 |poster?|string|背景图|
 |duration?|string|视频总时长，单位：毫秒|
+|hideControl?|boolean|隐藏控制栏|
+|vod?|boolean|视频类型为hls点播需要设置|
 
 
 ```typescript
