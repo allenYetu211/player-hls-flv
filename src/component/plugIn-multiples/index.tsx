@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import style from './style/index.scss';
 import cn from 'classnames';
 
@@ -12,9 +12,13 @@ interface IProps {
 type multipleType = {text: string, value: number}
 
 const PluginMultiple = (props: IProps) => {
+
+  console.log('props:::', props.multiple);
+
+
   const player: any = getVideoPlayer();
   const [multipleIndex, setMultipleIndex] = useState<number>(props.multiple  ? props.multiple!.initIndex : 0); 
-  const [multipleList] = useState<multipleType[]>(props.multiple ? props.multiple!.list  : [
+  const [multipleList, setMultipleList] = useState<multipleType[]>(props.multiple ? props.multiple!.list  : [
     {
       text: '1x',
       value: 1,
@@ -28,6 +32,13 @@ const PluginMultiple = (props: IProps) => {
       value: 3,
     },
   ])
+
+  useEffect(() => {
+    setMultipleList(props.multiple!.list)
+    setMultipleIndex(props.multiple!.initIndex)
+  }, [props.multiple!.list]);
+
+
 
   return (
     <div

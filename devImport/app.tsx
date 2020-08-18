@@ -12,27 +12,26 @@ const mp4Config: initConfig = {
   type: 'mp4',
   hideRefresh: true,
   multiple: {
-    list: [{text:'1x', value:1}, {text: '高清', value: 2}],
-    initIndex: 1
+    list: [{text:'1x', value:1}, {text: '2x', value: 2}],
+    initIndex: 0
   },
   poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
-  isMobile: true,
-  duration: 549185,
+  isMobile: false,
   src:
-    "https://pre-res.xylinkedu.com/video/425663056429711360.mp4",
+    "http://prd-vodcdn.xylink.com/vodfiles/sharefiles/live/2c94bb0471ad2fee0171ad3595620001/20204/0c9af238-ade8-48b0-b58b-17346c269b0d.mp4",
 }
 
 const mp4Config2: initConfig = {
   type: 'mp4',
   hideRefresh: false,
   multiple: {
-    list: [{text:'1x', value:1}, {text: '高清', value: 2}],
-    initIndex: 1
+    list: [{text:'1xx', value:1}, {text: '2xx', value: 2}],
+    initIndex: 0
   },
   poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
-  isMobile: true,
+  isMobile: false,
   src:
     "https://pre-res.xylinkedu.com/video/425663056429711360.mp4",
 }
