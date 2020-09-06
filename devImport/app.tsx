@@ -6,7 +6,7 @@ import VideoPlayer from '../src/index';
 
 import {initConfig} from '../src/interfaces';
 
-
+// https://prdlive.ainemo.com/prdnemo/9680cd9a73cef8770173d6ec29c9213b.m3u8?auth_key=1598612400-0-0-2a84e400b46a6fc6375f9110a56b1dff
 
 const mp4Config: initConfig = {
   type: 'mp4',
@@ -74,13 +74,10 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: "http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.m3u8?auth_key=c44f5608a056a65bac59fe6e31881f64-1589004009-d9c36ee5a34a44018cc0204f70dcf370-",
+        src: "https://prdlive.ainemo.com/prdnemo/9680cd9a73cef8770173d6ec29c9213b.m3u8?auth_key=1598612400-0-0-2a84e400b46a6fc6375f9110a56b1dff",
         text: "小鱼1",
       },
-      {
-        src: "http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.m3u8?auth_key=c44f5608a056a65bac59fe6e31881f64-1589004009-d9c36ee5a34a44018cc0204f70dcf370-",
-        text: "小鱼2"
-      }
+     
     ],
     playIndex: 0,
   },

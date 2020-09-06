@@ -155,6 +155,8 @@ export default class VideoContainer {
 
   public  addVideoAttribute = () => {
       this.videoEl.setAttribute("playsinline", 'true');
+      // 禁止下载按钮
+      this.videoEl.setAttribute("controlslist", 'nodownload');
       this.videoEl.setAttribute("webkit-playsinline", 'true');
       this.videoEl.setAttribute("preload", "auto");
       this.videoEl.setAttribute("poster", this.config.poster || '');
