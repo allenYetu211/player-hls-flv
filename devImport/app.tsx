@@ -17,9 +17,8 @@ const mp4Config: initConfig = {
   },
   poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
-  isMobile: false,
-  src:
-    "http://prd-vodcdn.xylink.com/vodfiles/sharefiles/live/2c94bb0471ad2fee0171ad3595620001/20204/0c9af238-ade8-48b0-b58b-17346c269b0d.mp4",
+  isMobile: true,
+  src: "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
 }
 
 const mp4Config2: initConfig = {
