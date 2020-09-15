@@ -34,9 +34,11 @@ const PluginMultiple = (props: IProps) => {
   ])
 
   useEffect(() => {
-    setMultipleList(props.multiple!.list)
-    setMultipleIndex(props.multiple!.initIndex)
-  }, [props.multiple!.list]);
+    if (props.multiple) {
+      setMultipleList(props.multiple!.list ? props.multiple!.list : multipleList)
+      setMultipleIndex(props.multiple!.initIndex ?  props.multiple!.initIndex  : multipleIndex)
+    }
+  }, []);
 
 
 

@@ -21,6 +21,11 @@ const mp4Config: initConfig = {
   src: "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
 }
 
+const mp4Config3: initConfig = {
+  type: 'mp4',
+  src: "http://precdn.xylink.com/vodfiles/sharefiles/pre/live/9680028d748791d401748ba8bbb3008c/202009/14170425/c7ff878b-7858-4f73-822f-d68dabb90781.mp4",
+}
+
 const mp4Config2: initConfig = {
   type: 'mp4',
   hideRefresh: false,
@@ -105,7 +110,7 @@ const hlsConfigSrc: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config)
+  const [option, setOption] = useState<initConfig>(mp4Config3)
 
   const choseFlv = () => {
     setOption(flvConfig);
