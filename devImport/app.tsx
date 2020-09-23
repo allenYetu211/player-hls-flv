@@ -22,12 +22,12 @@ const mp4Config: initConfig = {
   duration: 549185,
   src:
     "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
-  thumbnail: {
-    picture: 'https://i0.hdslb.com/bfs/videoshot/237418123.jpg@.webp',
-    width: 160,
-    height: 90,
-    count: 20
-  }
+  // thumbnail: {
+  //   picture: 'https://i0.hdslb.com/bfs/videoshot/237418123.jpg@.webp',
+  //   width: 160,
+  //   height: 90,
+  //   count: 20
+  // }
 }
 
 const mp4Config2: initConfig = {

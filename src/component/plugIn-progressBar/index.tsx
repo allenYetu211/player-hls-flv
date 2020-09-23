@@ -26,7 +26,7 @@ const PlugInProgressBar = (props: IProps) => {
   const player: any = getVideoPlayer();
 
   // 缩略图宽度
-  const PICTRUEWIDTH = props.thumbnail ? props.thumbnail.width  : 160;
+  const PICTRUEWIDTH = props.thumbnail ? props.thumbnail.width  : 70;
 
   //  记录滚动时间位置
   let CURRENTTIME =  0;
@@ -136,7 +136,7 @@ const PlugInProgressBar = (props: IProps) => {
           <div
             ref={thumbnailEl}
             style={{
-              backgroundImage: `url(${props.thumbnail!.picture})`
+              backgroundImage: props.thumbnail && `url(${props.thumbnail!.picture})`
             }}
             className={cn(style.focuseChild, style.value, {
               [style.thumbnailContainer]: props.thumbnail
