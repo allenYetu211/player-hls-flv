@@ -89,6 +89,12 @@ export default class VideoContainer {
   // 监听video事件
   private  addEventListener () {
   this.videoEl.addEventListener('timeupdate', (e: any) => {
+    if (this.videoEl.paused) {
+      this._emitter.emit('stop');
+    } else {
+      this._emitter.emit('play');
+    }
+
    
       // 手机检测
       if(!deviceType.pc) {
@@ -110,6 +116,16 @@ export default class VideoContainer {
         // this.resourceLoadingState = true;
         this._emitter.emit('mediaState', false)
       }
+    })
+
+    // conso.
+    this.videoEl.addEventListener('leavepictureinpicture', () => {
+      // @ts-ignore
+      console.log('::::::::   leavepictureinpicture>>>', this.videoEl.paused)
+    }) 
+    
+    this.videoEl.addEventListener('enterpictureinpicture', () => {
+      console.log('enterpictureinpicture')
     })
 
      //  监听微信 Android 全屏
@@ -155,6 +171,8 @@ export default class VideoContainer {
 
   public  addVideoAttribute = () => {
       this.videoEl.setAttribute("playsinline", 'true');
+      // 禁止下载按钮
+      this.videoEl.setAttribute("controlslist", 'nodownload nofullscreen noremoteplayback');
       this.videoEl.setAttribute("webkit-playsinline", 'true');
       this.videoEl.setAttribute("preload", "auto");
       this.videoEl.setAttribute("poster", this.config.poster || '');

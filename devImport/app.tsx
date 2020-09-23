@@ -13,8 +13,8 @@ const mp4Config: initConfig = {
   type: 'mp4',
   hideRefresh: true,
   multiple: {
-    list: [{text:'1x', value:1}, {text: '高清', value: 2}],
-    initIndex: 1
+    list: [{text:'1x', value:1}, {text: '2x', value: 2}],
+    initIndex: 0
   },
   poster: 'https://i0.hdslb.com/bfs/archive/54bd5adcf8505344fc0ae29422288db7e45af258.png@880w_388h_1c_95q',
   autoplay: false,
@@ -29,12 +29,12 @@ const mp4Config2: initConfig = {
   type: 'mp4',
   hideRefresh: false,
   multiple: {
-    list: [{text:'1x', value:1}, {text: '高清', value: 2}],
-    initIndex: 1
+    list: [{text:'1xx', value:1}, {text: '2xx', value: 2}],
+    initIndex: 0
   },
   poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
-  isMobile: true,
+  isMobile: false,
   src:
     "https://pre-res.xylinkedu.com/video/425663056429711360.mp4",
 }
@@ -77,13 +77,10 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: "http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.m3u8?auth_key=c44f5608a056a65bac59fe6e31881f64-1589004009-d9c36ee5a34a44018cc0204f70dcf370-",
+        src: "https://prdlive.ainemo.com/prdnemo/9680cd9a73cef8770173d6ec29c9213b.m3u8?auth_key=1598612400-0-0-2a84e400b46a6fc6375f9110a56b1dff",
         text: "小鱼1",
       },
-      {
-        src: "http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.m3u8?auth_key=c44f5608a056a65bac59fe6e31881f64-1589004009-d9c36ee5a34a44018cc0204f70dcf370-",
-        text: "小鱼2"
-      }
+     
     ],
     playIndex: 0,
   },
@@ -112,7 +109,7 @@ const hlsConfigSrc: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config)
+  const [option, setOption] = useState<initConfig>(mp4Config3)
 
   const choseFlv = () => {
     setOption(flvConfig);

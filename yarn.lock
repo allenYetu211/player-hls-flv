@@ -5209,6 +5209,20 @@ pkg-up@3.1.0:
   dependencies:
     find-up "^3.0.0"
 
+player-hls-flv@^1.2.36:
+  version "1.2.36"
+  resolved "http://10.80.84.176:4873/player-hls-flv/-/player-hls-flv-1.2.36.tgz#55a9dda8eafd0909087efe47c3d22204ea0c53c5"
+  integrity sha512-C/YeXHNxT2EyEcrIGgM18qA45FGeckf91gVd/uK+YNFG2VMgHl7hgIZ5ug0gGikBGTRCjZ+p7Y0dUbkngFUh8Q==
+  dependencies:
+    "@types/hls.js" "^0.12.5"
+    eventemitter3 "^4.0.0"
+    flv.js "^1.5.0"
+    hls.js "^0.13.2"
+    react "^16.8.6"
+    react-dev-utils "^10.1.0"
+    react-dom "^16.8.6"
+    react-rangeslider "^2.2.0"
+
 portfinder@^1.0.25:
   version "1.0.25"
   resolved "http://10.80.84.176:4873/portfinder/-/portfinder-1.0.25.tgz#254fd337ffba869f4b9d37edc298059cb4d35eca"

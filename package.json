@@ -1,6 +1,6 @@
 {
   "name": "player-hls-flv",
-  "version": "1.2.31",
+  "version": "1.2.36",
   "description": "",
   "main": "./dist/index.js",
   "keywords": [],
@@ -17,6 +17,7 @@
     "eventemitter3": "^4.0.0",
     "flv.js": "^1.5.0",
     "hls.js": "^0.13.2",
+    "player-hls-flv": "^1.2.36",
     "react": "^16.8.6",
     "react-dev-utils": "^10.1.0",
     "react-dom": "^16.8.6",
