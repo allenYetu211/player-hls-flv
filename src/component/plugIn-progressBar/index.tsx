@@ -10,17 +10,27 @@ import cn from 'classnames';
 interface IProps {
   onChangeComplete: Function;
   isMobile?: boolean;
-  thumbnail?: string;
+  thumbnail?: {
+    picture: string;
+    width: number;
+    height: number;
+    count: number
+  };
 }
 
-// 缩略图宽度
-const PICTRUEWIDTH = 160;
 
-//  记录滚动时间位置
-let CURRENTTIME =  0;
+
+
 
 const PlugInProgressBar = (props: IProps) => {
   const player: any = getVideoPlayer();
+
+  // 缩略图宽度
+  const PICTRUEWIDTH = props.thumbnail ? props.thumbnail.width  : 160;
+
+  //  记录滚动时间位置
+  let CURRENTTIME =  0;
+
   useEffect(() => {
     onListenerState('on');
     return () => {
@@ -126,7 +136,7 @@ const PlugInProgressBar = (props: IProps) => {
           <div
             ref={thumbnailEl}
             style={{
-              backgroundImage: `url(${props.thumbnail})`
+              backgroundImage: `url(${props.thumbnail!.picture})`
             }}
             className={cn(style.focuseChild, style.value, {
               [style.thumbnailContainer]: props.thumbnail

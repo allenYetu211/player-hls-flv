@@ -18,7 +18,12 @@ export interface initConfig {
   vod?: boolean;
   poster?: string;
   duration?: number;
-  thumbnail?: string;
+  thumbnail?: {
+    picture: string;
+    width: number;
+    height: number;
+    count: number
+  };
 }
 
 export interface IMultiple {
