@@ -5,8 +5,9 @@ import { hot } from "react-hot-loader/root";
 import VideoPlayer from '../src/index';
 
 import {initConfig} from '../src/interfaces';
+// import detailsPicture from './212621588.jpg@.webp';
+// https://i0.hdslb.com/bfs/videoshot/212621588.jpg@.webp
 
-// https://prdlive.ainemo.com/prdnemo/9680cd9a73cef8770173d6ec29c9213b.m3u8?auth_key=1598612400-0-0-2a84e400b46a6fc6375f9110a56b1dff
 
 const mp4Config: initConfig = {
   type: 'mp4',
@@ -15,15 +16,13 @@ const mp4Config: initConfig = {
     list: [{text:'1x', value:1}, {text: '2x', value: 2}],
     initIndex: 0
   },
-  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
+  poster: 'https://i0.hdslb.com/bfs/archive/54bd5adcf8505344fc0ae29422288db7e45af258.png@880w_388h_1c_95q',
   autoplay: false,
-  isMobile: true,
-  src: "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
-}
-
-const mp4Config3: initConfig = {
-  type: 'mp4',
-  src: "http://precdn.xylink.com/vodfiles/sharefiles/pre/live/9680028d748791d401748ba8bbb3008c/202009/14170425/c7ff878b-7858-4f73-822f-d68dabb90781.mp4",
+  isMobile: false,
+  duration: 549185,
+  src:
+    "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
+  // thumbnail: 'https://i0.hdslb.com/bfs/videoshot/237418123.jpg@.webp'
 }
 
 const mp4Config2: initConfig = {

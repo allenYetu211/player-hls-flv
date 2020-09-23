@@ -25,6 +25,7 @@ export interface initConfig {
   vod?: boolean,
   poster?: string;
   duration?: number;
+  thumbnail?:  string;
 }
 
 
