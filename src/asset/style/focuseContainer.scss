@@ -4,6 +4,17 @@
 .focusContainer {
   position: relative;
   height: 100%;
+
+  .notTransitionfocuseContainer {
+    pointer-events: none;
+    opacity: 0;
+    position: absolute;
+    top: -0;
+    left: 50%;
+    padding-bottom: 20px;
+  }
+
+
   .focuseContainer {
     pointer-events: none;
     opacity: 0;
@@ -38,6 +49,7 @@
 
   &:hover,
   &.hover {
+    .notTransitionfocuseContainer,
 		.focuseContainer {
       opacity: 1;
       pointer-events: auto;

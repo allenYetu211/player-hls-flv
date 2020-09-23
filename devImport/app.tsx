@@ -16,13 +16,13 @@ const mp4Config: initConfig = {
     list: [{text:'1x', value:1}, {text: '高清', value: 2}],
     initIndex: 1
   },
-  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
+  poster: 'https://i0.hdslb.com/bfs/archive/54bd5adcf8505344fc0ae29422288db7e45af258.png@880w_388h_1c_95q',
   autoplay: false,
   isMobile: false,
   duration: 549185,
   src:
-    "https://pre-res.xylinkedu.com/video/425663056429711360.mp4",
-  thumbnail: 'https://i0.hdslb.com/bfs/videoshot/212621588.jpg@.webp'
+    "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
+  // thumbnail: 'https://i0.hdslb.com/bfs/videoshot/237418123.jpg@.webp'
 }
 
 const mp4Config2: initConfig = {

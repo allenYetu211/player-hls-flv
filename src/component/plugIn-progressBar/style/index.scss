@@ -61,9 +61,21 @@
       line-height: 25px;
     }
       .thumbnailContainer  {
-        width: 150px;
+        position: relative;
+        width: 160px;
         height: 90px;
         background-size: 1700px;
+        span {
+          position: absolute;
+          left: 50%;
+          bottom: 0;
+          transform: translate(-50%, 0);
+          min-width: 64px;
+          height: 18px;
+          background: rgba(0, 0, 0, 0.5);
+          border-radius: 2px 2px 0px 0px;
+          padding: 1px 4px;
+        }
       }
   }
 }

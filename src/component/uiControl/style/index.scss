@@ -43,7 +43,9 @@
 	padding: 0 10px;
   transition: all 0.5s ease;
   transform: translate3d(0, 100%, 0);
-	opacity: 0;
+  opacity: 0;
+  
+  // 调试放开
 	// transform: translate3d(0, 0, 0);
 	// opacity: 1;
   background:rgba(0,0,0,0.45);
