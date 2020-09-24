@@ -14,7 +14,8 @@ interface IProps {
     picture: string;
     width: number;
     height: number;
-    count: number
+    count: number;
+    rowCount: number;
   };
 }
 
@@ -26,7 +27,8 @@ const PlugInProgressBar = (props: IProps) => {
   const player: any = getVideoPlayer();
 
   // 缩略图宽度
-  const PICTRUEWIDTH = props.thumbnail ? props.thumbnail.width  : 70;
+  const PICTRUEWIDTH = props.thumbnail ? props.thumbnail?.width : 60;
+  const PICTRUEHEIGHT = props.thumbnail ? props.thumbnail?.height : 70;
 
   //  记录滚动时间位置
   let CURRENTTIME =  0;
@@ -62,20 +64,26 @@ const PlugInProgressBar = (props: IProps) => {
   const onMouseMove = (e: React.MouseEvent): void => {
     const width = progressEl.current!.offsetWidth;
     const left = progressEl.current!.getBoundingClientRect().left;
+    const count =
     CURRENTTIME = (e.clientX - left) / width * videoDuration;
-    computePictureMove(width, e.clientX);
+
+    if (props.thumbnail) {
+      computePictureMove(width, e.clientX,  props.thumbnail!.count, props.thumbnail!.rowCount);
+    }
+
     //  移动进度条
     computeMove(width, e.clientX, left);
     setPopContent(msToTime(String(CURRENTTIME)))
   };
 
   // 缩略图位置预览计算
-  const computePictureMove = (width: number, clientx: number): void => {
-    const picturePosition = Math.ceil(clientx / width * 21);
-    const pictureRow = Math.floor(picturePosition / 10);
+  const computePictureMove = (width: number, clientx: number,  count: number, rowCount: number): void => {
+
+    const picturePosition = Math.ceil(clientx / width * count);
+    const pictureRow = Math.floor(picturePosition / rowCount);
     // 计算图片定位显示
-    const pictrueX = picturePosition <= 10 ? PICTRUEWIDTH * picturePosition : PICTRUEWIDTH * (picturePosition - (pictureRow * 10));
-    const pictrueY = 90 * pictureRow;
+    const pictrueX = picturePosition <= rowCount ? PICTRUEWIDTH * picturePosition : PICTRUEWIDTH * (picturePosition - (pictureRow * 12));
+    const pictrueY = PICTRUEHEIGHT * pictureRow;
     thumbnailEl.current!.style.backgroundPosition = `-${pictrueX}px -${pictrueY}px`;
   }
 
@@ -136,7 +144,10 @@ const PlugInProgressBar = (props: IProps) => {
           <div
             ref={thumbnailEl}
             style={{
-              backgroundImage: props.thumbnail && `url(${props.thumbnail!.picture})`
+              backgroundImage: props.thumbnail && `url(${props.thumbnail!.picture})`,
+              backgroundSize: `3840px`,
+              width: props.thumbnail?.width,
+              height: props.thumbnail?.height,
             }}
             className={cn(style.focuseChild, style.value, {
               [style.thumbnailContainer]: props.thumbnail

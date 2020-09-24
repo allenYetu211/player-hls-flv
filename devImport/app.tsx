@@ -5,7 +5,7 @@ import { hot } from "react-hot-loader/root";
 import VideoPlayer from '../src/index';
 
 import {initConfig} from '../src/interfaces';
-// import detailsPicture from './212621588.jpg@.webp';
+// import detailsPiscture from './212621588.jpg@.webp';
 // https://i0.hdslb.com/bfs/videoshot/212621588.jpg@.webp
 
 
@@ -21,13 +21,19 @@ const mp4Config: initConfig = {
   isMobile: false,
   duration: 549185,
   src:
-    "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
-  // thumbnail: {
-  //   picture: 'https://i0.hdslb.com/bfs/videoshot/237418123.jpg@.webp',
-  //   width: 160,
-  //   height: 90,
-  //   count: 20
-  // }
+    "https://testdevcdn.xylink.com/test-video/video.mp4",
+  thumbnail: {
+    picture: 'https://testdevcdn.xylink.com/test-video/dump_180P.png',
+    // width: 180,
+    // height: 90,
+    // count: 72
+
+    // picture: 'https://testdevcdn.xylink.com/test-video/dump_90p.png',
+    width: 320,
+    height: 180,
+    count: 72,
+    rowCount: 12,
+  }
 }
 
 const mp4Config2: initConfig = {

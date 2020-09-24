@@ -22,7 +22,8 @@ export interface initConfig {
     picture: string;
     width: number;
     height: number;
-    count: number
+    count: number;
+    rowCount: number;
   };
 }
 
