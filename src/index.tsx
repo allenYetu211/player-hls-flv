@@ -23,7 +23,8 @@ export interface initConfig {
     width: number;
     height: number;
     count: number;
-    rowCount: number;
+    rowCount?: number;
+    backgroundSize: number;
   };
 }
 

@@ -23,16 +23,17 @@ const mp4Config: initConfig = {
   src:
     "https://testdevcdn.xylink.com/test-video/video.mp4",
   thumbnail: {
-    picture: 'https://testdevcdn.xylink.com/test-video/dump_180P.png',
-    // width: 180,
-    // height: 90,
-    // count: 72
-
-    // picture: 'https://testdevcdn.xylink.com/test-video/dump_90p.png',
-    width: 320,
-    height: 180,
+    picture: 'https://testdevcdn.xylink.com/test-video/20min-1.jpg',
+    width: 160,
+    height: 90,
     count: 72,
-    rowCount: 12,
+
+    // picture: 'https://testdevcdn.xylink.com/test-video/dump_180P.png',
+    // width: 320,
+    // height: 180,
+    // count: 72,
+    // rowCount: 12,
+    backgroundSize: 3840,
   }
 }
 
