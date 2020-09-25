@@ -5,7 +5,7 @@ import {initPlayer, getVideoPlayer} from '@player/index';
 import UiControl from '@g/component/uiControl';
 import {deviceType} from '@utils/phoneType';
 export interface initConfig {
-  type?: 'flv' | 'hls' | 'mp4' | 'm3u8',
+  type?: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash',
   src?: string;
   autoplay?: boolean;
   option?: IMultiStreamsContainer;
