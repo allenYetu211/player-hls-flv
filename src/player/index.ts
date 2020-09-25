@@ -2,6 +2,7 @@ import {videoConfig} from '@interfaces/index';
 import NaitvePlayer from './native-player';
 import FlvPlayer from './flv-player';
 import HlsPlayer from './hls-player';
+import DashPlayer from './dash-player';
 
 let videoPlayer:any;
 
@@ -23,6 +24,10 @@ export default class Player {
       // case 'm3u8': 
       {
         return new NaitvePlayer(config);
+      }
+
+      case 'dash' :  {
+        return new DashPlayer(config);
       }
       default: {
             throw new Error('unsupport media type');

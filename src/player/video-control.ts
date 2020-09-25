@@ -170,6 +170,9 @@ export default class VideoContainer {
   }
 
   public  addVideoAttribute = () => {
+    
+      // 禁止下载按钮
+      this.videoEl.setAttribute("controlslist", 'nodownload');
       this.videoEl.setAttribute("playsinline", 'true');
       // 禁止下载按钮
       this.videoEl.setAttribute("controlslist", 'nodownload nofullscreen noremoteplayback');

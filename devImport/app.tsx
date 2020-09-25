@@ -117,11 +117,19 @@ const hlsConfigSrc: initConfig = {
   },
 }
 
+const dashConfig: initConfig = {
+  type: 'dash',
+  src: 'https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd',
+  isMobile: false,
+  vod: true,
+  hideMultiCode: false,
+}
+
 
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config)
+  const [option, setOption] = useState<initConfig>(dashConfig)
 
   const choseFlv = () => {
     setOption(flvConfig);

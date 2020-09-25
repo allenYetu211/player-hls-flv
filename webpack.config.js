@@ -132,6 +132,12 @@ module.exports = (env, argv) => {
           commonjs: 'hls.js',
           amd: 'hls.js',
         },
+        'dashjs': {
+          root: 'dashjs',
+          commonjs2: 'dashjs',
+          commonjs: 'dashjs',
+          amd: 'dashjs',
+        },
         classnames: {
           root: 'cn',
           commonjs2: 'classnames',
