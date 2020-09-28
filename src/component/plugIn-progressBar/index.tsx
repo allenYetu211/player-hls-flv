@@ -142,8 +142,8 @@ const PlugInProgressBar = (props: IProps) => {
       })}
       onMouseMove={(e) => { onMouseMove(e) }}
       onMouseEnter={() => { setCursorElDisplayState(true); }}
-      // onMouseLeave={() => {setCursorElDisplayState(false);}}s
-      onMouseLeave={() => { setCursorElDisplayState(true); }}
+      onMouseLeave={() => {setCursorElDisplayState(false);}}
+      // onMouseLeave={() => { setCursorElDisplayState(true); }}
     >
 
       <div
