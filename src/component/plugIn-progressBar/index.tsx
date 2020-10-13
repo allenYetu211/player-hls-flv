@@ -12,8 +12,8 @@ interface IProps {
   isMobile?: boolean;
   thumbnail?: {
     picture: string;
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
     count: number;
     rowCount?: number;
     backgroundSize: number;
@@ -32,6 +32,8 @@ const PlugInProgressBar = (props: IProps) => {
   const [PICTRUEWIDTH, set_PICTRUEWIDTH] = useState<number>(0);
   const [BACKGORUNDSIZE, set_BACKGORUNDSIZE] = useState<number>(0);
 
+  const [thumbnailWidth, set_thumbnailWidth] = useState<number>(160);
+
   //  记录滚动时间位置
   let CURRENTTIME =  0;
 
@@ -44,9 +46,13 @@ const PlugInProgressBar = (props: IProps) => {
 
   useEffect(() => {
     if (props.thumbnail) {
-      const ratio = props.thumbnail?.width / 160;
-      set_PICTRUEWIDTH(props.thumbnail.width / ratio);
-      set_PICTRUEHEIGHT(props.thumbnail.height / ratio);
+      const width = props.thumbnail?.width ?  props.thumbnail?.width  : 160;
+      const height = props.thumbnail?.height ?  props.thumbnail?.height  : 90;
+      const ratio = width / 160;
+      set_thumbnailWidth(width);
+
+      set_PICTRUEWIDTH(width / ratio);
+      set_PICTRUEHEIGHT(height / ratio);
       set_BACKGORUNDSIZE(props.thumbnail.backgroundSize / ratio)
     }
   }, [])
@@ -81,7 +87,7 @@ const PlugInProgressBar = (props: IProps) => {
 
 
     if (props.thumbnail) {
-      const rowCount = props.thumbnail.backgroundSize /  props.thumbnail.width;
+      const rowCount = props.thumbnail.backgroundSize /  thumbnailWidth;
 
       computePictureMove(width, e.clientX,  props.thumbnail!.count, rowCount);
     }

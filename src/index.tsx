@@ -20,8 +20,8 @@ export interface initConfig {
   duration?: number;
   thumbnail?: {
     picture: string;
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
     count: number;
     rowCount?: number;
     backgroundSize: number;

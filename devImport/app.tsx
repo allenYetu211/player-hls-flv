@@ -21,19 +21,13 @@ const mp4Config: initConfig = {
   isMobile: false,
   duration: 549185,
   src:
-    "https://testdevcdn.xylink.com/test-video/video.mp4",
+    "https://testdevcdn.xylink.com/test-video/20min.mp4",
   thumbnail: {
     picture: 'https://testdevcdn.xylink.com/test-video/20min-1.jpg',
-    width: 160,
-    height: 90,
-    count: 72,
-
-    // picture: 'https://testdevcdn.xylink.com/test-video/dump_180P.png',
-    // width: 320,
-    // height: 180,
-    // count: 72,
-    // rowCount: 12,
-    backgroundSize: 3840,
+    // width: 160,
+    // height: 90,
+    count: 300, // 图片总数
+    backgroundSize: 3840, // 图片分辨率
   }
 }
 
@@ -129,7 +123,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(dashConfig)
+  const [option, setOption] = useState<initConfig>(mp4Config)
 
   const choseFlv = () => {
     setOption(flvConfig);

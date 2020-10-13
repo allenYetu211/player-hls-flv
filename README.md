@@ -110,6 +110,14 @@ return (
 |hideControl?|boolean|隐藏控制栏|
 |vod?|boolean|视频类型为hls点播需要设置|
 
+```js
+ thumbnail: {
+    picture: 'https://testdevcdn.xylink.com/test-video/20min-1.jpg',   // 图片地址
+    count: 301,  // 图片总数
+    backgroundSize: 3840, // 图片分辨率
+  }
+```
+
 
 ```typescript
 <!-- vp返回关键属性 -->
