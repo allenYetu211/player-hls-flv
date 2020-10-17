@@ -31,7 +31,6 @@ const PlugInProgressBar = (props: IProps) => {
   const [PICTRUEHEIGHT, set_PICTRUEHEIGHT] = useState<number>(0);
   const [PICTRUEWIDTH, set_PICTRUEWIDTH] = useState<number>(0);
   const [BACKGORUNDSIZE, set_BACKGORUNDSIZE] = useState<number>(0);
-
   const [thumbnailWidth, set_thumbnailWidth] = useState<number>(160);
 
   //  记录滚动时间位置
@@ -46,8 +45,8 @@ const PlugInProgressBar = (props: IProps) => {
 
   useEffect(() => {
     if (props.thumbnail) {
-      const width = props.thumbnail?.width ?  props.thumbnail?.width  : 160;
-      const height = props.thumbnail?.height ?  props.thumbnail?.height  : 90;
+      const width = props.thumbnail!.width ?  props.thumbnail!.width  : 160;
+      const height = props.thumbnail!.height ?  props.thumbnail!.height  : 90;
       const ratio = width / 160;
       set_thumbnailWidth(width);
 
@@ -105,8 +104,6 @@ const PlugInProgressBar = (props: IProps) => {
 
     const pictureRow = Math.floor(picturePosition / rowCount);
 
-    console.log('picturePosition', picturePosition)
-
     // 计算图片定位显示
     const pictrueX = picturePosition <= rowCount ? PICTRUEWIDTH * picturePosition : PICTRUEWIDTH * (picturePosition - (pictureRow * rowCount));
 
@@ -117,11 +114,15 @@ const PlugInProgressBar = (props: IProps) => {
 
 
   const computeMove = (width: number, clinetx: number, left: number): void => {
+
+    
+    const movel = clinetx - left;
+
     // 控制光标
-    cursorEl.current!.style.left = `${clinetx - left}px`;
+    cursorEl.current!.style.left = `${movel}px`;
 
     // 控制缩略图
-    if (clinetx > width / 2) {
+    if (movel > width / 2) {
       // 向右
       const l = clinetx - left + (PICTRUEWIDTH / 2);
       if (l > width) {
@@ -129,7 +130,7 @@ const PlugInProgressBar = (props: IProps) => {
         return 
       }
       thumbnailContainerEl.current!.style.left = `0px`
-    } else if (clinetx < width / 2) {
+    } else {
       // 向左
       const l = clinetx - left - (PICTRUEWIDTH / 2);
       if (l < 0) {
@@ -164,7 +165,9 @@ const PlugInProgressBar = (props: IProps) => {
         })}>
         <div 
         onClick={() => {
+          console.log('CURRENTTIME')
           player.setCurrentTime(CURRENTTIME);
+          player.play()
         }}
         
         ref={thumbnailContainerEl} 

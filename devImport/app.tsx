@@ -16,14 +16,14 @@ const mp4Config: initConfig = {
     list: [{text:'1x', value:1}, {text: '2x', value: 2}],
     initIndex: 0
   },
-  poster: 'https://i0.hdslb.com/bfs/archive/54bd5adcf8505344fc0ae29422288db7e45af258.png@880w_388h_1c_95q',
+  // poster: 'https://i0.hdslb.com/bfs/archive/54bd5adcf8505344fc0ae29422288db7e45af258.png@880w_388h_1c_95q',
   autoplay: false,
   isMobile: false,
   duration: 54918500,
   src:
-    "http://testdevvoddownload.xylink.com/vodfiles/downloadfiles/shareLink/b8c7e98c-f83a-4db0-9164-d34a21ce8233.mp4?auth_key=1602844159-0-0-f2367fbfe086975bf0b8d1de7e9b172b",
+    "http://testdevvoddownload.xylink.com/vodfiles/downloadfiles/shareLink/adf1ad66-1f0d-4e75-9092-fe18d2d884aa.mp4?auth_key=1602936082-0-0-641156cb88592f0ee6c61ff9113c7526",
   thumbnail: {
-    picture: 'http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9000692623/101-bj1-txdevSig1MS-1157164699871_0_1602757143125_1280_720_preview.jpg?auth_key=1602858559-0-0-987bae58737689202ac214b4e712283d',
+    picture: 'http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9005795481/101-bj2-txdevSig2-2157164404862_0_1602747891243_1920_1080_preview.jpg?auth_key=1602949766-0-0-80ea255c73cf82d634b69eea2c01b7ac',
     // width: 160,
     // height: 90,
     count: 12, // 图片总数
