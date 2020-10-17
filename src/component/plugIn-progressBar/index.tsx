@@ -81,15 +81,15 @@ const PlugInProgressBar = (props: IProps) => {
   const onMouseMove = (e: React.MouseEvent): void => {
     const width = progressEl.current!.offsetWidth;
     const left = progressEl.current!.getBoundingClientRect().left;
-    const count =
+    // const count =
     CURRENTTIME = (e.clientX - left) / width * videoDuration;
 
 
 
     if (props.thumbnail) {
       const rowCount = props.thumbnail.backgroundSize /  thumbnailWidth;
-
-      computePictureMove(width, e.clientX,  props.thumbnail!.count, rowCount);
+      const clientX = e.clientX - left;
+      computePictureMove(width, clientX ,  props.thumbnail!.count, rowCount);
     }
 
     //  移动进度条
@@ -100,14 +100,18 @@ const PlugInProgressBar = (props: IProps) => {
   // 缩略图位置预览计算
   const computePictureMove = (width: number, clientx: number,  count: number, rowCount: number): void => {
 
-    const picturePosition = Math.ceil(clientx / width * count);
+
+    const picturePosition = Math.ceil(clientx / width * count) - 1;
 
     const pictureRow = Math.floor(picturePosition / rowCount);
+
+    console.log('picturePosition', picturePosition)
 
     // 计算图片定位显示
     const pictrueX = picturePosition <= rowCount ? PICTRUEWIDTH * picturePosition : PICTRUEWIDTH * (picturePosition - (pictureRow * rowCount));
 
     const pictrueY = PICTRUEHEIGHT * pictureRow;
+
     thumbnailEl.current!.style.backgroundPosition = `-${pictrueX}px -${pictrueY}px`;
   }
 
@@ -170,8 +174,8 @@ const PlugInProgressBar = (props: IProps) => {
             style={{
               backgroundImage: props.thumbnail && `url(${props.thumbnail!.picture})`,
               backgroundSize: `${BACKGORUNDSIZE}px`,
-              width: PICTRUEWIDTH,
-              height: PICTRUEHEIGHT,
+              width: PICTRUEWIDTH === 0 ? 'auto' : PICTRUEWIDTH,
+              height: PICTRUEHEIGHT === 0 ? 'auto' : PICTRUEHEIGHT,
             }}
             className={cn(style.focuseChild, style.value, {
               [style.thumbnailContainer]: props.thumbnail

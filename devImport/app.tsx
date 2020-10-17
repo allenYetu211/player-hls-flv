@@ -19,14 +19,14 @@ const mp4Config: initConfig = {
   poster: 'https://i0.hdslb.com/bfs/archive/54bd5adcf8505344fc0ae29422288db7e45af258.png@880w_388h_1c_95q',
   autoplay: false,
   isMobile: false,
-  duration: 549185,
+  duration: 54918500,
   src:
-    "https://testdevcdn.xylink.com/test-video/20min.mp4",
+    "http://testdevvoddownload.xylink.com/vodfiles/downloadfiles/shareLink/b8c7e98c-f83a-4db0-9164-d34a21ce8233.mp4?auth_key=1602844159-0-0-f2367fbfe086975bf0b8d1de7e9b172b",
   thumbnail: {
-    picture: 'https://testdevcdn.xylink.com/test-video/20min-1.jpg',
+    picture: 'http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9000692623/101-bj1-txdevSig1MS-1157164699871_0_1602757143125_1280_720_preview.jpg?auth_key=1602858559-0-0-987bae58737689202ac214b4e712283d',
     // width: 160,
     // height: 90,
-    count: 300, // 图片总数
+    count: 12, // 图片总数
     backgroundSize: 3840, // 图片分辨率
   }
 }

@@ -114,7 +114,8 @@ return (
  thumbnail: {
     picture: 'https://testdevcdn.xylink.com/test-video/20min-1.jpg',   // 图片地址
     count: 301,  // 图片总数
-    backgroundSize: 3840, // 图片分辨率
+    
+    backgroundSize: 3840, // 图片分辨率（固定写成  3840）
   }
 ```
 
