@@ -176,6 +176,7 @@ const PlugInProgressBar = (props: IProps) => {
         ref={thumbnailContainerEl} 
         className={style.notTransitionfocuseContainer}>
           <div
+            id="thumbnailEl"
             ref={thumbnailEl}
             style={{
               backgroundImage: store.thumbnail && `url(${store.thumbnail!.picture})`,
