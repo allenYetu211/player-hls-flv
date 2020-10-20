@@ -1,9 +1,11 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useContext} from 'react';
 import style from './style/index.scss';
 import cn from 'classnames';
 
 import {getVideoPlayer} from '@player/index';
 import {IMultiple} from '@interfaces/index';
+
+import { GlobalContext } from '@g/store';
 
 
 interface IProps {
@@ -13,12 +15,12 @@ type multipleType = {text: string, value: number}
 
 const PluginMultiple = (props: IProps) => {
 
-  console.log('props:::', props.multiple);
+  const { store } = useContext(GlobalContext);
 
 
   const player: any = getVideoPlayer();
-  const [multipleIndex, setMultipleIndex] = useState<number>(props.multiple  ? props.multiple!.initIndex : 0); 
-  const [multipleList, setMultipleList] = useState<multipleType[]>(props.multiple ? props.multiple!.list  : [
+  const [multipleIndex, setMultipleIndex] = useState<number>(store.multiple  ? store.multiple!.initIndex : 0); 
+  const [multipleList, setMultipleList] = useState<multipleType[]>(store.multiple ? store.multiple!.list  : [
     {
       text: '1x',
       value: 1,
@@ -34,9 +36,9 @@ const PluginMultiple = (props: IProps) => {
   ])
 
   useEffect(() => {
-    if (props.multiple) {
-      setMultipleList(props.multiple!.list ? props.multiple!.list : multipleList)
-      setMultipleIndex(props.multiple!.initIndex ?  props.multiple!.initIndex  : multipleIndex)
+    if (store.multiple) {
+      setMultipleList(store.multiple!.list ? store.multiple!.list : multipleList)
+      setMultipleIndex(store.multiple!.initIndex ?  store.multiple!.initIndex  : multipleIndex)
     }
   }, []);
 

@@ -21,14 +21,14 @@ const mp4Config: initConfig = {
   isMobile: false,
   duration: 54918500,
   src:
-    "http://testdevvoddownload.xylink.com/vodfiles/downloadfiles/shareLink/adf1ad66-1f0d-4e75-9092-fe18d2d884aa.mp4?auth_key=1602936082-0-0-641156cb88592f0ee6c61ff9113c7526",
-  thumbnail: {
-    picture: 'http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9005795481/101-bj2-txdevSig2-2157164404862_0_1602747891243_1920_1080_preview.jpg?auth_key=1602949766-0-0-80ea255c73cf82d634b69eea2c01b7ac',
-    // width: 160,
-    // height: 90,
-    count: 12, // 图片总数
-    backgroundSize: 3840, // 图片分辨率
-  }
+    "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
+  // thumbnail: {
+  //   picture: 'http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9005795481/101-bj2-txdevSig2-2157164404862_0_1602747891243_1920_1080_preview.jpg?auth_key=1602949766-0-0-80ea255c73cf82d634b69eea2c01b7ac',
+  //   // width: 160,
+  //   // height: 90,
+  //   count: 12, // 图片总数
+  //   backgroundSize: 3840, // 图片分辨率
+  // }
 }
 
 const mp4Config2: initConfig = {
