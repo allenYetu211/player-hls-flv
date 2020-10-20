@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {getVideoPlayer} from '@player/index';
+import React, { useEffect, useState, useContext } from 'react';
+import { getVideoPlayer } from '@player/index';
 import style from './style/index.scss';
-import {initConfig} from '@interfaces/index';
+import { initConfig } from '@interfaces/index';
 import PlugInVoice from '@g/component/plugIn-voice'
 import PlugInPlayBtn from '@g/component/plugIn-playBtn';
 import PlugInDuration from '@g/component/plugIn-duration';
@@ -10,46 +10,52 @@ import PlugInFullScreen from '@g/component/plugIn-fullScreen'
 import PluginMultiples from '@g/component/plugIn-multiples';
 import PluginMultiCode from '@g/component/plugIn-multiCode';
 import PluginRefresh from '@g/component/plugIn-refresh';
-import {iconLoading} from '@g/images/icon';
+import { iconLoading } from '@g/images/icon';
 import cn from 'classnames';
+
+import { GlobalContext } from '@g/store';
+
+
 // import {deviceType} from '@utils/phoneType';
 interface IPlayer {
-  config: initConfig;
   element: HTMLDivElement;
 }
 
 const UiControl = (props: IPlayer) => {
+  const { store } = useContext(GlobalContext);
+
   // 播放器
   const player: any = getVideoPlayer();
-  const config: initConfig = props.config;
-  const [isProgressBar,setProgressBar] = useState<boolean>(false);
-  const [isDuration,setDuration] = useState<boolean>(false);
-  const [isPlayBtn,setPlayBtn] = useState<boolean>(true);
-  const [isMultiples,setMultiples] = useState<boolean>(false);
-  const [isVoice,setVoice] = useState<boolean>(true);
-  const [isFullScreen,setFullScreen] = useState<boolean>(true);
-  const [isPluginMultiCode,setPluginMultiCode] = useState<boolean>(false);
-  const [isShowPlayering,setShowPlayering] = useState<boolean>(true);
-  const [loading,setloading] = useState<boolean>(false);
-  const [containerDisplay,setContainerDisplay] = useState<boolean>(false);
+  // const config: initConfig = props.config;
+  const [isProgressBar, setProgressBar] = useState<boolean>(false);
+  const [isDuration, setDuration] = useState<boolean>(false);
+  const [isMultiples, setMultiples] = useState<boolean>(false);
+  const [isPluginMultiCode, setPluginMultiCode] = useState<boolean>(false);
+  const [isShowPlayering, setShowPlayering] = useState<boolean>(true);
+  const [loading, setloading] = useState<boolean>(false);
+  const [containerDisplay, setContainerDisplay] = useState<boolean>(false);
+
+  const [isPlayBtn, setPlayBtn] = useState<boolean>(true);
+  const [isVoice, setVoice] = useState<boolean>(true);
+  const [isFullScreen, setFullScreen] = useState<boolean>(true);
 
 
   useEffect(() => {
     onListenerState('on');
     controlUi()
-return () => {
-  onListenerState('off')
-}
+    return () => {
+      onListenerState('off')
+    }
   }, []);
 
   const controlUi = () => {
-    if (props.config.type === 'mp4' || (props.config.type === 'hls' && props.config.vod)) {
+    if (store.type === 'mp4' || (store.type === 'hls' && store.vod)) {
       setMultiples(true);
       setDuration(true);
       setProgressBar(true);
     }
 
-    if (props.config.type === 'flv' || (props.config.type === 'hls' && !props.config.vod)) {
+    if (store.type === 'flv' || (store.type === 'hls' && !store.vod)) {
       setPluginMultiCode(true);
     }
 
@@ -71,9 +77,9 @@ return () => {
     player[state]('stop', () => {
       setShowPlayering(true);
     });
-    
-    player[state]('mediaState', (state: boolean) =>{
-      if(state) {
+
+    player[state]('mediaState', (state: boolean) => {
+      if (state) {
         setloading(false);
       } else {
         setloading(true);
@@ -86,26 +92,26 @@ return () => {
   }
 
   const switchContainerDisplay = () => {
-      setContainerDisplay(!containerDisplay)
+    setContainerDisplay(!containerDisplay)
   }
 
   return (
-    <div className={cn(style.container, 'needsclick',{
-      [style.display]: config.isMobile! && containerDisplay,
-      [style.hover]: !config.isMobile!,
+    <div className={cn(style.container, 'needsclick', {
+      [style.display]: store.isMobile! && containerDisplay,
+      [style.hover]: !store.isMobile!,
     })}
-    onClick={switchContainerDisplay}
+      onClick={switchContainerDisplay}
     >
 
       <div className={style.middleContainer}>
-      { isShowPlayering && isPlayBtn &&  <PlugInPlayBtn notlistener={true} />}
+        {isShowPlayering && isPlayBtn && <PlugInPlayBtn notlistener={true} />}
 
-      { !isShowPlayering && loading &&  <div className={cn(style.icon, style.animation)}>
-        {iconLoading}
-      </div> }
+        {!isShowPlayering && loading && <div className={cn(style.icon, style.animation)}>
+          {iconLoading}
+        </div>}
       </div>
 
-      {!props.config.hideControl && (
+      {!store.hideControl && (
         <div
           className={cn(style.controlBar)}
           onClick={(e) => {
@@ -115,20 +121,20 @@ return () => {
         >
 
           <div className={style.leftContainer}>
-            {isPlayBtn &&  <PlugInPlayBtn />}
-            {!config.hideRefresh && <PluginRefresh/>}
-            {isDuration &&  <PlugInDuration />}
+            {isPlayBtn && <PlugInPlayBtn />}
+            {!store.hideRefresh && <PluginRefresh />}
+            {isDuration && <PlugInDuration />}
           </div>
 
-        {isProgressBar && <PlugInProgressBar thumbnail={config.thumbnail} isMobile={config.isMobile!} onChangeComplete={onChangeComplete} />} 
+          {isProgressBar && <PlugInProgressBar onChangeComplete={onChangeComplete} />}
           <div className={style.rightContaienr}>
-            {!config.hideMultiCode  && isPluginMultiCode && !config.vod && <PluginMultiCode  option={config.option!}/>}
-            {!config.isMobile && isMultiples && <PluginMultiples  multiple={config.multiple} />}
-            {!config.isMobile && isVoice && <PlugInVoice isMobile={config.isMobile!}/>}
+            {!store.hideMultiCode && isPluginMultiCode && !store.vod && <PluginMultiCode option={store.option!} />}
+            {!store.isMobile && isMultiples && <PluginMultiples />}
+            {!store.isMobile && isVoice && <PlugInVoice />}
             {isFullScreen && <PlugInFullScreen element={props.element} />}
           </div>
         </div>
-      )} 
+      )}
     </div>
   );
 };

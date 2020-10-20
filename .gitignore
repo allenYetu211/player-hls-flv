@@ -17,3 +17,6 @@ Thumbs.db
 
 yarn.lock
 yarn-error.log
+
+./index3.tsx
+demo*

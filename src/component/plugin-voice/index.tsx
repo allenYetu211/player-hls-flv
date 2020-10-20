@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import cn from 'classnames';
 import style from './style/index.scss';
 import {getVideoPlayer} from '@player/index';
@@ -6,10 +6,14 @@ import Slider from 'react-rangeslider';
 
 import {iconVoice, iconVoiceOff} from '@images/icon';
 
+import { GlobalContext } from '@g/store';
+
 interface IProps {
   isMobile?: boolean;
 }
 const PluginVoice = (props: IProps) => {
+
+  const { store } = useContext(GlobalContext);
 
   const player: any = getVideoPlayer();
   const [volume, setVolume] = useState(0.6);
@@ -30,7 +34,7 @@ const PluginVoice = (props: IProps) => {
   return (
     <div
       className={cn(style.voiceContainer,style.focusContainer, {
-        [style.mobile]: props.isMobile
+        [style.mobile]: store.isMobile
       })}
     >
       <div className={cn(style.icon)} onClick={onClickMuteVolume}>

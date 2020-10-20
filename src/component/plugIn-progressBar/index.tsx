@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { getVideoPlayer } from '@player/index';
 import Slider from 'react-rangeslider';
 import style from './style/index.scss';
 import { msToTime } from '@utils/translateTime';
+
+import { GlobalContext } from '@g/store';
 
 import cn from 'classnames';
 
@@ -22,9 +24,10 @@ interface IProps {
 
 
 
-
+// thumbnail={store.thumbnail} isMobile={store.isMobile!}
 
 const PlugInProgressBar = (props: IProps) => {
+  const { store } = useContext(GlobalContext);
   const player: any = getVideoPlayer();
 
   // 缩略图宽度
@@ -44,15 +47,15 @@ const PlugInProgressBar = (props: IProps) => {
   }, []);
 
   useEffect(() => {
-    if (props.thumbnail) {
-      const width = props.thumbnail!.width ?  props.thumbnail!.width  : 160;
-      const height = props.thumbnail!.height ?  props.thumbnail!.height  : 90;
+    if (store.thumbnail) {
+      const width = store.thumbnail!.width ?  store.thumbnail!.width  : 160;
+      const height = store.thumbnail!.height ?  store.thumbnail!.height  : 90;
       const ratio = width / 160;
       set_thumbnailWidth(width);
 
       set_PICTRUEWIDTH(width / ratio);
       set_PICTRUEHEIGHT(height / ratio);
-      set_BACKGORUNDSIZE(props.thumbnail.backgroundSize / ratio)
+      set_BACKGORUNDSIZE(store.thumbnail.backgroundSize / ratio)
     }
   }, [])
 
@@ -85,10 +88,10 @@ const PlugInProgressBar = (props: IProps) => {
 
 
 
-    if (props.thumbnail) {
-      const rowCount = props.thumbnail.backgroundSize /  thumbnailWidth;
+    if (store.thumbnail) {
+      const rowCount = store.thumbnail.backgroundSize /  thumbnailWidth;
       const clientX = e.clientX - left;
-      computePictureMove(width, clientX ,  props.thumbnail!.count, rowCount);
+      computePictureMove(width, clientX ,  store.thumbnail!.count, rowCount);
     }
 
     //  移动进度条
@@ -149,7 +152,7 @@ const PlugInProgressBar = (props: IProps) => {
     <div
       ref={progressEl}
       className={cn(style.progress, {
-        [style.mobileIndicateBar]: props.isMobile,
+        [style.mobileIndicateBar]: store.isMobile,
       })}
       onMouseMove={(e) => { onMouseMove(e) }}
       onMouseEnter={() => { setCursorElDisplayState(true); }}
@@ -161,7 +164,7 @@ const PlugInProgressBar = (props: IProps) => {
         ref={cursorEl}
         className={cn(style.indicateBar, style.focusContainer, {
           [style.hover]: cursorElDisplayState,
-          [style.mobile]: props.isMobile,
+          [style.mobile]: store.isMobile,
         })}>
         <div 
         onClick={() => {
@@ -175,13 +178,13 @@ const PlugInProgressBar = (props: IProps) => {
           <div
             ref={thumbnailEl}
             style={{
-              backgroundImage: props.thumbnail && `url(${props.thumbnail!.picture})`,
+              backgroundImage: store.thumbnail && `url(${store.thumbnail!.picture})`,
               backgroundSize: `${BACKGORUNDSIZE}px`,
               width: PICTRUEWIDTH === 0 ? 'auto' : PICTRUEWIDTH,
               height: PICTRUEHEIGHT === 0 ? 'auto' : PICTRUEHEIGHT,
             }}
             className={cn(style.focuseChild, style.value, {
-              [style.thumbnailContainer]: props.thumbnail
+              [style.thumbnailContainer]: store.thumbnail
             })}
           >
             <span> {popContent} </span>
