@@ -177,8 +177,10 @@ export default class VideoContainer {
       // 禁止下载按钮
       this.videoEl.setAttribute("controlslist", 'nodownload nofullscreen noremoteplayback');
       this.videoEl.setAttribute("webkit-playsinline", 'true');
+      // 适配微信webview
+      this.videoEl.setAttribute("x5-video-player-type", 'h5');
       this.videoEl.setAttribute("preload", "auto");
-      this.videoEl.setAttribute("poster", this.config.poster || '');
+      // this.videoEl.setAttribute("poster", this.config.poster || '');
       
       // if (deviceType.androidTx) {
         this.videoEl.setAttribute("x5-video-orientation", "landscape|portrait");

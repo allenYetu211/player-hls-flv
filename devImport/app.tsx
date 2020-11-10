@@ -9,6 +9,22 @@ import {initConfig} from '../src/interfaces';
 // https://i0.hdslb.com/bfs/videoshot/212621588.jpg@.webp
 
 
+const mp4Config3: initConfig = {
+  type: 'mp4',
+  hideRefresh: true,
+  multiple: {
+    list: [{text:'1x', value:1}, {text: '2x', value: 2}],
+    initIndex: 0
+  },
+  poster: 'http://prevoddownload.xylink.com/vodfiles/vodfiles/cloud/9005364858/104-bj2-preSig2ms-2157350101326_0_1604890143166_1280_720.jpg?auth_key=1613656101-0-0-93ade7e62eebadde67cec7ff88699c77',
+  autoplay: false,
+  isMobile: false,
+  duration: 54918500,
+  src:
+    "http://prevoddownload.xylink.com/vodfiles/downloadfiles/shareLink/1328fea4-396b-4e0b-90c8-978e3fab7e88.mp4?auth_key=1605030501-0-0-0cb51078cd629ce44c87dbf11c4de930",
+}
+
+
 const mp4Config: initConfig = {
   type: 'mp4',
   hideRefresh: true,
@@ -123,7 +139,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config)
+  const [option, setOption] = useState<initConfig>(mp4Config3)
 
   const choseFlv = () => {
     setOption(flvConfig);
