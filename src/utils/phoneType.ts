@@ -1,6 +1,6 @@
 const ua = navigator.userAgent;
 export const isIOS = () => {
-  return /iPhone/.test(ua)
+  return /iPhone|iPad/.test(ua)
 }
 
 export const isAndroid = () => {
