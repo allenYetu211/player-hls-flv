@@ -11,18 +11,34 @@ import {initConfig} from '../src/interfaces';
 
 const mp4Config3: initConfig = {
   type: 'mp4',
-  hideRefresh: true,
+  // hideRefresh: true,
   multiple: {
-    list: [{text:'1x', value:1}, {text: '2x', value: 2}],
-    initIndex: 0
+    list: [{text:'1xx', value:1}, {text: '2xx', value: 2},{text: '3xx', value: 3}],
+    initIndex: 1
   },
   poster: 'http://prevoddownload.xylink.com/vodfiles/vodfiles/cloud/9005364858/104-bj2-preSig2ms-2157350101326_0_1604890143166_1280_720.jpg?auth_key=1613656101-0-0-93ade7e62eebadde67cec7ff88699c77',
   autoplay: false,
   isMobile: false,
   duration: 54918500,
   src:
-    "http://prevoddownload.xylink.com/vodfiles/downloadfiles/shareLink/1328fea4-396b-4e0b-90c8-978e3fab7e88.mp4?auth_key=1605030501-0-0-0cb51078cd629ce44c87dbf11c4de930",
+    "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
 }
+
+
+const mp4Config2: initConfig = {
+  type: 'mp4',
+  // hideRefresh: false,
+  multiple: {
+    list: [{text:'1xx', value:1}, {text: '2xx', value: 2}],
+    initIndex: 0
+  },
+  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
+  autoplay: false,
+  isMobile: false,
+  src:
+    "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140312/25cf0015-421b-48fe-b723-fb2ade2ae243.mp4",
+}
+
 
 
 const mp4Config: initConfig = {
@@ -47,19 +63,7 @@ const mp4Config: initConfig = {
   }
 }
 
-const mp4Config2: initConfig = {
-  type: 'mp4',
-  hideRefresh: false,
-  multiple: {
-    list: [{text:'1xx', value:1}, {text: '2xx', value: 2}],
-    initIndex: 0
-  },
-  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
-  autoplay: false,
-  isMobile: false,
-  src:
-    "https://pre-res.xylinkedu.com/video/425663056429711360.mp4",
-}
+
 
 // vod 点播
 const vodHlsConfig: initConfig = {
@@ -154,6 +158,8 @@ const App = () => {
 
   const onVideoPlayerState = (vp: any) => {
     console.log('vp', vp);
+
+    console.log('vp==>>>>',vp.videoEl.playbackRate = 1)
   }
 
   return (

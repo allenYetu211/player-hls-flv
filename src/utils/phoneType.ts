@@ -5,7 +5,7 @@ export const isIOS = () => {
 
 export const isAndroid = () => {
   return /Android/.test(ua)
-}
+} 
 
 export const isPc = () => {
   return !/Android|iPhone|SymbianOS|Windows Phone|iPad|iPod/.test(ua);

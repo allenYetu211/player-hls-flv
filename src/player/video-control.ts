@@ -118,6 +118,8 @@ export default class VideoContainer {
       }
     })
 
+   
+
     // conso.
     this.videoEl.addEventListener('leavepictureinpicture', () => {
       // @ts-ignore
@@ -190,13 +192,14 @@ export default class VideoContainer {
   }
 
   public onRefershVideo(){
-    console.log('onRefershVideo')
+    const oldVideoElVolume = this.videoEl.volume;
     this.videoEl.remove();
     const newVideoEl = document.createElement('video');
     this.videoEl = newVideoEl;
     this.addVideoAttribute()
     this.addEventListener()
-    this.containerEl.appendChild(newVideoEl)
+    this.containerEl.appendChild(newVideoEl);
+    this._emitter.emit('oldVolume', oldVideoElVolume)
     
   }
 
