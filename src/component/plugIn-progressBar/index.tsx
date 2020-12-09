@@ -96,6 +96,7 @@ const PlugInProgressBar = (props: IProps) => {
     setPopContent(msToTime(String(CURRENTTIME)))
   };
 
+  
   // 缩略图位置预览计算
   const computePictureMove = (width: number, clientx: number,  count: number, rowCount: number): void => {
 
@@ -113,6 +114,10 @@ const PlugInProgressBar = (props: IProps) => {
   }
 
 
+  /*
+   *  
+   */
+    
   const computeMove = (width: number, clinetx: number, left: number): void => {
 
     

@@ -51,7 +51,14 @@ const config = {
             },
           },
           'postcss-loader',
-          'sass-loader',
+          {
+            loader:  'sass-loader',
+            options: {
+              implementation: require('sass'),
+              sourceMap: true
+            }
+          }
+         ,
         ]),
       },
       {

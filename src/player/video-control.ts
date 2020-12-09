@@ -98,8 +98,10 @@ export default class VideoContainer {
    
       // 手机检测
       if(!deviceType.pc) {
-        if (this.displayingFullscreenState !== this.videoEl.webkitDisplayingFullscreen) {
-          this.displayingFullscreenState = this.videoEl.webkitDisplayingFullscreen
+        // @ts-ignore
+        const FullscreenState= this.videoEl.webkitDisplayingFullscreen;
+        if (this.displayingFullscreenState !== FullscreenState) {
+          this.displayingFullscreenState = FullscreenState
           if(this.displayingFullscreenState) {
             this._emitter.emit('fullscreen', true)
           } else {

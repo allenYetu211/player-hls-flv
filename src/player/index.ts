@@ -2,7 +2,7 @@ import {videoConfig} from '@interfaces/index';
 import NaitvePlayer from './native-player';
 import FlvPlayer from './flv-player';
 import HlsPlayer from './hls-player';
-// import DashPlayer from './dash-player';
+import DashPlayer from './dash-player';
 
 let videoPlayer:any;
 
@@ -13,7 +13,6 @@ export default class Player {
     switch(config.type) {
       case 'hls':
       case 'm3u8': {
-        console.log('config::', config)
         return new HlsPlayer(config);
       }
       case 'flv' : {
@@ -26,9 +25,9 @@ export default class Player {
         return new NaitvePlayer(config);
       }
 
-      // case 'dash' :  {
-      //   return new DashPlayer(config);
-      // }
+      case 'dash' :  {
+        return new DashPlayer(config);
+      }
       default: {
             throw new Error('unsupport media type');
         }

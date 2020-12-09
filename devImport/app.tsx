@@ -133,17 +133,21 @@ const hlsConfigSrc: initConfig = {
 
 const dashConfig: initConfig = {
   type: 'dash',
-  src: 'https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd',
+  src: 'https://ainemo-vodcdn.oss-cn-beijing.aliyuncs.com/vodfiles/sharefiles/dash_single_file/training.mpd',
   isMobile: false,
+  multiple: {
+    list: [{text:'1xx', value:1}, {text: '2xx', value: 2},{text: '3xx', value: 3}],
+    initIndex: 1
+  },
+  autoplay: false,
   vod: true,
-  hideMultiCode: false,
 }
 
 
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config3)
+  const [option, setOption] = useState<initConfig>(dashConfig)
 
   const choseFlv = () => {
     setOption(flvConfig);

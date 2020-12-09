@@ -45,7 +45,7 @@ const UiControl = (props: IPlayer) => {
   }, []);
 
   const controlUi = () => {
-    if (props.config.type === 'mp4' || (props.config.type === 'hls' && props.config.vod)) {
+    if (props.config.type === 'mp4' || props.config.type === 'dash' || (props.config.type === 'hls' && props.config.vod)) {
       setMultiples(true);
       setDuration(true);
       setProgressBar(true);
