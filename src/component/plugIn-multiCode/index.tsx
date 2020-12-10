@@ -1,17 +1,19 @@
-import React,{useState, useEffect} from 'react';
+import React from 'react';
 import style from '../plugIn-multiples/style/index.scss';
 import multicodeStyle from './style/index.scss';
 import cn from 'classnames';
-import {getVideoPlayer} from '@player/index';
-import {IMultiStreamsContainer, IMultiStreams} from '@interfaces/index';
+import { IMultiStreams} from '@interfaces/index';
 
 
+interface Props {
+  playIndex: number;
+  multiStreams: IMultiStreams[];
+  onChangePlayIndex: (key: number) => void;
+}
 
-const PlugInMultiCode = (props: {option:IMultiStreamsContainer}) => {
-  const player: any = getVideoPlayer();
-  const [playIndex, setPlayIndex] = useState<number>(props.option.playIndex); 
-  const [multiStreams, setMultiStreams] = useState<IMultiStreams[]>(props.option.multiStreams); 
+const PlugInMultiCode = (props: Props) => {
 
+  const {playIndex, multiStreams } = props;
 
   return (
     <div
@@ -32,8 +34,7 @@ const PlugInMultiCode = (props: {option:IMultiStreamsContainer}) => {
                 })}
                 key={`${item.text}-${key}`}
                 onClick={() => {
-                  setPlayIndex(key);
-                  player.chooseMultiCode(key)
+                  props.onChangePlayIndex(key);
                 }}
               >
                 {item.text}

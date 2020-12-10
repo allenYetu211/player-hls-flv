@@ -4,6 +4,9 @@ import style from './styles.scss';
 import {initPlayer, getVideoPlayer} from '@player/index';
 import UiControl from '@g/component/uiControl';
 import {deviceType} from '@utils/phoneType';
+
+import Exp from '@g/exp';
+
 export interface initConfig {
   type?: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash',
   src?: string;
@@ -118,6 +121,7 @@ const VideoPlayer = (props: initConfig) => {
         config={props} 
         element={containerEl.current!} 
       />}
+    {/* <Exp /> */}
     <video  ref={videoEl} />
   </div>);
 }

@@ -18,6 +18,9 @@ interface IProps {
     rowCount?: number;
     backgroundSize: number;
   };
+  videoDuration: number;
+  playProgress: number;
+
 }
 
 
@@ -37,27 +40,18 @@ const PlugInProgressBar = (props: IProps) => {
   let CURRENTTIME =  0;
 
   useEffect(() => {
-    onListenerState('on');
-    return () => {
-      onListenerState('off');
-    }
-  }, []);
-
-  useEffect(() => {
     if (props.thumbnail) {
       const width = props.thumbnail!.width ?  props.thumbnail!.width  : 160;
       const height = props.thumbnail!.height ?  props.thumbnail!.height  : 90;
       const ratio = width / 160;
       set_thumbnailWidth(width);
-
       set_PICTRUEWIDTH(width / ratio);
       set_PICTRUEHEIGHT(height / ratio);
       set_BACKGORUNDSIZE(props.thumbnail.backgroundSize / ratio)
     }
   }, [])
 
-  const [videoDuration, setVideoDuration] = useState<number>(0);
-  const [playProgress, setPlayProgress] = useState<number>(0);
+
   const [popContent, setPopContent] = useState<string>('');
   const [cursorElDisplayState, setCursorElDisplayState] = useState<boolean>(false);
   const progressEl = useRef<HTMLDivElement>(null);
@@ -66,31 +60,17 @@ const PlugInProgressBar = (props: IProps) => {
   const thumbnailContainerEl = useRef<HTMLDivElement>(null);
 
 
-  const onListenerState = (state: 'on' | 'off'): void => {
-    player[state]('duration', (duration: string) => {
-      setVideoDuration(Number(duration));
-    });
-
-    player[state]('playProgress', (duration: string): void => {
-      setPlayProgress(Number(duration));
-    });
-  };
-
   //  计算
   const onMouseMove = (e: React.MouseEvent): void => {
     const width = progressEl.current!.offsetWidth;
     const left = progressEl.current!.getBoundingClientRect().left;
     // const count =
-    CURRENTTIME = (e.clientX - left) / width * videoDuration;
-
-
-
+    CURRENTTIME = (e.clientX - left) / width * props.videoDuration;
     if (props.thumbnail) {
       const rowCount = props.thumbnail.backgroundSize /  thumbnailWidth;
       const clientX = e.clientX - left;
       computePictureMove(width, clientX ,  props.thumbnail!.count, rowCount);
     }
-
     //  移动进度条
     computeMove(width, e.clientX, left);
     setPopContent(msToTime(String(CURRENTTIME)))
@@ -99,33 +79,19 @@ const PlugInProgressBar = (props: IProps) => {
   
   // 缩略图位置预览计算
   const computePictureMove = (width: number, clientx: number,  count: number, rowCount: number): void => {
-
-
     const picturePosition = Math.ceil(clientx / width * count) - 1;
-
     const pictureRow = Math.floor(picturePosition / rowCount);
-
     // 计算图片定位显示
     const pictrueX = picturePosition <= rowCount ? PICTRUEWIDTH * picturePosition : PICTRUEWIDTH * (picturePosition - (pictureRow * rowCount));
-
     const pictrueY = PICTRUEHEIGHT * pictureRow;
-
     thumbnailEl.current!.style.backgroundPosition = `-${pictrueX}px -${pictrueY}px`;
   }
 
 
-  /*
-   *  
-   */
-    
   const computeMove = (width: number, clinetx: number, left: number): void => {
-
-    
     const movel = clinetx - left;
-
     // 控制光标
     cursorEl.current!.style.left = `${movel}px`;
-
     // 控制缩略图
     if (movel > width / 2) {
       // 向右
@@ -144,10 +110,7 @@ const PlugInProgressBar = (props: IProps) => {
       }
       thumbnailContainerEl.current!.style.left = `0px`
     } 
-
   }
-
-
 
 
   return (
@@ -195,10 +158,10 @@ const PlugInProgressBar = (props: IProps) => {
       </div>
       <Slider
         min={0}
-        max={videoDuration}
+        max={props.videoDuration}
         step={0.1}
         tooltip={false}
-        value={playProgress}
+        value={props.playProgress}
         onChange={(value: number) => {
           player.setCurrentTime(value);
         }}

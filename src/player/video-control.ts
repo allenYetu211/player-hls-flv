@@ -89,11 +89,14 @@ export default class VideoContainer {
   // 监听video事件
   private  addEventListener () {
   this.videoEl.addEventListener('timeupdate', (e: any) => {
-    if (this.videoEl.paused) {
-      this._emitter.emit('stop');
-    } else {
-      this._emitter.emit('play');
-    }
+    /**
+     * @TODO 为什么需要重复监听？
+     */ 
+    // if (this.videoEl.paused) {
+    //   this._emitter.emit('stop');
+    // } else {
+    //   this._emitter.emit('play');
+    // }
 
    
       // 手机检测

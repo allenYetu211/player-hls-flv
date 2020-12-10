@@ -73,9 +73,7 @@ const PlugInFullScreen = (props: IProps) => {
       console.log('deviceType.pc || !deviceType.tbs',deviceType.pc || !deviceType.tbs)
       console.log('=====================')
       console.log('=====================')
-
       setFullState(true);
-
       // 如果是ios手机 则使用video进行全屏
       if (deviceType.ios){
         fullScreen(player.videoEl)

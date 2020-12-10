@@ -82,12 +82,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.flv?auth_key=45cb07cb837b032b36e8b8174de25bab-1589004009-fe3bc305f8da457e91765d3612c7fcf0-',
+        src:'http://presecurelive.ainemo.com/testdevnemo/9628abad7641990f01764ba7428a020f_2.flv?auth_key=cbeb6b8d942a20b7ddaf433d91347913-1607680859-1008e8d4920d48efac7dc5e16c5e716c-',
         text: '标清',
       },
       {
         src:
-          'http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.flv?auth_key=45cb07cb837b032b36e8b8174de25bab-1589004009-fe3bc305f8da457e91765d3612c7fcf0-',
+          'http://presecurelive.ainemo.com/testdevnemo/9628abad7641990f01764ba7428a020f.flv?auth_key=f76809b1d4a191e741c4d150d96cb01a-1607680859-2792bb9669c74333bbeecb0c2d66df63-',
         text: '高清',
       },
     ],
@@ -147,7 +147,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(dashConfig)
+  const [option, setOption] = useState<initConfig>(mp4Config3)
 
   const choseFlv = () => {
     setOption(flvConfig);

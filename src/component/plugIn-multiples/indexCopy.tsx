@@ -22,24 +22,24 @@ const defaultList = [
   {
     text: '1x',
     value: 1,
-  },{
+  },
+  {
     text: '2x',
     value: 2,
-  },{
+  },
+  {
     text: '3x',
     value: 3,
-  }
+  },
 ]
 
 const PluginMultiple = (props: IProps) => {
-  const [multipleList, setMultipleList] = useState<multipleType[]>(defaultList);
-  
+  const [multipleList, setMultipleList] = useState<multipleType[]>(defaultList)
   useEffect(() => {
     if (props.list) {
      setMultipleList(props.list);
     }
   }, []);
-
   return (
     <div
       className={cn(
