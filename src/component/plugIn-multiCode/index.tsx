@@ -7,14 +7,16 @@ import { IMultiStreams } from '@interfaces/index';
 import ToolTip from '@g/uiCompoent/toolTip';
 
 
-interface Props {
+interface IProps {
   playIndex: number;
   multiStreams: IMultiStreams[];
   onChangePlayIndex: (key: number) => void;
 }
 
-const PlugInMultiCode = (props: Props) => {
+const PlugInMultiCode = (props: IProps) => {
   const { playIndex, multiStreams } = props;
+  console.log('playIndex>>>>', playIndex)
+  console.log('playIndex>>>>', multiStreams)
   return (
     <ToolTip text={multiStreams[playIndex].text}>
       <ul>
@@ -38,4 +40,7 @@ const PlugInMultiCode = (props: Props) => {
   )
 }
 
-export default PlugInMultiCode;
+
+const areEqual =(prevProps: IProps, nextProps: IProps) =>  prevProps.playIndex == nextProps.playIndex;
+
+export default React.memo(PlugInMultiCode, areEqual);

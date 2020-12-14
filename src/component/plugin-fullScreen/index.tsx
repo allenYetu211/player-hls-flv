@@ -11,6 +11,9 @@ interface IProps {
 
 const PlugInFullScreen = (props: IProps) => {
   const [fullState, setFullState] = useState(false);
+
+  console.log('PlugInFullScreen>>>>>>');
+
   // 播放器
   const player: any = getVideoPlayer();
     // 注册全屏事件
@@ -113,4 +116,10 @@ const PlugInFullScreen = (props: IProps) => {
   );
 };
 
-export default PlugInFullScreen;
+const areEqual =(prevProps: IProps, nextProps: IProps) => {
+  return prevProps.element === nextProps.element;
+}
+
+
+export default React.memo(PlugInFullScreen, areEqual);
+

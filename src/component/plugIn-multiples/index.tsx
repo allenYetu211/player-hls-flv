@@ -67,4 +67,7 @@ const PluginMultiple = (props: IProps) => {
   )
 }
 
-export default PluginMultiple;
+
+const areEqual =(prevProps: IProps, nextProps: IProps) =>  prevProps.index === nextProps.index;
+
+export default React.memo(PluginMultiple, areEqual);

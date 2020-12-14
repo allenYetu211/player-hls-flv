@@ -172,7 +172,7 @@ const UiControl = (props: IPlayer) => {
       onVideoRatechange()
     }
   }, [])
-  const [multipleList] = React.useState<{text: string, value: number}[]>(config.multiple ? config.multiple!.list : [])
+  const [multipleList] = React.useState<{ text: string, value: number }[]>(config.multiple ? config.multiple!.list : [])
   const [multipleIndex, setMultipleIndex] = React.useState<number>(0)
   const onChangeMultipleIndex = (key: number) => {
     setMultipleIndex(key);
@@ -204,7 +204,27 @@ const UiControl = (props: IPlayer) => {
   }
 
 
+  /**
+   * @声音控制
+   */ 
+  const [volume, setVolume] = useState<number>(0.6);
+  player.on('oldVolume', (value: number) => {
+    onChangeVideoVolume(value)
+  });
 
+  const onChangeVideoVolume = (value: number) => {
+    player.setVideoVolume(value);
+    setVolume(value);
+  }
+
+  const  onSwitchViodVolume = () => {
+    onChangeVideoVolume(volume ? 0.6 : 0);
+  }
+
+
+  /**
+   * @渲染
+   */
   return (
     <div className={cn(style.container, 'needsclick', {
       [style.display]: config.isMobile! && containerDisplay,
@@ -298,7 +318,13 @@ const UiControl = (props: IPlayer) => {
                 onChangeMultipleIndex={onChangeMultipleIndex} />
             }
 
-            {!config.isMobile && isVoice && <PlugInVoice isMobile={config.isMobile!} />}
+            {!config.isMobile && isVoice && 
+              <PlugInVoice 
+              isMobile={config.isMobile!} 
+              volume={volume}
+              onChangeVideoVolume={onChangeVideoVolume}
+              onSwitchViodVolume={onSwitchViodVolume}
+              />}
             {isFullScreen && <PlugInFullScreen element={props.element} />}
           </div>
         </div>

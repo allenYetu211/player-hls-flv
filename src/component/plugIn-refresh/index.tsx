@@ -16,4 +16,6 @@ const PlugInRefresh = (props: IProps) => {
   )
 }
 
-export default PlugInRefresh;
+const areEqual =(prevProps: IProps, nextProps: IProps) =>  prevProps.onRefreshPlayer !== nextProps.onRefreshPlayer;
+
+export default React.memo(PlugInRefresh, areEqual);

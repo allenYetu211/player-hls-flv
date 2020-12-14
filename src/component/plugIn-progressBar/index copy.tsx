@@ -40,12 +40,12 @@ const PlugInProgressBar = (props: IProps) => {
   const [thumbnailWidth, set_thumbnailWidth] = useState<number>(160);
 
   //  记录滚动时间位置
-  let CURRENTTIME = 0;
+  let CURRENTTIME =  0;
 
   useEffect(() => {
     if (props.thumbnail) {
-      const width = props.thumbnail!.width ? props.thumbnail!.width : 160;
-      const height = props.thumbnail!.height ? props.thumbnail!.height : 90;
+      const width = props.thumbnail!.width ?  props.thumbnail!.width  : 160;
+      const height = props.thumbnail!.height ?  props.thumbnail!.height  : 90;
       const ratio = width / 160;
       set_thumbnailWidth(width);
       set_PICTRUEWIDTH(width / ratio);
@@ -70,18 +70,18 @@ const PlugInProgressBar = (props: IProps) => {
     // const count =
     CURRENTTIME = (e.clientX - left) / width * props.videoDuration;
     if (props.thumbnail) {
-      const rowCount = props.thumbnail.backgroundSize / thumbnailWidth;
+      const rowCount = props.thumbnail.backgroundSize /  thumbnailWidth;
       const clientX = e.clientX - left;
-      computePictureMove(width, clientX, props.thumbnail!.count, rowCount);
+      computePictureMove(width, clientX ,  props.thumbnail!.count, rowCount);
     }
     //  移动进度条
     computeMove(width, e.clientX, left);
     setPopContent(msToTime(String(CURRENTTIME)))
   };
 
-
+  
   // 缩略图位置预览计算
-  const computePictureMove = (width: number, clientx: number, count: number, rowCount: number): void => {
+  const computePictureMove = (width: number, clientx: number,  count: number, rowCount: number): void => {
     const picturePosition = Math.ceil(clientx / width * count) - 1;
     const pictureRow = Math.floor(picturePosition / rowCount);
     // 计算图片定位显示
@@ -95,14 +95,13 @@ const PlugInProgressBar = (props: IProps) => {
     const movel = clinetx - left;
     // 控制光标
     cursorEl.current!.style.left = `${movel}px`;
-
     // 控制缩略图
     if (movel > width / 2) {
       // 向右
       const l = clinetx - left + (PICTRUEWIDTH / 2);
       if (l > width) {
         thumbnailContainerEl.current!.style.left = `-${l - width}px`;
-        return
+        return 
       }
       thumbnailContainerEl.current!.style.left = `0px`
     } else {
@@ -113,7 +112,7 @@ const PlugInProgressBar = (props: IProps) => {
         return
       }
       thumbnailContainerEl.current!.style.left = `0px`
-    }
+    } 
   }
 
 
@@ -125,10 +124,9 @@ const PlugInProgressBar = (props: IProps) => {
       })}
       onMouseMove={(e) => { onMouseMove(e) }}
       onMouseEnter={() => { setCursorElDisplayState(true); }}
-      onMouseLeave={() => { setCursorElDisplayState(false); }}
-    // onMouseLeave={() => { setCursorElDisplayState(true); }}
+      onMouseLeave={() => {setCursorElDisplayState(false);}}
+      // onMouseLeave={() => { setCursorElDisplayState(true); }}
     >
-
 
       <div
         ref={cursorEl}
@@ -136,13 +134,17 @@ const PlugInProgressBar = (props: IProps) => {
           [style.hover]: cursorElDisplayState,
           [style.mobile]: props.isMobile,
         })}>
-        <div
-          onClick={() => {
-            player.setCurrentTime(CURRENTTIME);
-            player.play()
-          }}
-          ref={thumbnailContainerEl}
-          className={style.notTransitionfocuseContainer}>
+        <div 
+        onClick={() => {
+          console.log('CURRENTTIME')
+          player.setCurrentTime(CURRENTTIME);
+          player.play()
+        }}
+        
+        ref={thumbnailContainerEl} 
+        className={style.notTransitionfocuseContainer}>
+
+
           <div
             ref={thumbnailEl}
             style={{
@@ -160,8 +162,9 @@ const PlugInProgressBar = (props: IProps) => {
 
 
         </div>
-      </div>
 
+
+      </div>
       <Slider
         min={0}
         max={props.videoDuration}
