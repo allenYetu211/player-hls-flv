@@ -15,8 +15,6 @@ interface IProps {
 
 const PlugInMultiCode = (props: IProps) => {
   const { playIndex, multiStreams } = props;
-  console.log('playIndex>>>>', playIndex)
-  console.log('playIndex>>>>', multiStreams)
   return (
     <ToolTip text={multiStreams[playIndex].text}>
       <ul>

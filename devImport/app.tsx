@@ -16,12 +16,19 @@ const mp4Config3: initConfig = {
     list: [{text:'1xx', value:1}, {text: '2xx', value: 2},{text: '3xx', value: 3}],
     initIndex: 1
   },
-  poster: 'http://prevoddownload.xylink.com/vodfiles/vodfiles/cloud/9005364858/104-bj2-preSig2ms-2157350101326_0_1604890143166_1280_720.jpg?auth_key=1613656101-0-0-93ade7e62eebadde67cec7ff88699c77',
+  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
   isMobile: false,
   duration: 54918500,
+  thumbnail: {
+    picture: 'http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9005795481/101-bj2-txdevSig2-2157179905119_0_1608711761713_1280_720_preview.jpg?auth_key=1608818711-0-0-a4f6d74602bfebd790b29dfe5ac3ede8',
+    // width: 160,
+    // height: 90,
+    count: 12, // 图片总数
+    backgroundSize: 3840, // 图片分辨率
+  },
   src:
-    "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
+    "http://testdevvoddownload.xylink.com/vodfiles/downloadfiles/shareLink/846b09b8-2bd6-442f-b19c-3031317596a6.mp4?auth_key=1608804311-0-0-8db945e96f6186161558378621ad6695",
 }
 
 
@@ -35,6 +42,7 @@ const mp4Config2: initConfig = {
   poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
   isMobile: false,
+
   src:
     "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140312/25cf0015-421b-48fe-b723-fb2ade2ae243.mp4",
 }

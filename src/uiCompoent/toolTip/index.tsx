@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React, { SFC } from 'react';
 import style from './style/style.scss';
 import cn from 'classnames';
 
 
 interface Props {
   text?: string;
-  children: JSX.Element;
   styles?: any;
   onClick?: () => void;
 }
-export default React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-
+ const ToolTipComponet: SFC<Props>  = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { styles } = props;
-
 
   const classNames = cn(styles,  style.resolutionContainer, style.focusContainer);
 
@@ -32,3 +29,5 @@ export default React.forwardRef<HTMLDivElement, Props>((props, ref) => {
     </div>
   )
 })
+
+export default  ToolTipComponet;
