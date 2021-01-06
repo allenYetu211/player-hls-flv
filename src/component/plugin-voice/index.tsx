@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import cn from 'classnames';
 import style from './style/index.scss';
-import {getVideoPlayer} from '@player/index';
 import Slider from 'react-rangeslider';
 
 import {iconVoice, iconVoiceOff} from '@images/icon';
@@ -9,49 +8,20 @@ import {iconVoice, iconVoiceOff} from '@images/icon';
 
 interface IProps {
   isMobile?: boolean;
+  volume: number;
+  onChangeVideoVolume: (value: number) => void;
+  onSwitchViodVolume: () => void;
 }
 const PluginVoice = (props: IProps) => {
-
-  const player: any = getVideoPlayer();
-  const [volume, setVolume] = useState(0.6);
-
-
-  useEffect(() => {
-    console.log('onVideoVolumechange');
-    onListenerState('on');
-    return () => {
-        onListenerState('off');
-    }
-  }, [])
-
-  const onClickMuteVolume = () => {
-    if (!volume) {
-      setVideoVolume(0.6)
-    } else {
-      setVideoVolume(0)
-    }
-  };
-
-  const setVideoVolume = (value: number) => {
-    player.setVideoVolume(value);
-    setVolume(value)
-  }
-
-  const onListenerState = (state: 'on' | 'off') => {
-    // 防止刷新导致声音被再次重启
-    player[state]('oldVolume', (value: number) => {
-      setVideoVolume(value)
-    });
-  };
-
+  const {isMobile, volume, onChangeVideoVolume, onSwitchViodVolume} = props;
 
   return (
     <div
       className={cn(style.voiceContainer,style.focusContainer, {
-        [style.mobile]: props.isMobile
+        [style.mobile]: isMobile
       })}
     >
-      <div className={cn(style.icon)} onClick={onClickMuteVolume}>
+      <div className={cn(style.icon)} onClick={onSwitchViodVolume}>
         {volume > 0 ? iconVoice : iconVoiceOff}
       </div>
       <div className={style.focuseContainer}>
@@ -65,7 +35,7 @@ const PluginVoice = (props: IProps) => {
               value={volume}
               orientation='vertical'
               onChange={(value: number) => {
-                setVideoVolume(value)
+                onChangeVideoVolume(value)
               }}
            />
         </div>
@@ -74,4 +44,7 @@ const PluginVoice = (props: IProps) => {
   );
 };
 
-export default PluginVoice;
+
+const areEqual =(prevProps: IProps, nextProps: IProps) =>  prevProps.volume === nextProps.volume;
+
+export default React.memo(PluginVoice, areEqual);

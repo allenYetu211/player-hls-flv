@@ -1,32 +1,13 @@
-import React,{useState, useEffect} from 'react';
-import {getVideoPlayer} from '@player/index';
+import React from 'react';
 import style from './style/index.scss';
 
-import {msToTime} from '@utils/translateTime';
+interface IProps {
+  videoDuration: string;
+  playProgress: string;
+}
 
-
-const PluginDiration = () => {
-  const player: any = getVideoPlayer();
-  useEffect(() => {
-    onListenerState('on');
-    return () => {
-      onListenerState('off');
-    }
-  }, []);
-
-  const onListenerState = (state: 'on' | 'off') => {
-    player[state]('duration', (duration: string) => {
-      setVideoDuration(msToTime(duration));
-    }); 
-    
-    player[state]('playProgress', (duration: string) => {
-      setPlayProgress(msToTime(duration));
-    });
-  };
-
-  const [playProgress, setPlayProgress] = useState<string>('00:00');
-  const [videoDuration, setVideoDuration] = useState<string>('00:00');
-
+const PluginDiration = (props: IProps) => {
+  const {videoDuration, playProgress} = props;
   return (
     <div className={style.progressBar}>
       {playProgress} {videoDuration === '00:00' ? '' : `/ ${videoDuration}`}
@@ -34,4 +15,10 @@ const PluginDiration = () => {
   );
 };
 
-export default PluginDiration;
+
+const areEqual =(prevProps: IProps, nextProps: IProps) => {
+  return (prevProps.videoDuration === nextProps.videoDuration)  &&  (prevProps.playProgress === nextProps.playProgress);
+}
+
+
+export default React.memo(PluginDiration, areEqual);

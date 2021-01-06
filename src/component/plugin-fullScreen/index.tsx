@@ -11,6 +11,9 @@ interface IProps {
 
 const PlugInFullScreen = (props: IProps) => {
   const [fullState, setFullState] = useState(false);
+
+  console.log('PlugInFullScreen>>>>>>');
+
   // 播放器
   const player: any = getVideoPlayer();
     // 注册全屏事件
@@ -73,9 +76,7 @@ const PlugInFullScreen = (props: IProps) => {
       console.log('deviceType.pc || !deviceType.tbs',deviceType.pc || !deviceType.tbs)
       console.log('=====================')
       console.log('=====================')
-
       setFullState(true);
-
       // 如果是ios手机 则使用video进行全屏
       if (deviceType.ios){
         fullScreen(player.videoEl)
@@ -115,4 +116,10 @@ const PlugInFullScreen = (props: IProps) => {
   );
 };
 
-export default PlugInFullScreen;
+const areEqual =(prevProps: IProps, nextProps: IProps) => {
+  return prevProps.element === nextProps.element;
+}
+
+
+export default React.memo(PlugInFullScreen, areEqual);
+

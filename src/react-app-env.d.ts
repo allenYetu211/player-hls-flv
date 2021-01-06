@@ -9,6 +9,10 @@ declare namespace NodeJS {
 	}
 }
 
+declare module 'vfile-message' {
+  export type VFileMessage = any;
+}
+
 declare module '*.bmp' {
 	const src: string;
 	export default src;

@@ -16,10 +16,19 @@ const mp4Config3: initConfig = {
     list: [{text:'1xx', value:1}, {text: '2xx', value: 2},{text: '3xx', value: 3}],
     initIndex: 1
   },
-  poster: 'http://prevoddownload.xylink.com/vodfiles/vodfiles/cloud/9005364858/104-bj2-preSig2ms-2157350101326_0_1604890143166_1280_720.jpg?auth_key=1613656101-0-0-93ade7e62eebadde67cec7ff88699c77',
+  hideMultiple: true,
+  hideProgressBar: true,
+  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
   isMobile: false,
   duration: 54918500,
+  thumbnail: {
+    picture: 'http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9005795481/101-bj2-txdevSig2-2157179905119_0_1608711761713_1280_720_preview.jpg?auth_key=1608818711-0-0-a4f6d74602bfebd790b29dfe5ac3ede8',
+    // width: 160,
+    // height: 90,
+    count: 12, // 图片总数
+    backgroundSize: 3840, // 图片分辨率
+  },
   src:
     "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
 }
@@ -35,6 +44,7 @@ const mp4Config2: initConfig = {
   poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
   isMobile: false,
+
   src:
     "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140312/25cf0015-421b-48fe-b723-fb2ade2ae243.mp4",
 }
@@ -82,12 +92,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.flv?auth_key=45cb07cb837b032b36e8b8174de25bab-1589004009-fe3bc305f8da457e91765d3612c7fcf0-',
+        src:'http://presecurelive.ainemo.com/testdevnemo/9628abad7641990f01764ba7428a020f_2.flv?auth_key=cbeb6b8d942a20b7ddaf433d91347913-1607680859-1008e8d4920d48efac7dc5e16c5e716c-',
         text: '标清',
       },
       {
         src:
-          'http://prdsecurelive.ainemo.com/prdnemo/2c949a2971ada78c0171f2563f835f35.flv?auth_key=45cb07cb837b032b36e8b8174de25bab-1589004009-fe3bc305f8da457e91765d3612c7fcf0-',
+          'http://presecurelive.ainemo.com/testdevnemo/9628abad7641990f01764ba7428a020f.flv?auth_key=f76809b1d4a191e741c4d150d96cb01a-1607680859-2792bb9669c74333bbeecb0c2d66df63-',
         text: '高清',
       },
     ],
@@ -147,7 +157,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(dashConfig)
+  const [option, setOption] = useState<initConfig>(mp4Config3)
 
   const choseFlv = () => {
     setOption(flvConfig);
