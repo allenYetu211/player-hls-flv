@@ -16,6 +16,8 @@ const mp4Config3: initConfig = {
     list: [{text:'1xx', value:1}, {text: '2xx', value: 2},{text: '3xx', value: 3}],
     initIndex: 1
   },
+  hideMultiple: true,
+  hideProgressBar: true,
   poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
   isMobile: false,
@@ -28,7 +30,7 @@ const mp4Config3: initConfig = {
     backgroundSize: 3840, // 图片分辨率
   },
   src:
-    "http://testdevvoddownload.xylink.com/vodfiles/downloadfiles/shareLink/846b09b8-2bd6-442f-b19c-3031317596a6.mp4?auth_key=1608804311-0-0-8db945e96f6186161558378621ad6695",
+    "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
 }
 
 

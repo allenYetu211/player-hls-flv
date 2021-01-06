@@ -16,6 +16,8 @@ export interface initConfig {
   hideControl?: boolean;
   hideMultiCode?: boolean;
   hideRefresh?: boolean;
+  hideMultiple?: boolean;
+  hideProgressBar?: boolean;
   onVideoPlayerState?: (vp: any) => void;
   multiple?: IMultiple;
   vod?: boolean;
@@ -75,7 +77,7 @@ const VideoPlayer = (props: initConfig) => {
       if (videoPlayer) {
         setInitState(false);
         onListenerState(videoPlayer, 'off');
-        videoPlayer.destroy();
+        videoPlayer.destroy(); 
       }
 
       // 此处添加setTimeout 是处理切换码流类型时，销毁原本的播放器，需要一定时间重新初始。  

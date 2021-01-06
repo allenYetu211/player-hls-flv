@@ -1,9 +1,5 @@
 # v-player
 
-### 基于
-- react 
-- flvjs
-- hlsjs
 ---
 
 ## 浏览器 
@@ -19,6 +15,7 @@
 - [x] flv 
 - [x] hls 直播
 - [x] hls 点播
+- [x] dash 点播
 ---
 ---
 ### 使用
@@ -32,7 +29,7 @@ npm i player-hls-flv
 
 ```typescript
 export interface initConfig {
-  type?: 'flv' | 'hls' | 'mp4' | 'm3u8',
+  type?: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash',
   src?: string;
   autoplay?: boolean;
   option?: IMultiStreamsContainer;
@@ -103,6 +100,8 @@ return (
 |isMobile?| boolean |false|手机端|
 |hideMultiCode?| boolean |false|是否影藏分辨率|
 |hideRefresh?| boolean |false|是否影藏刷新按钮|
+|hideMultiple?|boolean|false|隐藏倍数|
+|hideProgressBar?|boolean|false|隐藏进度条|
 |onVideoPlayerState?|(vp) => void;|''|播放器注册成功后，通过回调返回播放器相关属性|
 |multiple|[{text: '1x',value: 1,},{text: '2x',value: 2,},{text: '3x',value: 3,},]|倍速|
 |poster?|string|背景图|

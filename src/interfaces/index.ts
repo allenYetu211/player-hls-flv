@@ -21,6 +21,8 @@ export interface initConfig {
   hideControl?: boolean;
   hideMultiCode?: boolean;
   hideRefresh?: boolean;
+  hideMultiple?: boolean;
+  hideProgressBar?: boolean;
   multiple?: IMultiple,
   vod?: boolean,
   poster?: string;

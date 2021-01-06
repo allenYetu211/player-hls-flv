@@ -290,6 +290,7 @@ const UiControl = (props: IPlayer) => {
           </div>
 
           {isProgressBar &&
+          !config.hideProgressBar &&
             <PlugInProgressBar
               thumbnail={config.thumbnail}
               isMobile={config.isMobile!}
@@ -311,6 +312,7 @@ const UiControl = (props: IPlayer) => {
             }
 
             {!config.isMobile &&
+             !config.hideMultiple &&
               isMultiples &&
               <PluginMultiples
                 index={multipleIndex}

@@ -1000,6 +1000,18 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
+"@types/unist@^2.0.0", "@types/unist@^2.0.2":
+  version "2.0.3"
+  resolved "http://10.80.84.176:4873/@types%2funist/-/unist-2.0.3.tgz#9c088679876f374eb5983f150d4787aa6fb32d7e"
+  integrity sha512-FvUupuM3rlRsRtCN+fDudtmytGO6iHJuuRKS1Ss0pG5z8oX0diNEw94UEL7hgDbpN94rgaK5R7sWm6RrSkZuAQ==
+
+"@types/vfile-message@^2.0.0":
+  version "2.0.0"
+  resolved "http://10.80.84.176:4873/@types%2fvfile-message/-/vfile-message-2.0.0.tgz#690e46af0fdfc1f9faae00cd049cc888957927d5"
+  integrity sha1-aQ5Grw/fwfn6rgDNBJzIiJV5J9U=
+  dependencies:
+    vfile-message "*"
+
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "http://10.80.84.176:4873/@webassemblyjs%2fast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
@@ -5034,22 +5046,6 @@ pkg-up@3.1.0, pkg-up@^3.1.0:
   dependencies:
     find-up "^3.0.0"
 
-player-hls-flv@^1.2.36:
-  version "1.3.6"
-  resolved "http://10.80.84.176:4873/player-hls-flv/-/player-hls-flv-1.3.6.tgz#688ddb5776b27da5277eb64ef1c730fcfc31b512"
-  integrity sha512-VK9I50b5aqRIRl1zfF/tl8CwbyeTbnDNyFMc19J6XlrrSp7lxjuWD2Ktlb3KWxbDMHjzgBsXZlCxR5dexKW8Sw==
-  dependencies:
-    "@types/hls.js" "^0.12.5"
-    dashjs "^3.1.1"
-    eventemitter3 "^4.0.0"
-    flv.js "^1.5.0"
-    hls.js "^0.13.2"
-    player-hls-flv "^1.2.36"
-    react "^16.8.6"
-    react-dev-utils "^10.1.0"
-    react-dom "^16.8.6"
-    react-rangeslider "^2.2.0"
-
 portfinder@^1.0.26:
   version "1.0.28"
   resolved "http://10.80.84.176:4873/portfinder/-/portfinder-1.0.28.tgz#67c4622852bd5374dd1dd900f779f53462fac778"
@@ -6795,6 +6791,13 @@ unique-slug@^2.0.0:
   dependencies:
     imurmurhash "^0.1.4"
 
+unist-util-stringify-position@^2.0.0:
+  version "2.0.3"
+  resolved "http://10.80.84.176:4873/unist-util-stringify-position/-/unist-util-stringify-position-2.0.3.tgz#cce3bfa1cdf85ba7375d1d5b17bdc4cada9bd9da"
+  integrity sha1-zOO/oc34W6c3XR1bF73Eytqb2do=
+  dependencies:
+    "@types/unist" "^2.0.2"
+
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
   resolved "http://10.80.84.176:4873/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
@@ -6916,6 +6919,14 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+vfile-message@*:
+  version "2.0.4"
+  resolved "http://10.80.84.176:4873/vfile-message/-/vfile-message-2.0.4.tgz#5b43b88171d409eae58477d13f23dd41d52c371a"
+  integrity sha1-W0O4gXHUCerlhHfRPyPdQdUsNxo=
+  dependencies:
+    "@types/unist" "^2.0.0"
+    unist-util-stringify-position "^2.0.0"
 
 vm-browserify@^1.0.1:
   version "1.1.2"
