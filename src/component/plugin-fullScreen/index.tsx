@@ -12,7 +12,7 @@ interface IProps {
 const PlugInFullScreen = (props: IProps) => {
   const [fullState, setFullState] = useState(false);
 
-  console.log('PlugInFullScreen>>>>>>');
+  // console.log('PlugInFullScreen>>>>>>');
 
   // 播放器
   const player: any = getVideoPlayer();

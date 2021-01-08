@@ -15,11 +15,11 @@ const mp4Config3: initConfig = {
   type: 'mp4',
   // hideRefresh: true,
   multiple: {
-    list: [{ text: '1xx', value: 1 }, { text: '2xx', value: 2 }, { text: '3xx', value: 3 }],
-    initIndex: 1
+    list: [{ text: '001', value: 1 }, { text: '002', value: 2 }, { text: '003', value: 3 }],
+    initIndex: 2
   },
-  hideMultiple: true,
-  hideProgressBar: true,
+  // hideMultiple: true,
+  // hideProgressBar: true,
   poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
   isMobile: false,
@@ -159,7 +159,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(tm)
+  const [option, setOption] = useState<initConfig>(mp4Config3)
 
   const choseFlv = () => {
     setOption(flvConfig);
@@ -173,9 +173,9 @@ const App = () => {
   }
 
   const onVideoPlayerState = (vp: any) => {
-    console.log('vp', vp.destroy);
+    // console.log('vp', vp.destroy);
 
-    console.log('vp==>>>>', vp.videoEl.playbackRate = 1)
+    // console.log('vp==>>>>', vp.videoEl.playbackRate = 1)
   }
 
   return (

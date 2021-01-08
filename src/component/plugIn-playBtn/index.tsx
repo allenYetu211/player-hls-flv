@@ -14,7 +14,7 @@ interface IProps {
 
 const PlugInPlayBtn = (props: IProps) => {
 
-  console.log('props.playerState>>>>>>', props.playerState)
+  // console.log('props.playerState>>>>>>', props.playerState)
   // 播放状态
   return (
     <div className={cn(style.icon)} onClick={props.onSwitchPlayer}>
