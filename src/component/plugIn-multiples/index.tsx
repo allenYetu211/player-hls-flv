@@ -12,7 +12,7 @@ interface IProps {
   // multiple?: IMultiple;
   onChangeMultipleIndex: (key: number) => void;
   index: number;
-  list?: {
+  list: {
     text: string,
     value: number,
   }[]
@@ -37,7 +37,7 @@ const PluginMultiple = (props: IProps) => {
   const [multipleList, setMultipleList] = useState<multipleType[]>(defaultList);
 
   useEffect(() => {
-    if (props.list) {
+    if (props.list.length) {
       setMultipleList(props.list);
     }
   }, []);

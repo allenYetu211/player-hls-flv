@@ -71,14 +71,14 @@ const UiControl = (props: IPlayer) => {
     }
 
     player[state]('play', () => {
-      console.log('>>>>>>>> play')
+      // console.log('>>>>>>>> play')
       setShowPlayering(false);
     });
 
     player[state]('stop', () => {
-      console.log('>>>>>>>>> stop')
+      // console.log('>>>>>>>>> stop')
       setShowPlayering(true);
-      console.log('onSwitchPlayer>>>>>>', isShowPlayering);
+      // console.log('onSwitchPlayer>>>>>>', isShowPlayering);
     });
 
     // 用户数据展示
@@ -173,7 +173,7 @@ const UiControl = (props: IPlayer) => {
     }
   }, [])
   const [multipleList] = React.useState<{ text: string, value: number }[]>(config.multiple ? config.multiple!.list : [])
-  const [multipleIndex, setMultipleIndex] = React.useState<number>(0)
+  const [multipleIndex, setMultipleIndex] = React.useState<number>(config.multiple? config.multiple!.initIndex : 0)
   const onChangeMultipleIndex = (key: number) => {
     setMultipleIndex(key);
     player.setPlaybackRate(multipleList[key].value)

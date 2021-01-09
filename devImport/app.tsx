@@ -1,23 +1,25 @@
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { hot } from "react-hot-loader/root";
 
 import VideoPlayer from '../src/index';
 
-import {initConfig} from '../src/interfaces';
+import { initConfig } from '../src/interfaces';
 // import detailsPiscture from './212621588.jpg@.webp';
 // https://i0.hdslb.com/bfs/videoshot/212621588.jpg@.webp
 
+
+const tm: initConfig = { "src": "https://predc2vod.xiaoyuonline.com/vodfiles/downloadfiles/shareLink/9828f93a-8c75-41c6-b6bc-47a2ec64ed73.mp4?auth_key=J_9h7WzpFAnGJeoCfhwTKg&expire=1610015465", "type": "mp4" }
 
 const mp4Config3: initConfig = {
   type: 'mp4',
   // hideRefresh: true,
   multiple: {
-    list: [{text:'1xx', value:1}, {text: '2xx', value: 2},{text: '3xx', value: 3}],
-    initIndex: 1
+    list: [{ text: '001', value: 1 }, { text: '002', value: 2 }, { text: '003', value: 3 }],
+    initIndex: 2
   },
-  hideMultiple: true,
-  hideProgressBar: true,
+  // hideMultiple: true,
+  // hideProgressBar: true,
   poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
   isMobile: false,
@@ -38,7 +40,7 @@ const mp4Config2: initConfig = {
   type: 'mp4',
   // hideRefresh: false,
   multiple: {
-    list: [{text:'1xx', value:1}, {text: '2xx', value: 2}],
+    list: [{ text: '1xx', value: 1 }, { text: '2xx', value: 2 }],
     initIndex: 0
   },
   poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
@@ -55,7 +57,7 @@ const mp4Config: initConfig = {
   type: 'mp4',
   hideRefresh: true,
   multiple: {
-    list: [{text:'1x', value:1}, {text: '2x', value: 2}],
+    list: [{ text: '1x', value: 1 }, { text: '2x', value: 2 }],
     initIndex: 0
   },
   // poster: 'https://i0.hdslb.com/bfs/archive/54bd5adcf8505344fc0ae29422288db7e45af258.png@880w_388h_1c_95q',
@@ -92,7 +94,7 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src:'http://presecurelive.ainemo.com/testdevnemo/9628abad7641990f01764ba7428a020f_2.flv?auth_key=cbeb6b8d942a20b7ddaf433d91347913-1607680859-1008e8d4920d48efac7dc5e16c5e716c-',
+        src: 'http://presecurelive.ainemo.com/testdevnemo/9628abad7641990f01764ba7428a020f_2.flv?auth_key=cbeb6b8d942a20b7ddaf433d91347913-1607680859-1008e8d4920d48efac7dc5e16c5e716c-',
         text: '标清',
       },
       {
@@ -116,7 +118,7 @@ const hlsConfig: initConfig = {
         src: "https://prdlive.ainemo.com/prdnemo/9680cd9a73cef8770173d6ec29c9213b.m3u8?auth_key=1598612400-0-0-2a84e400b46a6fc6375f9110a56b1dff",
         text: "小鱼1",
       },
-     
+
     ],
     playIndex: 0,
   },
@@ -132,10 +134,10 @@ const hlsConfigSrc: initConfig = {
   hideMultiCode: true,
   multiple: {
     list: [
-      {text: '2x', value: 2},
-      {text: '1.5x', value: 1.5},
-      {text: '1x', value: 1},
-      {text: '0.5x', value: 0.5},
+      { text: '2x', value: 2 },
+      { text: '1.5x', value: 1.5 },
+      { text: '1x', value: 1 },
+      { text: '0.5x', value: 0.5 },
     ],
     initIndex: 2,
   },
@@ -146,7 +148,7 @@ const dashConfig: initConfig = {
   src: 'https://ainemo-vodcdn.oss-cn-beijing.aliyuncs.com/vodfiles/sharefiles/dash_single_file/training.mpd',
   isMobile: false,
   multiple: {
-    list: [{text:'1xx', value:1}, {text: '2xx', value: 2},{text: '3xx', value: 3}],
+    list: [{ text: '1xx', value: 1 }, { text: '2xx', value: 2 }, { text: '3xx', value: 3 }],
     initIndex: 1
   },
   autoplay: false,
@@ -171,9 +173,9 @@ const App = () => {
   }
 
   const onVideoPlayerState = (vp: any) => {
-    console.log('vp', vp);
+    // console.log('vp', vp.destroy);
 
-    console.log('vp==>>>>',vp.videoEl.playbackRate = 1)
+    // console.log('vp==>>>>', vp.videoEl.playbackRate = 1)
   }
 
   return (
@@ -185,7 +187,7 @@ const App = () => {
         zIndex: 9999
       }} onClick={choseFlv}>flv</button>
 
-<button style={{
+      <button style={{
         position: 'absolute',
         top: '0px',
         left: '100px',
@@ -193,16 +195,16 @@ const App = () => {
       }} onClick={choseMp4Url2}>MP4</button>
 
 
-<button style={{
+      <button style={{
         position: 'absolute',
         top: '0px',
         left: '150px',
         zIndex: 9999
       }} onClick={choseHLS}>HLS</button>
-      <VideoPlayer {...option} onVideoPlayerState={onVideoPlayerState}/>
+      <VideoPlayer {...option} onVideoPlayerState={onVideoPlayerState} />
     </div>
   )
- 
+
 }
 
 export default hot(App);
