@@ -14,6 +14,8 @@ import { iconLoading } from '@g/images/icon';
 import { msToTime } from '@utils/translateTime';
 import cn from 'classnames';
 import { IMultiStreams } from '@interfaces/index';
+
+import {log} from '@utils/logs';
 // import {deviceType} from '@utils/phoneType';
 
 interface IPlayer {
@@ -64,6 +66,12 @@ const UiControl = (props: IPlayer) => {
       // 监听首次点击 只执行一次
       player.once('clickPlay', () => {
         console.log('clickPlay', loading)
+
+        log.info(loading)
+        log.error(loading)
+        // log.print(loading);
+
+
         setloading(true);
         setShowPlayering(false);
         setOncePoster(false);
@@ -327,7 +335,9 @@ const UiControl = (props: IPlayer) => {
               onChangeVideoVolume={onChangeVideoVolume}
               onSwitchViodVolume={onSwitchViodVolume}
               />}
+
             {isFullScreen && <PlugInFullScreen element={props.element} />}
+
           </div>
         </div>
       )}

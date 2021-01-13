@@ -5,6 +5,9 @@ import {initPlayer, getVideoPlayer} from '@player/index';
 import UiControl from '@g/component/uiControl';
 import {deviceType} from '@utils/phoneType';
 
+import {logInit , log} from '@utils/logs';
+
+
 // import Exp from '@g/exp';
 
 export interface initConfig {
@@ -50,6 +53,21 @@ export interface IMultiStreamsContainer {
 multiStreams: IMultiStreams[];
 playIndex: number;
 }
+
+
+
+//  初始全局log
+logInit('ALL');
+log.debug('debug1')
+log.info('info1')
+log.error('error1')
+log.log('log1')
+log.debug('debug2')
+log.info('info2')
+log.error('error2')
+log.log('log2')
+
+
 
 
 

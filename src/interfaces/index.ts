@@ -23,6 +23,7 @@ export interface initConfig {
   hideRefresh?: boolean;
   hideMultiple?: boolean;
   hideProgressBar?: boolean;
+  onVideoPlayerState?: (vp: any) => void;
   multiple?: IMultiple,
   vod?: boolean,
   poster?: string;
@@ -36,6 +37,33 @@ export interface initConfig {
     backgroundSize: number;
   };
 }
+
+
+// export interface initConfig {
+//   type?: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash',
+//   src?: string;
+//   autoplay?: boolean;
+//   option?: IMultiStreamsContainer;
+//   isMobile?: boolean;
+//   hideControl?: boolean;
+//   hideMultiCode?: boolean;
+//   hideRefresh?: boolean;
+//   hideMultiple?: boolean;
+//   hideProgressBar?: boolean;
+//   onVideoPlayerState?: (vp: any) => void;
+//   multiple?: IMultiple;
+//   vod?: boolean;
+//   poster?: string;
+//   duration?: number;
+//   thumbnail?: {
+//     picture: string;
+//     width?: number;
+//     height?: number;
+//     count: number;
+//     rowCount?: number;
+//     backgroundSize: number;
+//   };
+// }
 
 
 export type Element = HTMLVideoElement
