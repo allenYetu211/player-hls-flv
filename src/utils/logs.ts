@@ -34,7 +34,7 @@ class Logs {
   }
 
   public info(value: string | Object) {
-    this.handlerLog(value, 'INFO', '#41b883')
+    this.handlerLog(value, 'INFO', '#5bdcf1')
   }
 
   public error(value: string | Object) {
@@ -42,16 +42,18 @@ class Logs {
   }
 
   public debug(value: string | Object) {
-    this.handlerLog(value, 'DEBUG', '#f90d0d')
+    this.handlerLog(value, 'DEBUG', '#e2992c')
   }
 
   public log(value: string | Object) {
-    this.handlerLog(value, 'LOG', '#f90d0d')
+    this.handlerLog(value, 'LOG', '#41ec6e')
   }
   
   private handlerLog(value: string | Object, type: string, color: string) {
     if (typeof value === 'object') {
+      this.basisLog('', 'object start ', '#41ec6e')
       console.dir(value)
+      this.basisLog('', 'object   end ', '#41ec6e')
       return
     }
 
@@ -72,6 +74,7 @@ class Logs {
 }
 
 
+// export default Logs;
 
 let log: Logs;
 const logInit = (value: LEVEL): Logs => {
