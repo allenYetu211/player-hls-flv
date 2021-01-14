@@ -161,7 +161,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(flvConfig)
+  const [option, setOption] = useState<initConfig>(mp4Config3)
 
   const choseFlv = () => {
     setOption(flvConfig);
