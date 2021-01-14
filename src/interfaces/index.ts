@@ -13,7 +13,7 @@ export interface IMultiStreamsContainer {
 
 
 export interface initConfig {
-  type?: 'flv' | 'hls' | 'mp4' | 'm3u8'  | 'dash',
+  type: 'flv' | 'hls' | 'mp4' | 'm3u8'  | 'dash',
   src?: string;
   autoplay?: boolean;
   option?: IMultiStreamsContainer;
@@ -23,6 +23,7 @@ export interface initConfig {
   hideRefresh?: boolean;
   hideMultiple?: boolean;
   hideProgressBar?: boolean;
+  onVideoPlayerState?: (vp: any) => void;
   multiple?: IMultiple,
   vod?: boolean,
   poster?: string;
@@ -37,11 +38,10 @@ export interface initConfig {
   };
 }
 
-
 export type Element = HTMLVideoElement
 
 export interface videoConfig extends initConfig {
-  type?: 'flv' | 'hls' | 'mp4' | 'm3u8'  | 'dash',
+  type: 'flv' | 'hls' | 'mp4' | 'm3u8'  | 'dash',
   src?: string,
   element: Element,
   containerEl: HTMLDivElement,

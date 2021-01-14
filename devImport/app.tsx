@@ -4,7 +4,9 @@ import { hot } from "react-hot-loader/root";
 
 import VideoPlayer from '../src/index';
 
-import { initConfig } from '../src/interfaces';
+// import { initConfig } from '../src/interfaces';
+
+import {initConfig} from '../src/index';
 // import detailsPiscture from './212621588.jpg@.webp';
 // https://i0.hdslb.com/bfs/videoshot/212621588.jpg@.webp
 
@@ -94,12 +96,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: 'http://presecurelive.ainemo.com/testdevnemo/9628abad7641990f01764ba7428a020f_2.flv?auth_key=cbeb6b8d942a20b7ddaf433d91347913-1607680859-1008e8d4920d48efac7dc5e16c5e716c-',
+        src: 'http://presecurelive.ainemo.com/z3nemo/9628c92c76f479c50176f56ca1e603ac.flv?auth_key=4b507a719d4d73fcd2db95dab7aad8ba-1610616600-57c608f7bbfe4e5b90a911cf29e19fad-',
         text: '标清',
       },
       {
         src:
-          'http://presecurelive.ainemo.com/testdevnemo/9628abad7641990f01764ba7428a020f.flv?auth_key=f76809b1d4a191e741c4d150d96cb01a-1607680859-2792bb9669c74333bbeecb0c2d66df63-',
+          'http://presecurelive.ainemo.com/z3nemo/9628c92c76f479c50176f56ca1e603ac.flv?auth_key=4b507a719d4d73fcd2db95dab7aad8ba-1610616600-57c608f7bbfe4e5b90a911cf29e19fad-',
         text: '高清',
       },
     ],

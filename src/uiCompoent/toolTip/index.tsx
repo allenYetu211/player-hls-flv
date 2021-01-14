@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 
 interface Props {
-  text?: string;
+  node?: string | React.ReactNode;
   styles?: any;
   onClick?: () => void;
 }
@@ -20,9 +20,9 @@ interface Props {
       className={classNames}
       onClick={props.onClick}
     >
-      <div className={cn(style.multiple)}>{props.text}</div>
+      <div className={cn(style.content)}>{props.node}</div>
       <div className={style.focuseContainer}>
-        <div className={cn(style.listContainer, style.focuseChild)}>
+        <div className={cn(style.tipsContainer, style.focuseChild)}>
           {props.children}
         </div>
       </div>

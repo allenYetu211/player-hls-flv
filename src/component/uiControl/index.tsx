@@ -14,6 +14,8 @@ import { iconLoading } from '@g/images/icon';
 import { msToTime } from '@utils/translateTime';
 import cn from 'classnames';
 import { IMultiStreams } from '@interfaces/index';
+
+import { log } from '@utils/logs';
 // import {deviceType} from '@utils/phoneType';
 
 interface IPlayer {
@@ -21,13 +23,21 @@ interface IPlayer {
   element: HTMLDivElement;
 }
 
+const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash', matchArr: string[], vod: boolean): boolean => {
+  if (type === 'hls' && vod) {
+    return true
+  }
+  return matchArr.includes(type);
+}
+
+
+
 const UiControl = (props: IPlayer) => {
   // 播放器
   const player: any = getVideoPlayer();
   const config: initConfig = props.config;
   const [isProgressBar, setProgressBar] = useState<boolean>(false);
   const [isDuration, setDuration] = useState<boolean>(false);
-  // const [isPlayBtn, setPlayBtn] = useState<boolean>(true);
   const [isMultiples, setMultiples] = useState<boolean>(false);
   const [isVoice, setVoice] = useState<boolean>(true);
   const [isFullScreen, setFullScreen] = useState<boolean>(true);
@@ -47,13 +57,13 @@ const UiControl = (props: IPlayer) => {
 
 
   const controlUi = () => {
-    if (props.config.type === 'mp4' || props.config.type === 'dash' || (props.config.type === 'hls' && props.config.vod)) {
+    if (matchMediaVideoControll(props.config.type, ['mp4', 'dash'], !!props.config.vod)) {
       setMultiples(true);
       setDuration(true);
       setProgressBar(true);
     }
 
-    if (props.config.type === 'flv' || (props.config.type === 'hls' && !props.config.vod)) {
+    if (matchMediaVideoControll(props.config.type, ['flv'], !props.config.vod)) {
       setPluginMultiCode(true);
     }
   }
@@ -63,7 +73,6 @@ const UiControl = (props: IPlayer) => {
     if (state === 'on') {
       // 监听首次点击 只执行一次
       player.once('clickPlay', () => {
-        console.log('clickPlay', loading)
         setloading(true);
         setShowPlayering(false);
         setOncePoster(false);
@@ -71,14 +80,11 @@ const UiControl = (props: IPlayer) => {
     }
 
     player[state]('play', () => {
-      // console.log('>>>>>>>> play')
       setShowPlayering(false);
     });
 
     player[state]('stop', () => {
-      // console.log('>>>>>>>>> stop')
       setShowPlayering(true);
-      // console.log('onSwitchPlayer>>>>>>', isShowPlayering);
     });
 
     // 用户数据展示
@@ -157,7 +163,7 @@ const UiControl = (props: IPlayer) => {
    * @TODO  父级别组件，子组件组合关系。  设置默认值。
    */
   const [playIndex, setPlayIndex] = useState<number>(config.option! ? config.option!.playIndex : 0);
-  const [multiStreams, setMultiStreams] = useState<IMultiStreams[]>(config.option! ? config.option!.multiStreams : [{ src: '', text: 'default' }]);
+  const [multiStreams] = useState<IMultiStreams[]>(config.option! ? config.option!.multiStreams : [{ src: '', text: '' }]);
   const onChangePlayIndex = (key: number) => {
     setPlayIndex(key);
     player.chooseMultiCode(key)
@@ -173,7 +179,7 @@ const UiControl = (props: IPlayer) => {
     }
   }, [])
   const [multipleList] = React.useState<{ text: string, value: number }[]>(config.multiple ? config.multiple!.list : [])
-  const [multipleIndex, setMultipleIndex] = React.useState<number>(config.multiple? config.multiple!.initIndex : 0)
+  const [multipleIndex, setMultipleIndex] = React.useState<number>(config.multiple ? config.multiple!.initIndex : 0)
   const onChangeMultipleIndex = (key: number) => {
     setMultipleIndex(key);
     player.setPlaybackRate(multipleList[key].value)
@@ -206,7 +212,7 @@ const UiControl = (props: IPlayer) => {
 
   /**
    * @声音控制
-   */ 
+   */
   const [volume, setVolume] = useState<number>(0.6);
   player.on('oldVolume', (value: number) => {
     onChangeVideoVolume(value)
@@ -217,8 +223,8 @@ const UiControl = (props: IPlayer) => {
     setVolume(value);
   }
 
-  const  onSwitchViodVolume = () => {
-    onChangeVideoVolume(volume ? 0.6 : 0);
+  const onSwitchViodVolume = () => {
+    onChangeVideoVolume(volume ? 0 : 0.6);
   }
 
 
@@ -232,7 +238,6 @@ const UiControl = (props: IPlayer) => {
     })}
       onClick={switchContainerDisplay}
     >
-
       {/* 播放按钮 重构完成1 */}
       <div className={style.middleContainer}>
         {/* 
@@ -243,19 +248,16 @@ const UiControl = (props: IPlayer) => {
           <PlugInPlayBtn
             onSwitchPlayer={onSwitchPlayer}
             playerState={playerState}
-            notlistener={true} />
+             />
         }
 
         {!isShowPlayering && loading &&
-          //  !oncePoster &&
           <div className={cn(style.icon, style.animation)}>
             {iconLoading}
           </div>
         }
 
       </div>
-      {/* 播放按钮 重构完成1  */}
-
 
       {/* video 背景缩略图 */}
       {props.config.poster &&
@@ -290,7 +292,7 @@ const UiControl = (props: IPlayer) => {
           </div>
 
           {isProgressBar &&
-          !config.hideProgressBar &&
+            !config.hideProgressBar &&
             <PlugInProgressBar
               thumbnail={config.thumbnail}
               isMobile={config.isMobile!}
@@ -312,7 +314,7 @@ const UiControl = (props: IPlayer) => {
             }
 
             {!config.isMobile &&
-             !config.hideMultiple &&
+              !config.hideMultiple &&
               isMultiples &&
               <PluginMultiples
                 index={multipleIndex}
@@ -320,14 +322,16 @@ const UiControl = (props: IPlayer) => {
                 onChangeMultipleIndex={onChangeMultipleIndex} />
             }
 
-            {!config.isMobile && isVoice && 
-              <PlugInVoice 
-              isMobile={config.isMobile!} 
-              volume={volume}
-              onChangeVideoVolume={onChangeVideoVolume}
-              onSwitchViodVolume={onSwitchViodVolume}
+            {!config.isMobile && isVoice &&
+              <PlugInVoice
+                isMobile={config.isMobile!}
+                volume={volume}
+                onChangeVideoVolume={onChangeVideoVolume}
+                onSwitchViodVolume={onSwitchViodVolume}
               />}
+
             {isFullScreen && <PlugInFullScreen element={props.element} />}
+
           </div>
         </div>
       )}

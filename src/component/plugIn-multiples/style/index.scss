@@ -18,17 +18,17 @@
 }
 
 
-.volumeBar {
-  width: 50px;
-  height: 110px;
-  padding: 10px 0;
-  border-radius:2px;
-  @extend %flex-center;
-  flex-direction: column;
-  span {
-    font-size: 12px;
-  }
-}
+// .volumeBar {
+//   width: 50px;
+//   height: 110px;
+//   padding: 10px 0;
+//   border-radius:2px;
+//   @extend %flex-center;
+//   flex-direction: column;
+//   span {
+//     font-size: 12px;
+//   }
+// }
 
 
 .listContainer {
