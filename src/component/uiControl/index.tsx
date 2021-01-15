@@ -23,11 +23,11 @@ interface IPlayer {
   element: HTMLDivElement;
 }
 
-const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash', matchArr: string[], vod: boolean): boolean => {
+const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash' | undefined, matchArr: string[], vod: boolean): boolean => {
   if (type === 'hls' && vod) {
     return true
   }
-  return matchArr.includes(type);
+  return matchArr.includes(type!);
 }
 
 

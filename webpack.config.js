@@ -158,7 +158,7 @@ module.exports = (env, argv) => {
 
   if (env.NODE_ENV === 'development') {
     result = Object.assign({}, config, {
-      entry: ['react-hot-loader/patch', './devImport/index.tsx'],
+      entry: ['babel-polyfill','react-hot-loader/patch', './devImport/index.tsx'],
       optimization: {
         runtimeChunk: 'single',
         splitChunks: {
@@ -181,7 +181,7 @@ module.exports = (env, argv) => {
         contentBase: './dist',
         hot: true,
         stats: 'errors-only'
-      },
+      }
     });
   }
   console.log('path.resolve(__dirname', path.resolve(__dirname, 'index.html'));

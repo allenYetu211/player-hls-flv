@@ -1,4 +1,13 @@
 
+
+// 兼容IE9-11版本
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/stable';
+// Promise not defined
+
+import "core-js/stable"; 
+import "regenerator-runtime/runtime";
+
 import React, { useState } from 'react';
 import { hot } from "react-hot-loader/root";
 
@@ -96,12 +105,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: 'http://presecurelive.ainemo.com/z3nemo/9628c92c76f479c50176f56ca1e603ac.flv?auth_key=4b507a719d4d73fcd2db95dab7aad8ba-1610616600-57c608f7bbfe4e5b90a911cf29e19fad-',
+        src: 'http://prdpulllive.xylink.com/prdnemo/9680d8c276af456f017704a1373e5078.flv?auth_key=46afc9928d4020d484628b4a83b807a5-1610785807-de28f9fded044083966c83cca5cca663-',
         text: '标清',
       },
       {
         src:
-          'http://presecurelive.ainemo.com/z3nemo/9628c92c76f479c50176f56ca1e603ac.flv?auth_key=4b507a719d4d73fcd2db95dab7aad8ba-1610616600-57c608f7bbfe4e5b90a911cf29e19fad-',
+          'http://prdpulllive.xylink.com/prdnemo/9680d8c276af456f017704a1373e5078.flv?auth_key=46afc9928d4020d484628b4a83b807a5-1610785807-de28f9fded044083966c83cca5cca663-',
         text: '高清',
       },
     ],
@@ -117,7 +126,7 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: "https://prdlive.ainemo.com/prdnemo/9680cd9a73cef8770173d6ec29c9213b.m3u8?auth_key=1598612400-0-0-2a84e400b46a6fc6375f9110a56b1dff",
+        src: "http://prdpulllive.xylink.com/prdnemo/9680d8c276af456f017704a1373e5078_2.m3u8?auth_key=74dc39c1ba2a5c2e1b79b10b54e3da28-1610785807-58d536eb0f0448558a33806f533eadfb-",
         text: "小鱼1",
       },
 
@@ -161,7 +170,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config3)
+  const [option, setOption] = useState<initConfig>(hlsConfig)
 
   const choseFlv = () => {
     setOption(flvConfig);
