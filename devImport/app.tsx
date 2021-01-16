@@ -31,19 +31,19 @@ const mp4Config3: initConfig = {
   },
   // hideMultiple: true,
   // hideProgressBar: true,
-  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
+  // poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
   isMobile: false,
   duration: 54918500,
   thumbnail: {
-    picture: 'http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9005795481/101-bj2-txdevSig2-2157179905119_0_1608711761713_1280_720_preview.jpg?auth_key=1608818711-0-0-a4f6d74602bfebd790b29dfe5ac3ede8',
+    picture: 'https://precdn.xylink.com/testH5/img.jpg',
     // width: 160,
     // height: 90,
     count: 12, // 图片总数
     backgroundSize: 3840, // 图片分辨率
   },
   src:
-    "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
+    "http://testqavoddownload.xylink.com/vodfiles/downloadfiles/shareLink/cf3f247f-18f9-4f91-abc9-bfe80e7da1a9.mp4?auth_key=1610710530-0-0-a31a1e14fd1d0715e4b12226e051d8e8",
 }
 
 
@@ -120,19 +120,22 @@ const flvConfig: initConfig = {
 
 
 const hlsConfig: initConfig = {
-  type: 'hls',
-  isMobile: false,
+  type: 'flv',
   autoplay: false,
+  isMobile: true,
   option: {
     multiStreams: [
       {
         src: "http://prdpulllive.xylink.com/prdnemo/9680d8c276af456f017704a1373e5078_2.m3u8?auth_key=74dc39c1ba2a5c2e1b79b10b54e3da28-1610785807-58d536eb0f0448558a33806f533eadfb-",
         text: "小鱼1",
       },
-
+      {
+        src: "http://prdpulllive.xylink.com/prdnemo/9680d8c276af456f017704a1373e5078_2.m3u8?auth_key=74dc39c1ba2a5c2e1b79b10b54e3da28-1610785807-58d536eb0f0448558a33806f533eadfb-",
+        text: "小鱼2",
+      }
     ],
-    playIndex: 0,
-  },
+    playIndex: 1,
+  }
 }
 
 const hlsConfigSrc: initConfig = {
@@ -170,7 +173,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(hlsConfig)
+  const [option, setOption] = useState<initConfig>(mp4Config3)
 
   const choseFlv = () => {
     setOption(flvConfig);

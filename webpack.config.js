@@ -63,7 +63,7 @@ const config = {
         ]),
       },
       {
-        test: /\.svg$/,
+        test: /\.(svg|gif)$/,
         use: 'file-loader',
       },
       {

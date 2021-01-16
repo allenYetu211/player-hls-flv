@@ -19,12 +19,30 @@ export const fullScreen = (element: HTMLVideoElement| HTMLDivElement) => {
 
 //  退出全屏
 export const exitFullscreen = () => {
-  const _document = document as  any
+  const _document = document as  any;
+  console.log('退出全屏 - 1');
 	if (_document.fullscreenElement) {
 		_document.exitFullscreen()
 	} else if (_document.mozExitFullScreen) {
 		_document.mozExitFullScreen()
 	} else if (_document.webkitExitFullscreen) {
 		_document.webkitExitFullscreen()
-	}
+  } else if (_document.msRequestFullscreen) {
+    _document.msRequestFullscreen()
+  }
+  
+
 };
+
+// 低版本浏览器
+// function iefull(){
+  //     var el = document.documentElement;
+  //     var rfs =  el.msRequestFullScreen;
+  //     if(typeof window.ActiveXObject != "undefined") {
+  //         //这的方法 模拟f11键，使浏览器全屏
+  //         var wscript = new ActiveXObject("WScript.Shell");
+  //         if(wscript != null) {
+  //             wscript.SendKeys("{F11}");
+  //         }
+  //     }
+  // }
