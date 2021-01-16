@@ -64,7 +64,14 @@ const config = {
       },
       {
         test: /\.(svg|gif)$/,
-        use: 'file-loader',
+        use:[{
+          loader:'url-loader',
+          options: {
+              limit:5000,
+              outputPath: 'images/',
+              name:'[name].[ext]'
+          }
+      }]
       },
       {
         test: /\.ts(x)?$/,

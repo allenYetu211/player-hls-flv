@@ -58,7 +58,7 @@ const PlugInProgressBar = (props: IProps) => {
 
   const [popContent, setPopContent] = useState<string>('');
   // 测试 开发
-  const [cursorElDisplayState, setCursorElDisplayState] = useState<boolean>(true);
+  const [cursorElDisplayState, setCursorElDisplayState] = useState<boolean>(false);
   const progressEl = useRef<HTMLDivElement>(null);
   const cursorEl = useRef<HTMLDivElement>(null);
   const thumbnailEl = useRef<HTMLDivElement>(null);
