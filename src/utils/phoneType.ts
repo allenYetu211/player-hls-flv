@@ -23,7 +23,6 @@ export const tbs = () => {
   // 安卓手机，微信 QQ浏览器, 并且为TBS内核
   if (isTx() && isAndroid() && /TBS\//.test(ua)) {
       const result = ua.replace(/.*TBS\/(\d*)\s.*/g, '$1');
-      console.log('result', result)
       return result >= '036849'
   }
   return false

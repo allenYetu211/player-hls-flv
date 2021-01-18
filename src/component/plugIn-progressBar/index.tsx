@@ -6,6 +6,8 @@ import { msToTime } from '@utils/translateTime';
 
 import ToolTip from '@g/uiCompoent/toolTip';
 
+import {log} from '@utils/logs';
+
 
 import cn from 'classnames';
 
@@ -71,10 +73,10 @@ const PlugInProgressBar = (props: IProps) => {
     const img = new Image();
     img.src = picturePath;
     if (img.complete) {
-      console.log('complete')
+      log.info('complete')
     } else {
       img.onload = function () {
-        console.log('onload')
+        log.info('onload')
       };
     }
   }

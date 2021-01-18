@@ -166,7 +166,7 @@ const UiControl = (props: IPlayer) => {
   const [multiStreams] = useState<IMultiStreams[]>(config.option! ? config.option!.multiStreams : [{ src: '', text: '' }]);
   const onChangePlayIndex = (key: number) => {
 
-    console.log('onChangePlayIndex', key);
+    log.debug(`onChangePlayIndex-> ${key}`);
 
     setPlayIndex(key);
     player.chooseMultiCode(key)
@@ -184,7 +184,7 @@ const UiControl = (props: IPlayer) => {
   const [multipleList] = React.useState<{ text: string, value: number }[]>(config.multiple ? config.multiple!.list : [])
   const [multipleIndex, setMultipleIndex] = React.useState<number>(config.multiple ? config.multiple!.initIndex : 0)
   const onChangeMultipleIndex = (key: number) => {
-    console.log('key>>>>', key);
+    log.debug(`key-> ${key}`);
     setMultipleIndex(key);
     player.setPlaybackRate(multipleList[key].value)
   }

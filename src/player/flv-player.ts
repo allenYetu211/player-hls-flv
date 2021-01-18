@@ -2,6 +2,7 @@ import VideoControl from './video-control';
 import {videoConfig, IMultiStreams} from '@interfaces/index';
 
 // import flvjs from 'flv.js';
+
 // @ts-ignore
 import flvjs from 'flv.js/dist/flv';
 // console.log('flvjs', flvjs)
@@ -83,7 +84,6 @@ export default class FlvPlayer extends VideoControl {
   }
 
   public refresh() {
-    console.log('Refresh FLV')
     this.stop()
     this.destroy();
     this.onRefershVideo()

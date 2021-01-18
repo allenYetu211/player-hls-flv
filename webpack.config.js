@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 let envPrd = false;
 
+
 const config = {
   devtool: 'source-map',
   output: {
@@ -16,11 +17,6 @@ const config = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: 'babel-loader',
-        exclude: /node_modules/,
-      },
       {
         test: /\.css$/,
         use: addMiniCssExtractPlugin([
@@ -53,25 +49,25 @@ const config = {
           },
           'postcss-loader',
           {
-            loader:  'sass-loader',
+            loader: 'sass-loader',
             options: {
               implementation: require('sass'),
               sourceMap: true
             }
           }
-         ,
+          ,
         ]),
       },
       {
         test: /\.(svg|gif)$/,
-        use:[{
-          loader:'url-loader',
+        use: [{
+          loader: 'url-loader',
           options: {
-              limit:5000,
-              outputPath: 'images/',
-              name:'[name].[ext]'
+            limit: 5000,
+            outputPath: 'images/',
+            name: '[name].[ext]'
           }
-      }]
+        }]
       },
       {
         test: /\.ts(x)?$/,
@@ -95,10 +91,10 @@ const config = {
   },
 };
 
-function addMiniCssExtractPlugin (arr) {
+function addMiniCssExtractPlugin(arr) {
   let copyarr = arr.concat();
   if (envPrd) {
-    copyarr.splice(1, 0 ,{ loader: MiniCssExtractPlugin.loader} )
+    copyarr.splice(1, 0, { loader: MiniCssExtractPlugin.loader })
     return copyarr
   }
   return copyarr
@@ -165,7 +161,7 @@ module.exports = (env, argv) => {
 
   if (env.NODE_ENV === 'development') {
     result = Object.assign({}, config, {
-      entry: ['babel-polyfill','react-hot-loader/patch', './devImport/index.tsx'],
+      entry: ['babel-polyfill', 'react-hot-loader/patch', './devImport/index.tsx'],
       optimization: {
         runtimeChunk: 'single',
         splitChunks: {
@@ -181,7 +177,7 @@ module.exports = (env, argv) => {
       plugins: [
         new HtmlWebpackPlugin({
           inject: true,
-					template:path.resolve(__dirname, 'index.html'),
+          template: path.resolve(__dirname, 'index.html'),
         }),
       ],
       devServer: {

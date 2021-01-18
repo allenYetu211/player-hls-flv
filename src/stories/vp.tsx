@@ -56,8 +56,6 @@ export interface IMultiStreamsContainer {
 
 export const VideeoPlayer: React.FC<initConfig> = (props) => {
   const onVideoPlayerState = (vp: any) => {
-    // console.log('vp', vp.destroy);
-    // console.log('vp==>>>>', vp.videoEl.playbackRate = 1)
   }
 
 

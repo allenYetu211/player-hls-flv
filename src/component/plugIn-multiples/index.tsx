@@ -32,8 +32,6 @@ const defaultList = [
 const PluginMultiple = (props: IProps) => {
   const [multipleList, setMultipleList] = useState<multipleType[]>(defaultList);
   const {index, onChangeMultipleIndex} = props;
-
-  console.log('index>>>>>', index);
   useEffect(() => {
     if (props.list.length) {
       setMultipleList(props.list);

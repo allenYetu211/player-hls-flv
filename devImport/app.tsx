@@ -5,7 +5,7 @@ import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/stable';
 // Promise not defined
 
-import "core-js/stable"; 
+import "core-js/stable";
 import "regenerator-runtime/runtime";
 
 import React, { useState } from 'react';
@@ -15,12 +15,18 @@ import VideoPlayer from '../src/index';
 
 // import { initConfig } from '../src/interfaces';
 
-import {initConfig} from '../src/index';
+import { initConfig } from '../src/index';
 // import detailsPiscture from './212621588.jpg@.webp';
 // https://i0.hdslb.com/bfs/videoshot/212621588.jpg@.webp
 
 
 const tm: initConfig = { "src": "https://predc2vod.xiaoyuonline.com/vodfiles/downloadfiles/shareLink/9828f93a-8c75-41c6-b6bc-47a2ec64ed73.mp4?auth_key=J_9h7WzpFAnGJeoCfhwTKg&expire=1610015465", "type": "mp4" }
+
+
+const mp4C = {
+  src: "http://prevoddownload.xylink.com/vodfiles/downloadfiles/shareLink/ed21d157-3761-4121-9a53-e32137f14699.mp4?auth_key=1610952382-0-0-911c459c7835b47768a002a61c2382f3",
+  type: "mp4"
+}
 
 const mp4Config3: initConfig = {
   type: 'mp4',
@@ -173,7 +179,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config3)
+  const [option, setOption] = useState<any>(mp4Config3)
 
   const choseFlv = () => {
     setOption(flvConfig);

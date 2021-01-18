@@ -1,6 +1,3 @@
-
-
-
 import React, {useRef, useEffect, useState} from 'react';
 import style from './styles.scss';
 import {initPlayer} from '@player/index';
@@ -9,8 +6,15 @@ import UiControl from '@g/component/uiControl';
 import {logInit} from '@utils/logs';
 
 
-//  初始全局log
+// //  初始全局log
 logInit('ALL');
+// todo webpack 打包插入
+console.info(`
+%c==============================
+* xy-player版本：1.4.18
+==============================
+`, `color: #41ec6e`)
+
 export interface initConfig {
   type?: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash',
   src?: string;

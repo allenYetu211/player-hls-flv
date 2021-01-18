@@ -6,6 +6,8 @@ import style from './style/index.scss';
 import { getVideoPlayer } from '@player/index';
 import ToolTip from '@g/uiCompoent/toolTip';
 
+import {log} from '@utils/logs';
+
 interface IProps {
   element: HTMLDivElement;
 }
@@ -13,7 +15,7 @@ interface IProps {
 const PlugInFullScreen = (props: IProps) => {
   const [fullState, setFullState] = useState(false);
 
-  // console.log('PlugInFullScreen>>>>>>');
+  // log.info('PlugInFullScreen>>>>>>');
 
   // 播放器
   const player: any = getVideoPlayer();
@@ -28,7 +30,7 @@ const PlugInFullScreen = (props: IProps) => {
 
     // android 全屏事件
     document.addEventListener('webkitfullscreenchange', (evt) => {
-      console.log('webkitfullscreenchange==>>>')
+      log.info('webkitfullscreenchange==>>>')
       const _d = document as any;
       if (!_d.webkitIsFullScreen && evt.srcElement === player.videoEl) {
         onExitfullScreen();
@@ -51,7 +53,7 @@ const PlugInFullScreen = (props: IProps) => {
     player[state]('fullscreen', (value: boolean) => {
       setFullState(value);
       if (!value) {
-        console.log('listener stop')
+        log.info('listener stop')
         player.stop()
       }
     });
@@ -59,24 +61,16 @@ const PlugInFullScreen = (props: IProps) => {
 
 
   const onExitfullScreen = () => {
-    console.log('=====================')
-    console.log('=====================')
-    console.log('触发退出全屏：onExitfullScreen')
-    console.log('=====================')
-    console.log('=====================')
+    log.info('触发退出全屏：onExitfullScreen')
     setFullState(false)
     exitFullscreen()
   }
 
   const onfullScreen = () => {
-    // console.log(player.resourceLoadingState)
-    console.log('=====================')
-    console.log('=====================')
-    console.log('触发进入全屏：pc', deviceType.pc)
-    console.log('触发进入全屏：tbs', deviceType.tbs)
-    console.log('deviceType.pc || !deviceType.tbs', deviceType.pc || !deviceType.tbs)
-    console.log('=====================')
-    console.log('=====================')
+    // log.info(player.resourceLoadingState)
+    log.log('触发进入出全屏：onExitfullScreen')
+    log.info(deviceType.pc)
+    log.info(deviceType.tbs)
     setFullState(true);
     // 如果是ios手机 则使用video进行全屏
     if (deviceType.ios) {
@@ -88,10 +82,10 @@ const PlugInFullScreen = (props: IProps) => {
 
     if (deviceType.pc || !deviceType.tbs) {
       // if (deviceType.pc || deviceType.android) {
-      console.log('use props.element')
+      log.info('use props.element')
       fullScreen(props.element);
     } else {
-      console.log('use props.videoEl')
+      log.info('use props.videoEl')
       fullScreen(player.videoEl)
     }
   };
