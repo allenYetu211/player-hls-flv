@@ -1,5 +1,5 @@
 import VideoControl from './video-control';
-import {videoConfig, IMultiStreams} from '@interfaces/index';
+import { videoConfig, IMultiStreams } from '@interfaces/index';
 
 import Hls from 'hls.js';
 
@@ -14,17 +14,17 @@ export default class HLSPlayer extends VideoControl {
   private playerIndex: number = 0;
 
   // 播放列表
-  private multiStreams: IMultiStreams[] = [{src: '', text: ''}];
+  private multiStreams: IMultiStreams[] = [{ src: '', text: '' }];
 
   // 当前播放的列表
-  private src: string  = '';
+  private src: string = '';
 
   private hls: any;
 
-  constructor(config: videoConfig){
+  constructor(config: videoConfig) {
     super({
-      element:  config.element,
-      container:  config.containerEl,
+      element: config.element,
+      container: config.containerEl,
       poster: config.poster
     })
 
@@ -42,33 +42,38 @@ export default class HLSPlayer extends VideoControl {
       } else {
         this.src = config.src || ''
       }
-     
+
     } else {
       this.vod = true;
       this.src = config.src || '';
     }
 
     this.autoplay = config.autoplay || false;
-    
+
     this.initVideoEl();
   }
 
   private initVideoEl() {
 
-    if (Hls.isSupported()) { 
-      this.hls = new Hls();
+    if (Hls.isSupported()) {
+      this.hls = new Hls({
+        xhrSetup: async (xhr, url) => {
+          const requestUrl = /\?/.test(url) ? `${url}&t=${new Date().getTime()}` : `${url}?t=${new Date().getTime()}`
+          xhr.open('GET', requestUrl, true);
+        },
+      });
       this.hls.loadSource(this.src);
       this.hls.attachMedia(this.videoEl);
       this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
-      this.autoplay && this.play();
-      if(this.vod) {
-        this.videoEl.addEventListener('loadedmetadata', () => {
-          this._emitter.emit('duration', this.videoEl.duration * 1000)
-        });
-      }
-    });
+        this.autoplay && this.play();
+        if (this.vod) {
+          this.videoEl.addEventListener('loadedmetadata', () => {
+            this._emitter.emit('duration', this.videoEl.duration * 1000)
+          });
+        }
+      });
 
-    this.addPlayerListener();
+      this.addPlayerListener();
 
     } else if (this.videoEl.canPlayType('application/vnd.apple.mpegurl')) {
       this.videoEl.src = this.src;
@@ -86,7 +91,7 @@ export default class HLSPlayer extends VideoControl {
   public chooseMultiCode(key: number) {
     try {
       this.destroy();
-    } catch(e) {
+    } catch (e) {
       console.log('hls not function');
     }
 
@@ -101,20 +106,20 @@ export default class HLSPlayer extends VideoControl {
       this._emitter.emit('NETWORK_ERROR: HLS ===>', e)
     })
 
-    this.hls.on(Hls.Events.ERROR, (e:any) => {
+    this.hls.on(Hls.Events.ERROR, (e: any) => {
       this._emitter.emit('ERROR: HLS ===>', e)
     })
 
-    this.hls.on(Hls.ErrorTypes.MEDIA_ERROR, (e:any) => {
+    this.hls.on(Hls.ErrorTypes.MEDIA_ERROR, (e: any) => {
       this._emitter.emit('MEDIA_ERROR: HLS ===>', e)
     })
 
-    this.hls.on(Hls.ErrorTypes.OTHER_ERROR, (e:any) => {
+    this.hls.on(Hls.ErrorTypes.OTHER_ERROR, (e: any) => {
       this._emitter.emit('OTHER_ERROR: HLS ===>', e)
     })
   }
 
-  public  destroy(){
+  public destroy() {
     if (this.hls) {
       this.hls.destroy();
     }

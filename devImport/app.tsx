@@ -126,17 +126,17 @@ const flvConfig: initConfig = {
 
 
 const hlsConfig: initConfig = {
-  type: 'flv',
+  type: 'hls',
   autoplay: false,
   isMobile: true,
   option: {
     multiStreams: [
       {
-        src: "http://prdpulllive.xylink.com/prdnemo/9680d8c276af456f017704a1373e5078_2.m3u8?auth_key=74dc39c1ba2a5c2e1b79b10b54e3da28-1610785807-58d536eb0f0448558a33806f533eadfb-",
+        src: "http://prdpulllive.xylink.com/prdnemo/9680cfa876af419b017715fa2a506ea0.m3u8?auth_key=9696c64407db597b01b45958b122566b-1611075650-1095f4aac2d2463f929ae04ddc289695-",
         text: "小鱼1",
       },
       {
-        src: "http://prdpulllive.xylink.com/prdnemo/9680d8c276af456f017704a1373e5078_2.m3u8?auth_key=74dc39c1ba2a5c2e1b79b10b54e3da28-1610785807-58d536eb0f0448558a33806f533eadfb-",
+        src: "http://prdpulllive.xylink.com/prdnemo/9680cfa876af419b017715fa2a506ea0.m3u8?auth_key=9696c64407db597b01b45958b122566b-1611075650-1095f4aac2d2463f929ae04ddc289695-",
         text: "小鱼2",
       }
     ],
@@ -179,7 +179,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<any>(mp4Config3)
+  const [option, setOption] = useState<any>(hlsConfig)
 
   const choseFlv = () => {
     setOption(flvConfig);

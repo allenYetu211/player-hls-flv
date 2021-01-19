@@ -11,7 +11,7 @@ logInit('ALL');
 // todo webpack 打包插入
 console.info(`
 %c==============================
-* xy-player版本：1.4.18
+* xy-player版本：1.4.19
 ==============================
 `, `color: #41ec6e`)
 
