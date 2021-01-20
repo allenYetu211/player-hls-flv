@@ -1,5 +1,5 @@
 import React from 'react';
-import VideoPlayer from '../../dist';
+import VideoPlayer from '../index';
 
 export interface initConfig {
   type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash',

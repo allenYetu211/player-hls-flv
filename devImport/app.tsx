@@ -42,7 +42,7 @@ const mp4Config3: initConfig = {
   isMobile: false,
   duration: 54918500,
   thumbnail: {
-    picture: 'https://precdn.xylink.com/testH5/img.jpg',
+    picture: 'https://testdevcdn.xylink.com/test-video/bimg.jpg',
     // width: 160,
     // height: 90,
     count: 12, // 图片总数
@@ -179,7 +179,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<any>(hlsConfig)
+  const [option, setOption] = useState<any>(mp4Config3)
 
   const choseFlv = () => {
     setOption(flvConfig);

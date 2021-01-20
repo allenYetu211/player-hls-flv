@@ -2,9 +2,75 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WebpackAddVersionPulgin = require('./webpackAddVersionPulgin');
 
 let envPrd = false;
 
+const moduleRulesConfig = [
+  {
+    test: /\.css$/,
+    use: addMiniCssExtractPlugin([
+      'style-loader',
+      'css-loader',
+    ]),
+    exclude: /\.module\.css$/,
+    // include: /\.module\.css$/,
+  },
+  // {
+  //   test: /\.css$/,
+  //   use: addMiniCssExtractPlugin([
+  //     'style-loader',
+  //     'css-loader',
+  //   ]),
+  //   include: /\.module\.css$/,
+  // },
+  {
+    test: /\.scss$/,
+    sideEffects: true,
+    use: addMiniCssExtractPlugin([
+      'style-loader',
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 2,
+          modules: {
+            localIdentName: '[name]__[local]',
+          },
+        },
+      },
+      'postcss-loader',
+      {
+        loader: 'sass-loader',
+        options: {
+          implementation: require('sass'),
+          sourceMap: true
+        }
+      }
+      ,
+    ]),
+  },
+  {
+    test: /\.(svg|gif)$/,
+    use: [{
+      loader: 'url-loader',
+      options: {
+        limit: 5000,
+        outputPath: 'images/',
+        name: '[name].[ext]'
+      }
+    }]
+  },
+  {
+    test: /\.ts(x)?$/,
+    use: ['awesome-typescript-loader'],
+    exclude: /node_modules/,
+  }
+]
+
+const moduleRules = (itemConfig) => {
+  moduleRulesConfig.unshift(itemConfig);
+  return moduleRulesConfig;
+}
 
 const config = {
   devtool: 'source-map',
@@ -15,67 +81,9 @@ const config = {
     libraryTarget: 'umd',
     umdNamedDefine: true,
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: addMiniCssExtractPlugin([
-          'style-loader',
-          'css-loader',
-        ]),
-        exclude: /\.module\.css$/,
-      },
-      {
-        test: /\.css$/,
-        use: addMiniCssExtractPlugin([
-          'style-loader',
-          'css-loader',
-        ]),
-        include: /\.module\.css$/,
-      },
-      {
-        test: /\.scss$/,
-        sideEffects: true,
-        use: addMiniCssExtractPlugin([
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              modules: {
-                localIdentName: '[name]__[local]',
-              },
-            },
-          },
-          'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              implementation: require('sass'),
-              sourceMap: true
-            }
-          }
-          ,
-        ]),
-      },
-      {
-        test: /\.(svg|gif)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 5000,
-            outputPath: 'images/',
-            name: '[name].[ext]'
-          }
-        }]
-      },
-      {
-        test: /\.ts(x)?$/,
-        use: ['awesome-typescript-loader'],
-        exclude: /node_modules/,
-      },
-    ],
-  },
+  // resolveLoader: {
+  //   modules: ['node_modules', './loader']
+  // },
   resolve: {
     extensions: ['.js', '.jsx', '.tsx', '.ts'],
     alias: {
@@ -156,6 +164,12 @@ module.exports = (env, argv) => {
           amd: 'classnames',
         },
       },
+      module: {
+        rules: moduleRulesConfig
+      },
+      plugins: [
+        new WebpackAddVersionPulgin()
+      ]
     });
   }
 
@@ -184,9 +198,16 @@ module.exports = (env, argv) => {
         contentBase: './dist',
         hot: true,
         stats: 'errors-only'
+      },
+      module: {
+        // rules: moduleRules({
+        //   test: /\.ts(x)?$/,
+        //   use: ['awesome-typescript-loader'],
+        //   exclude: /node_modules/,
+        // })
+        rules: moduleRulesConfig
       }
     });
   }
-  console.log('path.resolve(__dirname', path.resolve(__dirname, 'index.html'));
   return result;
 };
