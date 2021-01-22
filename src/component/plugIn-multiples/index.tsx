@@ -31,8 +31,14 @@ const defaultList = [
 
 const PluginMultiple = (props: IProps) => {
   const [multipleList, setMultipleList] = useState<multipleType[]>(defaultList);
+  console.log('list', multipleList)
+
   const {index, onChangeMultipleIndex} = props;
+  console.log('list', multipleList)
+  console.log('index', index)
+
   useEffect(() => {
+    console.log('multipleList', multipleList)
     if (props.list.length) {
       setMultipleList(props.list);
     }
@@ -40,7 +46,7 @@ const PluginMultiple = (props: IProps) => {
 
   return (
     <ToolTip
-      node={multipleList[index].text}>
+      node={multipleList[index] ? multipleList[index].text : multipleList[multipleList.length - 1].text}>
       <ul>
         {multipleList.map((item: multipleType, key: number) => {
           return (

@@ -23,6 +23,19 @@ import { initConfig } from '../src/index';
 const tm: initConfig = { "src": "https://predc2vod.xiaoyuonline.com/vodfiles/downloadfiles/shareLink/9828f93a-8c75-41c6-b6bc-47a2ec64ed73.mp4?auth_key=J_9h7WzpFAnGJeoCfhwTKg&expire=1610015465", "type": "mp4" }
 
 
+const mp4z = {
+  "type": "mp4",
+  "src": "https://gxtestqa-res.xylinkedu.com/video/20201202/518802067800723456.mp4?auth_key=1611304333-21-1-96381b9d7203d210ad78d76d4d436943",
+  "autoplay": true,
+  "isMobile": false,
+  "hideMultiCode": true,
+  "multiple": {
+    "list":
+      [{ "text": "2x", "value": 2 }, { "text": "1.5x", "value": 1.5 }, { "text": "1.25x", "value": 1.25 }, { "text": "1x", "value": 1 }, { "text": "0.5x", "value": 0.5 }],
+    "initIndex": 3
+  }
+}
+
 const mp4C = {
   src: "http://prevoddownload.xylink.com/vodfiles/downloadfiles/shareLink/ed21d157-3761-4121-9a53-e32137f14699.mp4?auth_key=1610952382-0-0-911c459c7835b47768a002a61c2382f3",
   type: "mp4"
@@ -179,7 +192,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<any>(mp4Config3)
+  const [option, setOption] = useState<any>(mp4z)
 
   const choseFlv = () => {
     setOption(flvConfig);
