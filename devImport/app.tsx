@@ -1,4 +1,13 @@
 
+
+// 兼容IE9-11版本
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/stable';
+// Promise not defined
+
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import React, { useState } from 'react';
 import { hot } from "react-hot-loader/root";
 
@@ -6,12 +15,18 @@ import VideoPlayer from '../src/index';
 
 // import { initConfig } from '../src/interfaces';
 
-import {initConfig} from '../src/index';
+import { initConfig } from '../src/index';
 // import detailsPiscture from './212621588.jpg@.webp';
 // https://i0.hdslb.com/bfs/videoshot/212621588.jpg@.webp
 
 
 const tm: initConfig = { "src": "https://predc2vod.xiaoyuonline.com/vodfiles/downloadfiles/shareLink/9828f93a-8c75-41c6-b6bc-47a2ec64ed73.mp4?auth_key=J_9h7WzpFAnGJeoCfhwTKg&expire=1610015465", "type": "mp4" }
+
+
+const mp4C = {
+  src: "http://prevoddownload.xylink.com/vodfiles/downloadfiles/shareLink/ed21d157-3761-4121-9a53-e32137f14699.mp4?auth_key=1610952382-0-0-911c459c7835b47768a002a61c2382f3",
+  type: "mp4"
+}
 
 const mp4Config3: initConfig = {
   type: 'mp4',
@@ -22,19 +37,19 @@ const mp4Config3: initConfig = {
   },
   // hideMultiple: true,
   // hideProgressBar: true,
-  poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
+  // poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591699097501&di=1f2f4942197f230c198c5fc8eeb6603a&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fgm%2Fcr%2F2014%2F0611%2F3311791356.png',
   autoplay: false,
   isMobile: false,
   duration: 54918500,
   thumbnail: {
-    picture: 'http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9005795481/101-bj2-txdevSig2-2157179905119_0_1608711761713_1280_720_preview.jpg?auth_key=1608818711-0-0-a4f6d74602bfebd790b29dfe5ac3ede8',
+    picture: 'https://testdevcdn.xylink.com/test-video/bimg.jpg',
     // width: 160,
     // height: 90,
     count: 12, // 图片总数
     backgroundSize: 3840, // 图片分辨率
   },
   src:
-    "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140036/4f721fd9-2219-4bb0-b9af-12e42acd6913.mp4",
+    "http://testqavoddownload.xylink.com/vodfiles/downloadfiles/shareLink/cf3f247f-18f9-4f91-abc9-bfe80e7da1a9.mp4?auth_key=1610710530-0-0-a31a1e14fd1d0715e4b12226e051d8e8",
 }
 
 
@@ -96,12 +111,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: 'http://presecurelive.ainemo.com/z3nemo/9628c92c76f479c50176f56ca1e603ac.flv?auth_key=4b507a719d4d73fcd2db95dab7aad8ba-1610616600-57c608f7bbfe4e5b90a911cf29e19fad-',
+        src: 'http://prdpulllive.xylink.com/prdnemo/9680d8c276af456f017704a1373e5078.flv?auth_key=46afc9928d4020d484628b4a83b807a5-1610785807-de28f9fded044083966c83cca5cca663-',
         text: '标清',
       },
       {
         src:
-          'http://presecurelive.ainemo.com/z3nemo/9628c92c76f479c50176f56ca1e603ac.flv?auth_key=4b507a719d4d73fcd2db95dab7aad8ba-1610616600-57c608f7bbfe4e5b90a911cf29e19fad-',
+          'http://prdpulllive.xylink.com/prdnemo/9680d8c276af456f017704a1373e5078.flv?auth_key=46afc9928d4020d484628b4a83b807a5-1610785807-de28f9fded044083966c83cca5cca663-',
         text: '高清',
       },
     ],
@@ -112,18 +127,21 @@ const flvConfig: initConfig = {
 
 const hlsConfig: initConfig = {
   type: 'hls',
-  isMobile: false,
   autoplay: false,
+  isMobile: true,
   option: {
     multiStreams: [
       {
-        src: "https://prdlive.ainemo.com/prdnemo/9680cd9a73cef8770173d6ec29c9213b.m3u8?auth_key=1598612400-0-0-2a84e400b46a6fc6375f9110a56b1dff",
+        src: "http://prdpulllive.xylink.com/prdnemo/9680cfa876af419b017715fa2a506ea0.m3u8?auth_key=9696c64407db597b01b45958b122566b-1611075650-1095f4aac2d2463f929ae04ddc289695-",
         text: "小鱼1",
       },
-
+      {
+        src: "http://prdpulllive.xylink.com/prdnemo/9680cfa876af419b017715fa2a506ea0.m3u8?auth_key=9696c64407db597b01b45958b122566b-1611075650-1095f4aac2d2463f929ae04ddc289695-",
+        text: "小鱼2",
+      }
     ],
-    playIndex: 0,
-  },
+    playIndex: 1,
+  }
 }
 
 const hlsConfigSrc: initConfig = {
@@ -161,7 +179,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<initConfig>(mp4Config3)
+  const [option, setOption] = useState<any>(mp4Config3)
 
   const choseFlv = () => {
     setOption(flvConfig);

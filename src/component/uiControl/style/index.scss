@@ -1,5 +1,6 @@
 @import '@g/asset/style/global.scss';
 @import '@g/asset/style/svg.scss';
+@import '@g/asset/style/animation.scss';
 
 .container {
   position: absolute;
@@ -11,6 +12,7 @@
   overflow: hidden;
   color:#fff;
   z-index:999;
+  
   &:active{
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
@@ -45,7 +47,7 @@
   transform: translate3d(0, 100%, 0);
   opacity: 0;
   
-  // 调试放开
+  // 测试 调试放开
 	// transform: translate3d(0, 0, 0);
 	// opacity: 1;
   background:rgba(0,0,0,0.45);
@@ -72,16 +74,6 @@
 
 .animation {
   animation: rotation 0.5s linear 0s infinite running;
-}
-
-
-@keyframes rotation {
-	from {
-		transform: rotate(0);
-	}
-	to {
-		transform: rotate(360deg);
-	}
 }
 
 

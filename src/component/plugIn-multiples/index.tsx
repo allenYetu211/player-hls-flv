@@ -31,7 +31,7 @@ const defaultList = [
 
 const PluginMultiple = (props: IProps) => {
   const [multipleList, setMultipleList] = useState<multipleType[]>(defaultList);
-
+  const {index, onChangeMultipleIndex} = props;
   useEffect(() => {
     if (props.list.length) {
       setMultipleList(props.list);
@@ -40,17 +40,17 @@ const PluginMultiple = (props: IProps) => {
 
   return (
     <ToolTip
-      node={multipleList[props.index].text}>
+      node={multipleList[index].text}>
       <ul>
         {multipleList.map((item: multipleType, key: number) => {
           return (
             <li
               className={cn({
-                [style.action]: key === props.index,
+                [style.action]: key === index,
               })}
               key={`${item.text}-${key}`}
               onClick={() => {
-                props.onChangeMultipleIndex(key);
+                onChangeMultipleIndex(key);
               }}
             >
               {item.text}

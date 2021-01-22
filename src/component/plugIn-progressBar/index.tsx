@@ -6,6 +6,8 @@ import { msToTime } from '@utils/translateTime';
 
 import ToolTip from '@g/uiCompoent/toolTip';
 
+import {log} from '@utils/logs';
+
 
 import cn from 'classnames';
 
@@ -44,6 +46,7 @@ const PlugInProgressBar = (props: IProps) => {
 
   useEffect(() => {
     if (props.thumbnail) {
+      preload(props.thumbnail!.picture);
       const width = props.thumbnail!.width ? props.thumbnail!.width : 160;
       const height = props.thumbnail!.height ? props.thumbnail!.height : 90;
       const ratio = width / 160;
@@ -56,11 +59,28 @@ const PlugInProgressBar = (props: IProps) => {
 
 
   const [popContent, setPopContent] = useState<string>('');
+  // 测试 开发
   const [cursorElDisplayState, setCursorElDisplayState] = useState<boolean>(false);
   const progressEl = useRef<HTMLDivElement>(null);
   const cursorEl = useRef<HTMLDivElement>(null);
   const thumbnailEl = useRef<HTMLDivElement>(null);
   const thumbnailContainerEl = useRef<HTMLDivElement>(null);
+
+
+
+  // 预加载图片
+  const preload = (picturePath: string) => {
+    const img = new Image();
+    img.src = picturePath;
+    if (img.complete) {
+      log.info('complete')
+    } else {
+      img.onload = function () {
+        log.info('onload')
+      };
+    }
+  }
+
 
 
   //  计算

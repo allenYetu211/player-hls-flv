@@ -23,11 +23,11 @@ interface IPlayer {
   element: HTMLDivElement;
 }
 
-const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash', matchArr: string[], vod: boolean): boolean => {
+const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash' | undefined, matchArr: string[], vod: boolean): boolean => {
   if (type === 'hls' && vod) {
     return true
   }
-  return matchArr.includes(type);
+  return matchArr.includes(type!);
 }
 
 
@@ -165,6 +165,9 @@ const UiControl = (props: IPlayer) => {
   const [playIndex, setPlayIndex] = useState<number>(config.option! ? config.option!.playIndex : 0);
   const [multiStreams] = useState<IMultiStreams[]>(config.option! ? config.option!.multiStreams : [{ src: '', text: '' }]);
   const onChangePlayIndex = (key: number) => {
+
+    log.debug(`onChangePlayIndex-> ${key}`);
+
     setPlayIndex(key);
     player.chooseMultiCode(key)
   }
@@ -181,6 +184,7 @@ const UiControl = (props: IPlayer) => {
   const [multipleList] = React.useState<{ text: string, value: number }[]>(config.multiple ? config.multiple!.list : [])
   const [multipleIndex, setMultipleIndex] = React.useState<number>(config.multiple ? config.multiple!.initIndex : 0)
   const onChangeMultipleIndex = (key: number) => {
+    log.debug(`key-> ${key}`);
     setMultipleIndex(key);
     player.setPlaybackRate(multipleList[key].value)
   }

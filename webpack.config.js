@@ -2,8 +2,75 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WebpackAddVersionPulgin = require('./webpackAddVersionPulgin');
 
 let envPrd = false;
+
+const moduleRulesConfig = [
+  {
+    test: /\.css$/,
+    use: addMiniCssExtractPlugin([
+      'style-loader',
+      'css-loader',
+    ]),
+    exclude: /\.module\.css$/,
+    // include: /\.module\.css$/,
+  },
+  // {
+  //   test: /\.css$/,
+  //   use: addMiniCssExtractPlugin([
+  //     'style-loader',
+  //     'css-loader',
+  //   ]),
+  //   include: /\.module\.css$/,
+  // },
+  {
+    test: /\.scss$/,
+    sideEffects: true,
+    use: addMiniCssExtractPlugin([
+      'style-loader',
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 2,
+          modules: {
+            localIdentName: '[name]__[local]',
+          },
+        },
+      },
+      'postcss-loader',
+      {
+        loader: 'sass-loader',
+        options: {
+          implementation: require('sass'),
+          sourceMap: true
+        }
+      }
+      ,
+    ]),
+  },
+  {
+    test: /\.(svg|gif)$/,
+    use: [{
+      loader: 'url-loader',
+      options: {
+        limit: 5000,
+        outputPath: 'images/',
+        name: '[name].[ext]'
+      }
+    }]
+  },
+  {
+    test: /\.ts(x)?$/,
+    use: ['awesome-typescript-loader'],
+    exclude: /node_modules/,
+  }
+]
+
+const moduleRules = (itemConfig) => {
+  moduleRulesConfig.unshift(itemConfig);
+  return moduleRulesConfig;
+}
 
 const config = {
   devtool: 'source-map',
@@ -14,65 +81,9 @@ const config = {
     libraryTarget: 'umd',
     umdNamedDefine: true,
   },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: 'babel-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/,
-        use: addMiniCssExtractPlugin([
-          'style-loader',
-          'css-loader',
-        ]),
-        exclude: /\.module\.css$/,
-      },
-      {
-        test: /\.css$/,
-        use: addMiniCssExtractPlugin([
-          'style-loader',
-          'css-loader',
-        ]),
-        include: /\.module\.css$/,
-      },
-      {
-        test: /\.scss$/,
-        sideEffects: true,
-        use: addMiniCssExtractPlugin([
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              modules: {
-                localIdentName: '[name]__[local]',
-              },
-            },
-          },
-          'postcss-loader',
-          {
-            loader:  'sass-loader',
-            options: {
-              implementation: require('sass'),
-              sourceMap: true
-            }
-          }
-         ,
-        ]),
-      },
-      {
-        test: /\.svg$/,
-        use: 'file-loader',
-      },
-      {
-        test: /\.ts(x)?$/,
-        use: ['awesome-typescript-loader'],
-        exclude: /node_modules/,
-      },
-    ],
-  },
+  // resolveLoader: {
+  //   modules: ['node_modules', './loader']
+  // },
   resolve: {
     extensions: ['.js', '.jsx', '.tsx', '.ts'],
     alias: {
@@ -88,10 +99,10 @@ const config = {
   },
 };
 
-function addMiniCssExtractPlugin (arr) {
+function addMiniCssExtractPlugin(arr) {
   let copyarr = arr.concat();
   if (envPrd) {
-    copyarr.splice(1, 0 ,{ loader: MiniCssExtractPlugin.loader} )
+    copyarr.splice(1, 0, { loader: MiniCssExtractPlugin.loader })
     return copyarr
   }
   return copyarr
@@ -153,12 +164,18 @@ module.exports = (env, argv) => {
           amd: 'classnames',
         },
       },
+      module: {
+        rules: moduleRulesConfig
+      },
+      plugins: [
+        new WebpackAddVersionPulgin()
+      ]
     });
   }
 
   if (env.NODE_ENV === 'development') {
     result = Object.assign({}, config, {
-      entry: ['react-hot-loader/patch', './devImport/index.tsx'],
+      entry: ['babel-polyfill', 'react-hot-loader/patch', './devImport/index.tsx'],
       optimization: {
         runtimeChunk: 'single',
         splitChunks: {
@@ -174,7 +191,7 @@ module.exports = (env, argv) => {
       plugins: [
         new HtmlWebpackPlugin({
           inject: true,
-					template:path.resolve(__dirname, 'index.html'),
+          template: path.resolve(__dirname, 'index.html'),
         }),
       ],
       devServer: {
@@ -182,8 +199,15 @@ module.exports = (env, argv) => {
         hot: true,
         stats: 'errors-only'
       },
+      module: {
+        // rules: moduleRules({
+        //   test: /\.ts(x)?$/,
+        //   use: ['awesome-typescript-loader'],
+        //   exclude: /node_modules/,
+        // })
+        rules: moduleRulesConfig
+      }
     });
   }
-  console.log('path.resolve(__dirname', path.resolve(__dirname, 'index.html'));
   return result;
 };

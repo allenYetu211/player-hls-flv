@@ -128,7 +128,7 @@ export default class VideoContainer {
     // conso.
     this.videoEl.addEventListener('leavepictureinpicture', () => {
       // @ts-ignore
-      console.log('::::::::   leavepictureinpicture>>>', this.videoEl.paused)
+      console.log('leavepictureinpicture>>>', this.videoEl.paused)
     }) 
     
     this.videoEl.addEventListener('enterpictureinpicture', () => {

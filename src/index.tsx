@@ -1,4 +1,3 @@
-
 import React, {useRef, useEffect, useState} from 'react';
 import style from './styles.scss';
 import {initPlayer} from '@player/index';
@@ -7,10 +6,12 @@ import UiControl from '@g/component/uiControl';
 import {logInit} from '@utils/logs';
 
 
-//  初始全局log
+// //  初始全局log
 logInit('ALL');
+// todo webpack 打包插入
+
 export interface initConfig {
-  type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash',
+  type?: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash',
   src?: string;
   autoplay?: boolean;
   option?: IMultiStreamsContainer;
@@ -82,6 +83,7 @@ const VideoPlayer = (props: initConfig) => {
         onListenerState(videoPlayer, 'off');
         videoPlayer.destroy(); 
       }
+
       // 此处添加setTimeout 是处理切换码流类型时，销毁原本的播放器，需要一定时间重新初始。  
       // TODO 后续需要优化
       setTimeout(() => {
@@ -89,7 +91,6 @@ const VideoPlayer = (props: initConfig) => {
           element: videoEl.current!,
           containerEl: containerEl.current!,
         })
-
 
         vp = initPlayer(config);
         setInitState(true);
