@@ -15,8 +15,12 @@ interface IProps {
 
 const PlugInMultiCode = (props: IProps) => {
   const { playIndex, multiStreams } = props;
+  // TODO 上下行边际处理
+  // React.useEffect(() => {
+  //   multiStreams[playIndex]
+  // },[props.playIndex])
   return (
-    <ToolTip node={multiStreams[playIndex].text}>
+    <ToolTip node={multiStreams[playIndex] ? multiStreams[playIndex].text : multiStreams[multiStreams.length -1 ].text}>
       <ul>
         {multiStreams.map((item, key) => {
           return (

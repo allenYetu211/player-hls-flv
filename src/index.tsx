@@ -2,7 +2,6 @@ import React, {useRef, useEffect, useState} from 'react';
 import style from './styles.scss';
 import {initPlayer} from '@player/index';
 import UiControl from '@g/component/uiControl';
-// import {deviceType} from '@utils/phoneType';
 import {logInit} from '@utils/logs';
 
 
