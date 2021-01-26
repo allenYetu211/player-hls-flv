@@ -17,3 +17,5 @@ Thumbs.db
 
 yarn.lock
 yarn-error.log
+
+/test
