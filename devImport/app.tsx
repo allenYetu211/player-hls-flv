@@ -109,12 +109,22 @@ const mp4Config: initConfig = {
 
 // vod 点播
 const vodHlsConfig: initConfig = {
-  type: 'hls',
-  vod: true,
-  autoplay: false,
-  isMobile: false,
-  src:
-    "https://vod.xylink.com/vodfile1/cloud/9006261021/1155662354619_0_1588073014333_1280_720.mp4/index.m3u8?proxysessionid=1804317912,bandwidth=1816980",
+  "type": "m3u8",
+  "src": "http://prdpulllive.xylink.com/prdnemo/9680d4be77203b4d0177431d4d7a3f6c.m3u8?auth_key=d171b8f67b3dbf3ff672a4b3e48d44dd-1611833408-8edcdb3a8826407c8b69636e590ce19e-",
+  "autoplay": false,
+  "isMobile": false,
+  "hideMultiCode": true,
+  "multiple":
+  {
+    "list":
+      [{ "text": "2x", "value": 2 },
+      { "text": "1.5x", "value": 1.5 },
+      { "text": "1.25x", "value": 1.25 },
+      { "text": "1x", "value": 1 },
+      { "text": "0.5x", "value": 0.5 }],
+    "initIndex": 3
+  },
+  "vod": true
 }
 
 const flvConfig: initConfig = {
@@ -192,7 +202,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<any>(mp4z)
+  const [option, setOption] = useState<any>(vodHlsConfig)
 
   const choseFlv = () => {
     setOption(flvConfig);

@@ -23,8 +23,8 @@ interface IPlayer {
   element: HTMLDivElement;
 }
 
-const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash' | undefined, matchArr: string[], vod: boolean): boolean => {
-  if (type === 'hls' && vod) {
+const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash' , matchArr: string[], vod: boolean): boolean => {
+  if ((type === 'hls' || type === 'm3u8') && vod) {
     return true
   }
   return matchArr.includes(type!);
@@ -57,13 +57,13 @@ const UiControl = (props: IPlayer) => {
 
 
   const controlUi = () => {
-    if (matchMediaVideoControll(props.config.type, ['mp4', 'dash'], !!props.config.vod)) {
+    if (matchMediaVideoControll(props.config.type || 'mp4', ['mp4', 'dash'], !!props.config.vod)) {
       setMultiples(true);
       setDuration(true);
       setProgressBar(true);
     }
 
-    if (matchMediaVideoControll(props.config.type, ['flv'], !props.config.vod)) {
+    if (matchMediaVideoControll(props.config.type || "mp4", ['flv'], !props.config.vod)) {
       setPluginMultiCode(true);
     }
   }
