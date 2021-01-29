@@ -107,8 +107,10 @@ const mp4Config: initConfig = {
 
 
 
+
 // vod 点播
 const vodHlsConfig: initConfig = {
+  poster: "http://testqacdn.xylink.com/poster/202105/16119087407093887.jpg",
   "type": "m3u8",
   "src": "http://prdpulllive.xylink.com/prdnemo/9680d4be77203b4d0177431d4d7a3f6c.m3u8?auth_key=d171b8f67b3dbf3ff672a4b3e48d44dd-1611833408-8edcdb3a8826407c8b69636e590ce19e-",
   "autoplay": false,
