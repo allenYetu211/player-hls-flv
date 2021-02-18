@@ -93,6 +93,12 @@ export default class NativePlayer extends VideoControl {
 
   public  destroy(){
     this.stop()
+
+    //  HACK 
+    //  当视频mp4 为 pending状态时，切换mp4链接，进行了暂停操作后， 此视频在浏览器中仍会继续架加载。  会出现串音操作。
+    //  直接将链接至为空，并重新loading。
+    this.videoEl.src = '';
+    this.videoEl.load()
     console.log('Native destroy')
   }
 
