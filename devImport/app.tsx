@@ -112,7 +112,7 @@ const mp4Config: initConfig = {
 const vodHlsConfig: initConfig = {
   poster: "http://testqacdn.xylink.com/poster/202105/16119087407093887.jpg",
   "type": "m3u8",
-  "src": "http://prdpulllive.xylink.com/prdnemo/9680d4be77203b4d0177431d4d7a3f6c.m3u8?auth_key=d171b8f67b3dbf3ff672a4b3e48d44dd-1611833408-8edcdb3a8826407c8b69636e590ce19e-",
+  "src": "http://prd-vodcdn.xylink.com/vodfiles/sharefiles/202102/25001022/a8a35bb7-e640-4e18-8225-e17c0b8cf585.m3u8",
   "autoplay": false,
   "isMobile": false,
   "hideMultiCode": true,
@@ -157,15 +157,15 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: "http://prdpulllive.xylink.com/prdnemo/9680cfa876af419b017715fa2a506ea0.m3u8?auth_key=9696c64407db597b01b45958b122566b-1611075650-1095f4aac2d2463f929ae04ddc289695-",
+        src: "http://prdpulllive.xylink.com/prdnemo/9680d8c877e410780177f19971ed0b80.m3u8?auth_key=472de38c3cf3b5f6e4f189a1c26496b0-1614760238-20a94f758a3344209d8851e9f19c1fa9-",
         text: "小鱼1",
       },
       {
-        src: "http://prdpulllive.xylink.com/prdnemo/9680cfa876af419b017715fa2a506ea0.m3u8?auth_key=9696c64407db597b01b45958b122566b-1611075650-1095f4aac2d2463f929ae04ddc289695-",
+        src: "http://prdpulllive.xylink.com/prdnemo/9680d8c877e410780177f19971ed0b80.m3u8?auth_key=472de38c3cf3b5f6e4f189a1c26496b0-1614760238-20a94f758a3344209d8851e9f19c1fa9-",
         text: "小鱼2",
       }
     ],
-    playIndex: 1,
+    playIndex: 0,
   }
 }
 

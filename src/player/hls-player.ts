@@ -58,9 +58,15 @@ export default class HLSPlayer extends VideoControl {
     if (Hls.isSupported()) {
       this.hls = new Hls({
         xhrSetup: async (xhr, url) => {
-          const requestUrl = /\?/.test(url) ? `${url}&t=${new Date().getTime()}` : `${url}?t=${new Date().getTime()}`
+          //  .ts 文件不增加时间戳，防止文件OSS 命中降低。
+          let requestUrl = url;
+          if (/\.m3u8/.test(url)) {
+            requestUrl = /\?/.test(url) ? `${url}&t=${new Date().getTime()}` : `${url}?t=${new Date().getTime()}`
+          } 
+        
           xhr.open('GET', requestUrl, true);
         },
+        maxBufferLength: 120
       });
       this.hls.loadSource(this.src);
       this.hls.attachMedia(this.videoEl);
