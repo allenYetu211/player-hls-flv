@@ -126,7 +126,19 @@ const vodHlsConfig: initConfig = {
       { "text": "0.5x", "value": 0.5 }],
     "initIndex": 3
   },
-  "vod": true
+  "vod": true,
+  thumbnail: {
+    picture: '"http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9005795481/101-bj2-txdevSig2-2157164404862_0_1602747891243_1920_1080_preview.jpg?auth_key=1603290713-0-0-c4431191c2f139503e88874b4d5ef939"',
+    // width: 160,
+    // height: 90,
+    count: 12, // 图片总数
+    backgroundSize: 3840, // 图片分辨率
+  },
+  "contentPreview": {
+    "pictureUrl": "http://xxxxxxxxxxx",
+    "viewCount": 100,
+    "timestap": ['1233', '21312', 't3']
+  }
 }
 
 const flvConfig: initConfig = {

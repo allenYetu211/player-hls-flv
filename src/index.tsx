@@ -33,6 +33,11 @@ export interface initConfig {
     rowCount?: number;
     backgroundSize: number;
   };
+  contentPreview?: {
+    pictureUrl: string;
+    viewCount: number;
+    timestap: string[];
+  }
 }
 
 export interface IMultiple {
