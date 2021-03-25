@@ -34,9 +34,9 @@ export interface initConfig {
     backgroundSize: number;
   };
   contentPreview?: {
-    pictureUrl: string;
+    picture: string;
     viewCount: number;
-    timestap: string[];
+    timestap: number[];
   }
 }
 
@@ -128,6 +128,7 @@ const VideoPlayer = (props: initConfig) => {
     { initState && 
       <UiControl 
         config={props} 
+        eel={containerEl}
         element={containerEl.current!} 
       />}
     <video  ref={videoEl} />

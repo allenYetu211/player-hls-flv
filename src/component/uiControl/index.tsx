@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { getVideoPlayer } from '@player/index';
 import style from './style/index.scss';
-import { initConfig } from '@interfaces/index';
+// import { initConfig } from '@interfaces/index';
+
+import { initConfig } from '../../index';
 import PlugInVoice from '@g/component/plugIn-voice'
 import PlugInPlayBtn from '@g/component/plugIn-playBtn';
 import PlugInDuration from '@g/component/plugIn-duration';
@@ -10,10 +12,12 @@ import PlugInFullScreen from '@g/component/plugIn-fullScreen'
 import PluginMultiples from '@g/component/plugIn-multiples';
 import PluginMultiCode from '@g/component/plugIn-multiCode';
 import PluginRefresh from '@g/component/plugIn-refresh';
+import PulginDrawer from '@g/component/plugin-drawer';
 import { iconLoading } from '@g/images/icon';
 import { msToTime } from '@utils/translateTime';
 import cn from 'classnames';
 import { IMultiStreams } from '@interfaces/index';
+
 
 import { log } from '@utils/logs';
 // import {deviceType} from '@utils/phoneType';
@@ -21,9 +25,10 @@ import { log } from '@utils/logs';
 interface IPlayer {
   config: initConfig;
   element: HTMLDivElement;
+  eel: React.RefObject<HTMLDivElement>;
 }
 
-const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash' , matchArr: string[], vod: boolean): boolean => {
+const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash', matchArr: string[], vod: boolean): boolean => {
   if ((type === 'hls' || type === 'm3u8') && vod) {
     return true
   }
@@ -45,6 +50,7 @@ const UiControl = (props: IPlayer) => {
   const [loading, setloading] = useState<boolean>(false);
   const [containerDisplay, setContainerDisplay] = useState<boolean>(false);
   const [oncePoster, setOncePoster] = useState<boolean>(true);
+  const pel = React.useRef<HTMLDivElement>(null);
 
 
   useEffect(() => {
@@ -231,15 +237,35 @@ const UiControl = (props: IPlayer) => {
     onChangeVideoVolume(volume ? 0 : 0.6);
   }
 
+  /**
+   * @导航栏
+   */
+  const [openDrawerState, setOpenDrawerState] = useState<boolean>(false);
+  const onChangeDrawer = () => {
+    console.log('onChangeDrawer', openDrawerState)
+    setOpenDrawerState(!openDrawerState);
+  }
+
+  const onChangeTimestamp = (value: number) => {
+    player.setCurrentTime(value);
+    player.play();
+    // setPlayProgressBar(value)
+  }
+
+  // console.log('playProgress')
+
 
   /**
    * @渲染
    */
   return (
-    <div className={cn(style.container, 'needsclick', {
-      [style.display]: config.isMobile! && containerDisplay,
-      [style.hover]: !config.isMobile!,
-    })}
+    <div
+
+      ref={pel}
+      className={cn(style.container, 'needsclick', {
+        [style.display]: config.isMobile! && containerDisplay,
+        [style.hover]: !config.isMobile!,
+      })}
       onClick={switchContainerDisplay}
     >
       {/* 播放按钮 重构完成1 */}
@@ -252,7 +278,7 @@ const UiControl = (props: IPlayer) => {
           <PlugInPlayBtn
             onSwitchPlayer={onSwitchPlayer}
             playerState={playerState}
-             />
+          />
         }
 
         {!isShowPlayering && loading &&
@@ -336,6 +362,17 @@ const UiControl = (props: IPlayer) => {
 
             {isFullScreen && <PlugInFullScreen element={props.element} />}
 
+
+            {/* 导航栏 */}
+            {config.contentPreview && <PulginDrawer
+              parentEl={props.eel}
+              open={openDrawerState}
+              onClose={onChangeDrawer}
+              onChangeTimestamp={onChangeTimestamp}
+              contentPreview={config.contentPreview}
+              prefixCls={'xyel'}
+            />}
+
           </div>
         </div>
       )}
@@ -344,3 +381,4 @@ const UiControl = (props: IPlayer) => {
 };
 
 export default UiControl;
+

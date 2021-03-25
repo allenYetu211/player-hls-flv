@@ -1,0 +1,38 @@
+@import '@g/asset/style/svg.scss';
+
+.previewItem {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  background-repeat: no-repeat;
+  background-size: 1640px;
+  // background-position: top left;
+  width: 164px;
+  height: 90px;
+  margin: 10px;
+
+  cursor: pointer;
+
+  &:hover {
+    .previewText {
+     background-color: rgba(0,0,0,.8);
+    }
+  }
+}
+
+.previewText {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0,0,0,.3);
+  transition: all 0.2s ease-in;
+  color: rgba(255,255,255,.8);
+  line-height: 1;
+}
+
+// :global {
+//   .xyel-drawer-child {
+//     background-color:rgba(0,0,0,.8);;
+//   }
+// }

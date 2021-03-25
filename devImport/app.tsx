@@ -134,11 +134,11 @@ const vodHlsConfig: initConfig = {
     count: 12, // 图片总数
     backgroundSize: 3840, // 图片分辨率
   },
-  "contentPreview": {
-    "pictureUrl": "http://xxxxxxxxxxx",
-    "viewCount": 100,
-    "timestap": ['1233', '21312', 't3']
-  }
+  contentPreview:{
+    picture: "https://devcdn.xylink.com/test/dump_img.jpg",
+    viewCount: 20,
+    timestap: [90937, 124937, 196937, 294637, 394937, 494937, 394937, 494937, 594937, 694937, 794937, 894937, 2294937, 5890937]
+  },
 }
 
 const flvConfig: initConfig = {
