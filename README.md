@@ -1,87 +1,6 @@
-### 环境依赖：
-```
-node ：10.0+
-```
-
-### 本地开发准备
-安装启动
-```
-yarn install
-```
 
 
-### 本地运行
-```
-集成开发测试：yarn start  // 占用3000端口
-组件开发测试：yarn storybook  // 占用8000端口
-```
-### 访问地址：
-```
-localhost:3000
-```
-
-### 打包
-```
-yarn build 
-```
-
-
-
-### 目录结构：
-```
-├── README.md
-├── babel.config.js
-├── devImport  // 开发测试集成入口
-│   ├── app.tsx  // 开发测试集成入口， 在此文件模拟第三方应用调用。
-│   └── index.tsx
-├── dist // 编译后的文件
-├── index.html 
-├── jest.config.js
-├── jest.setup.js
-├── package-lock.json
-├── package.json
-├── picture
-├── postcss.config.js
-├── react-app-env.d.ts
-├── src
-│   ├── asset 
-│   ├── basicComponent // 抽离的公用组件，可以单独发布npm
-│   ├── component // 组件内容
-│   ├── dash-shaka // 测试内容，
-│   ├── hooks 
-│   ├── images
-│   ├── index.tsx  // 入口文件
-│   ├── interfaces // 内容定义
-│   ├── player //播放器实现
-│   ├── react-app-env.d.ts
-│   ├── stories // storybooks 测试内容
-│   ├── styles.scss
-│   ├── uiCompoent // 二次ui开发
-│   ├── ur-util 
-│   └── utils // 工具库
-├── test
-│   ├── Link.react.js
-│   ├── Link.react.test.js
-│   ├── __snapshots__
-│   └── index.test1.js
-├── tsconfig.extends.json
-├── tsconfig.json
-├── util
-│   └── replaceLoader.js 
-├── webpack.config.js
-├── webpackAddVersionPulgin.js  // 编译打包的版本自动生成webpack 插件， 可以单独提出npm包
-├── yarn-error.log
-```
-
-### 版本更新内容：
-#### 1.4.30-bate1
-1. 新增播放器导航栏（2021-03-25）
-
----
-
-
-
-# 组件说明 v-player
+# v-player
 
 
 ## 浏览器 
@@ -213,11 +132,88 @@ return (
 }
 ```
 
-### 推荐安装依赖后，启动后运行查看使用方式。
-- 安装依赖 **yarn install**
-- 启动 **yarn start**
-- console 内打印的Vp 为播放器相关属性。
+
+---
+
+# 本地开发准备
+### 环境依赖：
+```
+node ：10.0+
+```
+
+
+### 安装启动
+```
+yarn install
+```
+
+
+### 本地运行
+```
+集成开发测试：yarn start  // 占用3000端口
+组件开发测试：yarn storybook  // 占用8000端口
+```
+### 访问地址：
+```
+localhost:3000
+```
+
+### 打包
+```
+yarn build 
+```
 
 
 
+### 目录结构：
+```
+├── README.md
+├── babel.config.js
+├── devImport  // 开发测试集成入口
+│   ├── app.tsx  // 开发测试集成入口， 在此文件模拟第三方应用调用。
+│   └── index.tsx
+├── dist // 编译后的文件
+├── index.html 
+├── jest.config.js
+├── jest.setup.js
+├── package-lock.json
+├── package.json
+├── picture
+├── postcss.config.js
+├── react-app-env.d.ts
+├── src
+│   ├── asset 
+│   ├── basicComponent // 抽离的公用组件，可以单独发布npm
+│   ├── component // 组件内容
+│   ├── dash-shaka // 测试内容，
+│   ├── hooks 
+│   ├── images
+│   ├── index.tsx  // 入口文件
+│   ├── interfaces // 内容定义
+│   ├── player //播放器实现
+│   ├── react-app-env.d.ts
+│   ├── stories // storybooks 测试内容
+│   ├── styles.scss
+│   ├── uiCompoent // 二次ui开发
+│   ├── ur-util 
+│   └── utils // 工具库
+├── test
+│   ├── Link.react.js
+│   ├── Link.react.test.js
+│   ├── __snapshots__
+│   └── index.test1.js
+├── tsconfig.extends.json
+├── tsconfig.json
+├── util
+│   └── replaceLoader.js 
+├── webpack.config.js
+├── webpackAddVersionPulgin.js  // 编译打包的版本自动生成webpack 插件， 可以单独提出npm包
+├── yarn-error.log
+```
+
+### 版本更新内容：
+#### 1.4.30-bate1
+1. 新增播放器导航栏（2021-03-25）
+
+---
 
