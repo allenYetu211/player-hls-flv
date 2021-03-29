@@ -73,9 +73,19 @@ const VideoPlayer = (props: initConfig) => {
 
   // src 发生变化时候更新
   useEffect(() => {
-    if(videoPlayer && videoPlayer.updateMp4Path) {
-      videoPlayer.stop();
-      videoPlayer.updateMp4Path(props.src, props.duration)
+    // console.log('->>>>');
+    // if(videoPlayer && videoPlayer.updateMp4Path) {
+    //   videoPlayer.stop();
+    //   videoPlayer.updateMp4Path(props.src, props.duration)
+    // }
+
+    if (videoPlayer) {
+      if (props.type === 'mp4') {
+        videoPlayer.stop();
+        videoPlayer.updateMp4Path(props.src, props.duration)
+      } if (props.type === 'm3u8' || props.type === 'hls') { 
+        videoPlayer.updatePath(props.src)
+      }
     }
   }, [props.src, props.duration])
 

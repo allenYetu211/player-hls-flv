@@ -42,7 +42,6 @@ const DrawerChild = React.forwardRef<PortalRef, DrawerChildProps>((props, ref) =
   const [stateOpen, setStateOpen] = React.useState<boolean>(open || false);
 
   React.useEffect(() => {
-    console.log('open', props.open);
     if (props.open) {
       domEl.current!.style.zIndex =  '9999';
     }

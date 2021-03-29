@@ -112,7 +112,39 @@ const mp4Config: initConfig = {
 const vodHlsConfig: initConfig = {
   poster: "http://testqacdn.xylink.com/poster/202105/16119087407093887.jpg",
   "type": "m3u8",
-  "src": "http://prd-vodcdn.xylink.com/vodfiles/sharefiles/202102/25001022/a8a35bb7-e640-4e18-8225-e17c0b8cf585.m3u8",
+  "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8",
+  "autoplay": false,
+  "isMobile": false,
+  "hideMultiCode": true,
+  "multiple":
+  {
+    "list":
+      [{ "text": "2x", "value": 2 },
+      { "text": "1.5x", "value": 1.5 },
+      { "text": "1.25x", "value": 1.25 },
+      { "text": "1x", "value": 1 },
+      { "text": "0.5x", "value": 0.5 }],
+    "initIndex": 3
+  },
+  "vod": true,
+  thumbnail: {
+    picture: '"http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9005795481/101-bj2-txdevSig2-2157164404862_0_1602747891243_1920_1080_preview.jpg?auth_key=1603290713-0-0-c4431191c2f139503e88874b4d5ef939"',
+    // width: 160,
+    // height: 90,
+    count: 12, // 图片总数
+    backgroundSize: 3840, // 图片分辨率
+  },
+  contentPreview:{
+    picture: "https://devcdn.xylink.com/test/dump_img.jpg",
+    viewCount: 20,
+    timestap: [90937, 124937, 196937, 294637, 394937, 494937, 394937, 494937, 594937, 694937, 794937, 894937, 2294937, 5890937]
+  },
+}
+
+const vodHlsConfig2: initConfig = {
+  poster: "http://testqacdn.xylink.com/poster/202105/16119087407093887.jpg",
+  "type": "m3u8",
+  "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8?v=2",
   "autoplay": false,
   "isMobile": false,
   "hideMultiCode": true,
@@ -222,7 +254,7 @@ const App = () => {
     setOption(flvConfig);
   }
   const choseHLS = () => {
-    setOption(hlsConfig);
+    setOption(vodHlsConfig2);
   }
 
   const choseMp4Url2 = () => {

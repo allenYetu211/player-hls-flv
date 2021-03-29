@@ -28,11 +28,8 @@ export default class HLSPlayer extends VideoControl {
       poster: config.poster
     })
 
-
-
     // 如果是vod点播，
     if (!config!.vod) {
-
       // 如果存在option，则处理多码率。
       if (config.option) {
         this.multiStreams = config.option!.multiStreams;
@@ -42,19 +39,15 @@ export default class HLSPlayer extends VideoControl {
       } else {
         this.src = config.src || ''
       }
-
     } else {
       this.vod = true;
       this.src = config.src || '';
     }
-
     this.autoplay = config.autoplay || false;
-
     this.initVideoEl();
   }
 
   private initVideoEl() {
-
     if (Hls.isSupported()) {
       this.hls = new Hls({
         xhrSetup: async (xhr, url) => {
@@ -125,6 +118,14 @@ export default class HLSPlayer extends VideoControl {
     })
   }
 
+  public updatePath(src: string) {
+    this.autoplay = !this.videoEl.paused;
+    this.destroy();
+    this.src = src;
+    this._emitter.emit('playProgress', 0);
+    this.refresh();
+  }
+
   public destroy() {
     if (this.hls) {
       this.hls.destroy();
@@ -138,4 +139,5 @@ export default class HLSPlayer extends VideoControl {
     this.onRefershVideo()
     this.initVideoEl();
   }
+
 }

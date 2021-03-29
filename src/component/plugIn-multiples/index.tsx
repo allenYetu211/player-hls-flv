@@ -31,14 +31,10 @@ const defaultList = [
 
 const PluginMultiple = (props: IProps) => {
   const [multipleList, setMultipleList] = useState<multipleType[]>(defaultList);
-  console.log('list', multipleList)
 
   const {index, onChangeMultipleIndex} = props;
-  console.log('list', multipleList)
-  console.log('index', index)
 
   useEffect(() => {
-    console.log('multipleList', multipleList)
     if (props.list.length) {
       setMultipleList(props.list);
     }
