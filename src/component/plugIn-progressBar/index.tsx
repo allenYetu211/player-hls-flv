@@ -28,9 +28,7 @@ interface IProps {
 
 }
 
-
-
-
+let CURRENTTIME = 0;
 
 const PlugInProgressBar = (props: IProps) => {
   const player: any = getVideoPlayer();
@@ -42,7 +40,6 @@ const PlugInProgressBar = (props: IProps) => {
   const [thumbnailWidth, set_thumbnailWidth] = useState<number>(160);
 
   //  记录滚动时间位置
-  let CURRENTTIME = 0;
 
   useEffect(() => {
     if (props.thumbnail) {
@@ -87,7 +84,6 @@ const PlugInProgressBar = (props: IProps) => {
   const onMouseMove = (e: React.MouseEvent): void => {
     const width = progressEl.current!.offsetWidth;
     const left = progressEl.current!.getBoundingClientRect().left;
-    // const count =
     CURRENTTIME = (e.clientX - left) / width * props.videoDuration;
     if (props.thumbnail) {
       const rowCount = props.thumbnail.backgroundSize / thumbnailWidth;
