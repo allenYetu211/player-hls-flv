@@ -86,9 +86,43 @@ export default class VideoContainer {
     this.videoEl.volume = value;
   }
 
+  // 计算操作缓冲内容长度
+  public onCacheUpdate () {
+    let buffered = this.videoEl.buffered
+    if (buffered && buffered.length > 0) {
+      let end = buffered.end(buffered.length - 1)
+      for (let i = 0, len = buffered.length; i < len; i++) {
+        if (this.videoEl.currentTime >= buffered.start(i) && this.videoEl.currentTime <= buffered.end(i)) {
+          end = buffered.end(i)
+          for (let j = i + 1; j < buffered.length; j++) {
+            if (buffered.start(j) - buffered.end(j - 1) >= 2) {
+              end = buffered.end(j - 1)
+              break
+            }
+          }
+          break
+        }
+      }
+      const catchValue = `${(end / this.videoEl.duration * 100).toFixed(3)}%`;
+      this._emitter.emit('catchUpdate', catchValue)
+    }
+  }
+
   // 监听video事件
   private  addEventListener () {
+    this.videoEl.addEventListener('progress', () => {
+    this.onCacheUpdate()
+  })
+
   this.videoEl.addEventListener('timeupdate', (e: any) => {
+
+    // TODO : 监听缓冲时间,  设置缓冲区。
+    // {length: 4}
+    // this._emitter.emit('bufferedState', {
+    //   bufferedStart: this.videoEl.buffered.start(0),
+    //   bufferedEnd: this.videoEl.buffered.end(0)
+    // })
+
     /**
      * @TODO 为什么需要重复监听？
      */ 
@@ -161,6 +195,7 @@ export default class VideoContainer {
       console.log('webkitendfullscreen')
       this._emitter.emit('fullscreen', false)
     })
+
   }
 
   public setCurrentTime (value: number) {

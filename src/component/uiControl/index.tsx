@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getVideoPlayer } from '@player/index';
+import Player, { getVideoPlayer } from '@player/index';
 import style from './style/index.scss';
 // import { initConfig } from '@interfaces/index';
 
@@ -27,6 +27,8 @@ interface IPlayer {
   element: HTMLDivElement;
   eel: React.RefObject<HTMLDivElement>;
 }
+
+type bufferedStateType = {bufferedStart: number;bufferedEnd: number}
 
 const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash', matchArr: string[], vod: boolean): boolean => {
   if ((type === 'hls' || type === 'm3u8') && vod) {
@@ -159,8 +161,18 @@ const UiControl = (props: IPlayer) => {
   /**
    * @进度条 
    */
+  
   const [videoProgressBarDuration, setProgressBarDuration] = useState<number>(0);
   const [playProgressBar, setPlayProgressBar] = useState<number>(0);
+  const [cacheValue, setCacheValue] = useState<string>('0%');
+  // const [ bufferedState, setBufferedState] = useState<bufferedStateType>({
+  //   bufferedStart: 0,
+  //   bufferedEnd: 0
+  // })
+
+  player.on('catchUpdate', (value: string) => {
+    setCacheValue(value)
+  });
 
 
   /**
@@ -329,6 +341,9 @@ const UiControl = (props: IPlayer) => {
               onChangeComplete={onChangeComplete}
               videoDuration={videoProgressBarDuration}
               playProgress={playProgressBar}
+              cacheValue={cacheValue}
+              // bufferedStart={bufferedState.bufferedStart}
+              // bufferedEnd={bufferedState.bufferedEnd}
             />}
 
           <div className={style.rightContaienr}>

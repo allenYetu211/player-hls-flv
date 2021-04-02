@@ -25,12 +25,15 @@ interface IProps {
   };
   videoDuration: number;
   playProgress: number;
-
+  cacheValue: string;
+  // bufferedStart: number;
+  // bufferedEnd: number;
 }
 
 let CURRENTTIME = 0;
 
 const PlugInProgressBar = (props: IProps) => {
+
   const player: any = getVideoPlayer();
 
   // 缩略图宽度
@@ -54,6 +57,11 @@ const PlugInProgressBar = (props: IProps) => {
     }
   }, [])
 
+  // 计算缓冲区间
+  // useEffect(() => {
+  //     console.log('props.bufferedStart', props.bufferedStart)
+  //     console.log('props.bufferedEnd', props.bufferedEnd)
+  // }, [props.bufferedStart, props.bufferedEnd]);
 
   const [popContent, setPopContent] = useState<string>('');
   // 测试 开发
@@ -62,8 +70,6 @@ const PlugInProgressBar = (props: IProps) => {
   const cursorEl = useRef<HTMLDivElement>(null);
   const thumbnailEl = useRef<HTMLDivElement>(null);
   const thumbnailContainerEl = useRef<HTMLDivElement>(null);
-
-
 
   // 预加载图片
   const preload = (picturePath: string) => {
@@ -77,8 +83,6 @@ const PlugInProgressBar = (props: IProps) => {
       };
     }
   }
-
-
 
   //  计算
   const onMouseMove = (e: React.MouseEvent): void => {
@@ -95,7 +99,6 @@ const PlugInProgressBar = (props: IProps) => {
     setPopContent(msToTime(String(CURRENTTIME)))
   };
 
-
   // 缩略图位置预览计算
   const computePictureMove = (width: number, clientx: number, count: number, rowCount: number): void => {
     const picturePosition = Math.ceil(clientx / width * count) - 1;
@@ -105,7 +108,6 @@ const PlugInProgressBar = (props: IProps) => {
     const pictrueY = PICTRUEHEIGHT * pictureRow;
     thumbnailEl.current!.style.backgroundPosition = `-${pictrueX}px -${pictrueY}px`;
   }
-
 
   const computeMove = (width: number, clinetx: number, left: number): void => {
     const movel = clinetx - left;
@@ -132,6 +134,10 @@ const PlugInProgressBar = (props: IProps) => {
     }
   }
 
+  // const React.useMemo(() => {
+  //   return props.cacheValue
+  // }, [props.cacheValue])
+
 
   return (
     <div
@@ -144,6 +150,11 @@ const PlugInProgressBar = (props: IProps) => {
       onMouseLeave={() => { setCursorElDisplayState(false); }}
     // onMouseLeave={() => { setCursorElDisplayState(true); }}
     >
+      <div 
+      className={style.cacheContainer}
+      style={{
+        width: props.cacheValue,
+      }}/>
 
 
       <div
@@ -197,4 +208,10 @@ const PlugInProgressBar = (props: IProps) => {
   );
 };
 
+
 export default PlugInProgressBar;
+
+// const areEqual = (prevProps: IProps, nextProps: IProps) =>  prevProps.playerState == nextProps.playerState;
+
+// export default  React.memo(PlugInProgressBar, areEqual);
+ 
