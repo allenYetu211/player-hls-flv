@@ -58,25 +58,32 @@ export default class FlvPlayer extends VideoControl {
   }
 
   private addPlayerListener() {
+
     this.flv.on(flvjs.ErrorTypes.NETWORK_ERROR, (e: any) => {
-      this._emitter.emit('NETWORK_ERROR: FLV ===>', e)
+      this._emitter.emit('NETWORK_ERROR', e)
     })
 
     this.flv.on(flvjs.Events.STATISTICS_INFO, (e:any) => {
-      this._emitter.emit('STATISTICS_INFO: FLV ===>', e)
+      this._emitter.emit('STATISTICS_INFO', e)
     })
     
     this.flv.on(flvjs.Events.ERROR, (e:any) => {
-      this._emitter.emit('ERROR: FLV ===>', e)
+      this._emitter.emit('ERROR', e)
     })
 
     this.flv.on(flvjs.ErrorTypes.MEDIA_ERROR, (e:any) => {
-      this._emitter.emit('MEDIA_ERROR: FLV ===>', e)
+      this._emitter.emit('MEDIA_ERROR', e)
     })
 
     this.flv.on(flvjs.ErrorTypes.OTHER_ERROR, (e:any) => {
-      this._emitter.emit('OTHER_ERROR: FLV ===>', e)
+      this._emitter.emit('OTHER_ERROR', e)
     })
+
+    this.flv.on(flvjs.Events.LOADING_COMPLETE, (e:any) => {
+      // LOADING_COMPLETE	The input MediaDataSource has been completely buffered to end
+      this._emitter.emit('LOADING_COMPLETE')
+    })
+
   }
 
   public  destroy(){
