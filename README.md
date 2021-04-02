@@ -18,7 +18,9 @@
 - [x] hls 直播
 - [x] hls 点播
 - [x] dash 点播
----
+- [x] 导播图
+- [x] 预览图
+
 ---
 ### 使用
 
@@ -110,6 +112,7 @@ return (
 |duration?|string|视频总时长，单位：毫秒|
 |hideControl?|boolean|隐藏控制栏|
 |vod?|boolean|视频类型为hls点播需要设置|
+|contentPreview:{picture,viewCount,timestap}|{picture:string,viewCount:number,timestap:number[]}|timestap 毫秒|
 
 ```js
  thumbnail: {
@@ -212,8 +215,9 @@ yarn build
 ```
 
 ### 版本更新内容：
-#### 1.4.30-bate1
-1. 新增播放器导航栏（2021-03-25）
-
----
+#### 1.4.6（2021-04-02）
+1. 优化缓存。
+2. 增加缓冲条。
+#### 1.4.30-bate1（2021-03-25）
+1. 新增播放器导航栏
 
