@@ -14,16 +14,7 @@ const moduleRulesConfig = [
       'css-loader',
     ]),
     exclude: /\.module\.css$/,
-    // include: /\.module\.css$/,
   },
-  // {
-  //   test: /\.css$/,
-  //   use: addMiniCssExtractPlugin([
-  //     'style-loader',
-  //     'css-loader',
-  //   ]),
-  //   include: /\.module\.css$/,
-  // },
   {
     test: /\.scss$/,
     sideEffects: true,
@@ -64,13 +55,18 @@ const moduleRulesConfig = [
     test: /\.ts(x)?$/,
     use: ['awesome-typescript-loader'],
     exclude: /node_modules/,
-  }
+  },
+  {
+    test: /\.tsx?$/,
+    use: 'ts-loader',
+    exclude: /node_modules/,
+  },
 ]
 
-const moduleRules = (itemConfig) => {
-  moduleRulesConfig.unshift(itemConfig);
-  return moduleRulesConfig;
-}
+// const moduleRules = (itemConfig) => {
+//   moduleRulesConfig.unshift(itemConfig);
+//   return moduleRulesConfig;
+// }
 
 const config = {
   devtool: 'source-map',
@@ -80,12 +76,13 @@ const config = {
     library: 'Videoplayer',
     libraryTarget: 'umd',
     umdNamedDefine: true,
+    publicPath: '/'
   },
   // resolveLoader: {
   //   modules: ['node_modules', './loader']
   // },
   resolve: {
-    extensions: ['.js', '.jsx', '.tsx', '.ts'],
+    extensions: ['.js', '.jsx', '.tsx', '.ts','js', 'jsx', 'tsx', 'ts'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
       '@g': path.resolve(__dirname, './src'),
@@ -111,6 +108,8 @@ function addMiniCssExtractPlugin(arr) {
 
 module.exports = (env, argv) => {
 
+  console.log('env', env);
+  console.log('argv', argv);
   let result = {};
   if (argv.hot) {
     // Cannot use 'contenthash' when hot reloading is enabled.
@@ -120,6 +119,7 @@ module.exports = (env, argv) => {
   if (env.NODE_ENV === 'production') {
     result = Object.assign({}, config, {
       entry: ['./src/index.tsx'],
+      mode: "production",
       plugins: [
         new MiniCssExtractPlugin({
           filename: 'css/index.css',
@@ -175,7 +175,9 @@ module.exports = (env, argv) => {
 
   if (env.NODE_ENV === 'development') {
     result = Object.assign({}, config, {
-      entry: ['babel-polyfill', 'react-hot-loader/patch', './devImport/index.tsx'],
+      // entry: ['babel-polyfill', 'react-hot-loader/patch', './devImport/index.tsx'],
+      entry: ['./devImport/index.tsx'],
+      mode: "development",
       optimization: {
         runtimeChunk: 'single',
         splitChunks: {
@@ -209,5 +211,14 @@ module.exports = (env, argv) => {
       }
     });
   }
+
+  console.log('==========')
+  console.log('==========')
+  console.log('==========')
+  console.log('==========')
+  console.log('result', result);
+  console.log('==========')
+  console.log('==========')
+  console.log('==========')
   return result;
 };

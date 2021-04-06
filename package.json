@@ -5,15 +5,21 @@
     "main": "./dist/index.js",
     "keywords": [],
     "author": "",
+    "path": "./",
     "license": "ISC",
     "scripts": {
         "clean": "rm dist/bundle.js",
         "build-dev": "webpack -d --mode development",
-        "build": "webpack -p --mode production --env.NODE_ENV=production",
-        "start": "webpack-dev-server --hot --mode development --env.NODE_ENV=development --host 0.0.0.0",
+        "build": "webpack --config webpack.config.prod.js",
+        "start": "webpack serve  --config webpack.config.dev.js",
+        "start-dev": "webpack serve  --config webpack.config.dev.js",
+        "server": "node server.js",
         "storybook": "start-storybook -p 8000",
         "build-storybook": "build-storybook",
         "test": "jest"
+    },
+    "old-scripts": {
+        "start": "webpack-dev-server --hot --mode development --env.NODE_ENV=development --host 0.0.0.0"
     },
     "dependencies": {
         "@types/vfile-message": "^2.0.0",
@@ -57,8 +63,9 @@
         "core-js": "^3.8.2",
         "css-loader": "^3.4.2",
         "enzyme": "^3.11.0",
+        "express": "^4.17.1",
         "file-loader": "^5.0.2",
-        "html-webpack-plugin": "^3.2.0",
+        "html-webpack-plugin": "^5.0.0-beta.6",
         "html-webpack-template": "^6.2.0",
         "jest": "^27.0.0-next.1",
         "jest-css-modules": "^2.1.0",
@@ -78,9 +85,10 @@
         "style-loader": "^1.1.3",
         "typescript": "^3.7.5",
         "url-loader": "^4.1.1",
-        "webpack": "^4.41.6",
-        "webpack-cli": "^3.3.11",
-        "webpack-dev-server": "^3.10.3"
+        "webpack": "^5.30.0",
+        "webpack-cli": "^4.6.0",
+        "webpack-dev-middleware": "^4.1.0",
+        "webpack-dev-server": "^3.11.2"
     },
     "transform": {
         ".+\\.(css|styl|less|sass|scss)$": "jest-css-modules-transform"
