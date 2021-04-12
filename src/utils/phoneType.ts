@@ -1,3 +1,10 @@
+/*
+ * @Author: Allen OYang
+ * @Date: 2021-01-22 14:30:13
+ * @Descripttion: 
+ * @LastEditTime: 2021-04-12 12:02:06
+ * @FilePath: /ts-vp/src/utils/phoneType.ts
+ */
 const ua = navigator.userAgent;
 export const isIOS = () => {
   return /iPhone|iPad/.test(ua)

@@ -1,3 +1,10 @@
+/*
+ * @Author: Allen OYang
+ * @Date: 2021-04-06 09:12:41
+ * @Descripttion: 
+ * @LastEditTime: 2021-04-09 16:00:20
+ * @FilePath: /ts-vp/webpack.config.dev.js
+ */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {moduleRulesConfig, config} = require('./webpack.config.basis');
@@ -37,6 +44,5 @@ const result = Object.assign({}, config, {
   }
 });
 
-console.log('result', result);
 
 module.exports = result;

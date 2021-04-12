@@ -112,8 +112,8 @@ const mp4Config: initConfig = {
 const vodHlsConfig: initConfig = {
   poster: "http://testqacdn.xylink.com/poster/202105/16119087407093887.jpg",
   "type": "m3u8",
-  "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8",
-  // "src": "http://xy5.btjy.net:9990/vodfiles/sharefiles/202103/30184931/6e9cda93-6e6c-4548-89f3-23816b83b4c7.m3u8",
+  // "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8",
+  "src": "http://xy5.btjy.net:9990/vodfiles/sharefiles/202103/30184931/6e9cda93-6e6c-4548-89f3-23816b83b4c7.m3u8",
   "autoplay": false,
   "isMobile": false,
   "hideMultiCode": true,

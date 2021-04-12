@@ -194,21 +194,27 @@ const UiControl = (props: IPlayer) => {
    * @速率切换
    */
 
-  useEffect(() => {
-    if (onVideoRatechange) {
-      onVideoRatechange()
-    }
-  }, [])
+  // useEffect(() => {
+    // BUG : issues/2572695  IE11中：拖拽进度video进度时会触发video的ratechange。
+    // 
+    // if (onVideoRatechange) {
+    //   onVideoRatechange()
+    // }
+  // }, [])
+
+
   const [multipleList] = React.useState<{ text: string, value: number }[]>(config.multiple ? config.multiple!.list : [])
   const [multipleIndex, setMultipleIndex] = React.useState<number>(config.multiple ? config.multiple!.initIndex : 0)
   const onChangeMultipleIndex = (key: number) => {
     log.debug(`key-> ${key}`);
+    // console.log(`key-> ${key}`);
     setMultipleIndex(key);
     player.setPlaybackRate(multipleList[key].value)
   }
 
   const onVideoRatechange = () => {
     player.videoEl.addEventListener('ratechange', (e: any) => {
+
       try {
         const target = multipleList.findIndex((item) => item.value === e.target.playbackRate);
         if (target === -1) {
