@@ -59,7 +59,8 @@ export default class HLSPlayer extends VideoControl {
         
           xhr.open('GET', requestUrl, true);
         },
-        maxBufferLength: 300
+        // maxBufferLength: 300
+        maxBufferLength: 120
         // maxBufferLength: 30,
         // maxMaxBufferLength: 600,
         // maxBufferSize: 60*1000*1000,
