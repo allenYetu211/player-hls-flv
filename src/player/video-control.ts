@@ -240,7 +240,6 @@ export default class VideoContainer {
     this.addEventListener()
     this.containerEl.appendChild(newVideoEl);
     this._emitter.emit('oldVolume', oldVideoElVolume)
-    
   }
 
 

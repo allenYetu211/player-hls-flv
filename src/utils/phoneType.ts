@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-01-22 14:30:13
  * @Descripttion: 
- * @LastEditTime: 2021-04-12 12:02:06
+ * @LastEditTime: 2021-04-13 10:57:17
  * @FilePath: /ts-vp/src/utils/phoneType.ts
  */
 const ua = navigator.userAgent;
@@ -18,9 +18,13 @@ export const isPc = () => {
   return !/Android|iPhone|SymbianOS|Windows Phone|iPad|iPod/.test(ua);
 }
 
+export const isIE = () => {
+  return /MSIE/.test(ua) || /Trident\//.test(ua);
+}
+
 // 判断微信， qq
 export const isTx = () => {
-  return /MicroMessenger|mobile mqqbrowser/.test(ua)
+  return /MicroMessenger|mobile mqqbrowser/.test(ua);
 }
 
 // tbs版本大于，036849 可以使用同层播放，则使用video全屏， 如果不支持，则使用div全屏
@@ -32,7 +36,7 @@ export const tbs = () => {
       const result = ua.replace(/.*TBS\/(\d*)\s.*/g, '$1');
       return result >= '036849'
   }
-  return false
+  return false;
 }
 
 
@@ -41,5 +45,6 @@ export const deviceType = {
   android: isAndroid(),
   pc: isPc(),
   androidTx: isTx() && !isIOS(),
-  tbs: tbs()
+  tbs: tbs(),
+  ie: isIE()
 }

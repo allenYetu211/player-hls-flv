@@ -40,3 +40,5 @@ export const initPlayer = (config: videoConfig) => {
   return videoPlayer;
 }
 
+export type videoType = HlsPlayer | FlvPlayer | NaitvePlayer | DashPlayer;
+
