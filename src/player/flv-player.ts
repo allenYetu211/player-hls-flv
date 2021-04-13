@@ -2,17 +2,17 @@
  * @Author: Allen OYang
  * @Date: 2021-03-30 10:59:36
  * @Descripttion: 
- * @LastEditTime: 2021-04-13 09:54:22
+ * @LastEditTime: 2021-04-13 11:47:57
  * @FilePath: /ts-vp/src/player/flv-player.ts
  */
 import VideoControl from './video-control';
 import {videoConfig, IMultiStreams} from '@interfaces/index';
 
-// import flvjs from 'flv.js';
+import flvjs from 'flv.js';
 
 // @ts-ignore
 // IE 11 测试环境需要使用本行代码
-import flvjs from 'flv.js/dist/flv';
+// import flvjs from 'flv.js/dist/flv';
 
 export default class FlvPlayer extends VideoControl {
 

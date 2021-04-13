@@ -201,7 +201,6 @@ const UiControl = (props: IPlayer) => {
     // if (onVideoRatechange) {
     //   onVideoRatechange()
     // }
-    console.log('deviceType.ie', deviceType.ie)
     if (deviceType.ie) {
       onIEVideoRatechange()
     }

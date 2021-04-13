@@ -1,6 +1,8 @@
 import VideoControl from './video-control';
 import { videoConfig, IMultiStreams } from '@interfaces/index';
 
+import { deviceType } from '@utils/phoneType';
+
 import Hls from 'hls.js';
 
 export default class HLSPlayer extends VideoControl {
@@ -49,22 +51,26 @@ export default class HLSPlayer extends VideoControl {
 
   private initVideoEl() {
     if (Hls.isSupported()) {
-      this.hls = new Hls({
-        xhrSetup: async (xhr, url) => {
+
+      const hlsConfig = Object.assign({
+        xhrSetup: async (xhr: any, url: any) => {
           //  .ts 文件不增加时间戳，防止文件OSS 命中降低。
           let requestUrl = url;
           if (/\.m3u8/.test(url)) {
             requestUrl = /\?/.test(url) ? `${url}&t=${new Date().getTime()}` : `${url}?t=${new Date().getTime()}`
-          } 
-        
+          }
           xhr.open('GET', requestUrl, true);
-        },
-        // maxBufferLength: 300
-        maxBufferLength: 120
-        // maxBufferLength: 30,
-        // maxMaxBufferLength: 600,
-        // maxBufferSize: 60*1000*1000,
-      });
+        }
+      }, deviceType.ie ? {} : {
+        maxBufferLength: 300,
+        maxMaxBufferLength: 600,
+        maxBufferSize: 60 * 1000 * 1000,
+      })
+
+      console.log('hlsConfig>', hlsConfig);
+
+      this.hls = new Hls(hlsConfig);
+
       this.hls.loadSource(this.src);
       this.hls.attachMedia(this.videoEl);
       this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
