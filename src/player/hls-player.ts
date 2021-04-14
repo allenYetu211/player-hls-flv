@@ -53,21 +53,28 @@ export default class HLSPlayer extends VideoControl {
     if (Hls.isSupported()) {
 
       const hlsConfig = Object.assign({
-        xhrSetup: async (xhr: any, url: any) => {
+        xhrSetup: async (xhr: any, url: string) => {
           //  .ts 文件不增加时间戳，防止文件OSS 命中降低。
           let requestUrl = url;
-          if (/\.m3u8/.test(url)) {
+          /**
+           *  TODO:  windos系统电脑问题 IE11 黑屏内存使用率过高情况下偶现黑屏（高概率）
+           *  可能原因:   
+           *   1. 电脑CPU 使用率过高， 关闭高使用率的应用后，黑屏情况大幅减少约（1/20）
+           *   2. 偶现部分TS 文件请求被挂载，可能愿意还是CPU 问题导致IE请求发送被挂载。
+           *  可以修改调试： (/\.m3u8/.test(url) ||  deviceType.ie) 
+           *  
+           */
+          if (/\.m3u8/.test(url) ||  deviceType.ie) {
             requestUrl = /\?/.test(url) ? `${url}&t=${new Date().getTime()}` : `${url}?t=${new Date().getTime()}`
           }
           xhr.open('GET', requestUrl, true);
         }
       }, deviceType.ie ? {} : {
-        maxBufferLength: 300,
+        maxBufferLength: 120,
         maxMaxBufferLength: 600,
         maxBufferSize: 60 * 1000 * 1000,
       })
 
-      console.log('hlsConfig>', hlsConfig);
 
       this.hls = new Hls(hlsConfig);
 
