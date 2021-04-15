@@ -27,6 +27,9 @@ export default class VideoContainer {
   //  计时器
   private timer: any; 
 
+  // 增加挂载方法， 暂放此处
+  public mountFunction: any = {}
+
   // 资源加载状态
   // public resourceLoadingState: boolean = false;
 

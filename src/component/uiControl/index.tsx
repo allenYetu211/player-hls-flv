@@ -20,7 +20,7 @@ import { IMultiStreams } from '@interfaces/index';
 
 
 import { log } from '@utils/logs';
-import {deviceType} from '@utils/phoneType';
+import { deviceType } from '@utils/phoneType';
 
 interface IPlayer {
   config: initConfig;
@@ -28,7 +28,7 @@ interface IPlayer {
   eel: React.RefObject<HTMLDivElement>;
 }
 
-type bufferedStateType = {bufferedStart: number;bufferedEnd: number}
+type bufferedStateType = { bufferedStart: number; bufferedEnd: number }
 
 const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash', matchArr: string[], vod: boolean): boolean => {
   if ((type === 'hls' || type === 'm3u8') && vod) {
@@ -162,7 +162,7 @@ const UiControl = (props: IPlayer) => {
   /**
    * @进度条 
    */
-  
+
   const [videoProgressBarDuration, setProgressBarDuration] = useState<number>(0);
   const [playProgressBar, setPlayProgressBar] = useState<number>(0);
   const [cacheValue, setCacheValue] = useState<string>('0%');
@@ -181,6 +181,15 @@ const UiControl = (props: IPlayer) => {
    * @组件内部维护基础样式,  
    * @TODO  父级别组件，子组件组合关系。  设置默认值。
    */
+
+  //  增加挂载
+  useEffect(() => {
+    player.mountFunction = {
+      onChangePlayIndex
+    }
+  }, [])
+
+
   const [playIndex, setPlayIndex] = useState<number>(config.option! ? config.option!.playIndex : 0);
   const [multiStreams] = useState<IMultiStreams[]>(config.option! ? config.option!.multiStreams : [{ src: '', text: '' }]);
   const onChangePlayIndex = (key: number) => {
@@ -191,13 +200,15 @@ const UiControl = (props: IPlayer) => {
     player.chooseMultiCode(key)
   }
 
+
+
   /**
    * @速率切换
    */
 
   useEffect(() => {
     // BUG : issues/2572695  IE11中：拖拽进度video进度时会触发video的ratechange。
-    
+
     // if (onVideoRatechange) {
     //   onVideoRatechange()
     // }
@@ -362,8 +373,8 @@ const UiControl = (props: IPlayer) => {
               videoDuration={videoProgressBarDuration}
               playProgress={playProgressBar}
               cacheValue={cacheValue}
-              // bufferedStart={bufferedState.bufferedStart}
-              // bufferedEnd={bufferedState.bufferedEnd}
+            // bufferedStart={bufferedState.bufferedStart}
+            // bufferedEnd={bufferedState.bufferedEnd}
             />}
 
           <div className={style.rightContaienr}>
