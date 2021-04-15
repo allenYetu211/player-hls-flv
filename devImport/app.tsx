@@ -249,7 +249,7 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<any>(hlsConfig)
+  const [option, setOption] = useState<any>(vodHlsConfig)
 
   const choseFlv = () => {
     setOption(flvConfig);

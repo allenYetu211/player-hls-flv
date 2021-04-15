@@ -206,36 +206,40 @@ const UiControl = (props: IPlayer) => {
    * @速率切换
    */
 
-  useEffect(() => {
-    // BUG : issues/2572695  IE11中：拖拽进度video进度时会触发video的ratechange。
+  // useEffect(() => {
+  //   // BUG : issues/2572695  IE11中：拖拽进度video进度时会触发video的ratechange。
 
-    // if (onVideoRatechange) {
-    //   onVideoRatechange()
-    // }
-    if (deviceType.ie) {
-      onIEVideoRatechange()
-    }
-  }, [])
+  //   // if (onVideoRatechange) {
+  //   //   onVideoRatechange()
+  //   // }
+  //   if (deviceType.ie) {
+  //     onIEVideoRatechange()
+  //   }
+  // }, [])
 
 
   const [multipleList] = React.useState<{ text: string, value: number }[]>(config.multiple ? config.multiple!.list : [])
   const [multipleIndex, setMultipleIndex] = React.useState<number>(config.multiple ? config.multiple!.initIndex : 0)
   const onChangeMultipleIndex = (key: number) => {
-    log.debug(`key-> ${key}`);
+    // log.debug(`key-> ${key}`);
     // console.log(`key-> ${key}`);
     setMultipleIndex(key);
-    console.log('multipleList[key].value', multipleList[key].value);
-    player.setPlaybackRate(multipleList[key].value)
+    // console.log('multipleList[key].value', multipleList[key].value);
+    // player.setPlaybackRate(multipleList[key].value)
   }
 
-  const onIEVideoRatechange = () => {
-    //  notice： 当拖拽进度，时候IE 浏览器会默认将速率恢复成1倍播放， 此时进行存储的状态倍数进行对比。重新进行设置。
-    player.videoEl.addEventListener('ratechange', (e: any) => {
-      if (e.target.playbackRate !== multipleIndex) {
-        player.setPlaybackRate(multipleIndex);
-      }
-    })
-  }
+  useEffect(() => {
+    player.setPlaybackRate(multipleList[multipleIndex].value)
+  }, [multipleIndex])
+
+  // const onIEVideoRatechange = () => {
+  //   //  notice： 当拖拽进度，时候IE 浏览器会默认将速率恢复成1倍播放， 此时进行存储的状态倍数进行对比。重新进行设置。
+  //   player.videoEl.addEventListener('ratechange', (e: any) => {
+  //     if (e.target.playbackRate !== multipleIndex) {
+  //       player.setPlaybackRate(multipleIndex);
+  //     }
+  //   })
+  // }
 
   // const onVideoRatechange = () => {
   //   player.videoEl.addEventListener('ratechange', (e: any) => {

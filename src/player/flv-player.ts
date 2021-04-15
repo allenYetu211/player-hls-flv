@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-03-30 10:59:36
  * @Descripttion: 
- * @LastEditTime: 2021-04-14 11:10:40
+ * @LastEditTime: 2021-04-15 20:11:23
  * @FilePath: /ts-vp/src/player/flv-player.ts
  */
 import VideoControl from './video-control';
