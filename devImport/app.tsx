@@ -119,13 +119,14 @@ const vodHlsConfig: initConfig = {
   "hideMultiCode": true,
   "multiple":
   {
-    "list":
-      [{ "text": "2x", "value": 2 },
-      { "text": "1.5x", "value": 1.5 },
-      { "text": "1.25x", "value": 1.25 },
-      { "text": "1x", "value": 1 },
-      { "text": "0.5x", "value": 0.5 }],
-    "initIndex": 3
+    list: [
+      { text: '0.5x', value: 0.5 },
+      { text: '0.75x', value: 0.75 },
+      { text: '1x', value: 1 },
+      { text: '1.5x', value: 1.5 },
+      { text: '2x', value: 2 },
+    ],
+    initIndex: 2,
   },
   "vod": true,
   // thumbnail: {
