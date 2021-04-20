@@ -1,3 +1,10 @@
+/*
+ * @Author: Allen OYang
+ * @Date: 2021-04-13 11:24:30
+ * @Descripttion: 
+ * @LastEditTime: 2021-04-19 17:39:10
+ * @FilePath: /ts-vp/src/component/plugIn-multiples/index.tsx
+ */
 import React, { useState, useEffect } from 'react';
 import style from './style/index.scss';
 import cn from 'classnames';
@@ -43,7 +50,7 @@ const PluginMultiple = (props: IProps) => {
   return (
     <ToolTip
       node={multipleList[index] ? multipleList[index].text : multipleList[multipleList.length - 1].text}>
-      <ul>
+      <ul className={style.listContainer}>
         {multipleList.map((item: multipleType, key: number) => {
           return (
             <li
