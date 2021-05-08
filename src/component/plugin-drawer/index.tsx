@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Drawer, { DrawerProps } from '../../basicComponent/drawer';
 import preloadImg from '../../utils/preloadImg';
 
 import ToolTip from '@g/uiCompoent/toolTip';
 import {msToTime} from '@g/utils/translateTime';
 import {  iconMenu } from '@images/icon';
+import { getVideoPlayer } from '@player/index';
 
 import style from './style/index.scss';
 
@@ -27,8 +28,21 @@ export interface IProps extends DrawerProps {
 
 const PluginDrawer: React.FC<IProps> = (
   (props) => {
+
+    const player: any = getVideoPlayer();
+
     const { contentPreview } = props;
     const { picture, timestap } = contentPreview;
+
+    const [openDrawerState, setOpenDrawerState] = useState<boolean>(false);
+    const onChangeDrawer = () => {
+      setOpenDrawerState(!openDrawerState);
+    }
+  
+    const onChangeTimestamp = (value: number) => {
+      player.setCurrentTime(value);
+      player.play();
+    }
 
     //  预加载图片
     React.useEffect(() => {
@@ -48,16 +62,15 @@ const PluginDrawer: React.FC<IProps> = (
           <div 
           className={style.icon}
           onClick={() => {
-            if (props.onClose) {
-              props.onClose()
-            }
+            onChangeDrawer()
           }}>
               {iconMenu}
           </div>
         }>
 
         <Drawer
-          {...props}
+          open={openDrawerState}
+          onClose={onChangeDrawer}
           width={`auto`}
           childStyles={{
             backgroundColor: `rgba(0,0,0,.8)`
@@ -78,11 +91,7 @@ const PluginDrawer: React.FC<IProps> = (
                     backgroundPosition: calcultatedPictureValue(index)
                   }}
                   onClick={() => {
-
-                    if (props.onChangeTimestamp) {
-                      props.onChangeTimestamp(item)
-                    }
-
+                    onChangeTimestamp(item)
                   }}>
                   <p className={style.previewText}>{msToTime(`${item}`)}</p>
                 </div>

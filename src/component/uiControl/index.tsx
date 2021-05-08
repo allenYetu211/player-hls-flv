@@ -3,7 +3,7 @@ import Player, { getVideoPlayer, videoType } from '@player/index';
 import style from './style/index.scss';
 // import { initConfig } from '@interfaces/index';
 
-import { initConfig } from '../../index';
+import { initConfig } from '@g/index';
 import PlugInVoice from '@g/component/plugIn-voice'
 import PlugInPlayBtn from '@g/component/plugIn-playBtn';
 import PlugInDuration from '@g/component/plugIn-duration';
@@ -20,7 +20,7 @@ import { IMultiStreams } from '@interfaces/index';
 
 
 import { log } from '@utils/logs';
-import { deviceType } from '@utils/phoneType';
+
 
 interface IPlayer {
   config: initConfig;
@@ -38,7 +38,7 @@ const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash', 
 }
 
 
-let IEIndex = 0;
+// let IEIndex = 0;
 
 
 const UiControl = (props: IPlayer) => {
@@ -46,10 +46,11 @@ const UiControl = (props: IPlayer) => {
   const player: any = getVideoPlayer();
   // const player: videoType = getVideoPlayer();
   const config: initConfig = props.config;
+
   const [isProgressBar, setProgressBar] = useState<boolean>(false);
   const [isDuration, setDuration] = useState<boolean>(false);
   const [isMultiples, setMultiples] = useState<boolean>(false);
-  const [isVoice, setVoice] = useState<boolean>(true);
+  // const [isVoice, setVoice] = useState<boolean>(true);
   const [isFullScreen, setFullScreen] = useState<boolean>(true);
   const [isPluginMultiCode, setPluginMultiCode] = useState<boolean>(false);
   const [loading, setloading] = useState<boolean>(false);
@@ -104,21 +105,18 @@ const UiControl = (props: IPlayer) => {
     })
 
     player[state]('duration', (duration: string) => {
-      setProgressBarDuration(Number(duration));
+      // setProgressBarDuration(Number(duration));
       setVideoDuration(msToTime(duration));
     });
 
     player[state]('playProgress', (duration: string) => {
-      setPlayProgressBar(Number(duration));
+      // setPlayProgressBar(Number(duration));
       setPlayProgress(msToTime(duration));
     });
 
   };
 
 
-  const onChangeComplete = () => {
-    setShowPlayering(false);
-  }
 
 
   const switchContainerDisplay = () => {
@@ -161,142 +159,13 @@ const UiControl = (props: IPlayer) => {
   const [videoDuration, setVideoDuration] = useState<string>('00:00');
 
 
-  /**
-   * @进度条 
-   */
-
-  const [videoProgressBarDuration, setProgressBarDuration] = useState<number>(0);
-  const [playProgressBar, setPlayProgressBar] = useState<number>(0);
   const [cacheValue, setCacheValue] = useState<string>('0%');
-  // const [ bufferedState, setBufferedState] = useState<bufferedStateType>({
-  //   bufferedStart: 0,
-  //   bufferedEnd: 0
-  // })
 
   player.on('catchUpdate', (value: string) => {
     setCacheValue(value)
   });
 
 
-  /**
-   * @分辨率处理 
-   * @组件内部维护基础样式,  
-   * @TODO  父级别组件，子组件组合关系。  设置默认值。
-   */
-
-  //  增加挂载
-  useEffect(() => {
-    player.mountFunction = {
-      onChangePlayIndex
-    }
-  }, [])
-
-
-  const [playIndex, setPlayIndex] = useState<number>(config.option! ? config.option!.playIndex : 0);
-  const [multiStreams] = useState<IMultiStreams[]>(config.option! ? config.option!.multiStreams : [{ src: '', text: '' }]);
-  const onChangePlayIndex = (key: number) => {
-
-    log.debug(`onChangePlayIndex-> ${key}`);
-
-    setPlayIndex(key);
-    player.chooseMultiCode(key)
-  }
-
-
-
-  /**
-   * @速率切换
-   */
-
-  useEffect(() => {
-    // BUG : issues/2572695  IE11中：拖拽进度video进度时会触发video的ratechange。
-    if (deviceType.ie) {
-      onIEVideoRatechange()
-    }
-    IEIndex = config.multiple ? config.multiple!.initIndex : 0;
-  }, [])
-
-
-  const [multipleList] = React.useState<{ text: string, value: number }[]>(config.multiple ? config.multiple!.list : [])
-  const [multipleIndex, setMultipleIndex] = React.useState<number>(config.multiple ? config.multiple!.initIndex : 0)
-  const onChangeMultipleIndex = (key: number) => {
-    IEIndex = key;
-    setMultipleIndex(key);
-  }
-
-  useEffect(() => {
-    player.setPlaybackRate(multipleList[multipleIndex].value)
-  }, [multipleIndex])
-
-  const onIEVideoRatechange = () => {
-    //  notice： 当拖拽进度，时候IE 浏览器会默认将速率恢复成1倍播放， 此时进行存储的状态倍数进行对比。重新进行设置。
-    player.videoEl.addEventListener('ratechange', (e: any) => {
-      if (e.target.playbackRate !== multipleList[IEIndex].value) {
-        player.setPlaybackRate(multipleList[IEIndex].value);
-      }
-
-    })
-  }
-
-  // const onVideoRatechange = () => {
-  //   player.videoEl.addEventListener('ratechange', (e: any) => {
-
-  //     try {
-  //       const target = multipleList.findIndex((item) => item.value === e.target.playbackRate);
-  //       if (target === -1) {
-  //         // TODO 中间数需要做异常处理
-  //         const lastIndex = multipleList.length - 1;
-  //         if (e.target.playbackRate > multipleList[lastIndex].value) {
-  //           setMultipleIndex(multipleList.length - 1);
-  //           player.setPlaybackRate(multipleList[multipleList.length - 1].value);
-  //         }
-  //         if (e.target.playbackRate < multipleList[0].value) {
-  //           setMultipleIndex(0);
-  //           player.setPlaybackRate(multipleList[0].value);
-  //         }
-  //       } else {
-  //         setMultipleIndex(target);
-  //       }
-  //     } catch (e) {
-  //       console.warn('error: ', e);
-  //     }
-  //   })
-  // }
-
-
-  /**
-   * @声音控制
-   */
-  const [volume, setVolume] = useState<number>(0.6);
-  player.on('oldVolume', (value: number) => {
-    onChangeVideoVolume(value)
-  });
-
-  const onChangeVideoVolume = (value: number) => {
-    player.setVideoVolume(value);
-    setVolume(value);
-  }
-
-  const onSwitchViodVolume = () => {
-    onChangeVideoVolume(volume ? 0 : 0.6);
-  }
-
-  /**
-   * @导航栏
-   */
-  const [openDrawerState, setOpenDrawerState] = useState<boolean>(false);
-  const onChangeDrawer = () => {
-    console.log('onChangeDrawer', openDrawerState)
-    setOpenDrawerState(!openDrawerState);
-  }
-
-  const onChangeTimestamp = (value: number) => {
-    player.setCurrentTime(value);
-    player.play();
-    // setPlayProgressBar(value)
-  }
-
-  // console.log('playProgress')
 
 
   /**
@@ -304,7 +173,6 @@ const UiControl = (props: IPlayer) => {
    */
   return (
     <div
-
       ref={pel}
       className={cn(style.container, 'needsclick', {
         [style.display]: config.isMobile! && containerDisplay,
@@ -370,12 +238,7 @@ const UiControl = (props: IPlayer) => {
             <PlugInProgressBar
               thumbnail={config.thumbnail}
               isMobile={config.isMobile!}
-              onChangeComplete={onChangeComplete}
-              videoDuration={videoProgressBarDuration}
-              playProgress={playProgressBar}
               cacheValue={cacheValue}
-            // bufferedStart={bufferedState.bufferedStart}
-            // bufferedEnd={bufferedState.bufferedEnd}
             />}
 
           <div className={style.rightContaienr}>
@@ -385,42 +248,36 @@ const UiControl = (props: IPlayer) => {
               isPluginMultiCode &&
               !config.vod &&
               <PluginMultiCode
-                playIndex={playIndex}
-                multiStreams={multiStreams}
-                onChangePlayIndex={onChangePlayIndex} />
+                config={props.config}
+              />
             }
 
             {!config.isMobile &&
               !config.hideMultiple &&
               isMultiples &&
               <PluginMultiples
-                index={multipleIndex}
-                list={multipleList}
-                onChangeMultipleIndex={onChangeMultipleIndex} />
+                config={props.config}
+              />
             }
 
-            {!config.isMobile && isVoice &&
-              <PlugInVoice
-                isMobile={config.isMobile!}
-                volume={volume}
-                onChangeVideoVolume={onChangeVideoVolume}
-                onSwitchViodVolume={onSwitchViodVolume}
-              />}
+            {/* {!config.isMobile && isVoice && */}
+            {!config.isMobile &&
+              <PlugInVoice />
+            }
 
             {isFullScreen && <PlugInFullScreen element={props.element} />}
 
 
             {/* 导航栏 */}
-            {config.contentPreview && <PulginDrawer
-              parentEl={props.eel}
-              open={openDrawerState}
-              onClose={onChangeDrawer}
-              onChangeTimestamp={onChangeTimestamp}
-              contentPreview={config.contentPreview}
-              prefixCls={'xyel'}
-            />}
+            {config.contentPreview &&
+              <PulginDrawer
+                parentEl={props.eel}
+                contentPreview={config.contentPreview}
+                prefixCls={'xyel'}
+              />}
 
           </div>
+          
         </div>
       )}
     </div>

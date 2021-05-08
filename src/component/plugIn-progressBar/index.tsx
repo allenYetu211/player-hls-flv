@@ -6,14 +6,14 @@ import { msToTime } from '@utils/translateTime';
 
 import ToolTip from '@g/uiCompoent/toolTip';
 
-import {log} from '@utils/logs';
+import { log } from '@utils/logs';
 
 
 import cn from 'classnames';
 
 
 interface IProps {
-  onChangeComplete: Function;
+  // onChangeComplete: Function;
   isMobile?: boolean;
   thumbnail?: {
     picture: string;
@@ -23,8 +23,8 @@ interface IProps {
     rowCount?: number;
     backgroundSize: number;
   };
-  videoDuration: number;
-  playProgress: number;
+  // videoDuration: number;
+  // playProgress: number;
   cacheValue: string;
   // bufferedStart: number;
   // bufferedEnd: number;
@@ -41,6 +41,34 @@ const PlugInProgressBar = (props: IProps) => {
   const [PICTRUEWIDTH, set_PICTRUEWIDTH] = useState<number>(0);
   const [BACKGORUNDSIZE, set_BACKGORUNDSIZE] = useState<number>(0);
   const [thumbnailWidth, set_thumbnailWidth] = useState<number>(160);
+
+  // 进度条
+  const [videoDuration, setProgressBarDuration] = useState<number>(0);
+  const [playProgress, setPlayProgress] = useState<number>(0);
+  // const [cacheValue, setCacheValue] = useState<string>('0%');
+
+  useEffect(() => {
+    onListenerState('on');
+    return () => {
+      onListenerState('off')
+    }
+  }, []);
+
+
+
+  const onListenerState = (state: 'on' | 'off') => {
+
+    player[state]('duration', (duration: string) => {
+      setProgressBarDuration(Number(duration));
+      // setVideoDuration(msToTime(duration));
+    });
+
+    player[state]('playProgress', (duration: string) => {
+      setPlayProgress(Number(duration));
+      // setPlayProgress(msToTime(duration));
+    });
+
+  };
 
   //  记录滚动时间位置
 
@@ -88,7 +116,7 @@ const PlugInProgressBar = (props: IProps) => {
   const onMouseMove = (e: React.MouseEvent): void => {
     const width = progressEl.current!.offsetWidth;
     const left = progressEl.current!.getBoundingClientRect().left;
-    CURRENTTIME = (e.clientX - left) / width * props.videoDuration;
+    CURRENTTIME = (e.clientX - left) / width * videoDuration;
     if (props.thumbnail) {
       const rowCount = props.thumbnail.backgroundSize / thumbnailWidth;
       const clientX = e.clientX - left;
@@ -150,11 +178,11 @@ const PlugInProgressBar = (props: IProps) => {
       onMouseLeave={() => { setCursorElDisplayState(false); }}
     // onMouseLeave={() => { setCursorElDisplayState(true); }}
     >
-      <div 
-      className={style.cacheContainer}
-      style={{
-        width: props.cacheValue,
-      }}/>
+      <div
+        className={style.cacheContainer}
+        style={{
+          width: props.cacheValue,
+        }} />
 
 
       <div
@@ -191,17 +219,17 @@ const PlugInProgressBar = (props: IProps) => {
 
       <Slider
         min={0}
-        max={props.videoDuration}
+        max={videoDuration}
         step={0.1}
         tooltip={false}
-        value={props.playProgress}
+        value={playProgress}
         onChange={(value: number) => {
           player.setCurrentTime(value);
         }}
 
         onChangeComplete={() => {
           player.play();
-          props.onChangeComplete()
+          // props.onChangeComplete()
         }}
       />
     </div>
@@ -214,4 +242,3 @@ export default PlugInProgressBar;
 // const areEqual = (prevProps: IProps, nextProps: IProps) =>  prevProps.playerState == nextProps.playerState;
 
 // export default  React.memo(PlugInProgressBar, areEqual);
- 

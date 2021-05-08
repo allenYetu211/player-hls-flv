@@ -199,15 +199,15 @@ const flvConfig: initConfig = {
 const hlsConfig: initConfig = {
   type: 'hls',
   autoplay: false,
-  isMobile: true,
+  isMobile: false,
   option: {
     multiStreams: [
       {
-        src: "http://presecurelive.ainemo.com/prenemo/9680bf5178cc269c0178ce083cc40019.m3u8?auth_key=eddbebf1a9323a472e64b3bd526b15a7-1618459201-1847c4d06dfb49c2be953e35c7d097d2-",
+        src: "0http://presecurelive.ainemo.com/prenemo/9680bf5178cc269c0178ce083cc40019.m3u8?auth_key=eddbebf1a9323a472e64b3bd526b15a7-1618459201-1847c4d06dfb49c2be953e35c7d097d2-",
         text: "小鱼1",
       },
       {
-        src: "http://presecurelive.ainemo.com/prenemo/9680bf5178cc269c0178ce083cc40019.m3u8?auth_key=eddbebf1a9323a472e64b3bd526b15a7-1618459201-1847c4d06dfb49c2be953e35c7d097d2-",
+        src: "1http://presecurelive.ainemo.com/prenemo/9680bf5178cc269c0178ce083cc40019.m3u8?auth_key=eddbebf1a9323a472e64b3bd526b15a7-1618459201-1847c4d06dfb49c2be953e35c7d097d2-",
         text: "小鱼2",
       }
     ],
@@ -250,7 +250,9 @@ const dashConfig: initConfig = {
 
 
 const App = () => {
-  const [option, setOption] = useState<any>(vodHlsConfig)
+  // const [option, setOption] = useState<any>(vodHlsConfig)
+  // const [option, setOption] = useState<any>(hlsConfig)
+  const [option, setOption] = useState<any>(vodHlsConfig2)
 
   const choseFlv = () => {
     setOption(flvConfig);
