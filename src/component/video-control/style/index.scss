@@ -2,37 +2,7 @@
 @import '@g/asset/style/svg.scss';
 @import '@g/asset/style/animation.scss';
 
-.container {
-  position: absolute;
-  top:0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  // background: rgba(0,0,0,0.5);
-  overflow: hidden;
-  color:#fff;
-  z-index:999;
-  
-  &:active{
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-  }
- 
-  &.hover:hover {
-    & > .controlBar {
-      pointer-events: all;
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-  }
 
-  &.display {
-    & > .controlBar {
-      pointer-events: all;
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-  }
-}
 
 .controlBar {
   pointer-events: none;
@@ -61,6 +31,16 @@
 	}
 }
 
+.middleContainer {
+  position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index:999;
+    .icon {
+      width: 50px;
+    }
+}
 
 .animation {
   animation: rotation 0.5s linear 0s infinite running;
@@ -75,5 +55,20 @@
   @extend %flex-center;;
 }
 
+.posterContainer {
+  position: absolute;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // background-size: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
+.posterHide {
+  display: none;
+}
 

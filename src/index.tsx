@@ -1,8 +1,10 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import style from './styles.scss';
-import {initPlayer} from '@player/index';
+import { initPlayer } from '@player/index';
 import UiControl from '@g/component/uiControl';
-import {logInit} from '@utils/logs';
+import { logInit } from '@utils/logs';
+
+import VideoKeyBoard from '@g/component/video-keyboard';
 
 
 // //  初始全局log
@@ -54,8 +56,8 @@ export interface IMultiStreams {
 }
 
 export interface IMultiStreamsContainer {
-multiStreams: IMultiStreams[];
-playIndex: number;
+  multiStreams: IMultiStreams[];
+  playIndex: number;
 }
 
 
@@ -83,7 +85,7 @@ const VideoPlayer = (props: initConfig) => {
       if (props.type === 'mp4') {
         videoPlayer.stop();
         videoPlayer.updateMp4Path(props.src, props.duration)
-      } if (props.type === 'm3u8' || props.type === 'hls') { 
+      } if (props.type === 'm3u8' || props.type === 'hls') {
         videoPlayer.updatePath(props.src)
       }
     }
@@ -91,42 +93,42 @@ const VideoPlayer = (props: initConfig) => {
 
   //  初始播放器
   useEffect(() => {
-      let vp: any = null;
-      if (videoPlayer) {
-        setInitState(false);
-        onListenerState(videoPlayer, 'off');
-        videoPlayer.destroy(); 
+    let vp: any = null;
+    if (videoPlayer) {
+      setInitState(false);
+      onListenerState(videoPlayer, 'off');
+      videoPlayer.destroy();
+    }
+
+    // 此处添加setTimeout 是处理切换码流类型时，销毁原本的播放器，需要一定时间重新初始。  
+    // TODO 后续需要优化
+    setTimeout(() => {
+      const config = Object.assign({}, props, {
+        element: videoEl.current!,
+        containerEl: containerEl.current!,
+      })
+
+      vp = initPlayer(config);
+      setInitState(true);
+      onListenerState(vp, 'on');
+      setVideoPlayer(vp);
+      if (props.onVideoPlayerState) {
+        props.onVideoPlayerState(vp);
       }
+    }, 100)
 
-      // 此处添加setTimeout 是处理切换码流类型时，销毁原本的播放器，需要一定时间重新初始。  
-      // TODO 后续需要优化
-      setTimeout(() => {
-        const config = Object.assign({}, props, {
-          element: videoEl.current!,
-          containerEl: containerEl.current!,
-        })
 
-        vp = initPlayer(config);
-        setInitState(true);
-        onListenerState(vp, 'on');
-        setVideoPlayer(vp);
-        if (props.onVideoPlayerState) {
-          props.onVideoPlayerState(vp);
-        }
-      }, 100)
-
-      
-      return () => {
-        vp.destroy();
-        // 清除所有监听
-        vp.removeAllListeners();
-        setInitState(false);
-        console.log('====== destroy ======')
-      }
+    return () => {
+      vp.destroy();
+      // 清除所有监听
+      vp.removeAllListeners();
+      setInitState(false);
+      console.log('====== destroy ======')
+    }
   }, [props.type])
 
   // 监听状态
-  const onListenerState = (vp: any, state: 'on'| 'off') => {
+  const onListenerState = (vp: any, state: 'on' | 'off') => {
     vp[state]('0001', (info: string) => {
       console.log('0001', info)
     })
@@ -134,15 +136,17 @@ const VideoPlayer = (props: initConfig) => {
 
 
   return (
-  <div ref={containerEl}  className={style.container}>
-    { initState && 
-      <UiControl 
-        config={props} 
-        eel={containerEl}
-        element={containerEl.current!} 
-      />}
-    <video  ref={videoEl} />
-  </div>);
+    <div ref={containerEl} className={style.container}>
+      <VideoKeyBoard>
+        {initState &&
+          <UiControl
+            config={props}
+            eel={containerEl}
+            element={containerEl.current!}
+          />}
+        <video ref={videoEl} />
+      </VideoKeyBoard>
+    </div>);
 }
 
 export default VideoPlayer;
