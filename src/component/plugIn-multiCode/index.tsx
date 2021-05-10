@@ -11,32 +11,26 @@ import style from '../plugIn-multiples/style/index.scss';
 import cn from 'classnames';
 import { IMultiStreams } from '@interfaces/index';
 
-import { getVideoPlayer } from '@player/index';
+// import { getVideoPlayer } from '@player/index';
 
 import ToolTip from '@g/uiCompoent/toolTip';
 
 import {initConfig} from '@g/index';
 
+import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
 
-interface IProps {
-  // playIndex: number;
-  // multiStreams: IMultiStreams[];
-  // onChangePlayIndex: (key: number) => void;
+
+interface IProps extends HocVideoType {
   config: initConfig
 }
 
 const PlugInMultiCode = (props: IProps) => {
 
-  const player: any = getVideoPlayer();
-  // const { playIndex, multiStreams } = props;
-  // TODO 上下行边际处理
-  // React.useEffect(() => {
-  //   multiStreams[playIndex]
-  // },[props.playIndex])
+  // const player: any = getVideoPlayer();
 
    //  增加挂载
    useEffect(() => {
-    player.mountFunction = {
+    props.player.mountFunction = {
       onChangePlayIndex
     }
   }, [])
@@ -48,7 +42,7 @@ const PlugInMultiCode = (props: IProps) => {
     // log.debug(`onChangePlayIndex-> ${key}`);
 
     setPlayIndex(key);
-    player.chooseMultiCode(key)
+    props.player.chooseMultiCode(key)
   }
 
 
@@ -78,8 +72,4 @@ const PlugInMultiCode = (props: IProps) => {
 }
 
 
-// const areEqual =(prevProps: IProps, nextProps: IProps) =>  prevProps.playIndex == nextProps.playIndex;
-
-// export default React.memo(PlugInMultiCode, areEqual);
-
-export default PlugInMultiCode;
+export default HotVideo(PlugInMultiCode);

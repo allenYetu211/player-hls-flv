@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Drawer, { DrawerProps } from '../../basicComponent/drawer';
 import preloadImg from '../../utils/preloadImg';
 
 import ToolTip from '@g/uiCompoent/toolTip';
-import {msToTime} from '@g/utils/translateTime';
-import {  iconMenu } from '@images/icon';
-import { getVideoPlayer } from '@player/index';
+import { msToTime } from '@g/utils/translateTime';
+import { iconMenu } from '@images/icon';
+// import { getVideoPlayer } from '@player/index';
+
+import HotVideo, { HocVideoType } from '@g/hoc-component/hoc-video';
 
 import style from './style/index.scss';
 
@@ -14,22 +16,24 @@ const pictureWidth = 164;
 const pictureHeight = 90;
 
 
-export interface ItemList {
+interface ItemList {
   picture: string
   viewCount: number
   timestap: number[]
 }
 
 
-export interface IProps extends DrawerProps {
+export interface IProps extends DrawerProps, HocVideoType {
   contentPreview: ItemList;
   onChangeTimestamp?: (value: number) => void;
 }
 
+
+
 const PluginDrawer: React.FC<IProps> = (
   (props) => {
 
-    const player: any = getVideoPlayer();
+    // const player: any = getVideoPlayer();
 
     const { contentPreview } = props;
     const { picture, timestap } = contentPreview;
@@ -38,10 +42,10 @@ const PluginDrawer: React.FC<IProps> = (
     const onChangeDrawer = () => {
       setOpenDrawerState(!openDrawerState);
     }
-  
+
     const onChangeTimestamp = (value: number) => {
-      player.setCurrentTime(value);
-      player.play();
+      props.player.setCurrentTime(value);
+      props.player.play();
     }
 
     //  预加载图片
@@ -59,16 +63,17 @@ const PluginDrawer: React.FC<IProps> = (
     return (
       <ToolTip
         node={
-          <div 
-          className={style.icon}
-          onClick={() => {
-            onChangeDrawer()
-          }}>
-              {iconMenu}
+          <div
+            className={style.icon}
+            onClick={() => {
+              onChangeDrawer()
+            }}>
+            {iconMenu}
           </div>
         }>
 
         <Drawer
+          parentEl={props.parentEl}
           open={openDrawerState}
           onClose={onChangeDrawer}
           width={`auto`}
@@ -106,4 +111,4 @@ const PluginDrawer: React.FC<IProps> = (
 
 
 
-export default PluginDrawer;
+export default HotVideo(PluginDrawer);

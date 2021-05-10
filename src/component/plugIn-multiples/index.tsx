@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-04-13 11:24:30
  * @Descripttion: 
- * @LastEditTime: 2021-05-08 14:38:14
+ * @LastEditTime: 2021-05-10 14:09:49
  * @FilePath: /ts-vp/src/component/plugIn-multiples/index.tsx
  */
 import React, { useState, useEffect } from 'react';
@@ -13,49 +13,26 @@ import ToolTip from '@g/uiCompoent/toolTip';
 
 import { deviceType } from '@utils/phoneType';
 
-import { getVideoPlayer } from '@player/index';
+// import { getVideoPlayer } from '@player/index';
 
 import { initConfig } from '@g/index';
+
+import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
 
 let IEIndex = 0;
 
 
 
 
-interface IProps {
+interface IProps extends HocVideoType {
   config: initConfig
 }
 
 type multipleType = { text: string, value: number }
 
-const defaultList = [
-  {
-    text: '1x',
-    value: 1,
-  }, {
-    text: '2x',
-    value: 2,
-  }, {
-    text: '3x',
-    value: 3,
-  }
-]
+
 
 const PluginMultiple = (props: IProps) => {
-  // const [multipleList, setMultipleList] = useState<multipleType[]>(defaultList);
-
-  // const {index, onChangeMultipleIndex} = props;
-
-  const player: any = getVideoPlayer();
-
-
-  // useEffect(() => {
-  //   if (props.list.length) {
-  //     setMultipleList(props.list);
-  //   }
-  // }, []);
-
-
   useEffect(() => {
     // BUG : issues/2572695  IE11中：拖拽进度video进度时会触发video的ratechange。
     if (deviceType.ie) {
@@ -73,14 +50,14 @@ const PluginMultiple = (props: IProps) => {
   }
 
   useEffect(() => {
-    player.setPlaybackRate(multipleList[multipleIndex].value)
+    props.player.setPlaybackRate(multipleList[multipleIndex].value)
   }, [multipleIndex])
 
   const onIEVideoRatechange = () => {
     //  notice： 当拖拽进度，时候IE 浏览器会默认将速率恢复成1倍播放， 此时进行存储的状态倍数进行对比。重新进行设置。
-    player.videoEl.addEventListener('ratechange', (e: any) => {
+    props.player.videoEl.addEventListener('ratechange', (e: any) => {
       if (e.target.playbackRate !== multipleList[IEIndex].value) {
-        player.setPlaybackRate(multipleList[IEIndex].value);
+        props.player.setPlaybackRate(multipleList[IEIndex].value);
       }
     })
   }
@@ -110,8 +87,4 @@ const PluginMultiple = (props: IProps) => {
   )
 }
 
-export default PluginMultiple;
-
-// const areEqual =(prevProps: IProps, nextProps: IProps) =>  prevProps.index === nextProps.index;
-
-// export default React.memo(PluginMultiple, areEqual)
+export default HotVideo(PluginMultiple);

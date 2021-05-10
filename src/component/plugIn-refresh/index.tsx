@@ -9,20 +9,16 @@ import React from 'react';
 import {iconRefresh} from '@images/icon';
 import style from './style/index.scss';
 
-import { getVideoPlayer } from '@player/index';
+// import { getVideoPlayer } from '@player/index';
 
-// interface IProps {
-//   onRefreshPlayer: () => void;
-// }
+import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
 
-const PlugInRefresh = () => {
 
-  const player = getVideoPlayer();
+const PlugInRefresh = (props: HocVideoType) => {
 
-      /**
-   * @刷新done
-   */
-  const onRefreshPlayer = () => { player.refresh() }
+  // const player = getVideoPlayer();
+
+  const onRefreshPlayer = () => { props.player.refresh() }
 
 
   return (
@@ -34,8 +30,5 @@ const PlugInRefresh = () => {
   )
 }
 
-// const areEqual =(prevProps: IProps, nextProps: IProps) =>  prevProps.onRefreshPlayer !== nextProps.onRefreshPlayer;
 
-// export default React.memo(PlugInRefresh, areEqual);
-
-export default PlugInRefresh;
+export default HotVideo(PlugInRefresh);

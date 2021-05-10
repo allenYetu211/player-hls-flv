@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 19:30:36
  * @Descripttion: 
- * @LastEditTime: 2021-05-08 19:40:58
+ * @LastEditTime: 2021-05-10 14:05:42
  * @FilePath: /ts-vp/src/component/plugin-middleContainer/index.tsx
  */
 
@@ -19,10 +19,12 @@ import style from './style/index.scss';
 
 import cn from 'classnames';
 
+import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
 
-const MiddleContainer = () => {
 
-  const player: any = getVideoPlayer();
+const MiddleContainer = (props: HocVideoType) => {
+
+  // const player: any = getVideoPlayer();
 
   const [isShowPlayering, setShowPlayering] = useState<boolean>(true);
   const [loading, setloading] = useState<boolean>(false);
@@ -37,22 +39,22 @@ const MiddleContainer = () => {
   const onListenerState = (state: 'on' | 'off') => {
     if (state === 'on') {
       // 监听首次点击 只执行一次
-      player.once('clickPlay', () => {
+      props.player.once('clickPlay', () => {
         setloading(true);
         setShowPlayering(false);
       });
     }
 
-    player[state]('play', () => {
+    props.player[state]('play', () => {
       setShowPlayering(false);
     });
 
-    player[state]('stop', () => {
+    props.player[state]('stop', () => {
       setShowPlayering(true);
     });
 
     // 用户数据展示
-    player[state]('mediaState', (state: boolean) => {
+    props.player[state]('mediaState', (state: boolean) => {
       setloading(!state)
     })
   };
@@ -75,4 +77,4 @@ const MiddleContainer = () => {
   )
 }
 
-export default MiddleContainer;
+export default HotVideo(MiddleContainer);

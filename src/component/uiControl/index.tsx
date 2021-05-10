@@ -20,6 +20,8 @@ import PublignBackgroundImages from '@g/component/plugin-backgorundImg';
 
 import MiddleContainer from '@g/component/plugin-middleContainer';
 
+import VideoKeyBoard from '@g/component/video-keyboard';
+
 // import { log } from '@utils/logs';
 
 
@@ -47,31 +49,33 @@ const UiControl = (props: IPlayer) => {
    */
   return (
 
-    <div
-      ref={pel}
-      className={cn(style.container, 'needsclick', {
-        [style.display]: config.isMobile! && containerDisplay,
-        [style.hover]: !config.isMobile!,
-      })}
-      onClick={switchContainerDisplay}
-    >
-
-      <PublignBackgroundImages
-        poster={props.config.poster}
+    <VideoKeyBoard>
+      <div
+        ref={pel}
+        className={cn(style.container, 'needsclick', {
+          [style.display]: config.isMobile! && containerDisplay,
+          [style.hover]: !config.isMobile!,
+        })}
+        onClick={switchContainerDisplay}
       >
 
-        <MiddleContainer />
+        <PublignBackgroundImages
+          poster={props.config.poster}
+        >
 
-        {!config.hideControl &&
-          <VideoControl
-            config={props.config}
-            element={props.element}
-            eel={props.eel}
-          />
-        }
+          <MiddleContainer />
 
-      </PublignBackgroundImages>
-    </div>
+          {!config.hideControl &&
+            <VideoControl
+              config={props.config}
+              element={props.element}
+              eel={props.eel}
+            />
+          }
+
+        </PublignBackgroundImages>
+      </div>
+    </VideoKeyBoard>
 
   );
 };

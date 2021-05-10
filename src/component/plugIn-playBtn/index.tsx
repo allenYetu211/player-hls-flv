@@ -2,37 +2,37 @@
  * @Author: Allen OYang
  * @Date: 2021-05-06 15:19:54
  * @Descripttion: 
- * @LastEditTime: 2021-05-08 17:14:14
+ * @LastEditTime: 2021-05-10 15:13:55
  * @FilePath: /ts-vp/src/component/plugIn-playBtn/index.tsx
  */
 import React, { useState, useEffect } from 'react';
 import cn from 'classnames';
 import style from './style/index.scss';
 
-import { getVideoPlayer } from '@player/index';
-
 import { iconVideoPlay, iconVideoStop } from '@images/icon';
 
+import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
 
-const PlugInPlayBtn = () => {
+
+const PlugInPlayBtn = (props: HocVideoType) => {
   const [playerState, setPlayerState] = useState<boolean>(false);
-  const player: any = getVideoPlayer();
 
 
-  useEffect(() => {
-    onListenerState('on');
-    return () => {
-      onListenerState('off')
-    }
-  }, []);
+  // useEffect(() => {
+  //   onListenerState('on');
+  //   return () => {
+  //     onListenerState('off')
+  //   }
+  // }, []);
 
   const onListenerState = (state: 'on' | 'off') => {
-
-    player[state]('play', () => {
+    props.player[state]('play', () => {
+      console.log('play');
       setPlayerState(true);
     });
   
-    player[state]('stop', () => {
+    props.player[state]('stop', () => {
+      console.log('stop');
       setPlayerState(false);
     });
   };
@@ -40,9 +40,9 @@ const PlugInPlayBtn = () => {
  
   const onSwitchPlayer = () => {
     if (playerState) {
-      player.stop()
+      props.player.stop()
     } else {
-      player.play()
+      props.player.play()
     }
   }
 
@@ -54,4 +54,4 @@ const PlugInPlayBtn = () => {
   );
 };
 
-export default PlugInPlayBtn;
+export default HotVideo(PlugInPlayBtn);

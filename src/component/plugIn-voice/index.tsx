@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-01-27 11:57:57
  * @Descripttion: 
- * @LastEditTime: 2021-05-08 14:37:50
+ * @LastEditTime: 2021-05-10 14:12:58
  * @FilePath: /ts-vp/src/component/plugIn-voice/index.tsx
  */
 import React, { useState } from 'react';
@@ -11,31 +11,20 @@ import style from './style/index.scss';
 import Slider from 'react-rangeslider';
 import { iconVoice, iconVoiceOff } from '@images/icon';
 
-import { getVideoPlayer } from '@player/index';
+import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
+
 
 import ToolTip from '@g/uiCompoent/toolTip';
 
-
-// interface IProps {
-//   isMobile?: boolean;
-//   volume: number;
-//   onChangeVideoVolume: (value: number) => void;
-//   onSwitchViodVolume: () => void;
-// }
-// const PluginVoice = (props: IProps) => {
-const PluginVoice = () => {
-
-  const player: any = getVideoPlayer();
-
-  // const { isMobile, volume, onChangeVideoVolume, onSwitchViodVolume } = props;
+const PluginVoice = (props: HocVideoType) => {
 
   const [volume, setVolume] = useState<number>(0.6);
-  player.on('oldVolume', (value: number) => {
+  props.player.on('oldVolume', (value: number) => {
     onChangeVideoVolume(value)
   });
 
   const onChangeVideoVolume = (value: number) => {
-    player.setVideoVolume(value);
+    props.player.setVideoVolume(value);
     setVolume(value);
   }
 
@@ -44,11 +33,6 @@ const PluginVoice = () => {
   }
 
   return (
-    // <div
-    //   className={cn(style.voiceContainer, style.focusContainer, {
-    //     [style.mobile]: isMobile
-    //   })}
-    // >
     <ToolTip
       node={
         <div className={cn(style.icon)} onClick={onSwitchViodVolume}>
@@ -70,15 +54,10 @@ const PluginVoice = () => {
           }}
         />
       </div>
-      {/* </div> */}
     </ToolTip>
-    // </div>
   );
 };
 
 
-// const areEqual = (prevProps: IProps, nextProps: IProps) => prevProps.volume === nextProps.volume;
 
-// export default React.memo(PluginVoice, areEqual);
-
-export default PluginVoice;
+export default HotVideo(PluginVoice);

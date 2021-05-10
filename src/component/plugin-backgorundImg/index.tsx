@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 17:26:25
  * @Descripttion: 
- * @LastEditTime: 2021-05-08 18:03:21
+ * @LastEditTime: 2021-05-10 12:04:03
  * @FilePath: /ts-vp/src/component/plugin-backgorundImg/index.tsx
  */
 
@@ -11,11 +11,11 @@ import React, {useState, useEffect} from 'react';
 
 import style from './style/index.scss';
 
-import { getVideoPlayer } from '@player/index';
+import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
 
 import cn from 'classnames';
 
-interface Props {
+interface Props extends HocVideoType {
   oncePoster?: boolean
   poster?: string
 }
@@ -23,7 +23,6 @@ interface Props {
 const PluginBackgroundImages: React.FC<Props> = (props) => {
 
   const [oncePoster, setOncePoster] = useState<boolean>(true);
-  const player: any = getVideoPlayer();
 
   useEffect(() => {
     onListenerState('on');
@@ -35,7 +34,7 @@ const PluginBackgroundImages: React.FC<Props> = (props) => {
   const onListenerState = (state: 'on' | 'off') => {
     if (state === 'on') {
       // 监听首次点击 只执行一次
-      player.once('clickPlay', () => {
+      props.player.once('clickPlay', () => {
         setOncePoster(false);
       });
     }
@@ -52,4 +51,4 @@ const PluginBackgroundImages: React.FC<Props> = (props) => {
   )
 }
 
-export default PluginBackgroundImages;
+export default HotVideo(PluginBackgroundImages);

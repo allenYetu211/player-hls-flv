@@ -4,7 +4,7 @@ import { initPlayer } from '@player/index';
 import UiControl from '@g/component/uiControl';
 import { logInit } from '@utils/logs';
 
-import VideoKeyBoard from '@g/component/video-keyboard';
+
 
 
 // //  初始全局log
@@ -137,15 +137,14 @@ const VideoPlayer = (props: initConfig) => {
 
   return (
     <div ref={containerEl} className={style.container}>
-      <VideoKeyBoard>
-        {initState &&
-          <UiControl
-            config={props}
-            eel={containerEl}
-            element={containerEl.current!}
-          />}
-        <video ref={videoEl} />
-      </VideoKeyBoard>
+
+      {initState &&
+        <UiControl
+          config={props}
+          eel={containerEl}
+          element={containerEl.current!}
+        />}
+      <video ref={videoEl} />
     </div>);
 }
 
