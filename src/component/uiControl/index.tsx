@@ -5,7 +5,7 @@
  * @LastEditTime: 2021-05-08 19:40:13
  * @FilePath: /ts-vp/src/component/uiControl/index.tsx
  */
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import style from './style/index.scss';
 
@@ -20,7 +20,7 @@ import PublignBackgroundImages from '@g/component/plugin-backgorundImg';
 
 import MiddleContainer from '@g/component/plugin-middleContainer';
 
-import VideoKeyBoard from '@g/component/video-keyboard';
+import VideoKeyBoardAndMouse from '@g/component/videoKeyBoardAndMouse';
 
 // import { log } from '@utils/logs';
 
@@ -37,7 +37,7 @@ const UiControl = (props: IPlayer) => {
   const config: initConfig = props.config;
   const [containerDisplay, setContainerDisplay] = useState<boolean>(false);
 
-  const pel = React.useRef<HTMLDivElement>(null);
+  const pel = useRef<HTMLDivElement>(null);
 
   const switchContainerDisplay = () => {
     setContainerDisplay(!containerDisplay)
@@ -49,7 +49,7 @@ const UiControl = (props: IPlayer) => {
    */
   return (
 
-    <VideoKeyBoard>
+    <VideoKeyBoardAndMouse>
       <div
         ref={pel}
         className={cn(style.container, 'needsclick', {
@@ -75,7 +75,7 @@ const UiControl = (props: IPlayer) => {
 
         </PublignBackgroundImages>
       </div>
-    </VideoKeyBoard>
+    </VideoKeyBoardAndMouse>
 
   );
 };

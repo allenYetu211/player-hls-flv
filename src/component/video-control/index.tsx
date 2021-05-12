@@ -2,10 +2,10 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 15:46:11
  * @Descripttion: 
- * @LastEditTime: 2021-05-08 17:17:05
+ * @LastEditTime: 2021-05-12 19:03:33
  * @FilePath: /ts-vp/src/component/video-control/index.tsx
  */
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { initConfig } from '@g/index';
 
 import PlugInPlayBtn from '@g/component/plugIn-playBtn';
@@ -23,6 +23,8 @@ import { getVideoPlayer } from '@player/index';
 import cn from 'classnames';
 
 import { msToTime } from '@utils/translateTime';
+
+import { useStore } from '@g/store'
 
 import style from './style/index.scss';
 
@@ -42,6 +44,9 @@ const matchMediaVideoControll = (type: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash', 
 
 
 const VideoControl = (props: Props) => {
+
+  const [state] = useStore();
+
 
   const player: any = getVideoPlayer();
 
@@ -101,11 +106,15 @@ const VideoControl = (props: Props) => {
 
 
 
-
+  const controlState = useMemo(() => {
+    return state.controlState
+  }, [state.controlState])
 
   return (
     <div
-      className={cn(style.controlBar)}
+      className={cn(style.controlBar, {
+        [style.controlBarShow]: controlState
+      })}
       onClick={(e) => {
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();

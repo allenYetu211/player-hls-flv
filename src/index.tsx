@@ -4,6 +4,8 @@ import { initPlayer } from '@player/index';
 import UiControl from '@g/component/uiControl';
 import { logInit } from '@utils/logs';
 
+import { StoreProvider } from "@g/store";
+
 
 
 
@@ -136,16 +138,18 @@ const VideoPlayer = (props: initConfig) => {
 
 
   return (
-    <div ref={containerEl} className={style.container}>
-
-      {initState &&
-        <UiControl
-          config={props}
-          eel={containerEl}
-          element={containerEl.current!}
-        />}
-      <video ref={videoEl} />
-    </div>);
+    <StoreProvider>
+      <div ref={containerEl} className={style.container}>
+        {initState &&
+          <UiControl
+            config={props}
+            eel={containerEl}
+            element={containerEl.current!}
+          />}
+        <video ref={videoEl} />
+      </div>
+    </StoreProvider>
+  );
 }
 
 export default VideoPlayer;

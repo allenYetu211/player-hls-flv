@@ -11,13 +11,16 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  &:hover {
-    .controlBar {
-      pointer-events: all;
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-  }
+
+  // TODO 隐藏
+  
+  // &:hover {
+  //   .controlBar {
+  //     pointer-events: all;
+  //     opacity: 1;
+  //     transform: translate3d(0, 0, 0);
+  //   }
+  // }
 
 
 }

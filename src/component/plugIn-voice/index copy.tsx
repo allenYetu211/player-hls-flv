@@ -1,3 +1,10 @@
+/*
+ * @Author: Allen OYang
+ * @Date: 2021-01-27 11:57:57
+ * @Descripttion: 
+ * @LastEditTime: 2021-05-12 16:30:35
+ * @FilePath: /ts-vp/src/component/plugIn-voice/index copy.tsx
+ */
 import React from 'react';
 import cn from 'classnames';
 import style from './style/index.scss';

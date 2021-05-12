@@ -2,12 +2,12 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 19:30:36
  * @Descripttion: 
- * @LastEditTime: 2021-05-10 14:05:42
+ * @LastEditTime: 2021-05-10 16:08:53
  * @FilePath: /ts-vp/src/component/plugin-middleContainer/index.tsx
  */
 
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PlugInPlayBtn from '@g/component/plugIn-playBtn';
 
@@ -19,7 +19,7 @@ import style from './style/index.scss';
 
 import cn from 'classnames';
 
-import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
+import HotVideo, { HocVideoType } from '@g/hoc-component/hoc-video';
 
 
 const MiddleContainer = (props: HocVideoType) => {
@@ -63,10 +63,9 @@ const MiddleContainer = (props: HocVideoType) => {
   return (
     <>
       <div className={style.middleContainer}>
-        {
-          isShowPlayering &&
-          <PlugInPlayBtn />
-        }
+
+        <PlugInPlayBtn isShowPlayering={!isShowPlayering} />
+
         {!isShowPlayering && loading &&
           <div className={cn(style.icon, style.animation)}>
             {iconLoading}

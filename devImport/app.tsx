@@ -13,6 +13,8 @@ import { hot } from "react-hot-loader/root";
 
 import VideoPlayer from '../src/index';
 
+import TestStore from './testStore';
+
 // import { initConfig } from '../src/interfaces';
 
 import { initConfig } from '../src/index';
@@ -136,7 +138,7 @@ const vodHlsConfig: initConfig = {
   //   count: 12, // 图片总数
   //   backgroundSize: 3840, // 图片分辨率
   // },
-  contentPreview:{
+  contentPreview: {
     picture: "https://devcdn.xylink.com/test/dump_img.jpg",
     viewCount: 20,
     timestap: [90937, 124937, 196937, 294637, 394937, 494937, 394937, 494937, 594937, 694937, 794937, 894937, 2294937, 5890937]
@@ -168,7 +170,7 @@ const vodHlsConfig2: initConfig = {
     count: 12, // 图片总数
     backgroundSize: 3840, // 图片分辨率
   },
-  contentPreview:{
+  contentPreview: {
     picture: "https://devcdn.xylink.com/test/dump_img.jpg",
     viewCount: 20,
     timestap: [90937, 124937, 196937, 294637, 394937, 494937, 394937, 494937, 594937, 694937, 794937, 894937, 2294937, 5890937]
@@ -291,6 +293,16 @@ const App = () => {
         zIndex: 9999
       }} onClick={choseMp4Url2}>MP4</button>
 
+
+      <div style={{
+        position: 'absolute',
+        top: '0px',
+        left: '100px',
+        zIndex: 9999,
+        color: '#fff'
+      }}>
+        <TestStore />
+      </div>
 
       <button style={{
         position: 'absolute',

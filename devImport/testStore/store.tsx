@@ -7,7 +7,7 @@
  */
 
 
-import React from 'react';
+import React, {createContext, useReducer, useContext} from 'react';
 
 const initialState = { count: 0 };
 
@@ -23,18 +23,18 @@ const reducer = (state: typeof initialState, action: any) => {
   }
 }
 
-const Context = React.createContext<any>('');
+const Context = createContext<any>('');
 export default Context;
 
 // <AppContext.Provider></AppContext.Provider>
 
 const useStore = () => {
-  return React.useContext(Context);
+  return useContext(Context);
 }
 
 
 const StoreProvider = ({ children }: any) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <Context.Provider value= { [state, dispatch]}> { children } </Context.Provider>
    )

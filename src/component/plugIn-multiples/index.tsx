@@ -42,8 +42,8 @@ const PluginMultiple = (props: IProps) => {
   }, [])
 
 
-  const [multipleList] = React.useState<{ text: string, value: number }[]>(props.config.multiple ? props.config.multiple!.list : [])
-  const [multipleIndex, setMultipleIndex] = React.useState<number>(props.config.multiple ? props.config.multiple!.initIndex : 0)
+  const [multipleList] = useState<{ text: string, value: number }[]>(props.config.multiple ? props.config.multiple!.list : [])
+  const [multipleIndex, setMultipleIndex] = useState<number>(props.config.multiple ? props.config.multiple!.initIndex : 0)
   const onChangeMultipleIndex = (key: number) => {
     IEIndex = key;
     setMultipleIndex(key);

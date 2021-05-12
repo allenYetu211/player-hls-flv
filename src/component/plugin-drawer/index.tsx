@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, FC  } from 'react';
 import Drawer, { DrawerProps } from '../../basicComponent/drawer';
 import preloadImg from '../../utils/preloadImg';
 
@@ -30,7 +30,7 @@ export interface IProps extends DrawerProps, HocVideoType {
 
 
 
-const PluginDrawer: React.FC<IProps> = (
+const PluginDrawer: FC<IProps> = (
   (props) => {
 
     // const player: any = getVideoPlayer();
@@ -49,7 +49,7 @@ const PluginDrawer: React.FC<IProps> = (
     }
 
     //  预加载图片
-    React.useEffect(() => {
+    useEffect(() => {
       preloadImg(picture)
     }, [])
 

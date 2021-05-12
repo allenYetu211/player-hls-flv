@@ -28,7 +28,13 @@
 		border: none;
     // line-height: 40px;
     // height: 40px;
-	}
+  }
+  
+  &.controlBarShow {
+    pointer-events: all;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .middleContainer {

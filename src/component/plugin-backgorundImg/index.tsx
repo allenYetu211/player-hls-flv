@@ -7,7 +7,7 @@
  */
 
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, FC} from 'react';
 
 import style from './style/index.scss';
 
@@ -20,7 +20,7 @@ interface Props extends HocVideoType {
   poster?: string
 }
 
-const PluginBackgroundImages: React.FC<Props> = (props) => {
+const PluginBackgroundImages: FC<Props> = (props) => {
 
   const [oncePoster, setOncePoster] = useState<boolean>(true);
 
