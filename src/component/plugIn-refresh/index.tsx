@@ -1,21 +1,34 @@
+/*
+ * @Author: Allen OYang
+ * @Date: 2021-01-21 11:19:27
+ * @Descripttion: 
+ * @LastEditTime: 2021-05-08 16:01:00
+ * @FilePath: /ts-vp/src/component/plugIn-refresh/index.tsx
+ */
 import React from 'react';
 import {iconRefresh} from '@images/icon';
 import style from './style/index.scss';
 
-interface IProps {
-  onRefreshPlayer: () => void;
-}
+// import { getVideoPlayer } from '@player/index';
 
-const PlugInRefresh = (props: IProps) => {
+import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
+
+
+const PlugInRefresh = (props: HocVideoType) => {
+
+  // const player = getVideoPlayer();
+
+  const onRefreshPlayer = () => { props.player.refresh() }
+
+
   return (
     <div 
     className={style.icon} 
-    onClick={props.onRefreshPlayer}>
+    onClick={onRefreshPlayer}>
       {iconRefresh}
     </div>
   )
 }
 
-const areEqual =(prevProps: IProps, nextProps: IProps) =>  prevProps.onRefreshPlayer !== nextProps.onRefreshPlayer;
 
-export default React.memo(PlugInRefresh, areEqual);
+export default HotVideo(PlugInRefresh);

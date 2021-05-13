@@ -1,0 +1,32 @@
+
+
+.contentVolume {
+  box-sizing: border-box;
+  width: 100px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position:  absolute;
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: rgba(0,0,0, .6);
+  border-radius: 5px;
+
+  color:#fff;
+  padding:  10px 15px;
+
+  div {
+    flex: 1;
+  }
+
+   svg {
+     width: 25px;
+     height: 25px;
+   }
+
+}

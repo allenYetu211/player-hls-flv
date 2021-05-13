@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-04-06 09:12:41
  * @Descripttion: 
- * @LastEditTime: 2021-04-09 16:00:20
+ * @LastEditTime: 2021-05-12 08:21:22
  * @FilePath: /ts-vp/webpack.config.dev.js
  */
 const path = require('path');
@@ -37,7 +37,8 @@ const result = Object.assign({}, config, {
   devServer: {
     contentBase: './dist',
     hot: true,
-    stats: 'errors-only'
+    stats: 'errors-only',
+    port: 3001
   },
   module: {
     rules: moduleRulesConfig

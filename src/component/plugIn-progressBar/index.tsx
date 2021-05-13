@@ -6,13 +6,15 @@ import { msToTime } from '@utils/translateTime';
 
 import ToolTip from '@g/uiCompoent/toolTip';
 
+import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
+
 import { log } from '@utils/logs';
 
 
 import cn from 'classnames';
 
 
-interface IProps {
+interface IProps extends HocVideoType {
   // onChangeComplete: Function;
   isMobile?: boolean;
   thumbnail?: {
@@ -162,11 +164,6 @@ const PlugInProgressBar = (props: IProps) => {
     }
   }
 
-  // const React.useMemo(() => {
-  //   return props.cacheValue
-  // }, [props.cacheValue])
-
-
   return (
     <div
       ref={progressEl}
@@ -193,8 +190,8 @@ const PlugInProgressBar = (props: IProps) => {
         })}>
         <div
           onClick={() => {
-            player.setCurrentTime(CURRENTTIME);
-            player.play()
+            props.player.setCurrentTime(CURRENTTIME);
+            props.player.play()
           }}
           ref={thumbnailContainerEl}
           className={style.notTransitionfocuseContainer}>
@@ -224,12 +221,11 @@ const PlugInProgressBar = (props: IProps) => {
         tooltip={false}
         value={playProgress}
         onChange={(value: number) => {
-          player.setCurrentTime(value);
+          props.player.setCurrentTime(value);
         }}
 
         onChangeComplete={() => {
-          player.play();
-          // props.onChangeComplete()
+          props.player.play();
         }}
       />
     </div>
@@ -237,8 +233,4 @@ const PlugInProgressBar = (props: IProps) => {
 };
 
 
-export default PlugInProgressBar;
-
-// const areEqual = (prevProps: IProps, nextProps: IProps) =>  prevProps.playerState == nextProps.playerState;
-
-// export default  React.memo(PlugInProgressBar, areEqual);
+export default HotVideo(PlugInProgressBar);

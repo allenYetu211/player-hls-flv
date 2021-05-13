@@ -1,3 +1,10 @@
+/*
+ * @Author: Allen OYang
+ * @Date: 2021-04-13 11:24:30
+ * @Descripttion: 
+ * @LastEditTime: 2021-05-10 15:11:36
+ * @FilePath: /ts-vp/src/ur-util/portal.tsx
+ */
 // 用于 组件插入dom 节点。
 
 import React from 'react';
@@ -22,6 +29,8 @@ const Portal = React.forwardRef<PortalRef, PortalProps>((props, ref) => {
   const containerRef = React.useRef<HTMLElement>();
 
   React.useEffect(() => {
+    console.log('parentEl:::' , parentEl);
+
     if (parentEl && parentEl!.current) {
       if (getComputedStyle(parentEl!.current).position === '') {
         parentEl!.current.style.position = 'relative';

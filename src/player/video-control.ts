@@ -84,11 +84,7 @@ export default class VideoContainer {
     }, 1000)
   }
 
-  // 设置声音
-  public setVideoVolume (value: number) {
-    this.videoEl.volume = value;
-  }
-
+ 
   // 计算操作缓冲内容长度
   public onCacheUpdate () {
     let buffered = this.videoEl.buffered
@@ -206,6 +202,16 @@ export default class VideoContainer {
     this._emitter.emit('playProgress', value);
     this.videoEl.currentTime = value/1000;
   }
+
+  public setVideoCurrentTime (value: number) {
+    // TODO , 童虎修改内容
+    this.videoEl.currentTime = value;
+  }
+   // 设置声音
+   public setVideoVolume (value: number) {
+    this.videoEl.volume = value;
+  }
+
 
   public setPlaybackRate(value: number) {
     if (value === this.videoEl.playbackRate) {
