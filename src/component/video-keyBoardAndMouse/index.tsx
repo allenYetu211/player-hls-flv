@@ -2,8 +2,8 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 19:42:36
  * @Descripttion: 
- * @LastEditTime: 2021-05-12 18:29:10
- * @FilePath: /ts-vp/src/component/videoKeyBoardAndMouse/index.tsx
+ * @LastEditTime: 2021-05-13 09:06:44
+ * @FilePath: /ts-vp/src/component/video-keyBoardAndMouse/index.tsx
  */
 
 
@@ -136,7 +136,6 @@ const VideoKeyBoard: FC<HocVideoType> = (props) => {
       {volumeState &&
         <div className={style.contentVolume}>
           <div>
-            { state.controlState ? 0 : 1}
             {state.volume > 0 ? iconVoice : iconVoiceOff}
           </div>
           <div>{state.volume * 100}%</div>

@@ -205,6 +205,7 @@ export default class VideoContainer {
 
   public setVideoCurrentTime (value: number) {
     // TODO , 童虎修改内容
+    this._emitter.emit('playProgress', value * 1000);
     this.videoEl.currentTime = value;
   }
    // 设置声音

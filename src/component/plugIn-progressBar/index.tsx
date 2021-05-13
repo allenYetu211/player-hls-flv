@@ -62,15 +62,15 @@ const PlugInProgressBar = (props: IProps) => {
 
     player[state]('duration', (duration: string) => {
       setProgressBarDuration(Number(duration));
-      // setVideoDuration(msToTime(duration));
     });
 
     player[state]('playProgress', (duration: string) => {
       setPlayProgress(Number(duration));
-      // setPlayProgress(msToTime(duration));
     });
 
   };
+
+  
 
   //  记录滚动时间位置
 

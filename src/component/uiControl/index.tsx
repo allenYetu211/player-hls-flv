@@ -20,7 +20,7 @@ import PublignBackgroundImages from '@g/component/plugin-backgorundImg';
 
 import MiddleContainer from '@g/component/plugin-middleContainer';
 
-import VideoKeyBoardAndMouse from '@g/component/videoKeyBoardAndMouse';
+import VideoKeyBoardAndMouse from '@g/component/video-keyBoardAndMouse';
 
 // import { log } from '@utils/logs';
 
