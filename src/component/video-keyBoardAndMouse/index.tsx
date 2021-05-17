@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 19:42:36
  * @Descripttion: 
- * @LastEditTime: 2021-05-13 09:06:44
+ * @LastEditTime: 2021-05-17 15:08:52
  * @FilePath: /ts-vp/src/component/video-keyBoardAndMouse/index.tsx
  */
 
@@ -24,15 +24,20 @@ import style from './style/index.scss';
 let timer: any;
 let mouseTimer: any;
 
-const VideoKeyBoard: FC<HocVideoType> = (props) => {
+// let isFocus = false;
+
+const VideoKeyBoardAndMouse: FC<HocVideoType> = (props) => {
   const { player } = props;
   const { videoEl } = player;
 
   const [state, dispatch] = useStore();
 
+  const divControlEl = useRef<HTMLDivElement>(null);
+
   const [volumeState, setVolumeState] = useState<boolean>(false);
 
   const divElv = useRef<HTMLDivElement>(null);
+
 
 
   useEffect(() => {
@@ -42,7 +47,19 @@ const VideoKeyBoard: FC<HocVideoType> = (props) => {
   }, []);
 
   const addKeyBoardListener = () => {
-    document.addEventListener('keydown', (e: KeyboardEvent) => {
+
+    // divControlEl.current!.addEventListener('focus', () => {
+    //   isFocus = true
+    // })
+
+    // divControlEl.current!.addEventListener('blur', () => {
+    //   isFocus = false;
+    // })
+
+
+    divControlEl.current!.addEventListener('keydown', (e: KeyboardEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
       if (keyBoardEvent[e.keyCode]) {
         keyBoardEvent[e.keyCode]();
       }
@@ -132,7 +149,7 @@ const VideoKeyBoard: FC<HocVideoType> = (props) => {
 
 
   return (
-    <>
+    <div tabIndex={-1} ref={divControlEl}>
       {volumeState &&
         <div className={style.contentVolume}>
           <div>
@@ -144,8 +161,8 @@ const VideoKeyBoard: FC<HocVideoType> = (props) => {
       <div style={{ width: '100%', height: '100%' }} ref={divElv}>
         {props.children}
       </div>
-    </>
+    </div>
   )
 }
 
-export default HotVideo(VideoKeyBoard);
+export default HotVideo(VideoKeyBoardAndMouse);

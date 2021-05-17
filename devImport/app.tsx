@@ -310,7 +310,11 @@ const App = () => {
         left: '150px',
         zIndex: 9999
       }} onClick={choseHLS}>HLS</button>
-      <VideoPlayer {...option} onVideoPlayerState={onVideoPlayerState} />
+
+      {/* <div style={{width: '200px', height: "100vh", position: "relative"}}> */}
+        <VideoPlayer {...option} onVideoPlayerState={onVideoPlayerState} />
+      {/* </div> */}
+
     </div>
   )
 
