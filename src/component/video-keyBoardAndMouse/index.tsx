@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 19:42:36
  * @Descripttion: 
- * @LastEditTime: 2021-05-17 15:08:52
+ * @LastEditTime: 2021-05-17 15:38:32
  * @FilePath: /ts-vp/src/component/video-keyBoardAndMouse/index.tsx
  */
 
@@ -24,7 +24,7 @@ import style from './style/index.scss';
 let timer: any;
 let mouseTimer: any;
 
-// let isFocus = false;
+let isFocus = false;
 
 const VideoKeyBoardAndMouse: FC<HocVideoType> = (props) => {
   const { player } = props;
@@ -48,19 +48,19 @@ const VideoKeyBoardAndMouse: FC<HocVideoType> = (props) => {
 
   const addKeyBoardListener = () => {
 
-    // divControlEl.current!.addEventListener('focus', () => {
-    //   isFocus = true
-    // })
+    divControlEl.current!.addEventListener('focus', () => {
+      isFocus = true
+    })
 
-    // divControlEl.current!.addEventListener('blur', () => {
-    //   isFocus = false;
-    // })
+    divControlEl.current!.addEventListener('blur', () => {
+      isFocus = false;
+    })
 
 
     divControlEl.current!.addEventListener('keydown', (e: KeyboardEvent) => {
       e.stopPropagation();
       e.preventDefault();
-      if (keyBoardEvent[e.keyCode]) {
+      if (isFocus && keyBoardEvent[e.keyCode]) {
         keyBoardEvent[e.keyCode]();
       }
     })
