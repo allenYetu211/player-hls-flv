@@ -49,7 +49,9 @@ const UiControl = (props: IPlayer) => {
    */
   return (
 
-    <VideoKeyBoardAndMouse>
+    <VideoKeyBoardAndMouse 
+    vod={config.vod}
+    type={config.type}>
       <div
         ref={pel}
         className={cn(style.container, 'needsclick', {

@@ -184,12 +184,12 @@ const flvConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: 'http://prdpulllive.xylink.com/prdnemo/9680d8c276af456f017704a1373e5078.flv?auth_key=46afc9928d4020d484628b4a83b807a5-1610785807-de28f9fded044083966c83cca5cca663-',
+        src: 'http://prdpulllive.xylink.com/prdnemo/9680cebc796b73450179794af8530e57.flv?auth_key=a8ed83a7761372ef5197981d0b36e111-1621332004-357646ad72d448eea39ea00cd8bde223-',
         text: '标清',
       },
       {
         src:
-          'http://prdpulllive.xylink.com/prdnemo/9680d8c276af456f017704a1373e5078.flv?auth_key=46afc9928d4020d484628b4a83b807a5-1610785807-de28f9fded044083966c83cca5cca663-',
+          'http://prdpulllive.xylink.com/prdnemo/9680cebc796b73450179794af8530e57.flv?auth_key=a8ed83a7761372ef5197981d0b36e111-1621332004-357646ad72d448eea39ea00cd8bde223-',
         text: '高清',
       },
     ],
@@ -254,7 +254,7 @@ const dashConfig: initConfig = {
 const App = () => {
   // const [option, setOption] = useState<any>(vodHlsConfig)
   // const [option, setOption] = useState<any>(hlsConfig)
-  const [option, setOption] = useState<any>(vodHlsConfig2)
+  const [option, setOption] = useState<any>(flvConfig)
 
   const choseFlv = () => {
     setOption(flvConfig);

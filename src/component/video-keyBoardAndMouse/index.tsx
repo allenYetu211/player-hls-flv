@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 19:42:36
  * @Descripttion: 
- * @LastEditTime: 2021-05-17 15:38:32
+ * @LastEditTime: 2021-05-17 15:56:48
  * @FilePath: /ts-vp/src/component/video-keyBoardAndMouse/index.tsx
  */
 
@@ -21,12 +21,18 @@ import throttle from 'lodash.throttle';
 
 import style from './style/index.scss';
 
+interface Props extends HocVideoType {
+  type: string;
+  vod: boolean;
+}
+
 let timer: any;
 let mouseTimer: any;
 
 let isFocus = false;
+let isLive = true;
 
-const VideoKeyBoardAndMouse: FC<HocVideoType> = (props) => {
+const VideoKeyBoardAndMouse: FC<Props> = (props) => {
   const { player } = props;
   const { videoEl } = player;
 
@@ -47,6 +53,11 @@ const VideoKeyBoardAndMouse: FC<HocVideoType> = (props) => {
   }, []);
 
   const addKeyBoardListener = () => {
+
+
+    if (props.type === 'mp4' || (props.type === 'hls' && props.vod)) {
+      isLive = false;
+    }
 
     divControlEl.current!.addEventListener('focus', () => {
       isFocus = true
@@ -74,10 +85,10 @@ const VideoKeyBoardAndMouse: FC<HocVideoType> = (props) => {
         divElv.current!.style.cursor = 'default';
 
         mouseTimer = setTimeout(() => {
-        divElv.current!.style.cursor = 'none';
+          divElv.current!.style.cursor = 'none';
           dispatch({ type: 'setControlState', controlState: false });
         }, 5000)
-        
+
       }, 1000));
 
   }
@@ -95,6 +106,9 @@ const VideoKeyBoardAndMouse: FC<HocVideoType> = (props) => {
   const keyBoardEvent: { [index: number]: Function } = {
     // 右 - 控制进度
     37: () => {
+      if (isLive) {
+        return 
+      }
       let value;
       if (videoEl.currentTime - 5 < 0) {
         value = 0
@@ -105,6 +119,9 @@ const VideoKeyBoardAndMouse: FC<HocVideoType> = (props) => {
     },
     // 左 - 控制进度
     39: () => {
+      if (isLive) {
+        return 
+      }
       let value = videoEl.currentTime + 5;
       props.player.setVideoCurrentTime(value)
     },
