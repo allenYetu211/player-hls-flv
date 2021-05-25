@@ -148,7 +148,8 @@ const vodHlsConfig: initConfig = {
 const vodHlsConfig2: initConfig = {
   poster: "http://testqacdn.xylink.com/poster/202105/16119087407093887.jpg",
   "type": "m3u8",
-  "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8?v=2",
+  // "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8?v=2",
+  "src": "https://qahz-res.xylinkedu.com/vodfiles/sharefiles/vod/561143719001063424.m3u8?auth_key=1621586134-28-17-9578fc7ded6124d8537792dc519b3a5c&t=1621584214990",
   "autoplay": false,
   "isMobile": false,
   "hideMultiCode": true,
@@ -254,7 +255,7 @@ const dashConfig: initConfig = {
 const App = () => {
   // const [option, setOption] = useState<any>(vodHlsConfig)
   // const [option, setOption] = useState<any>(hlsConfig)
-  const [option, setOption] = useState<any>(flvConfig)
+  const [option, setOption] = useState<any>(vodHlsConfig2)
 
   const choseFlv = () => {
     setOption(flvConfig);

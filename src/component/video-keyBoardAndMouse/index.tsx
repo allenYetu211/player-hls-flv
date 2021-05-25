@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 19:42:36
  * @Descripttion: 
- * @LastEditTime: 2021-05-17 15:56:48
+ * @LastEditTime: 2021-05-21 16:08:52
  * @FilePath: /ts-vp/src/component/video-keyBoardAndMouse/index.tsx
  */
 
@@ -54,8 +54,7 @@ const VideoKeyBoardAndMouse: FC<Props> = (props) => {
 
   const addKeyBoardListener = () => {
 
-
-    if (props.type === 'mp4' || (props.type === 'hls' && props.vod)) {
+    if (props.type === 'mp4' || props.vod) {
       isLive = false;
     }
 
