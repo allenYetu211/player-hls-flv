@@ -1,4 +1,6 @@
 
+@import '@g/asset/style/animation.scss';
+
 .middleContainer {
   position: absolute;
     left: 50%;
@@ -8,4 +10,9 @@
     .icon {
       width: 50px;
     }
+}
+
+
+.animation {
+  animation: rotation 0.5s linear 0s infinite running;
 }
