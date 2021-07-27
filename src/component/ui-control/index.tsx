@@ -2,8 +2,8 @@
  * @Author: Allen OYang
  * @Date: 2021-05-07 10:57:33
  * @Descripttion: 
- * @LastEditTime: 2021-05-08 19:40:13
- * @FilePath: /ts-vp/src/component/uiControl/index.tsx
+ * @LastEditTime: 2021-07-20 10:02:44
+ * @FilePath: /ts-vp/src/component/ui-control/index.tsx
  */
 import React, { useRef, useState } from 'react';
 
@@ -21,6 +21,8 @@ import PublignBackgroundImages from '@g/component/plugin-backgorundImg';
 import MiddleContainer from '@g/component/plugin-middleContainer';
 
 import VideoKeyBoardAndMouse from '@g/component/video-keyBoardAndMouse';
+
+import VideoBarrage from '@g/component/video-barrage';
 
 // import { log } from '@utils/logs';
 
@@ -49,35 +51,36 @@ const UiControl = (props: IPlayer) => {
    */
   return (
 
-    <VideoKeyBoardAndMouse 
-    vod={config.vod}
-    type={config.type}>
-      <div
-        ref={pel}
-        className={cn(style.container, 'needsclick', {
-          [style.display]: config.isMobile! && containerDisplay,
-          [style.hover]: !config.isMobile!,
-        })}
-        onClick={switchContainerDisplay}
-      >
-
-        <PublignBackgroundImages
-          poster={props.config.poster}
+    <VideoBarrage>
+      <VideoKeyBoardAndMouse
+        vod={config.vod}
+        type={config.type}>
+        <div
+          ref={pel}
+          className={cn(style.container, 'needsclick', {
+            [style.display]: config.isMobile! && containerDisplay,
+            [style.hover]: !config.isMobile!,
+          })}
+          onClick={switchContainerDisplay}
         >
 
-          <MiddleContainer />
+          <PublignBackgroundImages
+            poster={props.config.poster}
+          >
 
-          {!config.hideControl &&
-            <VideoControl
-              config={props.config}
-              element={props.element}
-              eel={props.eel}
-            />
-          }
+            <MiddleContainer />
 
-        </PublignBackgroundImages>
-      </div>
-    </VideoKeyBoardAndMouse>
+            {!config.hideControl &&
+              <VideoControl
+                config={props.config}
+                element={props.element}
+                eel={props.eel}
+              />
+            }
+          </PublignBackgroundImages>
+        </div>
+      </VideoKeyBoardAndMouse>
+    </VideoBarrage>
 
   );
 };

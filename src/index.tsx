@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import style from './styles.scss';
 import { initPlayer } from '@player/index';
-import UiControl from '@g/component/uiControl';
+import UiControl from '@g/component/ui-control';
 import { logInit } from '@utils/logs';
 
 import { StoreProvider } from "@g/store";

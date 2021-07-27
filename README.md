@@ -136,6 +136,36 @@ return (
 ```
 
 
+- 跑马灯、弹幕： 注入onVideoPlayerState 回调方法。
+```typescript
+
+// 通过回调的vp方法获取
+// 通过 mountFunction.barrage.push 添加弹幕。
+// mountFunction.barrage.start 其实启动。
+
+
+const onVideoPlayerState = (vp: any) => {
+    let count = 0;
+    setInterval(() => {
+      count += 1;
+      vp.mountFunction.barrage.push({
+        value: `${count}：`,   // 弹幕内容 string
+        viewableArea: 240,     // 弹幕区域可视区域：number ，不填写默认视频区域全屏
+        speed: 2,               // 弹幕速度： number
+        color: '#20ff29',        // 颜色 16进制: string, 不填写， 则显示随机颜色。
+      })
+    }, 100);
+    vp.mountFunction.barrage.start();
+
+
+vp.mountFunction.barrage.start  // 开始发送弹幕
+vp.mountFunction.barrage.push   // 添加弹幕
+vp.mountFunction.barrage.clean  // 清除弹幕，并关闭弹幕功能
+vp.mountFunction.barrage.open   // 开启弹幕功能
+
+```
+
+
 ---
 
 # 本地开发准备
@@ -215,6 +245,10 @@ yarn build
 ```
 
 ### 版本更新内容：
+
+#### 1.5.26 (2021-07-27)
+1. 添加弹幕功能。
+
 #### 1.5.21（2021-05-13）
 1. 优化键盘操控, 需要聚焦屏幕才可触发键盘控制。
 
