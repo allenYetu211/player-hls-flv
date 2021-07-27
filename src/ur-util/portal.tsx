@@ -44,8 +44,6 @@ const Portal = React.forwardRef<PortalRef, PortalProps>((props, ref) => {
   }, [])
 
 
-
-
   return containerRef.current ? ReactDOM.createPortal(children, containerRef.current) : null;
 })
 
