@@ -23,12 +23,16 @@ export default class HLSPlayer extends VideoControl {
 
   private hls: any;
 
+  private notCache: boolean = false;
+
   constructor(config: videoConfig) {
     super({
       element: config.element,
       container: config.containerEl,
       poster: config.poster
     })
+
+    this.notCache = config.notCache || false;
 
     // 如果是vod点播，
     if (!config!.vod) {
@@ -64,7 +68,7 @@ export default class HLSPlayer extends VideoControl {
            *  可以修改调试： (/\.m3u8/.test(url) ||  deviceType.ie) 
            *  
            */
-          if (/\.m3u8/.test(url) ||  deviceType.ie) {
+          if (!this.notCache && /\.m3u8/.test(url) || deviceType.ie) {
             requestUrl = /\?/.test(url) ? `${url}&t=${new Date().getTime()}` : `${url}?t=${new Date().getTime()}`
           }
           xhr.open('GET', requestUrl, true);

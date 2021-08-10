@@ -4,6 +4,8 @@ import FlvPlayer from './flv-player';
 import HlsPlayer from './hls-player';
 import DashPlayer from './dash-player';
 
+
+
 let videoPlayer: any;
 
 export default class Player {
