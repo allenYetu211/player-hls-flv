@@ -23,7 +23,7 @@ export default class HLSPlayer extends VideoControl {
 
   private hls: any;
 
-  private notCache: boolean = false;
+  private timestampUnit: boolean | string = 't';
 
   constructor(config: videoConfig) {
     super({
@@ -32,7 +32,14 @@ export default class HLSPlayer extends VideoControl {
       poster: config.poster
     })
 
-    this.notCache = config.notCache || false;
+    console.log('config.timestampUnit', config.timestampUnit);
+
+    if (typeof config.timestampUnit === 'string') {
+      this.timestampUnit = config.timestampUnit;
+    } else if (typeof config.timestampUnit === 'boolean') {
+      this.timestampUnit = config.timestampUnit ? 't' : false
+    };
+
 
     // 如果是vod点播，
     if (!config!.vod) {
@@ -68,8 +75,10 @@ export default class HLSPlayer extends VideoControl {
            *  可以修改调试： (/\.m3u8/.test(url) ||  deviceType.ie) 
            *  
            */
-          if (!this.notCache && /\.m3u8/.test(url) || deviceType.ie) {
-            requestUrl = /\?/.test(url) ? `${url}&t=${new Date().getTime()}` : `${url}?t=${new Date().getTime()}`
+
+          console.log('this.timestampUnit??>>>>>>>', this.timestampUnit)
+          if (this.timestampUnit && (/\.m3u8/.test(url) || deviceType.ie)) {
+            requestUrl = /\?/.test(url) ? `${url}&${this.timestampUnit}=${new Date().getTime()}` : `${url}?${this.timestampUnit}=${new Date().getTime()}`
           }
           xhr.open('GET', requestUrl, true);
         }

@@ -151,10 +151,11 @@ const vodHlsConfig2: initConfig = {
   // "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8?v=2",
   // "src": "https://qahz-res.xylinkedu.com/vodfiles/sharefiles/vod/561143719001063424.m3u8?auth_key=1621586134-28-17-9578fc7ded6124d8537792dc519b3a5c&t=1621584214990",
   // "src": "http://prd-vodcdn.xylink.com/vodfiles/sharefiles/live/9680e1be766c4adb01766c591ac70027/202103/01154537/8dd9aaf3-a175-4d55-bedd-d78bcfbf3f0e.m3u8?t=1622770992789",
-  "src": 'https://test-cdn.eduzhida.com/vodfiles/sharefiles/vod/609758260756480000.m3u8?sign=01e9979af41161423d0e10d95d3183f1&t=1628583847911',
+  "src": 'https://test-cdn.eduzhida.com/vodfiles/sharefiles/vod/609758260756480000.m3u8',
   "autoplay": false,
   "isMobile": false,
   "hideMultiCode": true,
+  'timestampUnit': true,
   "multiple":
   {
     "list":

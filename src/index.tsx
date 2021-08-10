@@ -29,7 +29,7 @@ export interface initConfig {
   vod?: boolean;
   poster?: string;
   duration?: number;
-  notCache?: boolean;
+  timestampUnit?: boolean | string;
   thumbnail?: {
     picture: string;
     width?: number;
