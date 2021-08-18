@@ -2,10 +2,12 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2021-07-27 15:36:46
+ * @LastEditTime: 2021-08-18 10:25:59
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
+
+import CanvasProxy from '@utils/canvas';
 
 interface BarrageItemType {
   value: string;
@@ -33,12 +35,8 @@ interface canvas2D extends CanvasRenderingContext2D {
   oBackingStorePixelRatio?: any;
 }
 
-class BarrageCanvas {
-  private element: HTMLCanvasElement;
-  private width: number;
-  private height: number;
-  private ratio: number;
-  private ctx: canvas2D;
+class BarrageCanvas extends CanvasProxy {
+
   private barrageList: MsgItem[];
   private msgCacahLength: number = 100;
   // private barrageListItem: MsgItem[] = [];
@@ -50,38 +48,9 @@ class BarrageCanvas {
   constructor({ element, maxCache = 100 }: {
     element: HTMLCanvasElement, maxCache: number
   }) {
+    super(element);
     this.barrageList = new Array(maxCache);
     this.msgCacahLength = maxCache;
-
-    this.element = element;
-    let rect = this.element.getBoundingClientRect();
-
-    this.width = rect.right - rect.left;
-    this.height = rect.bottom - rect.top;
-    this.ctx = this.element.getContext('2d')!;
-
-
-    // 针对电脑分辨率处理Ratio
-    const devicePixelRatio = window.devicePixelRatio || 1
-    const backingStoreRatio = this.ctx.webkitBackingStorePixelRatio ||
-      this.ctx.mozBackingStorePixelRatio ||
-      this.ctx.msBackingStorePixelRatio ||
-      this.ctx.oBackingStorePixelRatio ||
-      this.ctx.backingStorePixelRatio || 1
-    this.ratio = devicePixelRatio / backingStoreRatio;
-
-    const oldwidth = rect.width;
-    const oldheight = rect.height;
-
-    this.element.width = oldwidth * this.ratio;
-    this.element.height = oldheight * this.ratio;
-
-    this.element.style.width = oldwidth + 'px';
-    this.element.style.height = oldheight + 'px';
-
-    this.ctx.scale(this.ratio, this.ratio);
-    this.ctx.font = `25px "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", "sans-serif"`;
-
   }
 
 
@@ -126,10 +95,10 @@ class BarrageCanvas {
     });
   }
 
-  start(){
-    
-    if(this.isClose) {
-      return 
+  start() {
+
+    if (this.isClose) {
+      return
     }
 
     this.isRunning = true;
@@ -147,7 +116,7 @@ class BarrageCanvas {
   }) {
 
     if (this.isClose) {
-      return 
+      return
     }
 
 
@@ -191,18 +160,7 @@ class BarrageCanvas {
 
 
 
-  getColor() {
-    return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
-  }
 
-  getLimitRandom(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min) + min)
-  }
-
-  //获取偏移量
-  getOffset() {
-    return +(Math.random() * 4).toFixed(1) + 1;
-  }
 
 
 }

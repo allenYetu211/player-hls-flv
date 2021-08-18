@@ -146,6 +146,7 @@ const vodHlsConfig: initConfig = {
 }
 
 const vodHlsConfig2: initConfig = {
+
   poster: "http://testqacdn.xylink.com/poster/202105/16119087407093887.jpg",
   "type": "m3u8",
   // "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8?v=2",
@@ -179,6 +180,13 @@ const vodHlsConfig2: initConfig = {
     viewCount: 20,
     timestap: [90937, 124937, 196937, 294637, 394937, 494937, 394937, 494937, 594937, 694937, 794937, 894937, 2294937, 5890937]
   },
+  antiScreenRecording: {
+    text: '测试内容',
+    color: 'red',
+    duration: 5000,
+    interval: 6000,
+    fontSize: 12
+  }
 }
 
 const flvConfig: initConfig = {
@@ -272,25 +280,25 @@ const App = () => {
   }
 
   const onVideoPlayerState = (vp: any) => {
-    let count = 0;
-    setInterval(() => {
-      count += 1;
-      vp.mountFunction.barrage.push({
-        value: `${count}：`,
-        // viewableArea: 240,
-        speed: 2
-      })
-    }, 100);
+    // let count = 0;
+    // setInterval(() => {
+    //   count += 1;
+    //   vp.mountFunction.barrage.push({
+    //     value: `${count}：`,
+    //     // viewableArea: 240,
+    //     speed: 2
+    //   })
+    // }, 100);
 
-    setTimeout(() => {
-      vp.mountFunction.barrage.clean()
-    }, 2000)
+    // setTimeout(() => {
+    //   vp.mountFunction.barrage.clean()
+    // }, 2000)
 
-    setTimeout(() => {
-      vp.mountFunction.barrage.open()
-    }, 4000)
+    // setTimeout(() => {
+    //   vp.mountFunction.barrage.open()
+    // }, 4000)
 
-    vp.mountFunction.barrage.start();
+    // vp.mountFunction.barrage.start();
 
     // setTimeout(() => {
     //   vp.mountFunction.onChangePlayIndex(1)

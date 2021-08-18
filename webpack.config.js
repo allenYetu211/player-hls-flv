@@ -33,7 +33,7 @@ const moduleRulesConfig = [
       {
         loader: 'sass-loader',
         options: {
-          implementation: require('sass'),
+          implementation: require('dart-sass'),
           sourceMap: true
         }
       }
@@ -82,7 +82,7 @@ const config = {
   //   modules: ['node_modules', './loader']
   // },
   resolve: {
-    extensions: ['.js', '.jsx', '.tsx', '.ts','js', 'jsx', 'tsx', 'ts'],
+    extensions: ['.js', '.jsx', '.tsx', '.ts', 'js', 'jsx', 'tsx', 'ts'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
       '@g': path.resolve(__dirname, './src'),

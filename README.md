@@ -1,20 +1,19 @@
-
-
 # v-player
 
+## 浏览器
 
-## 浏览器 
 - Windows 10 - IE11
-- IE以外所有浏览器
+- IE 以外所有浏览器
 - 移动端播放器
 
 ---
 
 ## 功能
+
 - [x] 分辨率切换
 - [x] 倍速选择
 - [x] mp4
-- [x] flv 
+- [x] flv
 - [x] hls 直播
 - [x] hls 点播
 - [x] dash 点播
@@ -22,18 +21,20 @@
 - [x] 预览图
 
 ---
+
 ### 使用
 
 > 安装
+
 ```
 npm i player-hls-flv
 ```
 
->初始参数
+> 初始参数
 
 ```typescript
 export interface initConfig {
-  type?: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash',
+  type?: 'flv' | 'hls' | 'mp4' | 'm3u8' | 'dash';
   src?: string;
   autoplay?: boolean;
   option?: IMultiStreamsContainer;
@@ -41,32 +42,33 @@ export interface initConfig {
   hideControl?: boolean;
   hideMultiCode?: boolean;
   hideRefresh?: boolean;
-  multiple?: IMultiple,
-  vod?: boolean,
+  multiple?: IMultiple;
+  vod?: boolean;
   poster?: string;
   duration?: string;
 }
 
 export interface IMultiple {
   list: {
-    text: string,
-    value: number,
-  }[],
-  initIndex: number
+    text: string;
+    value: number;
+  }[];
+  initIndex: number;
 }
 
 export interface IMultiStreams {
   src: string;
-  text: string
+  text: string;
 }
 
 export interface IMultiStreamsContainer {
-multiStreams: IMultiStreams[];
-playIndex: number;
+  multiStreams: IMultiStreams[];
+  playIndex: number;
 }
 ```
 
 > 实际引用
+
 ```react
 import PlayerHlsFlv from 'player-hls-flv';
 
@@ -74,6 +76,7 @@ return (
   <PlayerHlsFlv {...params} />
 )
 ```
+
 ---
 
 <!-- ## 效果图
@@ -85,44 +88,45 @@ return (
 ---
 
 ## Error Code
-| 错误码 | 描述 |
-| --- | --- |
-| 0001 | 浏览器禁止自动播放，需手动处理播放状态 |
-|NETWORK_ERROR| 网络相关错误 |
-|STATISTICS_INFO| 提供播放统计信息，如下降帧，当前速度等|
-|ERROR| 播放过程中发生的任何错误 |
-|MEDIA_ERROR| 与媒体相关的错误(格式错误、解码问题等) |
-|OTHER_ERROR| 任何其他未指定的错误 |
+
+| 错误码          | 描述                                   |
+| --------------- | -------------------------------------- |
+| 0001            | 浏览器禁止自动播放，需手动处理播放状态 |
+| NETWORK_ERROR   | 网络相关错误                           |
+| STATISTICS_INFO | 提供播放统计信息，如下降帧，当前速度等 |
+| ERROR           | 播放过程中发生的任何错误               |
+| MEDIA_ERROR     | 与媒体相关的错误(格式错误、解码问题等) |
+| OTHER_ERROR     | 任何其他未指定的错误                   |
 
 ## 参数
-| 参数 | 参数类型 |默认值 |描述|
-| --- | --- |---|---|
-|type| 'flv' ，'hls'，'mp4'，'m3u8' | ''|媒体类型|
-|src?| string |''|请求地址|
-|autoplay?| boolean|''|自动播放|
-|option?| IMultiStreamsContainer |''|分辨率选项|
-|isMobile?| boolean |false|手机端|
-|hideMultiCode?| boolean |false|是否影藏分辨率|
-|hideRefresh?| boolean |false|是否影藏刷新按钮|
-|hideMultiple?|boolean|false|隐藏倍数|
-|hideProgressBar?|boolean|false|隐藏进度条|
-|onVideoPlayerState?|(vp) => void;|''|播放器注册成功后，通过回调返回播放器相关属性|
-|multiple|[{text: '1x',value: 1,},{text: '2x',value: 2,},{text: '3x',value: 3,},]|倍速|
-|poster?|string|背景图|
-|duration?|string|视频总时长，单位：毫秒|
-|hideControl?|boolean|隐藏控制栏|
-|vod?|boolean|视频类型为hls点播需要设置|
-|contentPreview:{picture,viewCount,timestap}|{picture:string,viewCount:number,timestap:number[]}|timestap 毫秒|
+
+| 参数                                        | 参数类型                                                                | 默认值                      | 描述                                         |
+| ------------------------------------------- | ----------------------------------------------------------------------- | --------------------------- | -------------------------------------------- |
+| type                                        | 'flv' ，'hls'，'mp4'，'m3u8'                                            | ''                          | 媒体类型                                     |
+| src?                                        | string                                                                  | ''                          | 请求地址                                     |
+| autoplay?                                   | boolean                                                                 | ''                          | 自动播放                                     |
+| option?                                     | IMultiStreamsContainer                                                  | ''                          | 分辨率选项                                   |
+| isMobile?                                   | boolean                                                                 | false                       | 手机端                                       |
+| hideMultiCode?                              | boolean                                                                 | false                       | 是否影藏分辨率                               |
+| hideRefresh?                                | boolean                                                                 | false                       | 是否影藏刷新按钮                             |
+| hideMultiple?                               | boolean                                                                 | false                       | 隐藏倍数                                     |
+| hideProgressBar?                            | boolean                                                                 | false                       | 隐藏进度条                                   |
+| onVideoPlayerState?                         | (vp) => void;                                                           | ''                          | 播放器注册成功后，通过回调返回播放器相关属性 |
+| multiple                                    | [{text: '1x',value: 1,},{text: '2x',value: 2,},{text: '3x',value: 3,},] | 倍速                        |
+| poster?                                     | string                                                                  | 背景图                      |
+| duration?                                   | string                                                                  | 视频总时长，单位：毫秒      |
+| hideControl?                                | boolean                                                                 | 隐藏控制栏                  |
+| vod?                                        | boolean                                                                 | 视频类型为 hls 点播需要设置 |
+| contentPreview:{picture,viewCount,timestap} | {picture:string,viewCount:number,timestap:number[]}                     | timestap 毫秒               |
 
 ```js
  thumbnail: {
     picture: 'https://testdevcdn.xylink.com/test-video/20min-1.jpg',   // 图片地址
     count: 301,  // 图片总数
-    
+
     backgroundSize: 3840, // 图片分辨率（固定写成  3840）
   }
 ```
-
 
 ```typescript
 <!-- vp返回关键属性 -->
@@ -135,9 +139,11 @@ return (
 }
 ```
 
+- 跑马灯、弹幕： 注入 onVideoPlayerState 回调方法。
 
-- 跑马灯、弹幕： 注入onVideoPlayerState 回调方法。
 ```typescript
+
+videoBarrage: boolean;
 
 // 通过回调的vp方法获取
 // 通过 mountFunction.barrage.push 添加弹幕。
@@ -165,40 +171,58 @@ vp.mountFunction.barrage.open   // 开启弹幕功能
 
 ```
 
+- 防录屏
+
+```javascript
+
+antiScreenRecording: {
+  text: string;
+  color: string;
+  duration: number;   // 字幕存活时间（单位 毫秒）   默认存活 5秒钟
+  interval: number;   // 字幕出现间隔（单位 毫秒）   默认出现频率 1分钟
+  fontSize?: number;  // 十六进制
+  locationX?: string | number;
+  locationY?: string | number;
+}
+```
 
 ---
 
 # 本地开发准备
+
 ### 环境依赖：
+
 ```
 node ：10.0+
 ```
 
-
 ### 安装启动
+
 ```
 yarn install
 ```
 
-
 ### 本地运行
+
 ```
 集成开发测试：yarn start  // 占用3000端口
 组件开发测试：yarn storybook  // 占用8000端口
 ```
+
 ### 访问地址：
+
 ```
 localhost:3000
 ```
 
 ### 打包
-```
-yarn build 
-```
 
-
+```
+yarn build
+```
 
 ### 目录结构：
+
 ```
 ├── README.md
 ├── babel.config.js
@@ -206,7 +230,7 @@ yarn build
 │   ├── app.tsx  // 开发测试集成入口， 在此文件模拟第三方应用调用。
 │   └── index.tsx
 ├── dist // 编译后的文件
-├── index.html 
+├── index.html
 ├── jest.config.js
 ├── jest.setup.js
 ├── package-lock.json
@@ -215,11 +239,11 @@ yarn build
 ├── postcss.config.js
 ├── react-app-env.d.ts
 ├── src
-│   ├── asset 
+│   ├── asset
 │   ├── basicComponent // 抽离的公用组件，可以单独发布npm
 │   ├── component // 组件内容
 │   ├── dash-shaka // 测试内容，
-│   ├── hooks 
+│   ├── hooks
 │   ├── images
 │   ├── index.tsx  // 入口文件
 │   ├── interfaces // 内容定义
@@ -228,7 +252,7 @@ yarn build
 │   ├── stories // storybooks 测试内容
 │   ├── styles.scss
 │   ├── uiCompoent // 二次ui开发
-│   ├── ur-util 
+│   ├── ur-util
 │   └── utils // 工具库
 ├── test
 │   ├── Link.react.js
@@ -238,7 +262,7 @@ yarn build
 ├── tsconfig.extends.json
 ├── tsconfig.json
 ├── util
-│   └── replaceLoader.js 
+│   └── replaceLoader.js
 ├── webpack.config.js
 ├── webpackAddVersionPulgin.js  // 编译打包的版本自动生成webpack 插件， 可以单独提出npm包
 ├── yarn-error.log
@@ -246,29 +270,44 @@ yarn build
 
 ### 版本更新内容：
 
+#### 1.5.32 (2021-08-18)
+
+1. 添加随即字幕（防录屏）
+
 #### 1.5.26 (2021-07-27)
+
 1. 添加弹幕功能。
 
 #### 1.5.21（2021-05-13）
+
 1. 优化键盘操控, 需要聚焦屏幕才可触发键盘控制。
 
 #### 1.5.2（2021-05-13）
+
 1. 增加键盘控制，上、下、左、右、空格
 2. 调整代码结构
 3. 调整进度条拖拽按钮
+
 ```
-空格：暂停/启动 
+空格：暂停/启动
 上下：音量控制:    -+10%
 左右:  快进/倒推  -+ 5s
 ```
+
 #### 1.5.0（2021-05-08）
-1. 重构部分ui组件部分 - 从父组件中抽离
+
+1. 重构部分 ui 组件部分 - 从父组件中抽离
+
 #### 1.4.7（2021-04-02）
-1. 增加监听flv mediaSource end 标记
-2. 优化flv订阅事件
+
+1. 增加监听 flv mediaSource end 标记
+2. 优化 flv 订阅事件
+
 #### 1.4.6（2021-04-02）
+
 1. 优化缓存。
 2. 增加缓冲条。
-#### 1.4.30-bate1（2021-03-25）
-1. 新增播放器导航栏
 
+#### 1.4.30-bate1（2021-03-25）
+
+1. 新增播放器导航栏

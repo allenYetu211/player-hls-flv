@@ -19,18 +19,17 @@ const VideoBarrage: React.FC = (props) => {
 
 
   React.useEffect(() => {
-
     const barrage = new BarrageCanvas({
-      element: canvasEl.current!, 
+      element: canvasEl.current!,
       maxCache: 100,
     });
-    player.current.mountFunction =  {
-      ...player.current.mountFunction, 
+    player.current.mountFunction = {
+      ...player.current.mountFunction,
       barrage: {
         start: barrage.start.bind(barrage),
-        push:  barrage.pushBarrage.bind(barrage),
-        clean:  barrage.clean.bind(barrage),
-        open:  barrage.open.bind(barrage),
+        push: barrage.pushBarrage.bind(barrage),
+        clean: barrage.clean.bind(barrage),
+        open: barrage.open.bind(barrage),
       }
     }
   }, [])
@@ -51,7 +50,6 @@ const VideoBarrage: React.FC = (props) => {
           // backgroundColor: '#fff'
         }}
         ref={canvasEl} />
-      {props.children}
     </>
   )
 }

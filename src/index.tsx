@@ -43,7 +43,20 @@ export interface initConfig {
     viewCount: number;
     timestap: number[];
   }
+  antiScreenRecording?: Type
+  videoBarrage?: boolean
 }
+
+export interface Type {
+  text: string;
+  color: string;
+  duration: number;
+  interval: number;
+  fontSize?: number;
+  locationX?: string | number;
+  locationY?: string | number;
+}
+
 
 export interface IMultiple {
   list: {

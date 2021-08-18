@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-05-07 10:57:33
  * @Descripttion: 
- * @LastEditTime: 2021-07-20 10:02:44
+ * @LastEditTime: 2021-08-18 11:32:28
  * @FilePath: /ts-vp/src/component/ui-control/index.tsx
  */
 import React, { useRef, useState } from 'react';
@@ -23,6 +23,8 @@ import MiddleContainer from '@g/component/plugin-middleContainer';
 import VideoKeyBoardAndMouse from '@g/component/video-keyBoardAndMouse';
 
 import VideoBarrage from '@g/component/video-barrage';
+
+import VideoAntiScreenRecording from '@g/component/video-AntiScreenRecording';
 
 // import { log } from '@utils/logs';
 
@@ -51,7 +53,13 @@ const UiControl = (props: IPlayer) => {
    */
   return (
 
-    <VideoBarrage>
+    <>
+      {config.videoBarrage && <VideoBarrage />}
+      {
+        config.antiScreenRecording && <VideoAntiScreenRecording
+          antiScreenRecording={config.antiScreenRecording}
+        />
+      }
       <VideoKeyBoardAndMouse
         vod={config.vod}
         type={config.type}>
@@ -63,13 +71,10 @@ const UiControl = (props: IPlayer) => {
           })}
           onClick={switchContainerDisplay}
         >
-
           <PublignBackgroundImages
             poster={props.config.poster}
           >
-
             <MiddleContainer />
-
             {!config.hideControl &&
               <VideoControl
                 config={props.config}
@@ -80,8 +85,7 @@ const UiControl = (props: IPlayer) => {
           </PublignBackgroundImages>
         </div>
       </VideoKeyBoardAndMouse>
-    </VideoBarrage>
-
+    </>
   );
 };
 
