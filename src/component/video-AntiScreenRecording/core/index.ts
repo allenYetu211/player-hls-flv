@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-08-18 10:26:18
  * @Descripttion:
- * @LastEditTime: 2021-08-18 11:43:30
+ * @LastEditTime: 2021-08-26 14:30:16
  * @FilePath: /ts-vp/src/component/video-AntiScreenRecording/core/index.ts
  */
 
@@ -54,8 +54,16 @@ class AntiScreenRecoording extends CanvasProxy {
     this.ctx.textAlign = "left";
 
     const text = this.ctx.measureText(this.config.text);
-    const left = this.getLimitRandom(0, this.width - text.width);
-    const top = this.getLimitRandom(0, this.height - 30);
+    const left = this.getLimitRandom(100, this.width - text.width);
+    const top = this.getLimitRandom(100, this.height - 100);
+
+    this.ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+    // 将阴影向右移动15px，向上移动10px
+    this.ctx.shadowOffsetX = 3;
+    this.ctx.shadowOffsetY = 3;
+    // 轻微模糊阴影
+    this.ctx.shadowBlur = 2;
+
     this.ctx.fillText(this.config.text, left, top);
     this.ctx.restore;
   };

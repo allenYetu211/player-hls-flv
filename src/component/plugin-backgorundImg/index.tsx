@@ -2,16 +2,16 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 17:26:25
  * @Descripttion: 
- * @LastEditTime: 2021-05-10 12:04:03
+ * @LastEditTime: 2021-08-26 14:34:45
  * @FilePath: /ts-vp/src/component/plugin-backgorundImg/index.tsx
  */
 
 
-import React, {useState, useEffect, FC} from 'react';
+import React, { useState, useEffect, FC } from 'react';
 
 import style from './style/index.scss';
 
-import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
+import HotVideo, { HocVideoType } from '@g/hoc-component/hoc-video';
 
 import cn from 'classnames';
 
@@ -45,7 +45,7 @@ const PluginBackgroundImages: FC<Props> = (props) => {
     <div
       className={cn(style.posterContainer, {
       })}
-      style={{ backgroundImage: `url(${  oncePoster ?  props.poster : '' })` }}>
+      style={props.poster ? { backgroundImage: `url(${oncePoster ? props.poster : ''})` } : {}}>
       {props.children}
     </div>
   )
