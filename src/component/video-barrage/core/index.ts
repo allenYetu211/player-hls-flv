@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2021-08-18 10:25:59
+ * @LastEditTime: 2021-11-16 11:28:01
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
@@ -89,7 +89,7 @@ class BarrageCanvas extends CanvasProxy {
           this.ctx.fillText(msg.value, msg.left, msg.top);
           const text = this.ctx.measureText(msg.value);
           msg.width = text.width * this.ratio;
-          this.ctx.restore;
+          this.ctx.restore();
         }
       }
     });

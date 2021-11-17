@@ -146,7 +146,8 @@ const vodHlsConfig: initConfig = {
 }
 
 const vodHlsConfig2: initConfig = {
-
+  defaultBarrageState: false,
+  videoBarrage: true,
   "type": "m3u8",
   // "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8?v=2",
   // "src": "https://qahz-res.xylinkedu.com/vodfiles/sharefiles/vod/561143719001063424.m3u8?auth_key=1621586134-28-17-9578fc7ded6124d8537792dc519b3a5c&t=1621584214990",
@@ -216,11 +217,11 @@ const hlsConfig: initConfig = {
   option: {
     multiStreams: [
       {
-        src: "0http://presecurelive.ainemo.com/prenemo/9680bf5178cc269c0178ce083cc40019.m3u8?auth_key=eddbebf1a9323a472e64b3bd526b15a7-1618459201-1847c4d06dfb49c2be953e35c7d097d2-",
+        src: "http://prdpulllive.xylink.com/prdnemo/9680cfb67be4da5d017c10c3d7f73da0.m3u8?auth_key=3669a7595f9c3beb99c436a7f5cc250d-1632463220-fe9aabd6e5b14fe897f9e34cf4a53cb4-",
         text: "小鱼1",
       },
       {
-        src: "1http://presecurelive.ainemo.com/prenemo/9680bf5178cc269c0178ce083cc40019.m3u8?auth_key=eddbebf1a9323a472e64b3bd526b15a7-1618459201-1847c4d06dfb49c2be953e35c7d097d2-",
+        src: "http://prdpulllive.xylink.com/prdnemo/9680cfb67be4da5d017c10c3d7f73da0_2.m3u8?auth_key=777213bd4adb19135a44c10f5caebd2f-1632463220-963f7ab995ff423bbb0de669a18ec859-",
         text: "小鱼2",
       }
     ],
@@ -279,15 +280,16 @@ const App = () => {
   }
 
   const onVideoPlayerState = (vp: any) => {
-    // let count = 0;
-    // setInterval(() => {
-    //   count += 1;
-    //   vp.mountFunction.barrage.push({
-    //     value: `${count}：`,
-    //     // viewableArea: 240,
-    //     speed: 2
-    //   })
-    // }, 100);
+    console.log('vp', vp)
+    let count = 0;
+    setInterval(() => {
+      count += 1;
+      vp.mountFunction.barrage.push({
+        value: `${count}：`,
+        // viewableArea: 240,
+        speed: 2
+      })
+    }, 100);
 
     // setTimeout(() => {
     //   vp.mountFunction.barrage.clean()
@@ -297,7 +299,7 @@ const App = () => {
     //   vp.mountFunction.barrage.open()
     // }, 4000)
 
-    // vp.mountFunction.barrage.start();
+    vp.mountFunction.barrage.start();
 
     // setTimeout(() => {
     //   vp.mountFunction.onChangePlayIndex(1)

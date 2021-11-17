@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-19 15:08:01
  * @Descripttion: 
- * @LastEditTime: 2021-07-27 15:21:59
+ * @LastEditTime: 2021-11-17 17:51:30
  * @FilePath: /ts-vp/src/component/video-barrage/index.tsx
  */
 
@@ -23,14 +23,12 @@ const VideoBarrage: React.FC = (props) => {
       element: canvasEl.current!,
       maxCache: 100,
     });
-    player.current.mountFunction = {
-      ...player.current.mountFunction,
-      barrage: {
-        start: barrage.start.bind(barrage),
-        push: barrage.pushBarrage.bind(barrage),
-        clean: barrage.clean.bind(barrage),
-        open: barrage.open.bind(barrage),
-      }
+
+    player.current.mountFunction['barrage'] = {
+      start: barrage.start.bind(barrage),
+      push: barrage.pushBarrage.bind(barrage),
+      clean: barrage.clean.bind(barrage),
+      open: barrage.open.bind(barrage),
     }
   }, [])
 

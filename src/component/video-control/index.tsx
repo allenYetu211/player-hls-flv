@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 15:46:11
  * @Descripttion: 
- * @LastEditTime: 2021-05-12 19:03:33
+ * @LastEditTime: 2021-11-17 16:32:47
  * @FilePath: /ts-vp/src/component/video-control/index.tsx
  */
 import React, { useState, useEffect, useMemo } from 'react';
@@ -17,6 +17,8 @@ import PluginMultiples from '@g/component/plugIn-multiples';
 import PluginMultiCode from '@g/component/plugIn-multiCode';
 import PluginRefresh from '@g/component/plugIn-refresh';
 import PulginDrawer from '@g/component/plugin-drawer';
+import PluginBarrage from '@g/component/plugin-barrage';
+
 
 import { getVideoPlayer } from '@player/index';
 
@@ -144,6 +146,13 @@ const VideoControl = (props: Props) => {
         />}
 
       <div className={style.rightContaienr}>
+
+        {
+          // 弹幕开关
+          props.config.videoBarrage &&
+          <PluginBarrage
+            defaultBarrageState={props.config.defaultBarrageState} />
+        }
 
         {
           !props.config.hideMultiCode &&
