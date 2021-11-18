@@ -143,7 +143,10 @@ return (
 
 ```typescript
 
-videoBarrage: boolean;
+videoBarrage: {
+    defaultBarrageState: bool;
+    fontSize: number;
+  }
 
 // 通过回调的vp方法获取
 // 通过 mountFunction.barrage.push 添加弹幕。

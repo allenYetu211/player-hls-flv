@@ -2,8 +2,8 @@
  * @Author: Allen OYang
  * @Date: 2021-08-18 10:21:56
  * @Descripttion:
- * @LastEditTime: 2021-08-18 10:21:56
- * @FilePath: /ts-vp/src/component/video-barrage/core/canvas.ts
+ * @LastEditTime: 2021-11-18 10:30:12
+ * @FilePath: /ts-vp/src/utils/canvas.ts
  */
 
 interface canvas2D extends CanvasRenderingContext2D {
@@ -23,7 +23,10 @@ class Canvas {
   public ratio: number;
   public ctx: canvas2D;
 
-  constructor(element: HTMLCanvasElement) {
+  public fontSize: number;
+
+  constructor(element: HTMLCanvasElement, fontSize?: number) {
+    this.fontSize = fontSize || 25;
 
     this.element = element;
     let rect = this.element.getBoundingClientRect();
@@ -52,7 +55,7 @@ class Canvas {
     this.element.style.height = oldheight + 'px';
 
     this.ctx.scale(this.ratio, this.ratio);
-    this.ctx.font = `25px "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", "sans-serif"`;
+    this.ctx.font = `${this.fontSize}px "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", "sans-serif"`;
 
   }
 

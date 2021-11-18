@@ -44,8 +44,10 @@ export interface initConfig {
     timestap: number[];
   }
   antiScreenRecording?: Type
-  videoBarrage?: boolean;
-  defaultBarrageState?: boolean;
+  videoBarrage?: {
+    fontSize?: number;
+    defaultBarrageState?: boolean;
+  };
 }
 
 export interface Type {

@@ -151,7 +151,7 @@ const VideoControl = (props: Props) => {
           // 弹幕开关
           props.config.videoBarrage &&
           <PluginBarrage
-            defaultBarrageState={props.config.defaultBarrageState} />
+            defaultBarrageState={props.config.videoBarrage.defaultBarrageState} />
         }
 
         {

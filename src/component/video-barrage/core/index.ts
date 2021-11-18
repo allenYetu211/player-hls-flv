@@ -45,10 +45,10 @@ class BarrageCanvas extends CanvasProxy {
   private isClose: boolean = false;
 
 
-  constructor({ element, maxCache = 100 }: {
-    element: HTMLCanvasElement, maxCache: number
+  constructor({ element, maxCache = 100, fontSize }: {
+    element: HTMLCanvasElement, maxCache: number, fontSize?: number
   }) {
-    super(element);
+    super(element, fontSize);
     this.barrageList = new Array(maxCache);
     this.msgCacahLength = maxCache;
   }
