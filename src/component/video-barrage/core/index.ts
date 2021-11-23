@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2021-11-24 01:04:11
+ * @LastEditTime: 2021-11-24 03:31:25
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
@@ -79,7 +79,6 @@ class BarrageCanvas extends CanvasProxy {
     this.ctx.save();
 
     // 根据内容展示
-
     this.tracks.forEach((track, index) => {
       track.forEach((msg, msgIndex) => {
         const renderMsg = (width: number = 0) => {
@@ -95,69 +94,22 @@ class BarrageCanvas extends CanvasProxy {
 
         // 检测当前弹幕是否已经滑动出去 , 如果是的，则进行删除。
         if (msg.left + (msg.width || 0) <= 0) {
-          track.splice(msgIndex, 1);
+          delete track[msgIndex];
           this.tracksCounts -= 1;
-
-          console.log('this.tracksCounts', this.tracksCounts);
           if (this.tracksCounts === 0) {
             console.log('this.requestAnimationFrameId', this.requestAnimationFrameId);
             window.cancelAnimationFrame(this.requestAnimationFrameId);
           }
         }
-
-        // 检测上一个是否已经已经完全出现
-
         renderMsg();
-
-
-        // if (msgIndex > 0) {
-        //   let prevMeg = track[msgIndex - 1];
-        //   if (prevMeg && this.width > prevMeg.width! + prevMeg.left) {
-        //     renderMsg(prevMeg.width);
-        //   }
-        // } else {
-        //   renderMsg();
-        // }
-
       })
     })
-
-    // this.barrageList.forEach((msg: MsgItem, index: number) => {
-    //   if (!msg) {
-    //     counter += 1;
-    //     if (counter === this.msgCacahLength) {
-    //       window.cancelAnimationFrame(this.requestAnimationFrameId);
-    //       this.isRunning = false;
-    //     }
-    //   } else {
-    //     this.isRunning = true;
-    //     if (msg.left < 0 - this.width) {
-    //       // @ts-ignore;
-    //       this.barrageList[index] = null;
-    //       return;
-    //     } else {
-    //       msg.left = msg.left - msg.speed;
-    //       this.ctx.shadowColor = msg.color;
-    //       this.ctx.fillStyle = msg.color;
-    //       this.ctx.textAlign = "left";
-    //       // 获取当前轨道数量最少的线路。
-    //       // this.tracks.map()
-
-    //       this.ctx.fillText(msg.value, msg.left, msg.top || 50);
-    //       const text = this.ctx.measureText(msg.value);
-    //       msg.width = text.width * this.ratio;
-    //       this.ctx.restore();
-    //     }
-    //   }
-    // });
   }
 
   start() {
-
     if (this.isClose) {
       return
     }
-
     this.isRunning = true;
     this.draw();
     this.requestAnimationFrameId = window.requestAnimationFrame(() => this.start());
@@ -175,26 +127,20 @@ class BarrageCanvas extends CanvasProxy {
     if (this.isClose) {
       return
     }
-
-
     const addTrackMsg = (currentTrack: MsgItem[]) => {
       this.tracksCounts += 1;
       currentTrack.push({
         value: item.value,
-        left: item.left || this.width,
+        left: (item.left || this.width) + 10,
         color: item.color || '#fff',
         speed: item.speed || 5,
         width: this.ctx.measureText(item.value).width
       })
     }
-
-
     /**
    * 检查当前列表最后一个内容是否都已经展现。
    * 如果为咱先则在下一个轨道内添加
    */
-
-
     for (let i = 0; i < this.tracks.length; i++) {
       const currentTrack = this.tracks[i];
       if (currentTrack.length !== 0) {

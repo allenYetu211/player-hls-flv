@@ -290,9 +290,10 @@ const App = () => {
     let count = 0;
     setInterval(() => {
       count += 1;
-      if (count > 100) return;
+      // if (count > 100) return;
       vp.mountFunction.barrage.push({
-        value: faker.lorem.word(),
+        // value: `${faker.lorem.word()}${faker.finance.account()}`,
+        value: count,
         // viewableArea: 240,
         speed: 2
       })
