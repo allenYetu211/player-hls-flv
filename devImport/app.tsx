@@ -18,6 +18,9 @@ import TestStore from './testStore';
 // import { initConfig } from '../src/interfaces';
 
 import { initConfig } from '../src/index';
+
+import faker from 'faker';
+
 // import detailsPiscture from './212621588.jpg@.webp';
 // https://i0.hdslb.com/bfs/videoshot/212621588.jpg@.webp
 
@@ -287,8 +290,9 @@ const App = () => {
     let count = 0;
     setInterval(() => {
       count += 1;
+      if (count > 100) return;
       vp.mountFunction.barrage.push({
-        value: `${count}：`,
+        value: faker.lorem.word(),
         // viewableArea: 240,
         speed: 2
       })
