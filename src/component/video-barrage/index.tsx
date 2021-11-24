@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-19 15:08:01
  * @Descripttion: 
- * @LastEditTime: 2021-11-18 10:19:13
+ * @LastEditTime: 2021-11-24 10:53:17
  * @FilePath: /ts-vp/src/component/video-barrage/index.tsx
  */
 
@@ -10,7 +10,8 @@ import React from 'react';
 import BarrageCanvas from './core';
 import { getVideoPlayer } from '@player/index';
 
-const VideoBarrage: React.FC<{ fontSize?: number }> = (props) => {
+
+const VideoBarrage: React.FC<{ fontSize?: number, defaultBarrageState?: boolean }> = (props) => {
 
 
   const canvasEl = React.useRef<HTMLCanvasElement>(null);
@@ -23,7 +24,8 @@ const VideoBarrage: React.FC<{ fontSize?: number }> = (props) => {
     const barrage = new BarrageCanvas({
       element: canvasEl.current!,
       maxCache: 100,
-      fontSize: fontSize
+      fontSize: fontSize,
+      defaultBarrageState: props.defaultBarrageState
     });
 
     player.current.mountFunction['barrage'] = {

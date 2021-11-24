@@ -152,7 +152,7 @@ const vodHlsConfig2: initConfig = {
   // defaultBarrageState: false,
   videoBarrage: {
     defaultBarrageState: false,
-    fontSize: 28
+    fontSize: 12
   },
   "type": "m3u8",
   // "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8?v=2",
@@ -292,10 +292,10 @@ const App = () => {
       count += 1;
       // if (count > 100) return;
       vp.mountFunction.barrage.push({
-        // value: `${faker.lorem.word()}${faker.finance.account()}`,
-        value: count,
+        value: `${faker.lorem.word()}${faker.finance.account()}`,
+        // value: count,
         // viewableArea: 240,
-        speed: 2
+        speed: 2,
       })
     }, 100);
 

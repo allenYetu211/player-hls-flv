@@ -54,7 +54,12 @@ const UiControl = (props: IPlayer) => {
   return (
 
     <>
-      {config.videoBarrage && <VideoBarrage fontSize={config.videoBarrage.fontSize} />}
+      {config.videoBarrage &&
+        <VideoBarrage
+          fontSize={config.videoBarrage.fontSize}
+          defaultBarrageState={config.videoBarrage.defaultBarrageState}
+        />
+      }
       {
         config.antiScreenRecording && <VideoAntiScreenRecording
           antiScreenRecording={config.antiScreenRecording}

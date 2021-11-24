@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2021-11-24 03:31:25
+ * @LastEditTime: 2021-11-24 11:14:21
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
@@ -46,22 +46,21 @@ class BarrageCanvas extends CanvasProxy {
 
   private tracks: MsgItem[][] = [];
   private tracksCounts: number = 0;
+  private tracksLine: number = 5;
 
 
-  constructor({ element, maxCache = 100, fontSize = 25 }: {
-    element: HTMLCanvasElement, maxCache: number, fontSize?: number
+  constructor({ element, maxCache = 100, fontSize = 22, defaultBarrageState }: {
+    element: HTMLCanvasElement, maxCache: number, fontSize?: number, defaultBarrageState?: boolean
   }) {
     super(element, fontSize);
     this.barrageList = new Array(maxCache);
     this.msgCacahLength = maxCache;
 
-    // 生成轨道数量
-    // const tracks = Math.floor(this.height / (fontSize + 5))
-    const tracks = Math.floor(300 / (fontSize + 5))
-    // this.tracks = Array(tracks).fill([]);
-    // this.tracksCounts = Array(tracks).fill(0);
+    this.isClose = !defaultBarrageState;
 
-    this.tracks = Array.from({ length: tracks }, () => []);
+    // 生成轨道数量
+    this.tracksLine = Math.floor(this.height / (fontSize + 5))
+    this.tracks = Array.from({ length: this.tracksLine }, () => []);
   }
 
 
@@ -86,6 +85,9 @@ class BarrageCanvas extends CanvasProxy {
           this.ctx.shadowColor = msg.color;
           this.ctx.fillStyle = msg.color;
           this.ctx.textAlign = "left";
+          this.ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+          this.ctx.shadowOffsetX = 3;
+          this.ctx.shadowOffsetY = 3;
           this.ctx.fillText(msg.value, msg.left, index * 25 + 50);
           const text = this.ctx.measureText(msg.value);
           msg.width = text.width * this.ratio;
@@ -127,6 +129,7 @@ class BarrageCanvas extends CanvasProxy {
     if (this.isClose) {
       return
     }
+
     const addTrackMsg = (currentTrack: MsgItem[]) => {
       this.tracksCounts += 1;
       currentTrack.push({
@@ -164,28 +167,20 @@ class BarrageCanvas extends CanvasProxy {
 
 
   clean() {
-    console.log('this.isRunning:', this.isRunning);
     this.isClose = true;
-
     if (this.isRunning) {
       window.cancelAnimationFrame(this.requestAnimationFrameId);
       this.isRunning = false;
     }
     this.ctx.clearRect(0, 0, this.width, this.height)
-    // @ts-ignore;
-    this.barrageList = this.barrageList.map(() => null);
+
+    this.tracks = Array.from({ length: this.tracksLine }, () => []);
   }
 
   open() {
     this.isClose = false;
     this.start();
   }
-
-
-
-
-
-
 }
 
 export default BarrageCanvas;

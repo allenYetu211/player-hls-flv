@@ -159,7 +159,6 @@ const onVideoPlayerState = (vp: any) => {
       count += 1;
       vp.mountFunction.barrage.push({
         value: `${count}：`,   // 弹幕内容 string
-        viewableArea: 240,     // 弹幕区域可视区域：number ，不填写默认视频区域全屏
         speed: 2,               // 弹幕速度： number
         color: '#20ff29',        // 颜色 16进制: string, 不填写， 则显示随机颜色。
       })
