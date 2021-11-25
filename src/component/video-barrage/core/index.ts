@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2021-11-25 15:06:31
+ * @LastEditTime: 2021-11-25 15:13:11
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
@@ -145,12 +145,14 @@ class BarrageCanvas extends CanvasProxy {
    * 如果为咱先则在下一个轨道内添加
    */
 
+    console.log('this.tracks', this.tracksCounts, this.tracks);
+
     for (let i = 0; i < this.tracks.length; i++) {
       const currentTrack = this.tracks[i];
       if (currentTrack.length !== 0) {
-        const { width = 0, left = 0 } = currentTrack[currentTrack.length - 1];
+        const prevLastMSG = currentTrack[currentTrack.length - 1];
         //  判断轨道最后一条内容是否已经全部展现, 
-        if (this.width >= width + left) {
+        if (prevLastMSG && this.width >= (prevLastMSG.width || 0) + prevLastMSG.left) {
           addTrackMsg(currentTrack, i)
           break;
         }
