@@ -151,8 +151,8 @@ const vodHlsConfig: initConfig = {
 const vodHlsConfig2: initConfig = {
   // defaultBarrageState: false,
   videoBarrage: {
-    defaultBarrageState: false,
-    fontSize: 12
+    defaultBarrageState: true,
+    fontSize: 25
   },
   "type": "m3u8",
   // "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8?v=2",
@@ -288,16 +288,49 @@ const App = () => {
   const onVideoPlayerState = (vp: any) => {
     console.log('vp', vp)
     let count = 0;
+
+    // const msgs = [
+    //   `config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40019?t=1637754878776', method: 'get', params: {…}, headers: {…}, baseURL: 'https://testqalive.xylink.com', …}`,
+    //   `config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40019?t=1637754878776', method: 'get', params: {…}, headers: {…}, baseURL: 'https://testqalive.xylink.com', …}`,
+    //   `config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40019?t=1637754878776', method: 'get', params: {…}, headers: {…}, baseURL: 'https://testqalive.xylink.com', …}`,
+    //   `config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40019?t=1637754878776', method: 'get', params: {…}, headers: {…}, baseURL: 'https://testqalive.xylink.com', …}`,
+    //   `config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40019?t=1637754878776', method: 'get', params: {…}, headers: {…}, baseURL: 'https://testqalive.xylink.com', …}`,
+    //   `config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40019?t=1637754878776', method: 'get', params: {…}, headers: {…}, baseURL: 'https://testqalive.xylink.com', …}`,
+    //   `config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40019?t=1637754878776', method: 'get', params: {…}, headers: {…}, baseURL: 'https://testqalive.xylink.com', …}`,
+    //   `config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40019?t=1637754878776', method: 'get', params: {…}, headers: {…}, baseURL: 'https://testqalive.xylink.com', …}`,
+
+    //   `SMG::::`,
+
+    //   `2random contact card containing many properties 
+    //   random contact card containing many properties random 
+    //   contact card containing many properties random contact 
+    //   card containing many properties random contact card containing
+    //   many properties random contact card containing many properties
+    //   random contact card containing many properties random contact 
+    //   card containing many properties random contact 
+    //   random contact card containing many properties
+    //   random contact card containing many properties
+    //   random contact card containing many properties
+    //   random contact card containing many properties
+    //   random contact card containing many properties
+    //   random contact card containing many properties
+    //   random contact card containing many properties
+    //   card containing many properties random contact card containing many properties`,
+    // ]
     setInterval(() => {
+
       count += 1;
       // if (count > 100) return;
       vp.mountFunction.barrage.push({
-        value: `${faker.lorem.word()}${faker.finance.account()}`,
+        // value: `${count} : config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40config `,
+        value: `${faker.name.lastName()}，${faker.name.firstName()}}`,
         // value: count,
         // viewableArea: 240,
         speed: 2,
       })
-    }, 100);
+
+
+    }, 1000);
 
     // setTimeout(() => {
     //   vp.mountFunction.barrage.clean()
@@ -318,7 +351,10 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div style={{
+      height: '350px',
+      position: 'relative'
+    }}>
       <button style={{
         position: 'absolute',
         top: '0px',

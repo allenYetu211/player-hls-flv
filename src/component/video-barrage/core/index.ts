@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2021-11-24 11:14:21
+ * @LastEditTime: 2021-11-25 15:06:31
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
@@ -37,9 +37,6 @@ interface canvas2D extends CanvasRenderingContext2D {
 
 class BarrageCanvas extends CanvasProxy {
 
-  private barrageList: MsgItem[];
-  private msgCacahLength: number = 100;
-  // private barrageListItem: MsgItem[] = [];
   private requestAnimationFrameId: any;
   private isRunning: boolean = false;
   private isClose: boolean = false;
@@ -48,25 +45,25 @@ class BarrageCanvas extends CanvasProxy {
   private tracksCounts: number = 0;
   private tracksLine: number = 5;
 
+  private tracksIndex: number[] = [];
+  private firstFlag: boolean = true;
+  private trackPoint = {
+    pointMinIndex: 0,
+    pointMinLength: 0
+  }
+
+
 
   constructor({ element, maxCache = 100, fontSize = 22, defaultBarrageState }: {
     element: HTMLCanvasElement, maxCache: number, fontSize?: number, defaultBarrageState?: boolean
   }) {
     super(element, fontSize);
-    this.barrageList = new Array(maxCache);
-    this.msgCacahLength = maxCache;
-
     this.isClose = !defaultBarrageState;
-
     // 生成轨道数量
     this.tracksLine = Math.floor(this.height / (fontSize + 5))
     this.tracks = Array.from({ length: this.tracksLine }, () => []);
+    this.tracksIndex = Array.from({ length: this.tracksLine }, () => 0);
   }
-
-
-  // addBrrage(value: string) {
-  //   this.barrageListItem.push(value);
-  // }
 
   draw() {
 
@@ -99,7 +96,6 @@ class BarrageCanvas extends CanvasProxy {
           delete track[msgIndex];
           this.tracksCounts -= 1;
           if (this.tracksCounts === 0) {
-            console.log('this.requestAnimationFrameId', this.requestAnimationFrameId);
             window.cancelAnimationFrame(this.requestAnimationFrameId);
           }
         }
@@ -126,35 +122,52 @@ class BarrageCanvas extends CanvasProxy {
     viewableArea?: number
   }) {
 
-    if (this.isClose) {
+    if (this.isClose || this.tracksCounts > 100) {
       return
     }
 
-    const addTrackMsg = (currentTrack: MsgItem[]) => {
+    const addTrackMsg = (currentTrack: MsgItem[], index: number, offsetValue: number = 0) => {
       this.tracksCounts += 1;
+      // 每次添加，将指针默认指向下一一位（默认认为下一位为最小数）。
+      this.trackPoint.pointMinIndex = index + 1 <= this.tracks.length - 1 ? index + 1 : 0;
       currentTrack.push({
         value: item.value,
-        left: (item.left || this.width) + 10,
+        left: (item.left || offsetValue || this.width) + 10,
+        // left: this.width + 10,
         color: item.color || '#fff',
         speed: item.speed || 5,
         width: this.ctx.measureText(item.value).width
       })
+
     }
     /**
    * 检查当前列表最后一个内容是否都已经展现。
    * 如果为咱先则在下一个轨道内添加
    */
+
     for (let i = 0; i < this.tracks.length; i++) {
       const currentTrack = this.tracks[i];
       if (currentTrack.length !== 0) {
-        const { width, left } = currentTrack[currentTrack.length - 1];
-        //  判断轨道最后一条内容是否已经全部展现
-        if (this.width >= width! + left) {
-          addTrackMsg(currentTrack)
+        const { width = 0, left = 0 } = currentTrack[currentTrack.length - 1];
+        //  判断轨道最后一条内容是否已经全部展现, 
+        if (this.width >= width + left) {
+          addTrackMsg(currentTrack, i)
           break;
         }
+        else {
+          const { pointMinIndex } = this.trackPoint;
+          // console.log('pointMinIndex', pointMinIndex);
+          const currentTrackLastMSG = this.tracks[pointMinIndex][this.tracks[pointMinIndex].length - 1];
+          let offsetValue = 0;
+          if (currentTrackLastMSG) {
+            offsetValue = currentTrackLastMSG.width! + currentTrackLastMSG.left + this.width;
+          }
+          addTrackMsg(this.tracks[pointMinIndex], pointMinIndex, offsetValue);
+          break;
+        }
+
       } else {
-        addTrackMsg(currentTrack)
+        addTrackMsg(currentTrack, i)
         break;
       }
     }
