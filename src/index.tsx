@@ -43,12 +43,18 @@ export interface initConfig {
     viewCount: number;
     timestap: number[];
   }
-  antiScreenRecording?: Type
-  videoBarrage?: {
-    fontSize?: number;
-    defaultBarrageState?: boolean;
-  };
+  antiScreenRecording?: Type;
+  videoBarrage?: videoBarrageType;
 }
+
+export interface videoBarrageType {
+  fontSize?: number;
+  defaultBarrageState?: boolean;
+  tracksLine?: number;
+  trackSpacing?: number;
+  textSpacing?: number;
+  cacheData?: number;
+};
 
 export interface Type {
   text: string;

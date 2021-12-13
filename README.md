@@ -144,8 +144,12 @@ return (
 ```typescript
 
 videoBarrage: {
-    defaultBarrageState: bool;
-    fontSize: number;
+     defaultBarrageState: true,  // 默认弹幕状态
+    fontSize: 25, // 字体大小
+    tracksLine: 2, // 弹幕列数
+    trackSpacing: 80, // 轨道间距
+    textSpacing: 20, // 弹幕 间距
+    cacheData: 100   // 最大缓存数
   }
 
 // 通过回调的vp方法获取
@@ -159,7 +163,6 @@ const onVideoPlayerState = (vp: any) => {
       count += 1;
       vp.mountFunction.barrage.push({
         value: `${count}：`,   // 弹幕内容 string
-        viewableArea: 240,     // 弹幕区域可视区域：number ，不填写默认视频区域全屏
         speed: 2,               // 弹幕速度： number
         color: '#20ff29',        // 颜色 16进制: string, 不填写， 则显示随机颜色。
       })

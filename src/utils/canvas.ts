@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-08-18 10:21:56
  * @Descripttion:
- * @LastEditTime: 2021-11-18 10:30:12
+ * @LastEditTime: 2021-12-01 11:42:10
  * @FilePath: /ts-vp/src/utils/canvas.ts
  */
 
@@ -57,6 +57,13 @@ class Canvas {
     this.ctx.scale(this.ratio, this.ratio);
     this.ctx.font = `${this.fontSize}px "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", "sans-serif"`;
 
+  }
+
+  resetScale() {
+    console.log('resetScale');
+
+    this.ctx.scale(this.ratio, this.ratio);
+    this.ctx.font = `${this.fontSize}px "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", "sans-serif"`;
   }
 
   getColor() {
