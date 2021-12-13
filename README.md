@@ -144,8 +144,12 @@ return (
 ```typescript
 
 videoBarrage: {
-    defaultBarrageState: bool;
-    fontSize: number;
+     defaultBarrageState: true,  // 默认弹幕状态
+    fontSize: 25, // 字体大小
+    tracksLine: 2, // 弹幕列数
+    trackSpacing: 80, // 轨道间距
+    textSpacing: 20, // 弹幕 间距
+    cacheData: 100   // 最大缓存数
   }
 
 // 通过回调的vp方法获取

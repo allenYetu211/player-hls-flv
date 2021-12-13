@@ -152,7 +152,12 @@ const vodHlsConfig2: initConfig = {
   // defaultBarrageState: false,
   videoBarrage: {
     defaultBarrageState: true,
-    fontSize: 25
+    fontSize: 25,
+    tracksLine: 2,
+    trackSpacing: 80,
+    textSpacing: 20,
+    cacheData: 200
+
   },
   "type": "m3u8",
   // "src": "http://testdevcdn.xylink.com/vodfiles/sharefiles/live/962891b17572fa6a017573ea1ff600c2/202103/26170334/a65e04a9-b92d-42e5-a990-d4b8f843a0f5.m3u8?v=2",
@@ -186,13 +191,13 @@ const vodHlsConfig2: initConfig = {
     viewCount: 20,
     timestap: [90937, 124937, 196937, 294637, 394937, 494937, 394937, 494937, 594937, 694937, 794937, 894937, 2294937, 5890937]
   },
-  antiScreenRecording: {
-    text: '测试内容',
-    color: '#fff',
-    duration: 2000,
-    interval: 3000,
-    fontSize: 35
-  }
+  // antiScreenRecording: {
+  //   text: '测试内容',
+  //   color: '#fff',
+  //   duration: 2000,
+  //   interval: 3000,
+  //   fontSize: 35
+  // }
 }
 
 const flvConfig: initConfig = {
@@ -317,20 +322,33 @@ const App = () => {
     //   random contact card containing many properties
     //   card containing many properties random contact card containing many properties`,
     // ]
-    setInterval(() => {
 
+
+    const fakers = {
+      1: () => `${faker.name.lastName()}，${faker.name.firstName()}}, ${faker.datatype.number}`,
+      2: () => `${faker.company.catchPhraseAdjective()}`,
+      3: () => `${faker.finance.currencyCode()}`,
+    }
+
+
+    setInterval(() => {
+      // setTimeout(() => {
       count += 1;
       // if (count > 100) return;
       vp.mountFunction.barrage.push({
+        // value: fakers[Math.round(Math.random() * 2 + 1)](),
         // value: `${count} : config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40config `,
-        value: `${faker.name.lastName()}，${faker.name.firstName()}}`,
-        // value: count,
+        value: `${count} ： ${faker.name.lastName()}，${faker.name.firstName()}}`,
+        // value: `${count} -  ${faker.datatype.number({
+        //   'min': 10,
+        //   'max': 50
+        // })} || >`,
         // viewableArea: 240,
         speed: 2,
       })
 
 
-    }, 1000);
+    }, 100);
 
     // setTimeout(() => {
     //   vp.mountFunction.barrage.clean()
@@ -352,8 +370,11 @@ const App = () => {
 
   return (
     <div style={{
-      height: '350px',
-      position: 'relative'
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
     }}>
       <button style={{
         position: 'absolute',

@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-05-07 10:57:33
  * @Descripttion: 
- * @LastEditTime: 2021-08-18 11:32:28
+ * @LastEditTime: 2021-12-13 10:01:42
  * @FilePath: /ts-vp/src/component/ui-control/index.tsx
  */
 import React, { useRef, useState } from 'react';
@@ -10,7 +10,6 @@ import React, { useRef, useState } from 'react';
 import style from './style/index.scss';
 
 import { initConfig } from '@g/index';
-
 
 import cn from 'classnames';
 
@@ -23,6 +22,8 @@ import MiddleContainer from '@g/component/plugin-middleContainer';
 import VideoKeyBoardAndMouse from '@g/component/video-keyBoardAndMouse';
 
 import VideoBarrage from '@g/component/video-barrage';
+
+// import VideoBarrageDom from '@g/component/video-barrage-dom';
 
 import VideoAntiScreenRecording from '@g/component/video-AntiScreenRecording';
 
@@ -37,12 +38,9 @@ interface IPlayer {
 
 const UiControl = (props: IPlayer) => {
   // 播放器
-
   const config: initConfig = props.config;
   const [containerDisplay, setContainerDisplay] = useState<boolean>(false);
-
   const pel = useRef<HTMLDivElement>(null);
-
   const switchContainerDisplay = () => {
     setContainerDisplay(!containerDisplay)
   }
@@ -54,12 +52,6 @@ const UiControl = (props: IPlayer) => {
   return (
 
     <>
-      {config.videoBarrage &&
-        <VideoBarrage
-          fontSize={config.videoBarrage.fontSize}
-          defaultBarrageState={config.videoBarrage.defaultBarrageState}
-        />
-      }
       {
         config.antiScreenRecording && <VideoAntiScreenRecording
           antiScreenRecording={config.antiScreenRecording}
@@ -76,6 +68,20 @@ const UiControl = (props: IPlayer) => {
           })}
           onClick={switchContainerDisplay}
         >
+
+          {config.videoBarrage &&
+            <VideoBarrage
+              videoBarrageConfig={config.videoBarrage}
+            />
+          }
+
+          {/* {config.videoBarrage &&
+            <VideoBarrageDom
+              videoBarrageConfig={config.videoBarrage}
+            />
+          } */}
+
+
           <PublignBackgroundImages
             poster={props.config.poster}
           >
