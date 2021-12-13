@@ -1,6 +1,6 @@
 {
     "name": "player-hls-flv",
-    "version": "1.5.54",
+    "version": "1.5.55",
     "description": "",
     "main": "./dist/index.js",
     "keywords": [],

@@ -47,7 +47,6 @@ const VideoKeyBoardAndMouse: FC<Props> = (props) => {
 
 
   useEffect(() => {
-    console.log('绑定键盘事件', props);
     addKeyBoardListener();
     handleMouse();
   }, []);
@@ -106,7 +105,7 @@ const VideoKeyBoardAndMouse: FC<Props> = (props) => {
     // 右 - 控制进度
     37: () => {
       if (isLive) {
-        return 
+        return
       }
       let value;
       if (videoEl.currentTime - 5 < 0) {
@@ -119,7 +118,7 @@ const VideoKeyBoardAndMouse: FC<Props> = (props) => {
     // 左 - 控制进度
     39: () => {
       if (isLive) {
-        return 
+        return
       }
       let value = videoEl.currentTime + 5;
       props.player.setVideoCurrentTime(value)

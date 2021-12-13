@@ -32,7 +32,6 @@ export default class HLSPlayer extends VideoControl {
       poster: config.poster
     })
 
-    console.log('config.timestampUnit', config.timestampUnit);
 
     if (typeof config.timestampUnit === 'string') {
       this.timestampUnit = config.timestampUnit;
@@ -76,7 +75,6 @@ export default class HLSPlayer extends VideoControl {
            *  
            */
 
-          console.log('this.timestampUnit??>>>>>>>', this.timestampUnit)
           if (this.timestampUnit && (/\.m3u8/.test(url) || deviceType.ie)) {
             requestUrl = /\?/.test(url) ? `${url}&${this.timestampUnit}=${new Date().getTime()}` : `${url}?${this.timestampUnit}=${new Date().getTime()}`
           }

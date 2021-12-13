@@ -29,8 +29,6 @@ const Portal = React.forwardRef<PortalRef, PortalProps>((props, ref) => {
   const containerRef = React.useRef<HTMLElement>();
 
   React.useEffect(() => {
-    console.log('parentEl:::' , parentEl);
-
     if (parentEl && parentEl!.current) {
       if (getComputedStyle(parentEl!.current).position === '') {
         parentEl!.current.style.position = 'relative';

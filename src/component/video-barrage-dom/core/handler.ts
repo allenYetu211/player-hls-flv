@@ -97,7 +97,7 @@ export const getContainer = (opts: Partial<containerType>) => {
     bulletContainer.addEventListener(
       'mouseenter',
       () => {
-        console.log('enter');
+        // console.log('enter');
 
         bulletContainer.style.animationPlayState = 'paused';
       },
@@ -106,7 +106,7 @@ export const getContainer = (opts: Partial<containerType>) => {
     bulletContainer.addEventListener(
       'mouseleave',
       () => {
-        console.log('leave');
+        // console.log('leave');
         if (!currScreen.allPaused && !bulletContainer.dataset.clicked) {
           bulletContainer.style.animationPlayState = 'running';
         }

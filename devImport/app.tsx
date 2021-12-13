@@ -151,6 +151,7 @@ const vodHlsConfig: initConfig = {
 const vodHlsConfig2: initConfig = {
   // defaultBarrageState: false,
   videoBarrage: {
+    // defaultBarrageState: false,
     defaultBarrageState: true,
     fontSize: 25,
     tracksLine: 2,
@@ -348,7 +349,7 @@ const App = () => {
       })
 
 
-    }, 100);
+    }, 1000);
 
     // setTimeout(() => {
     //   vp.mountFunction.barrage.clean()

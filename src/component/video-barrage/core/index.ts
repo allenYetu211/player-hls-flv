@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2021-12-13 14:16:16
+ * @LastEditTime: 2021-12-13 17:54:33
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
@@ -30,7 +30,6 @@ interface MsgItem {
 
 interface CanvasProps extends videoBarrageType {
   element: HTMLCanvasElement;
-  maxCache: number;
   fontSize?: number;
   defaultBarrageState?: boolean;
   cacheData?: number;
@@ -45,31 +44,23 @@ interface canvas2D extends CanvasRenderingContext2D {
 }
 
 
+let count = 0;
 class BarrageCanvas extends CanvasProxy {
-
   private requestAnimationFrameId: any;
   private isRunning: boolean = false;
   private isClose: boolean = false;
-
   private tracks: MsgItem[][] = [];
   private tracksWidth: number[] = [];
   private tracksCounts: number = 0;
   private tracksLine: number = 5;
-
   private tracksConfig: Partial<CanvasProps> = {};
-
-  private tracksIndex: number[] = [];
-  private firstFlag: boolean = true;
   private trackPoint = {
     pointMinIndex: 0,
     pointMinLength: 0
   }
 
-
-
   constructor({
     element,
-    maxCache = 100,
     fontSize = 22,
     defaultBarrageState,
     tracksLine: useTrackCount,
@@ -77,13 +68,12 @@ class BarrageCanvas extends CanvasProxy {
     textSpacing = 60,
     cacheData = 100,
   }: CanvasProps) {
-
     // TODO :参数 正数负数处理。
     super(element, fontSize);
 
-    this.isClose = this.tracksConfig.defaultBarrageState!;
+    this.isClose = !defaultBarrageState;
     // 生成轨道数量
-    this.tracksLine = useTrackCount || Math.floor(this.height / (fontSize! + 5))
+    this.tracksLine = useTrackCount || Math.floor(this.height / (fontSize! + 5));
     // 给到数量
     this.tracks = Array.from({ length: this.tracksLine }, () => []);
     // this.tracksIndex = Array.from({ length: this.tracksLine }, () => 0);
@@ -108,21 +98,19 @@ class BarrageCanvas extends CanvasProxy {
       track.forEach((msg, msgIndex) => {
         const renderMsg = (width: number = 0) => {
           msg.left = msg.left - msg.speed;
-          this.ctx.shadowColor = msg.color;
+          // this.ctx.shadowColor = msg.color;
           this.ctx.fillStyle = msg.color;
           this.ctx.textAlign = "left";
-          this.ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+          // this.ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
           this.ctx.shadowOffsetX = 3;
           this.ctx.shadowOffsetY = 3;
-
           this.ctx.strokeStyle = "#000000";
           this.ctx.strokeText(msg.value, msg.left, index * this.tracksConfig.trackSpacing! + 50);
-
           this.ctx.fillText(msg.value, msg.left, index * this.tracksConfig.trackSpacing! + 50);
-          const text = this.ctx.measureText(msg.value);
-          msg.width = text.width * this.ratio;
+          msg.width = this.ctx.measureText(msg.value).width * this.ratio;
           this.ctx.restore();
         }
+
         // 检测当前弹幕是否已经滑动出去 , 如果是的，则进行删除。
         if (msg.left + (msg.width || 0) <= 0) {
           delete track[msgIndex];
@@ -141,9 +129,14 @@ class BarrageCanvas extends CanvasProxy {
     if (this.isClose) {
       return
     }
+    count += 1;
     this.isRunning = true;
     this.draw();
     this.requestAnimationFrameId = window.requestAnimationFrame(() => this.start());
+  }
+
+  cancelAnimationFrame() {
+    window.cancelAnimationFrame(this.requestAnimationFrameId);
   }
 
   pushBarrage(item: {
@@ -176,9 +169,7 @@ class BarrageCanvas extends CanvasProxy {
         const minWidth = Math.min(...this.tracksWidth);
         this.trackPoint.pointMinIndex = this.tracksWidth.findIndex(item => item === minWidth)
       }
-
       findMinIndex();
-
 
       currentTrack.push({
         value: item.value,
@@ -231,12 +222,6 @@ class BarrageCanvas extends CanvasProxy {
     this.start();
   }
 
-  // resizeCanvas() {
-  //   console.log('resizeCanvas')
-  //   this.ctx.clearRect(0, 0, this.width, this.height)
-  // }
-
-
   clean() {
     this.isClose = true;
     if (this.isRunning) {
@@ -252,6 +237,11 @@ class BarrageCanvas extends CanvasProxy {
   open() {
     this.isClose = false;
     this.start();
+  }
+
+  restart() {
+    this.clean();
+    this.open()
   }
 }
 

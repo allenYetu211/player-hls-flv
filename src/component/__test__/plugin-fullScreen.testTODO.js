@@ -30,7 +30,7 @@ it("PluginFullScreen:  全屏触发", () => {
       element={videoEl} />,
       container);
   })
-  console.log('container.innerHTML', container.innerHTML)
+  // console.log('container.innerHTML', container.innerHTML)
   expect(container.innerHTML).toEqual('<div class="icon"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M409.6 153.6a51.2 51.2 0 0 1 51.2 51.2v614.4a51.2 51.2 0 0 1-102.4 0V204.8a51.2 51.2 0 0 1 51.2-51.2z m256 0a51.2 51.2 0 0 1 51.2 51.2v614.4a51.2 51.2 0 0 1-102.4 0V204.8a51.2 51.2 0 0 1 51.2-51.2z" p-id="3228" fill="#ffffff"></path></svg></div>');
 })
 

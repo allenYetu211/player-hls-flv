@@ -155,7 +155,7 @@ const VideoPlayer = (props: initConfig) => {
   // 监听状态
   const onListenerState = (vp: any, state: 'on' | 'off') => {
     vp[state]('0001', (info: string) => {
-      console.log('0001', info)
+      // console.log('0001', info)
     })
   }
 

@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-08-18 10:21:56
  * @Descripttion:
- * @LastEditTime: 2021-12-01 11:42:10
+ * @LastEditTime: 2021-12-13 17:55:03
  * @FilePath: /ts-vp/src/utils/canvas.ts
  */
 
@@ -18,24 +18,25 @@ interface canvas2D extends CanvasRenderingContext2D {
 
 class Canvas {
   public element: HTMLCanvasElement;
-  public width: number;
-  public height: number;
-  public ratio: number;
+  public width: number = 0;
+  public height: number = 0;
+  public ratio: number = 1;
   public ctx: canvas2D;
 
   public fontSize: number;
 
   constructor(element: HTMLCanvasElement, fontSize?: number) {
     this.fontSize = fontSize || 25;
-
     this.element = element;
-    let rect = this.element.getBoundingClientRect();
+    this.ctx = this.element.getContext('2d')!;
+    this.resetCanvas();
+  }
 
+
+  resetCanvas() {
+    let rect = this.element.getBoundingClientRect();
     this.width = rect.right - rect.left;
     this.height = rect.bottom - rect.top;
-    this.ctx = this.element.getContext('2d')!;
-
-
     // 针对电脑分辨率处理Ratio
     const devicePixelRatio = window.devicePixelRatio || 1
     const backingStoreRatio = this.ctx.webkitBackingStorePixelRatio ||
@@ -57,13 +58,6 @@ class Canvas {
     this.ctx.scale(this.ratio, this.ratio);
     this.ctx.font = `${this.fontSize}px "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", "sans-serif"`;
 
-  }
-
-  resetScale() {
-    console.log('resetScale');
-
-    this.ctx.scale(this.ratio, this.ratio);
-    this.ctx.font = `${this.fontSize}px "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", "sans-serif"`;
   }
 
   getColor() {
