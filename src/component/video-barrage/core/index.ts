@@ -26,6 +26,8 @@ interface MsgItem {
   color: string;
   speed: number;
   width?: number;
+  addTime: number; // 刚添加到屏幕的时间戳
+  originLeft: number; // 刚添加到屏幕的left值
 }
 
 interface CanvasProps extends videoBarrageType {
@@ -91,13 +93,17 @@ class BarrageCanvas extends CanvasProxy {
     }
 
     this.ctx.clearRect(0, 0, this.width, this.height);
-    this.ctx.save();
+    // this.ctx.save();
 
     // 根据内容展示
     this.tracks.forEach((track, index) => {
       track.forEach((msg, msgIndex) => {
         const renderMsg = (width: number = 0) => {
-          msg.left = msg.left - msg.speed;
+          // 从添加到屏幕右侧边缘到现在的时间差值
+          const timeDiff = performance.now() - msg.addTime;
+          // 弹幕向左侧的移动距离S ＝ V（速度）× T（时间）
+          const distance = msg.speed * 0.05 * timeDiff;
+          msg.left = msg.originLeft - distance;
           // this.ctx.shadowColor = msg.color;
           this.ctx.fillStyle = msg.color;
           this.ctx.textAlign = "left";
@@ -107,8 +113,8 @@ class BarrageCanvas extends CanvasProxy {
           this.ctx.strokeStyle = "#000000";
           this.ctx.strokeText(msg.value, msg.left, index * this.tracksConfig.trackSpacing! + 50);
           this.ctx.fillText(msg.value, msg.left, index * this.tracksConfig.trackSpacing! + 50);
-          msg.width = this.ctx.measureText(msg.value).width * this.ratio;
-          this.ctx.restore();
+          // msg.width = this.ctx.measureText(msg.value).width * this.ratio;
+          // this.ctx.restore();
         }
 
         // 检测当前弹幕是否已经滑动出去 , 如果是的，则进行删除。
@@ -174,10 +180,12 @@ class BarrageCanvas extends CanvasProxy {
       currentTrack.push({
         value: item.value,
         left: (item.left || offsetValue || this.width) + 10,
+        originLeft:(item.left || offsetValue || this.width) + 10,
         // left: this.width + 10,
         color: item.color || '#fff',
         speed: item.speed || 5,
-        width: textWidth
+        width: textWidth,
+        addTime: performance.now()
       })
 
     }
