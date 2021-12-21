@@ -9,6 +9,7 @@
 
 import CanvasProxy from '@utils/canvas';
 import { videoBarrageType } from '@g/index';
+import { now } from '@utils/translateTime';
 
 interface BarrageItemType {
   value: string;
@@ -100,7 +101,7 @@ class BarrageCanvas extends CanvasProxy {
       track.forEach((msg, msgIndex) => {
         const renderMsg = (width: number = 0) => {
           // 从添加到屏幕右侧边缘到现在的时间差值
-          const timeDiff = performance.now() - msg.addTime;
+          const timeDiff = now() - msg.addTime;
           // 弹幕向左侧的移动距离S ＝ V（速度）× T（时间）
           const distance = msg.speed * 0.05 * timeDiff;
           msg.left = msg.originLeft - distance;
@@ -185,7 +186,7 @@ class BarrageCanvas extends CanvasProxy {
         color: item.color || '#fff',
         speed: item.speed || 5,
         width: textWidth,
-        addTime: performance.now()
+        addTime: now()
       })
 
     }

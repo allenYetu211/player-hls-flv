@@ -17,3 +17,8 @@ export const msToTime = (time: string) => {
   } 
 	return `${ihours}:${iminutes}:${iseconds}`
 };
+
+// 获取当前时间
+export const now = () => {
+	return window.performance ? window.performance.now() : new Date().getTime();
+}
