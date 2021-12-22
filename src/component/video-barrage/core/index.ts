@@ -249,8 +249,10 @@ class BarrageCanvas extends CanvasProxy {
   }
 
   restart() {
-    this.clean();
-    this.open()
+    if(!this.isClose){
+      this.clean();
+      this.open()
+    }
   }
 }
 
