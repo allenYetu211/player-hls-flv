@@ -96,12 +96,14 @@ class BarrageCanvas extends CanvasProxy {
     this.ctx.clearRect(0, 0, this.width, this.height);
     // this.ctx.save();
 
+    const nowTime = now();
+
     // 根据内容展示
     this.tracks.forEach((track, index) => {
       track.forEach((msg, msgIndex) => {
         const renderMsg = (width: number = 0) => {
           // 从添加到屏幕右侧边缘到现在的时间差值
-          const timeDiff = now() - msg.addTime;
+          const timeDiff = nowTime - msg.addTime;
           // 弹幕向左侧的移动距离S ＝ V（速度）× T（时间）
           const distance = msg.speed * 0.05 * timeDiff;
           msg.left = msg.originLeft - distance;
