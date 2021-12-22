@@ -37,6 +37,7 @@ const result = Object.assign({}, config, {
   devServer: {
     contentBase: './dist',
     hot: true,
+    host: "0.0.0.0",
     stats: 'errors-only',
     port: 6005
   },
