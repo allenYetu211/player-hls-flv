@@ -40,7 +40,7 @@ const PluginVoice = (props: HocVideoType) => {
   return (
     <ToolTip
       node={
-        <div className={cn(style.icon)} onClick={() => {
+        <div className={cn(style.icon, style.voiceIcon)} onClick={() => {
           onChangeVideoVolume(state.volume ? 0 : 0.6)
         }}>
           {state.volume > 0 ? iconVoice : iconVoiceOff}
