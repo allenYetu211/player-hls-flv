@@ -14,6 +14,8 @@ import { barrageOpen, barrageClose } from '@images/icon';
 
 import style from '@g/asset/style/svg.scss';
 
+import cn from 'classnames';
+
 interface propsType extends HocVideoType {
   defaultBarrageState: boolean;
 }
@@ -24,7 +26,7 @@ const PluginBarrage: React.FC<propsType> = (props) => {
 
   return (
     <div
-      className={style.icon}
+      className={cn(style.icon,style.barrageIcon)}
       onClick={() => {
         if (switchBarrage) {
           setSwitchBarrage(false);

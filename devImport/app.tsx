@@ -152,7 +152,7 @@ const vodHlsConfig2: initConfig = {
   // defaultBarrageState: false,
   videoBarrage: {
     // defaultBarrageState: false,
-    defaultBarrageState: true,
+    defaultBarrageState: false,
     fontSize: 25,
     tracksLine: 2,
     trackSpacing: 80,
