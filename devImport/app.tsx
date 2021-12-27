@@ -100,7 +100,7 @@ const mp4Config: initConfig = {
   isMobile: false,
   duration: 54918500,
   src:
-    "http://testdevvoddownload.xylink.com/vodfiles/downloadfiles/shareLink/adf1ad66-1f0d-4e75-9092-fe18d2d884aa.mp4?auth_key=1603276313-0-0-90b9c5fc25a6204ed0a277fae7f483f7",
+    "http://v-vodshare.v.ouchn.cn/vodfiles/sharefiles/live/9680d8af740741c301740a5706be08dc/202008/31140312/25cf0015-421b-48fe-b723-fb2ade2ae243.mp4",
   thumbnail: {
     picture: '"http://testdevvoddownload.xylink.com/vodfiles/vodfiles/cloud/9005795481/101-bj2-txdevSig2-2157164404862_0_1602747891243_1920_1080_preview.jpg?auth_key=1603290713-0-0-c4431191c2f139503e88874b4d5ef939"',
     // width: 160,
@@ -285,7 +285,7 @@ const dashConfig: initConfig = {
 const App = () => {
   // const [option, setOption] = useState<any>(vodHlsConfig)
   // const [option, setOption] = useState<any>(hlsConfig)
-  const [option, setOption] = useState<any>(vodHlsConfig2)
+  const [option, setOption] = useState<any>(mp4Config)
 
   const choseFlv = () => {
     setOption(flvConfig);
@@ -342,15 +342,15 @@ const App = () => {
         *  每秒20条， 长句
         */
 
-    const timInterval = setInterval(() => {
-      count += 1;
-      vp.mountFunction.barrage.push({
-        // value: `${count} : config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40config `,
-        // value: `${count} ：今天就是感恩节了，有个好消息告诉你今天就是感恩节了，有个好消息告诉你今天就是感恩节了，有个好消息告诉你！`,
-        value: `${count}: ${faker.name.lastName()}`,
-        speed: 2,
-      })
-    }, 50);
+    // const timInterval = setInterval(() => {
+    //   count += 1;
+    //   vp.mountFunction.barrage.push({
+    //     // value: `${count} : config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40config `,
+    //     // value: `${count} ：今天就是感恩节了，有个好消息告诉你今天就是感恩节了，有个好消息告诉你今天就是感恩节了，有个好消息告诉你！`,
+    //     value: `${count}: ${faker.name.lastName()}`,
+    //     speed: 2,
+    //   })
+    // }, 50);
 
 
 

@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2021-12-27 11:56:26
+ * @LastEditTime: 2021-12-27 15:08:22
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
@@ -183,7 +183,7 @@ class BarrageCanvas extends CanvasProxy {
     speed?: number,
     viewableArea?: number
   }) {
-    console.log('this.cacheMsg.length', this.cacheMsg.length);
+
     if (this.isClose || this.cacheMsg.length > this.tracksConfig.cacheData!) {
       return
     }
@@ -243,6 +243,7 @@ class BarrageCanvas extends CanvasProxy {
     }
     this.ctx.clearRect(0, 0, this.width, this.height)
     this.tracks = Array.from({ length: this.tracksLine }, () => []);
+    this.cacheMsg = [];
     this.reSetTrackState();
   }
 

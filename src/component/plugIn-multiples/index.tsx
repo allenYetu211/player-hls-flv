@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-04-13 11:24:30
  * @Descripttion: 
- * @LastEditTime: 2021-05-10 14:09:49
+ * @LastEditTime: 2021-12-27 17:39:01
  * @FilePath: /ts-vp/src/component/plugIn-multiples/index.tsx
  */
 import React, { useState, useEffect } from 'react';
@@ -17,7 +17,7 @@ import { deviceType } from '@utils/phoneType';
 
 import { initConfig } from '@g/index';
 
-import HotVideo, {HocVideoType} from '@g/hoc-component/hoc-video';
+import HotVideo, { HocVideoType } from '@g/hoc-component/hoc-video';
 
 let IEIndex = 0;
 
@@ -65,6 +65,10 @@ const PluginMultiple = (props: IProps) => {
 
   return (
     <ToolTip
+      notHover={props.config.isMobile}
+      // onClick={() => {
+      //   console.log('tool')
+      // }}
       node={multipleList[multipleIndex] ? multipleList[multipleIndex].text : multipleList[multipleList.length - 1].text}>
       <ul className={style.listContainer}>
         {multipleList.map((item: multipleType, key: number) => {

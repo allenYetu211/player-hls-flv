@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 15:46:11
  * @Descripttion: 
- * @LastEditTime: 2021-11-17 16:32:47
+ * @LastEditTime: 2021-12-27 17:02:16
  * @FilePath: /ts-vp/src/component/video-control/index.tsx
  */
 import React, { useState, useEffect, useMemo } from 'react';
@@ -163,7 +163,7 @@ const VideoControl = (props: Props) => {
           />
         }
 
-        {!props.config.isMobile &&
+        {
           !props.config.hideMultiple &&
           isMultiples &&
           <PluginMultiples
