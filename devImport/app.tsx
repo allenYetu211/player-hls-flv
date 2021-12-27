@@ -152,12 +152,19 @@ const vodHlsConfig2: initConfig = {
   // defaultBarrageState: false,
   videoBarrage: {
     // defaultBarrageState: false,
-    defaultBarrageState: false,
-    fontSize: 25,
-    tracksLine: 2,
-    trackSpacing: 80,
-    textSpacing: 20,
-    cacheData: 200
+    // defaultBarrageState: false,
+    // fontSize: 25,
+    // tracksLine: 2,
+    // trackSpacing: 80,
+    // textSpacing: 20,
+    // cacheData: 200
+
+    fontSize: 20, // 字体大小
+    defaultBarrageState: true,
+    tracksLine: 3, // 弹幕轨道数
+    trackSpacing: 30, // 轨道间距
+    textSpacing: 20, // 弹幕间距
+    cacheData: 5
 
   },
   "type": "m3u8",
@@ -326,30 +333,54 @@ const App = () => {
 
 
     const fakers = {
-      1: () => `${faker.name.lastName()}，${faker.name.firstName()}}, ${faker.datatype.number}`,
-      2: () => `${faker.company.catchPhraseAdjective()}`,
-      3: () => `${faker.finance.currencyCode()}`,
+      a: () => `${faker.name.lastName()}，${faker.name.firstName()}}, ${faker.datatype.number}`,
+      b: () => `${faker.company.catchPhraseAdjective()}`,
+      c: () => `${faker.finance.currencyCode()}`,
     }
+    /**
+        *  场景一：
+        *  每秒20条， 长句
+        */
 
-
-    setInterval(() => {
-      // setTimeout(() => {
+    const timInterval = setInterval(() => {
       count += 1;
-      // if (count > 100) return;
       vp.mountFunction.barrage.push({
-        // value: fakers[Math.round(Math.random() * 2 + 1)](),
         // value: `${count} : config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40config `,
-        value: `${count} ： ${faker.name.lastName()}，${faker.name.firstName()}}`,
-        // value: `${count} -  ${faker.datatype.number({
-        //   'min': 10,
-        //   'max': 50
-        // })} || >`,
-        // viewableArea: 240,
+        // value: `${count} ：今天就是感恩节了，有个好消息告诉你今天就是感恩节了，有个好消息告诉你今天就是感恩节了，有个好消息告诉你！`,
+        value: `${count}: ${faker.name.lastName()}`,
         speed: 2,
       })
+    }, 50);
 
 
-    }, 1000);
+
+    /**
+      *  场景二：
+      *  添加5条后 ，停止推送20秒后继续添加弹幕出现。
+      */
+    // function setTimeInterval() {
+    //   console.log('setTimeInterval>>>>>>')
+    //   const timInterval = setInterval(() => {
+    //     count += 1;
+    //     vp.mountFunction.barrage.push({
+    //       value: `${count} ：今天就是感恩节了，有个好消息告诉你！`,
+    //       speed: 2,
+    //     });
+    //     if (count > 5) {
+    //       clearInterval(timInterval);
+    //       setTimeout(() => {
+    //         console.log('setTimeInterval')
+    //         setTimeInterval()
+    //         count = 0;
+    //       }, 10000)
+    //     }
+    //   }, 50);
+    // };
+
+    // setTimeInterval();
+
+
+
 
     // setTimeout(() => {
     //   vp.mountFunction.barrage.clean()

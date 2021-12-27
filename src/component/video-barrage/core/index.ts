@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2021-12-13 17:54:33
+ * @LastEditTime: 2021-12-27 11:56:26
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
@@ -57,10 +57,8 @@ class BarrageCanvas extends CanvasProxy {
   private tracksCounts: number = 0;
   private tracksLine: number = 5;
   private tracksConfig: Partial<CanvasProps> = {};
-  private trackPoint = {
-    pointMinIndex: 0,
-    pointMinLength: 0
-  }
+  private cacheMsg: any[] = [];
+  private tracksState: boolean[] = [];
 
   constructor({
     element,
@@ -82,6 +80,8 @@ class BarrageCanvas extends CanvasProxy {
     // this.tracksIndex = Array.from({ length: this.tracksLine }, () => 0);
     this.tracksWidth = Array.from({ length: this.tracksLine }, () => 0);
 
+    this.reSetTrackState();
+
     this.tracksConfig = {
       fontSize, defaultBarrageState, tracksLine: useTrackCount, trackSpacing, textSpacing, cacheData
     };
@@ -93,39 +93,67 @@ class BarrageCanvas extends CanvasProxy {
       return
     }
 
-    this.ctx.clearRect(0, 0, this.width, this.height);
-    // this.ctx.save();
 
-    const nowTime = now();
+    this.ctx.clearRect(0, 0, this.width, this.height);
 
     // 根据内容展示
     this.tracks.forEach((track, index) => {
+
+      if (track.length === 0) {
+        this.tracksState[index] = true;
+        return
+      }
+
       track.forEach((msg, msgIndex) => {
+        if (!msg) {
+          return
+        }
         const renderMsg = (width: number = 0) => {
           // 从添加到屏幕右侧边缘到现在的时间差值
-          const timeDiff = nowTime - msg.addTime;
+          const timeDiff = now() - msg.addTime;
           // 弹幕向左侧的移动距离S ＝ V（速度）× T（时间）
           const distance = msg.speed * 0.05 * timeDiff;
           msg.left = msg.originLeft - distance;
-          // this.ctx.shadowColor = msg.color;
+          // msg.left = msg.left - msg.speed;
           this.ctx.fillStyle = msg.color;
           this.ctx.textAlign = "left";
-          // this.ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
           this.ctx.shadowOffsetX = 3;
           this.ctx.shadowOffsetY = 3;
           this.ctx.strokeStyle = "#000000";
           this.ctx.strokeText(msg.value, msg.left, index * this.tracksConfig.trackSpacing! + 50);
           this.ctx.fillText(msg.value, msg.left, index * this.tracksConfig.trackSpacing! + 50);
           // msg.width = this.ctx.measureText(msg.value).width * this.ratio;
-          // this.ctx.restore();
+          this.ctx.restore();
         }
+        // console.log('msg.value === ', msg.value === '5 ：今天就是感恩节了，有个好消息告诉你！');
 
+        // if (msg.value === '5 ：今天就是感恩节了，有个好消息告诉你！') {
+        //   console.log('msg.left', msg.left);
+        // }
+
+
+        const currentLeft = msg.left + (msg.width || 0);
         // 检测当前弹幕是否已经滑动出去 , 如果是的，则进行删除。
-        if (msg.left + (msg.width || 0) <= 0) {
+        if (currentLeft <= 0) {
           delete track[msgIndex];
-          this.tracksCounts -= 1;
-          if (this.tracksCounts === 0) {
+          this.tracksWidth[index] = this.tracksWidth[index] - (msg.width || 0);
+          if (this.cacheMsg.length === 0) {
             window.cancelAnimationFrame(this.requestAnimationFrameId);
+            this.isRunning = false;
+            this.reSetTrackState();
+          }
+        }
+        // 当前信息是否需已经全部展现, 如果全部展示则添加进来
+
+        //  如果当前是轨道中最后一条，则检测是否展现完成
+        if (msgIndex === track.length - 1 && currentLeft < this.width) {
+          /**
+            *  if current tracks state is true， then insert msg to tracks
+            */
+          if (this.cacheMsg.length !== 0) {
+            const firstMsg = this.cacheMsg.shift()
+            firstMsg.addTime = now();
+            this.tracks[index].push(firstMsg);
           }
         }
 
@@ -138,7 +166,6 @@ class BarrageCanvas extends CanvasProxy {
     if (this.isClose) {
       return
     }
-    count += 1;
     this.isRunning = true;
     this.draw();
     this.requestAnimationFrameId = window.requestAnimationFrame(() => this.start());
@@ -156,75 +183,50 @@ class BarrageCanvas extends CanvasProxy {
     speed?: number,
     viewableArea?: number
   }) {
-
-    if (this.isClose || this.tracksCounts > this.tracksConfig.cacheData!) {
+    console.log('this.cacheMsg.length', this.cacheMsg.length);
+    if (this.isClose || this.cacheMsg.length > this.tracksConfig.cacheData!) {
       return
     }
 
-    const addTrackMsg = (currentTrack: MsgItem[], index: number, offsetValue: number = 0) => {
-      this.tracksCounts += 1;
-      // 每次添加，将指针默认指向下一一位（默认认为下一位为最小数）。
-      // this.trackPoint.pointMinIndex = index + 1 <= this.tracks.length - 1 ? index + 1 : 0;
-
-      const textWidth = this.ctx.measureText(item.value).width;
-      // 添加每列宽度
-      if (!this.tracksWidth[index]) {
-        this.tracksWidth[index] = textWidth;
-      } else {
-        this.tracksWidth[index] = this.tracksWidth[index] + textWidth;
-      }
-      //  寻找宽度最小列
-      const findMinIndex = () => {
-        const minWidth = Math.min(...this.tracksWidth);
-        this.trackPoint.pointMinIndex = this.tracksWidth.findIndex(item => item === minWidth)
-      }
-      findMinIndex();
-
-      currentTrack.push({
-        value: item.value,
-        left: (item.left || offsetValue || this.width) + 10,
-        originLeft:(item.left || offsetValue || this.width) + 10,
-        // left: this.width + 10,
-        color: item.color || '#fff',
-        speed: item.speed || 5,
-        width: textWidth,
-        addTime: now()
-      })
-
-    }
     /**
-   * 检查当前列表最后一个内容是否都已经展现。
-   * 如果为咱先则在下一个轨道内添加
-   */
+     * 添加一个缓存区
+     * 记录每一条轨道的状态： 
+     *  1. true 允许添加
+     *  2. false 禁止添加
+     *  
+     * 状态改变：
+     *  The last display of the current track is complete， false -> true
+     *  or : true -> false
+     */
+    // 检查当前轨道是否存在可以运行的。
+    const textWidth = this.ctx.measureText(item.value).width;
 
-    // console.log('this.tracks', this.tracksCounts, this.tracks);
+    const msg = {
+      value: item.value,
+      left: this.width + 10,
+      originLeft: this.width + 10,
+      color: item.color || '#fff',
+      speed: item.speed || 5,
+      width: textWidth,
+      addTime: 0
+    }
 
-    for (let i = 0; i < this.tracks.length; i++) {
-      const currentTrack = this.tracks[i];
-      if (currentTrack.length !== 0) {
-        const prevLastMSG = currentTrack[currentTrack.length - 1];
-        //  判断轨道最后一条内容是否已经全部展现, 
-        if (prevLastMSG && this.width >= (prevLastMSG.width || 0) + prevLastMSG.left) {
-          addTrackMsg(currentTrack, i)
-          break;
-        }
-        else {
-          const { pointMinIndex } = this.trackPoint;
-          // console.log('pointMinIndex', pointMinIndex);
-          const currentTrackLastMSG = this.tracks[pointMinIndex][this.tracks[pointMinIndex].length - 1];
-          let offsetValue = 0;
-          if (currentTrackLastMSG) {
-            // offsetValue = currentTrackLastMSG.width! + currentTrackLastMSG.left - this.width;
-            offsetValue = currentTrackLastMSG.width! + currentTrackLastMSG.left + this.tracksConfig.textSpacing!;
-          }
-          addTrackMsg(this.tracks[pointMinIndex], pointMinIndex, offsetValue);
-          break;
-        }
 
-      } else {
-        addTrackMsg(currentTrack, i)
+    let currentCanBeInsertedTracksIndex;
+    for (let i = 0; i < this.tracksState.length; i++) {
+      // find the first current track that can be inserted
+      if (this.tracksState[i]) {
+        currentCanBeInsertedTracksIndex = i;
+        msg.addTime = now();
+        this.tracks[i].push(msg);
+        this.tracksState[i] = false;
         break;
       }
+    }
+
+    // 当前没有可以使用的tacks  则添加至缓冲区
+    if (!currentCanBeInsertedTracksIndex && currentCanBeInsertedTracksIndex !== 0) {
+      this.cacheMsg.push(msg);
     }
 
     if (this.isRunning) {
@@ -240,9 +242,8 @@ class BarrageCanvas extends CanvasProxy {
       this.isRunning = false;
     }
     this.ctx.clearRect(0, 0, this.width, this.height)
-
     this.tracks = Array.from({ length: this.tracksLine }, () => []);
-    this.tracksCounts = 0;
+    this.reSetTrackState();
   }
 
   open() {
@@ -250,8 +251,13 @@ class BarrageCanvas extends CanvasProxy {
     this.start();
   }
 
+  reSetTrackState() {
+    //  轨道状态
+    this.tracksState = Array.from({ length: this.tracksLine }, () => true);
+  }
+
   restart() {
-    if(!this.isClose){
+    if (!this.isClose) {
       this.clean();
       this.open()
     }
