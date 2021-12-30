@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2021-12-27 15:08:22
+ * @LastEditTime: 2021-12-30 14:19:30
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
@@ -54,7 +54,7 @@ class BarrageCanvas extends CanvasProxy {
   private isClose: boolean = false;
   private tracks: MsgItem[][] = [];
   private tracksWidth: number[] = [];
-  private tracksCounts: number = 0;
+  private tracksCounts: number = 0;  // 当前轨道中存在的条数
   private tracksLine: number = 5;
   private tracksConfig: Partial<CanvasProps> = {};
   private cacheMsg: any[] = [];
@@ -96,9 +96,19 @@ class BarrageCanvas extends CanvasProxy {
 
     this.ctx.clearRect(0, 0, this.width, this.height);
 
+    /**
+     *  如果当前滚动条数，不存在数据。
+     *  缓存中也没有数据， 则停止动画。
+     *  TODO : 可以优化，达到条件后触发一次即可。
+     */
+    if (this.tracksCounts === 0 && this.cacheMsg.length === 0) {
+      this.reSetTrackState();
+      this.isRunning = false;
+      window.cancelAnimationFrame(this.requestAnimationFrameId);
+    }
+
     // 根据内容展示
     this.tracks.forEach((track, index) => {
-
       if (track.length === 0) {
         this.tracksState[index] = true;
         return
@@ -125,35 +135,28 @@ class BarrageCanvas extends CanvasProxy {
           // msg.width = this.ctx.measureText(msg.value).width * this.ratio;
           this.ctx.restore();
         }
-        // console.log('msg.value === ', msg.value === '5 ：今天就是感恩节了，有个好消息告诉你！');
-
-        // if (msg.value === '5 ：今天就是感恩节了，有个好消息告诉你！') {
-        //   console.log('msg.left', msg.left);
-        // }
-
 
         const currentLeft = msg.left + (msg.width || 0);
         // 检测当前弹幕是否已经滑动出去 , 如果是的，则进行删除。
         if (currentLeft <= 0) {
           delete track[msgIndex];
+          this.tracksCounts -= 1;
           this.tracksWidth[index] = this.tracksWidth[index] - (msg.width || 0);
-          if (this.cacheMsg.length === 0) {
-            window.cancelAnimationFrame(this.requestAnimationFrameId);
-            this.isRunning = false;
-            this.reSetTrackState();
-          }
-        }
-        // 当前信息是否需已经全部展现, 如果全部展示则添加进来
 
-        //  如果当前是轨道中最后一条，则检测是否展现完成
+        }
+        //  如果当前是轨道中最后一条，则检测是否展现完成 , 当前信息是否已经全部展现, 如果全部展示则添加新msg进来
         if (msgIndex === track.length - 1 && currentLeft < this.width) {
           /**
             *  if current tracks state is true， then insert msg to tracks
+            *  if there is not data in the catch。change the catch states to true
+            *  
             */
+          // 当前信息是否需已经全部展现, 如果全部展示则添加进来
           if (this.cacheMsg.length !== 0) {
             const firstMsg = this.cacheMsg.shift()
             firstMsg.addTime = now();
             this.tracks[index].push(firstMsg);
+            this.tracksCounts += 1;
           }
         }
 
@@ -190,7 +193,7 @@ class BarrageCanvas extends CanvasProxy {
 
     /**
      * 添加一个缓存区
-     * 记录每一条轨道的状态： 
+     * 记录每一条轨道的状态： 在初始阶段，如果轨道不存在msg，则添加，添加后则将msg存储至缓存区。
      *  1. true 允许添加
      *  2. false 禁止添加
      *  
@@ -203,8 +206,8 @@ class BarrageCanvas extends CanvasProxy {
 
     const msg = {
       value: item.value,
-      left: this.width + 10,
-      originLeft: this.width + 10,
+      left: this.width + this.tracksConfig.textSpacing!,
+      originLeft: this.width + this.tracksConfig.textSpacing!,
       color: item.color || '#fff',
       speed: item.speed || 5,
       width: textWidth,
@@ -219,6 +222,7 @@ class BarrageCanvas extends CanvasProxy {
         currentCanBeInsertedTracksIndex = i;
         msg.addTime = now();
         this.tracks[i].push(msg);
+        this.tracksCounts += 1;
         this.tracksState[i] = false;
         break;
       }
@@ -244,6 +248,7 @@ class BarrageCanvas extends CanvasProxy {
     this.ctx.clearRect(0, 0, this.width, this.height)
     this.tracks = Array.from({ length: this.tracksLine }, () => []);
     this.cacheMsg = [];
+    this.tracksCounts = 0;
     this.reSetTrackState();
   }
 

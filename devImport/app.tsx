@@ -148,23 +148,23 @@ const vodHlsConfig: initConfig = {
   },
 }
 
+const isMobile = false;
 const vodHlsConfig2: initConfig = {
   // defaultBarrageState: false,
   videoBarrage: {
-    // defaultBarrageState: false,
-    // defaultBarrageState: false,
-    // fontSize: 25,
-    // tracksLine: 2,
-    // trackSpacing: 80,
-    // textSpacing: 20,
-    // cacheData: 200
-
-    fontSize: 20, // 字体大小
+    fontSize: isMobile ? 16 : 20, // 字体大小
     defaultBarrageState: true,
-    tracksLine: 3, // 弹幕轨道数
-    trackSpacing: 30, // 轨道间距
-    textSpacing: 20, // 弹幕间距
-    cacheData: 5
+    tracksLine: isMobile ? 2 : 3, // 弹幕轨道数
+    trackSpacing: isMobile ? 25 : 30, // 轨道间距
+    textSpacing: isMobile ? 10 : 20, // 弹幕间距
+    cacheData: 20,
+
+    // fontSize: 20, // 字体大小
+    // defaultBarrageState: true,
+    // tracksLine: 3, // 弹幕轨道数
+    // trackSpacing: 30, // 轨道间距
+    // textSpacing: 20, // 弹幕间距
+    // cacheData: 5
 
   },
   "type": "m3u8",
@@ -285,7 +285,9 @@ const dashConfig: initConfig = {
 const App = () => {
   // const [option, setOption] = useState<any>(vodHlsConfig)
   // const [option, setOption] = useState<any>(hlsConfig)
-  const [option, setOption] = useState<any>(mp4Config)
+  const [option, setOption] = useState<any>(vodHlsConfig2)
+  const vps = React.useRef<any>(null);
+  // const [option, setOption] = useState<any>(mp4Config)
 
   const choseFlv = () => {
     setOption(flvConfig);
@@ -300,6 +302,8 @@ const App = () => {
 
   const onVideoPlayerState = (vp: any) => {
     console.log('vp', vp)
+
+    vps.current = vp;
     let count = 0;
 
     // const msgs = [
@@ -344,13 +348,22 @@ const App = () => {
 
     // const timInterval = setInterval(() => {
     //   count += 1;
+
+    //   const randomCount = Math.floor(Math.random() * 3)
+
+    //   let values = '：今天就是今天就是感恩节了，有个好消息告诉你！';
+
+    //   for (let i = 0; i < randomCount; i++) {
+    //     values += '：今天就是今天就是感恩节了，有个好消息告诉你！'
+    //   }
+
     //   vp.mountFunction.barrage.push({
     //     // value: `${count} : config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40config `,
-    //     // value: `${count} ：今天就是感恩节了，有个好消息告诉你今天就是感恩节了，有个好消息告诉你今天就是感恩节了，有个好消息告诉你！`,
-    //     value: `${count}: ${faker.name.lastName()}`,
+    //     value: `${count} ：${values}`,
+    //     // value: `${count}: ${faker.name.lastName()}`,
     //     speed: 2,
     //   })
-    // }, 50);
+    // }, 800);
 
 
 
@@ -400,6 +413,8 @@ const App = () => {
     // console.log('vp==>>>>', vp.videoEl.playbackRate = 1)
   }
 
+  const [text, setText] = React.useState<string>('')
+
   return (
     <div style={{
       position: 'absolute',
@@ -433,11 +448,40 @@ const App = () => {
         <TestStore />
       </div>
 
+      <input value={text} id="msg"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setText(e.target.value);
+        }}
+        style={{
+          position: 'absolute',
+          top: '0px',
+          left: '250px',
+          zIndex: 9999,
+          color: '#000'
+        }}
+      />
+      <button id="msgBtn" onClick={() => {
+        vps.current.mountFunction.barrage.push({
+          value: text,
+        })
+        setText('');
+      }}
+        style={{
+          position: 'absolute',
+          top: '0px',
+          left: '200px',
+          zIndex: 9999,
+          color: '#000'
+        }}
+      >发送msg</button>
+
       <button style={{
         position: 'absolute',
         top: '0px',
         left: '150px',
-        zIndex: 9999
+        zIndex: 9999,
+        color: '#000'
+
       }} onClick={choseHLS}>HLS</button>
 
       {/* <div style={{width: '200px', height: "100vh", position: "relative"}}> */}
