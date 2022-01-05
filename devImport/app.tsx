@@ -280,12 +280,22 @@ const dashConfig: initConfig = {
 }
 
 
+const hslTest = {
+  "src": "http://proxypre.xylink.com/vodfiles/sharefiles/pre/live/9680e3fb7a37ff3d017a76898b33011d/202107/09165528/b0498047-7634-435b-a46a-82d3deb46840.m3u8",
+  "type": "m3u8",
+  "vod": true,
+  "hideMultiple": true,
+  "count": 0,
+}
 
 
+
+
+let count = 0;
 const App = () => {
   // const [option, setOption] = useState<any>(vodHlsConfig)
   // const [option, setOption] = useState<any>(hlsConfig)
-  const [option, setOption] = useState<any>(vodHlsConfig2)
+  const [option, setOption] = useState<any>(hslTest)
   const vps = React.useRef<any>(null);
   // const [option, setOption] = useState<any>(mp4Config)
 
@@ -293,7 +303,10 @@ const App = () => {
     setOption(flvConfig);
   }
   const choseHLS = () => {
-    setOption(vodHlsConfig2);
+    count += 1;
+    const news = { ...hslTest, count }
+    console.log('hslTest', news);
+    setOption(news);
   }
 
   const choseMp4Url2 = () => {
@@ -403,7 +416,7 @@ const App = () => {
     //   vp.mountFunction.barrage.open()
     // }, 4000)
 
-    vp.mountFunction.barrage.start();
+    // vp.mountFunction.barrage.start();
 
     // setTimeout(() => {
     //   vp.mountFunction.onChangePlayIndex(1)

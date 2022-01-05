@@ -6,6 +6,8 @@ import { logInit } from '@utils/logs';
 
 import { StoreProvider } from "@g/store";
 
+import isequal from 'lodash.isequal';
+
 
 
 
@@ -144,6 +146,8 @@ const VideoPlayer = (props: initConfig) => {
 
 
     return () => {
+
+      if (!vp) { return }
       vp.destroy();
       // 清除所有监听
       vp.removeAllListeners();
@@ -175,4 +179,7 @@ const VideoPlayer = (props: initConfig) => {
   );
 }
 
-export default VideoPlayer;
+export default React.memo(VideoPlayer, (prevProps: initConfig, nextProps: initConfig) => {
+  console.log('isequal(prevProps, nextProps)', isequal(prevProps, nextProps));
+  return isequal(prevProps, nextProps);
+});

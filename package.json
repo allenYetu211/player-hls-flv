@@ -1,6 +1,6 @@
 {
     "name": "player-hls-flv",
-    "version": "1.5.66",
+    "version": "1.5.67",
     "description": "",
     "main": "./dist/index.js",
     "keywords": [],
@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@types/lodash.debounce": "^4.0.6",
+        "@types/lodash.isequal": "^4.5.5",
         "@types/lodash.throttle": "^4.1.6",
         "@types/vfile-message": "^2.0.0",
         "dashjs": "^3.1.1",
@@ -30,6 +31,7 @@
         "flv.js": "^1.5.0",
         "hls.js": "^0.13.2",
         "lodash.debounce": "^4.0.8",
+        "lodash.isequal": "^4.5.0",
         "lodash.throttle": "^4.1.1",
         "react": "^16.8.6",
         "react-dev-utils": "^10.1.0",
