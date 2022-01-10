@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-19 15:08:01
  * @Descripttion: 
- * @LastEditTime: 2021-12-13 18:05:11
+ * @LastEditTime: 2022-01-10 15:41:15
  * @FilePath: /ts-vp/src/component/video-barrage/index.tsx
  */
 
@@ -32,14 +32,19 @@ const VideoBarrage: React.FC<{ videoBarrageConfig: videoBarrageType }> = (props)
       open: barrage.open.bind(barrage),
     }
 
-    //  监听窗口大小变化
-    window.addEventListener('resize', debounce(() => {
-      const { offsetWidth: contentWidth } = canvasContentEl.current!
-      canvasEl.current!.style.width = `${contentWidth}px`;
-      canvasEl.current!.setAttribute('width', `${contentWidth}`);
-      barrage.resetCanvas();
-      barrage.restart();
-    }, 300))
+    const { autoEmpty = true } = props.videoBarrageConfig;
+
+    if (autoEmpty) {
+      //  监听窗口大小变化
+      window.addEventListener('resize', debounce(() => {
+        const { offsetWidth: contentWidth } = canvasContentEl.current!
+        canvasEl.current!.style.width = `${contentWidth}px`;
+        canvasEl.current!.setAttribute('width', `${contentWidth}`);
+        barrage.resetCanvas();
+        barrage.restart();
+      }, 300))
+    }
+
   }, [])
 
   return (

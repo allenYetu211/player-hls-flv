@@ -56,6 +56,7 @@ export interface videoBarrageType {
   trackSpacing?: number;
   textSpacing?: number;
   cacheData?: number;
+  autoEmpty?: boolean;
 };
 
 export interface Type {

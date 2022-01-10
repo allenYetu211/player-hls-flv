@@ -158,6 +158,7 @@ const vodHlsConfig2: initConfig = {
     trackSpacing: isMobile ? 25 : 30, // 轨道间距
     textSpacing: isMobile ? 10 : 20, // 弹幕间距
     cacheData: 20,
+    autoEmpty: false,
 
     // fontSize: 20, // 字体大小
     // defaultBarrageState: true,
@@ -293,9 +294,9 @@ const hslTest = {
 
 let count = 0;
 const App = () => {
-  // const [option, setOption] = useState<any>(vodHlsConfig)
+  const [option, setOption] = useState<any>(vodHlsConfig2)
   // const [option, setOption] = useState<any>(hlsConfig)
-  const [option, setOption] = useState<any>(hslTest)
+  // const [option, setOption] = useState<any>(hslTest)
   const vps = React.useRef<any>(null);
   // const [option, setOption] = useState<any>(mp4Config)
 
@@ -359,24 +360,24 @@ const App = () => {
         *  每秒20条， 长句
         */
 
-    // const timInterval = setInterval(() => {
-    //   count += 1;
+    const timInterval = setInterval(() => {
+      count += 1;
 
-    //   const randomCount = Math.floor(Math.random() * 3)
+      const randomCount = Math.floor(Math.random() * 3)
 
-    //   let values = '：今天就是今天就是感恩节了，有个好消息告诉你！';
+      let values = '：今天就是今天就是感恩节了，有个好消息告诉你！';
 
-    //   for (let i = 0; i < randomCount; i++) {
-    //     values += '：今天就是今天就是感恩节了，有个好消息告诉你！'
-    //   }
+      for (let i = 0; i < randomCount; i++) {
+        values += '：今天就是今天就是感恩节了，有个好消息告诉你！'
+      }
 
-    //   vp.mountFunction.barrage.push({
-    //     // value: `${count} : config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40config `,
-    //     value: `${count} ：${values}`,
-    //     // value: `${count}: ${faker.name.lastName()}`,
-    //     speed: 2,
-    //   })
-    // }, 800);
+      vp.mountFunction.barrage.push({
+        // value: `${count} : config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40config `,
+        value: `${count} ：${values}`,
+        // value: `${count}: ${faker.name.lastName()}`,
+        speed: 2,
+      })
+    }, 800);
 
 
 
