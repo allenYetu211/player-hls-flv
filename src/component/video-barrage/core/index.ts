@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2021-12-30 14:19:30
+ * @LastEditTime: 2022-01-12 17:29:57
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
@@ -143,6 +143,12 @@ class BarrageCanvas extends CanvasProxy {
           this.tracksCounts -= 1;
           this.tracksWidth[index] = this.tracksWidth[index] - (msg.width || 0);
 
+          // check the current track content is empty
+
+          if (track.filter(Boolean).length < 1) {
+            this.tracksState[index] = true;
+          }
+
         }
         //  如果当前是轨道中最后一条，则检测是否展现完成 , 当前信息是否已经全部展现, 如果全部展示则添加新msg进来
         if (msgIndex === track.length - 1 && currentLeft < this.width) {
@@ -216,6 +222,8 @@ class BarrageCanvas extends CanvasProxy {
 
 
     let currentCanBeInsertedTracksIndex;
+    
+
     for (let i = 0; i < this.tracksState.length; i++) {
       // find the first current track that can be inserted
       if (this.tracksState[i]) {

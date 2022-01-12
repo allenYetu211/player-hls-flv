@@ -359,25 +359,43 @@ const App = () => {
         *  场景一：
         *  每秒20条， 长句
         */
+    let delay = 300;
+    let values = '：今天就是今天就是感恩节了，有个好消息告诉你！';
 
-    const timInterval = setInterval(() => {
-      count += 1;
+    function resetTime() {
+      const timInterval = setInterval(() => {
+        count += 1;
+        // const randomCount = Math.floor(Math.random() * 3)
 
-      const randomCount = Math.floor(Math.random() * 3)
+        // for (let i = 0; i < randomCount; i++) {
+        //   values += '：今天就是今天就是感恩节了，有个好消息告诉你！'
+        // }
 
-      let values = '：今天就是今天就是感恩节了，有个好消息告诉你！';
+        if (count === 10) {
+          clearInterval(timInterval);
+          delay = 1000;
+          values = 'aaa'
+          resetTime()
+        }
 
-      for (let i = 0; i < randomCount; i++) {
-        values += '：今天就是今天就是感恩节了，有个好消息告诉你！'
-      }
+        if (count === 20) {
+          clearInterval(timInterval);
+          delay = 300;
+          values = '：今天就是今天就是感恩节了，有个好消息告诉你！';
+          resetTime()
+        }
 
-      vp.mountFunction.barrage.push({
-        // value: `${count} : config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40config `,
-        value: `${count} ：${values}`,
-        // value: `${count}: ${faker.name.lastName()}`,
-        speed: 2,
-      })
-    }, 800);
+        vp.mountFunction.barrage.push({
+          // value: `${count} : config {url: '/live/watch/heartbeat/9628b0c07d50a5f0017d514317a40config `,
+          value: `${count} ：${values}`,
+          // value: `${count}: ${faker.name.lastName()}`,
+          speed: 10,
+        })
+      }, delay);
+
+    }
+    resetTime()
+
 
 
 
