@@ -158,7 +158,7 @@ const vodHlsConfig2: initConfig = {
     trackSpacing: isMobile ? 25 : 30, // 轨道间距
     textSpacing: isMobile ? 10 : 20, // 弹幕间距
     cacheData: 20,
-    autoEmpty: false,
+    autoEmpty: true,
 
     // fontSize: 20, // 字体大小
     // defaultBarrageState: true,

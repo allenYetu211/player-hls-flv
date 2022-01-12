@@ -6,7 +6,7 @@ import style from './style/index.scss';
 import { getVideoPlayer } from '@player/index';
 import ToolTip from '@g/uiCompoent/toolTip';
 
-import {log} from '@utils/logs';
+import { log } from '@utils/logs';
 
 
 
@@ -14,13 +14,21 @@ interface IProps {
   element: HTMLDivElement;
 }
 
+
 const PlugInFullScreen = (props: IProps) => {
   const [fullState, setFullState] = useState(false);
+  const player: any = getVideoPlayer();
+
+
+  useEffect(() => {
+    if (player.mountFunction.barrage) {
+      player.mountFunction.barrage.resetView();
+    }
+  }, [fullState]);
 
   // log.info('PlugInFullScreen>>>>>>');
 
   // 播放器
-  const player: any = getVideoPlayer();
   // 注册全屏事件
   useEffect(() => {
     //  pc 端检测全屏状态， esc 监控当前退出全屏
@@ -104,13 +112,13 @@ const PlugInFullScreen = (props: IProps) => {
               {iconExitFull}
             </div>
           ) : (
-              <div
-                className={style.icon}
-                onClick={onfullScreen}
-              >
-                {iconFull}
-              </div>
-            )}
+            <div
+              className={style.icon}
+              onClick={onfullScreen}
+            >
+              {iconFull}
+            </div>
+          )}
         </div>
       } />
   );
