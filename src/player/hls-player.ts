@@ -41,20 +41,26 @@ export default class HLSPlayer extends VideoControl {
 
 
     // 如果是vod点播，
-    if (!config!.vod) {
-      // 如果存在option，则处理多码率。
-      if (config.option) {
-        this.multiStreams = config.option!.multiStreams;
-        this.playerIndex = config.option!.playIndex;
-        // 当前播放的src 
-        this.src = this.multiStreams[this.playerIndex].src;
-      } else {
-        this.src = config.src || ''
-      }
+    // if (!config!.vod) {
+    //   // 如果存在option，则处理多码率。
+     
+    // } else {
+    //   this.vod = true;
+    //   this.src = config.src || '';
+    // }
+
+
+    if (config.option) {
+      this.multiStreams = config.option!.multiStreams;
+      this.playerIndex = config.option!.playIndex;
+      // 当前播放的src 
+      this.src = this.multiStreams[this.playerIndex].src;
     } else {
-      this.vod = true;
-      this.src = config.src || '';
+      this.src = config.src || ''
     }
+
+    this.vod = !!config!.vod;
+
     this.autoplay = config.autoplay || false;
     this.initVideoEl();
   }
@@ -93,6 +99,8 @@ export default class HLSPlayer extends VideoControl {
       this.hls.attachMedia(this.videoEl);
       this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
         this.autoplay && this.play();
+        console.log('this.vod', this.vod);
+
         if (this.vod) {
           this.videoEl.addEventListener('loadedmetadata', () => {
             this._emitter.emit('duration', this.videoEl.duration * 1000)

@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-04-13 11:24:30
  * @Descripttion: 
- * @LastEditTime: 2021-12-27 17:39:01
+ * @LastEditTime: 2022-02-15 11:04:22
  * @FilePath: /ts-vp/src/component/plugIn-multiples/index.tsx
  */
 import React, { useState, useEffect } from 'react';
@@ -42,12 +42,15 @@ const PluginMultiple = (props: IProps) => {
   }, [])
 
 
-  const [multipleList] = useState<{ text: string, value: number }[]>(props.config.multiple ? props.config.multiple!.list : [])
+  const [multipleList] = useState<{ text: string, value: number }[]>(props.config.multiple ? props.config.multiple!.list : [{ value: 0 , text: '' }])
   const [multipleIndex, setMultipleIndex] = useState<number>(props.config.multiple ? props.config.multiple!.initIndex : 0)
   const onChangeMultipleIndex = (key: number) => {
     IEIndex = key;
     setMultipleIndex(key);
   }
+
+
+
 
   useEffect(() => {
     props.player.setPlaybackRate(multipleList[multipleIndex].value)
@@ -61,6 +64,7 @@ const PluginMultiple = (props: IProps) => {
       }
     })
   }
+
 
 
   return (

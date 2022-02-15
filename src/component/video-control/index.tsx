@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-05-08 15:46:11
  * @Descripttion: 
- * @LastEditTime: 2021-12-27 17:02:16
+ * @LastEditTime: 2022-02-15 11:08:51
  * @FilePath: /ts-vp/src/component/video-control/index.tsx
  */
 import React, { useState, useEffect, useMemo } from 'react';
@@ -156,8 +156,9 @@ const VideoControl = (props: Props) => {
 
         {
           !props.config.hideMultiCode &&
-          isPluginMultiCode &&
-          !props.config.vod &&
+          props.config.option && 
+          // isPluginMultiCode &&
+          // !props.config.vod &&
           <PluginMultiCode
             config={props.config}
           />
@@ -165,7 +166,7 @@ const VideoControl = (props: Props) => {
 
         {
           !props.config.hideMultiple &&
-          isMultiples &&
+          props.config.multiple &&
           <PluginMultiples
             config={props.config}
           />

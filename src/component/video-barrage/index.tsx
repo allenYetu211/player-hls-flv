@@ -27,8 +27,6 @@ const VideoBarrage: React.FC<{ videoBarrageConfig: videoBarrageType }> = (props)
 
     const { autoEmpty = true } = props.videoBarrageConfig;
 
-    console.log('autoEmpty>>>>>>', autoEmpty);
-
     if (autoEmpty) {
       //  监听窗口大小变化
       window!.addEventListener('resize', debounce(() => {

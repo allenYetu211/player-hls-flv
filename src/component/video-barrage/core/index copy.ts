@@ -2,7 +2,7 @@
  * @Author: Allen OYang
  * @Date: 2021-07-20 09:48:26
  * @Descripttion: 
- * @LastEditTime: 2022-01-16 09:44:44
+ * @LastEditTime: 2022-01-13 18:56:39
  * @FilePath: /ts-vp/src/component/video-barrage/core/index.ts
  */
 
@@ -10,7 +10,6 @@
 import CanvasProxy from '@utils/canvas';
 import { videoBarrageType } from '@g/index';
 import { now } from '@utils/translateTime';
-import debounce from 'lodash.debounce';
 
 interface BarrageItemType {
   value: string;
@@ -108,14 +107,41 @@ class BarrageCanvas extends CanvasProxy {
       window.cancelAnimationFrame(this.requestAnimationFrameId);
     }
 
-    this.transferMsg();
-    
+    const checkInfos = (index: number) => {
+      return new Promise((result, reject) => {
+        if (index > 0) {
+          for (let i = 0; i <= index; i++) {
+            // console.log('iLL:', i);
+            const beforeTracks = this.tracks[i];
+            const beforeTracksLastMsg = beforeTracks[beforeTracks.length - 1];
+
+            if (!beforeTracksLastMsg) {
+              return;
+            }
+
+            // check that the last msg was sent
+            if (beforeTracksLastMsg.left + (beforeTracksLastMsg.width || 0) < this.width) {
+              this.tracksState[i] = true;
+              result(i);
+              break;
+            }
+          }
+        }
+      })
+
+    }
+
     // 根据内容展示
     this.tracks.forEach((track, index) => {
-      if (track.length === 0) {
-        this.tracksState[index] = true;
+
+
+      if (track.filter(Boolean).length === 0) {
+        //  检测当前是否可以继续插入？ 
+        checkInfos(index);
+        // this.tracksState[index] = true;
         return
       }
+
 
       track.forEach((msg, msgIndex) => {
         if (!msg) {
@@ -139,80 +165,41 @@ class BarrageCanvas extends CanvasProxy {
           this.ctx.restore();
         }
 
-        /**
-         * 弹幕轨道更改状态：
-         * 1. 出现前：  
-         * 2. 出现中：
-         * 3. 出现后：
-         */
         const currentLeft = msg.left + (msg.width || 0);
-
-        // 滑动前
-        if (currentLeft < this.width + (msg.width || 0)) {
-          this.tracksState[index] = false;
-
-          // debounce(this.transferMsg, 100, {
-          //   'maxWait': 1000,
-          //   leading: true
-          // })
-
-        }
-
-        // 滑动中，完全进入
-        //  如果当前是轨道中最后一条，则检测是否展现完成 , 当前信息是否已经全部展现, 如果全部展示则添加新msg进来
-        if (msgIndex === track.length - 1 && currentLeft < this.width) {
-          /**
-            *  if current tracks state is true， then insert msg to tracks
-            *  if there is not data in the catch。change the catch states to true
-            *  
-            */
-
-          // console.log(index, msgIndex, track.length , currentLeft , track[track.length - 1].value)
-          this.tracksState[index] = true;
-        }
-
-
-
-        // 滑动后： 整体出去
         // 检测当前弹幕是否已经滑动出去 , 如果是的，则进行删除。
         if (currentLeft <= 0) {
           delete track[msgIndex];
           this.tracksCounts -= 1;
           this.tracksWidth[index] = this.tracksWidth[index] - (msg.width || 0);
-          // check the current track content is empty
-          // if (track.filter(Boolean).length < 1) {
-          //   console.log('index>>', index);
-          //   this.tracksState[index] = true;
-          // }
+          // this.tracksState[index] = true;
         }
+
+
+
+
+        //  如果当前是轨道中最后一条，则检测是否展现完成 , 当前信息是否已经全部展现, 如果全部展示则添加新msg进来
+        if (msgIndex === track.length - 1 && currentLeft < this.width) {
+          /**
+            *  if current tracks state is true， then insert msg to tracks
+            *  if there is not data in the catch。change the catch states to true
+            */
+          // checkInfos(index).then((i: any) => {
+          //   // 当前信息是否需已经全部展现, 如果全部展示则添加进来
+          
+          // });
+
+          if (this.cacheMsg.length !== 0) {
+            const firstMsg = this.cacheMsg.shift();
+            firstMsg.addTime = now();
+            this.tracksCounts += 1;
+            this.tracks[index].push(firstMsg);
+          }
+
+        }
+
         renderMsg();
       })
     })
-  }
-
-  _debounce () {
-    const self = this;
-    debounce(function (){
-      self.transferMsg()
-    }, 50)
-  }
- 
-
-  transferMsg() {
-    if (this.cacheMsg.length !== 0) {
-      for (let i = 0; i < this.tracksState.length; i++) {
-        // find the first current track that can be inserted
-        if (this.tracksState[i]) {
-          // currentCanBeInsertedTracksIndex = i;
-          const firstMsg = this.cacheMsg.shift();
-          firstMsg.addTime = now();
-          this.tracks[i].push(firstMsg);
-          this.tracksCounts += 1;
-          this.tracksState[i] = false;
-          break;
-        }
-      }
-    }
   }
 
   start() {
@@ -265,37 +252,26 @@ class BarrageCanvas extends CanvasProxy {
     }
 
 
-
-
-    /**、
-     * 1. 默认添加至缓存中
-     * 2. 开始变量缓存中是否存在消息，  如果存在消息，轨道中不存在，则添加到轨道中。 
-     * 3. 添加条件：  
-     *   - 轨道中不存在， 则添加， 如果轨道中存在，
-     *   - 
-     */
+    let currentCanBeInsertedTracksIndex;
+    for (let i = 0; i < this.tracksState.length; i++) {
+      // find the first current track that can be inserted
+      if (this.tracksState[i]) {
+        currentCanBeInsertedTracksIndex = i;
+        msg.addTime = now();
+        this.tracks[i].push(msg);
+        this.tracksCounts += 1;
+        this.tracksState[i] = false;
+        break;
+      }
+    }
 
     // 当前没有可以使用的tacks  则添加至缓冲区
-    // if (!currentCanBeInsertedTracksIndex && currentCanBeInsertedTracksIndex !== 0) {
-    //   this.cacheMsg.push(msg);
-    // }
+    if (!currentCanBeInsertedTracksIndex && currentCanBeInsertedTracksIndex !== 0) {
+      this.cacheMsg.push(msg);
+    }
 
     if (this.isRunning) {
-      this.cacheMsg.push(msg);
       return
-    } else {
-      // let currentCanBeInsertedTracksIndex;
-      for (let i = 0; i < this.tracksState.length; i++) {
-        // find the first current track that can be inserted
-        if (this.tracksState[i]) {
-          // currentCanBeInsertedTracksIndex = i;
-          msg.addTime = now();
-          this.tracks[i].push(msg);
-          this.tracksCounts += 1;
-          this.tracksState[i] = false;
-          break;
-        }
-      }
     }
     this.start();
   }
